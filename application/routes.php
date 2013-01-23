@@ -114,3 +114,6 @@ Route::filter('auth', function()
 Route::get('/b/(:num)/(:any?)', function() {
 	return View::make('build.view');
 });
+
+// Controller Routing 
+Route::controller(Controller::detect());
