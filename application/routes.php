@@ -109,3 +109,8 @@ Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::to('login');
 });
+
+// Build Route
+Route::get('/b/(:num)/(:any?)', function() {
+	return View::make('build.view');
+});
