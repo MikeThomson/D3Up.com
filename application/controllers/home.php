@@ -32,6 +32,7 @@ class Home_Controller extends Base_Controller {
 
 	public function action_index()
 	{
+		$test = Epic_Mongo::db("test")->find(); exit;
 		return View::make('home.index');
 	}
 

@@ -171,3 +171,5 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 {
 	Session::load();
 }
+
+// require_once("./bundles/epic_mongo/Mongo.php");

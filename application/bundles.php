@@ -37,4 +37,6 @@ return array(
 
 	'docs' => array('handles' => 'docs'),
 
+	'epic_mongo' => array('auto' => true),
+
 );
