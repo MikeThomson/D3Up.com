@@ -110,9 +110,13 @@ Route::filter('auth', function()
 	if (Auth::guest()) return Redirect::to('login');
 });
 
-// Build Route
-Route::get('/b/(:num)/(:any?)', function() {
-	return View::make('build.view');
+// Build Routing
+Route::get('/b/(:num)/(:any?)', function($id) {
+	$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
+	if(!$build) {
+		return Response::error('404');
+	}
+	return View::make('build.view')->with('build', $build);
 });
 
 // Controller Routing 
