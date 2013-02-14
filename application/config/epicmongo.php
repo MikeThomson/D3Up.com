@@ -2,8 +2,6 @@
 
 return array(
 	'host' => '127.0.0.1',
-	'username' => null,
-	'password' => null,
 	'dbname' => 'com_d3up',
 	'schema' => 'D3Up_Schema',
 	'typemap' => array(
