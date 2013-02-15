@@ -2,54 +2,26 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| D3Up.com Specific Routing
 |--------------------------------------------------------------------------
-|
-| Simply tell Laravel the HTTP verbs and URIs it should respond to. It is a
-| breeze to setup your application using Laravel's RESTful routing and it
-| is perfectly suited for building large applications and simple APIs.
-|
-| Let's respond to a simple GET request to http://example.com/hello:
-|
-|		Route::get('hello', function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| You can even respond to more than one URI:
-|
-|		Route::post(array('hello', 'world'), function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| It's easy to allow URI wildcards using (:num) or (:any):
-|
-|		Route::put('hello/(:any)', function($name)
-|		{
-|			return "Welcome, $name.";
-|		});
-|
 */
 
-Route::get('/', function()
-{
-	return View::make('home.index');
+// Builds a route to a build
+Route::get('/b/(:num)/(:any?)', function($id) {
+	$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
+	if(!$build) {
+		return Response::error('404');
+	}
+	return View::make('build.view')->with('build', $build);
 });
+
+// Detect Controllers and Build Routes for them
+Route::controller(Controller::detect());
 
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
 |--------------------------------------------------------------------------
-|
-| To centralize and simplify 404 handling, Laravel uses an awesome event
-| system to retrieve the response. Feel free to modify this function to
-| your tastes and the needs of your application.
-|
-| Similarly, we use an event to handle the display of 500 level errors
-| within the application. These errors are fired when there is an
-| uncaught exception thrown in the application.
-|
 */
 
 Event::listen('404', function()
@@ -66,33 +38,12 @@ Event::listen('500', function()
 |--------------------------------------------------------------------------
 | Route Filters
 |--------------------------------------------------------------------------
-|
-| Filters provide a convenient method for attaching functionality to your
-| routes. The built-in before and after filters are called before and
-| after every request to your application, and you may even create
-| other filters that can be attached to individual routes.
-|
-| Let's walk through an example...
-|
-| First, define a filter:
-|
-|		Route::filter('filter', function()
-|		{
-|			return 'Filtered!';
-|		});
-|
-| Next, attach the filter to a route:
-|
-|		Route::get('/', array('before' => 'filter', function()
-|		{
-|			return 'Hello World!';
-|		}));
-|
 */
 
 Route::filter('before', function()
 {
 	// Do stuff before every request to your application...
+	
 });
 
 Route::filter('after', function($response)
@@ -110,14 +61,66 @@ Route::filter('auth', function()
 	if (Auth::guest()) return Redirect::to('login');
 });
 
-// Build Routing
-Route::get('/b/(:num)/(:any?)', function($id) {
-	$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
-	if(!$build) {
-		return Response::error('404');
+/*
+|--------------------------------------------------------------------------
+| Login Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('login', function() {
+	if(Auth::check()) {
+		return Redirect::to('/');
 	}
-	return View::make('build.view')->with('build', $build);
+	return View::make('user/login');
 });
 
-// Controller Routing 
-Route::controller(Controller::detect());
+Route::post('login', function() {
+	if(Auth::check()) {
+		return Redirect::to('/');
+	}
+	// get POST data
+	$data = array(
+		'username' => Input::get('email'),
+		'password' => Input::get('password'),
+	);
+	if ( Auth::attempt(Input::all()) ) {
+		// we are now logged in, go to home
+		return Redirect::to('/');
+	} else {
+	// auth failure! lets go back to the login
+	return Redirect::to('login')
+	  ->with('login_errors', true)
+		->with_input('only', array('email'));
+}});
+
+Route::get('register', function() {
+	if(Auth::check()) {
+		return Redirect::to('/');
+	}
+	return View::make('user/register');
+});
+
+Route::post('register', function() {
+	if(Auth::check()) {
+		return Redirect::to('/');
+	}
+	$input = Input::all();
+	$rules = array(
+    'email' => 'required|email',
+		'password'  => 'required|between:8,50',
+		'key' => 'match:/jestasays/',
+	);
+	$validation = Validator::make($input, $rules);
+	if ($validation->fails()) {
+		return Redirect::to('register')->with_errors($validation)->with_input();
+	}
+	$user = Epic_Mongo::db('doc:user');
+	$user->email = $input['email'];
+	$user->password = Hash::make($input['password']);
+	$user->save();
+	return Redirect::to('/');
+});
+
+Route::get('logout', function() {
+	Auth::logout();
+	return Redirect::to('login');
+});
