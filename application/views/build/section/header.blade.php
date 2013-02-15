@@ -1,9 +1,9 @@
-<div id="build-header" class="title-block" data-class="barbarian">
+<div id="build-header" class="title-block" data-class="{{ $build->class }}">
 	<div class="title-inner">
 		<div class="row">
 			<div class="span9">
 				<h2 class="title">
-					<a href="/b/{{ $build-> id }}"><?= $build->name ?></a> 
+					<a href="/b/{{ $build-> id }}">{{ $build->name }}</a> 
 					<small>
 						@if($build->level == 60)
 							{{ __('build.paragon') }} {{ __('build.level') }} <span id="paragon-level">{{ $build->paragon }}</span>
@@ -39,20 +39,13 @@
 			<div class="span5">
 	  		<ul id="active-display" class="skill-icons pull-right" data-skill-type="actives" data-display="icon">
 					<li><span class="skill-type">{{ __('build.skills') }}</span></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
+					<!-- <li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li> -->
 				</ul>
 			</div>
 			<div class="span3">
 	  		<ul id="active-display" class="skill-icons" data-skill-type="actives" data-display="icon">
 					<li><span class="skill-type">{{ __('build.passives') }}</span></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
-					<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
+					<!-- <li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li> -->
 				</ul>
 		  </div>
 		</div>
