@@ -35,6 +35,11 @@ a:focus {
 	margin: 10px 5px 20px;
 }
 
+.alert {
+	margin-bottom: 10px;
+	padding-bottom: 4px;
+}
+
 .sysmsg img {
 	margin: 7px auto;
 	display: block;
