@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="/">D3Up V2</a>
+      <a class="brand" href="/">D3Up V2.0</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li class="dropdown">
