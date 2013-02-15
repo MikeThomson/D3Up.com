@@ -1,0 +1,80 @@
+/* Maximum Width */
+@media (min-width: 1200px) {
+	.sysmsg img {
+		margin: 15px auto;
+	}
+	.homepage .leaderboard {
+		text-align: center;
+	}
+}
+@media (max-width: 1199px) and (min-width: 979px) {
+	.skill-icons li img {
+		width: 32px;
+	}
+	.skill-icons .skill-type {
+		line-height: 32px;
+	}
+}
+@media (max-width: 979px) and (min-width: 768px) {
+	.logo img {
+		height: 74px;
+	}
+	.sysmsg img {
+		margin: 0;
+	}
+	.nav-collapse {
+		margin: 0;
+	}
+	.nav-collapse .nav {
+		margin-top: 5px;
+	}
+	body > .container {
+		margin-top: 0;
+		padding: 0 5px;
+	}
+	.span9 {
+		width: 483px;
+	}
+	.span3 {
+		width: 220px;
+	}
+	.navbar-fixed-top {
+		margin: 0 0 5px;
+	}	
+	.skill-icons li {
+		padding: 0 3px;
+	}
+	.skill-icons li img {
+		width: 32px;
+	}
+	.skill-icons .skill-type {
+		line-height: 32px;
+	}
+}
+
+@media (max-width: 767px) {
+	body {
+	}
+	body > .container {
+		margin: 0;
+		background: none;
+		border: none;
+	}
+	.sysmsg img {
+		margin: 0 0 5px;
+	}
+	.nav-collapse .nav {
+		margin-top: 5px;
+	}
+	.skill-icons {
+		margin: 1px 5px;
+		display: inline-block;
+		float: left;
+	}
+	.skill-icons li img {
+		width: 24px;
+	}
+	.skill-icons .skill-type {
+		line-height: 24px;
+	}
+}
