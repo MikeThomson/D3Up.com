@@ -93,6 +93,7 @@ Route::post('login', function() {
 }});
 
 Route::get('register', function() {
+	throw new Exception("Registration currently Disabled.");
 	if(Auth::check()) {
 		return Redirect::to('/');
 	}
