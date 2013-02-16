@@ -11,9 +11,6 @@
 			</a>
       <div class="nav-collapse">
         <ul class="nav">
-					@if(Auth::check())
-						@include("template.global.navbar.profile")
-					@endif
 					<li <?= (isset($build) || Auth::check()) ? 'class="dropdown"' : ''?>>
 						@if(isset($build))
 					  <a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
@@ -25,12 +22,14 @@
 							<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
 						</a>
 						@else
-						<a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
-							<img src="/img/icons/unknown.png" class="build-icon pull-left" style="width: 36px">
-							<div class='build-name'>Build Quick Select</div>
-							<small>My highest level builds</small>
-							<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
-						</a>
+							@if(Auth::check())
+								<a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
+									<img src="/img/icons/unknown.png" class="build-icon pull-left" style="width: 36px">
+									<div class='build-name'>Build Quick Select</div>
+									<small>My highest level builds</small>
+									<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
+								</a>
+							@endif
 						@endif
 						@if(Auth::check())
 							@include("template.global.navbar.user")
@@ -70,6 +69,10 @@
               <li><a href="#">Build #5</a></li>
             </ul>
           </li>
+					@if(Auth::check())
+						@include("template.global.navbar.profile")
+					@endif
+
         </ul>
         <form class="navbar-search pull-right" action="">
           <input type="text" class="search-query span3" placeholder="Search by BattleTag (Name#1234)">
