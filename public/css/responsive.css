@@ -6,6 +6,10 @@
 	.homepage .leaderboard {
 		text-align: center;
 	}
+	.getting-started {
+		width: 570px;
+	}
+	
 }
 @media (max-width: 1199px) and (min-width: 979px) {
 	.skill-icons li img {
@@ -13,6 +17,9 @@
 	}
 	.skill-icons .skill-type {
 		line-height: 32px;
+	}
+	.getting-started {
+		width: 570px;
 	}
 }
 @media (max-width: 979px) and (min-width: 768px) {

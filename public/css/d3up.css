@@ -34,7 +34,10 @@ a:focus {
 	text-align: center;
 	margin: 10px 5px 20px;
 }
-
+.navbar .nav > li > a.brand-extend {
+	padding: 8px 15px 0 0;
+	height: 32px;
+}
 .alert {
 	margin-bottom: 10px;
 	padding-bottom: 4px;
@@ -190,7 +193,6 @@ a:focus {
   background-image: -o-linear-gradient(top, #70b1d5, #4F86A9);
   background-image: linear-gradient(top, #70b1d5, #4F86A9);
   background-repeat: repeat-x;
-  margin-right: 1px;
 }
 
 .navbar-fixed-top .navbar-inner {
