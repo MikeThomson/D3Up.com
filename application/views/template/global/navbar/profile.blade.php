@@ -1,4 +1,4 @@
-<li class="dropdown">
+<li class="dropdown pull-right">
   <a href="#" class="brand brand-extend dropdown-toggle" data-toggle="dropdown">							
 		<span class='badge badge-inverse'>
 			{{ Auth::user()->username }}

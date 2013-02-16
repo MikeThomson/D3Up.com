@@ -42,12 +42,26 @@ a:focus {
 	margin-bottom: 10px;
 	padding-bottom: 4px;
 }
+.navbar .container .dropdown-menu a {
+	margin: 0;
+}
 
 .sysmsg img {
 	margin: 7px auto;
 	display: block;
 }
-
+.dropdown-menu .divider {
+	background-color: #333;
+	border-color: #333;
+}
+.dropdown-menu form p {
+	margin: 0;
+}
+.dropdown-menu .lead {
+	margin-bottom: 7px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #333;
+}
 .dropdown ul {
 	margin: 0;
 	padding: 3px;
@@ -88,7 +102,6 @@ a:focus {
 .navbar .nav > li > a.build-select small {
 	color: #777;
 }
-
 .dropdown ul li {
 	background: #222;
 	font-size: 12px;

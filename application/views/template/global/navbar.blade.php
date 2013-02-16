@@ -14,11 +14,30 @@
 					@if(Auth::check())
 						@include("template.global.navbar.profile")
 					@endif
-					@if(Auth::check())
-						@include("template.global.navbar.user")
-					@else
-						@include("template.global.navbar.anonymous")
-					@endif
+					<li <?= (isset($build) || Auth::check()) ? 'class="dropdown"' : ''?>>
+						@if(isset($build))
+					  <a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
+							<img src="/img/icons/{{ $build->class }}.png" class="build-icon pull-left">
+							<div class='build-name'>{{ $build->name }}</div>
+							<small>
+								<span class="level">{{ __('build.level') }} {{ $build->level }}</span>, {{ __('build.paragon') }} <span class="paragon">{{ $build->paragon }}</span>
+							</small>
+							<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
+						</a>
+						@else
+						<a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
+							<img src="/img/icons/unknown.png" class="build-icon pull-left" style="width: 36px">
+							<div class='build-name'>Build Quick Select</div>
+							<small>My highest level builds</small>
+							<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
+						</a>
+						@endif
+						@if(Auth::check())
+							@include("template.global.navbar.user")
+						@else
+							@include("template.global.navbar.anonymous")
+						@endif
+					</li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('d3up.builds') }} <b class="caret"></b></a>
 						<div class="dropdown-menu">

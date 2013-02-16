@@ -5,7 +5,7 @@
 	<div class='row'>
 		<div class='span9'>
 			<div class='leaderboard'>
-				<img src="http://placehold.it/728x90">
+				<img src="http://placehold.it/728x90&text=Possible Promotion Spot, 728x90">
 			</div>
 			<div class='content-page hero-unit'>
 				Stuff!

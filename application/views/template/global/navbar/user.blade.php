@@ -1,65 +1,25 @@
-<li class="dropdown">
-  <a href="#" class="build-select dropdown-toggle" data-toggle="dropdown">							
-		<img src="/img/icons/barbarian.png" class="build-icon pull-left">
-		<div class='build-name'>Jesta</div>
-		<small>
-			<span class="level">Level 60</span>, Paragon <span class="paragon">60</span>
-		</small>
-		<b class="caret"></b>
-	</a>
-	<div class="dropdown-menu">
-    <ul>
-			<li class='build-select'>
-				<a href="#">
-					<img src="/img/icons/barbarian.png" class="build-icon pull-left">
-					<div class='build-name'>Jesta</div>
-					<small>
-						<span class="level">Level 60</span>, Paragon <span class="paragon">60</span>
-					</small>
-				</a>
-			</li>
-			<li class='build-select'>
-				<a href="#">
-					<img src="/img/icons/monk.png" class="build-icon pull-left">
-					<div class='build-name'>Jesta</div>
-					<small>
-						<span class="level">Level 60</span>, Paragon <span class="paragon">8</span>
-					</small>
-				</a>
-			</li>
-			<li class='build-select'>
-				<a href="#">
-					<img src="/img/icons/demon-hunter.png" class="build-icon pull-left">
-					<div class='build-name'>Jesta</div>
-					<small>
-						<span class="level">Level 60</span>, Paragon <span class="paragon">3</span>
-					</small>
-				</a>
-			</li>
-			<li class='build-select'>
-				<a href="#">
-					<img src="/img/icons/wizard.png" class="build-icon pull-left">
-					<div class='build-name'>Jesta</div>
-					<small>
-						<span class="level">Level 60</span>, Paragon <span class="paragon">0</span>
-					</small>
-				</a>
-			</li>
-			<li class='build-select'>
-				<a href="#">
-					<img src="/img/icons/witch-doctor.png" class="build-icon pull-left">
-					<div class='build-name'>Jesta</div>
-					<small>
-						<span class="level">Level 12</span>
-					</small>
-				</a>
-			</li>
-			<li>
-				<div class='btn-group'>
-					<a href="#" class='btn btn-mini'>Create Build</a>
-					<a href="#" class='btn btn-mini'>All Builds</a>
-				</div>
-			</li>
-    </ul>
-	</div>
-</li>
+<?
+	$myBuilds = Epic_Mongo::db('build')->find(array('_createdBy' => Auth::user()->createReference()))->sort(array('paragon' => -1, 'level' => -1))->limit(5);
+?>
+<div class="dropdown-menu">
+   <ul>
+		<!-- <li class='lead'>My Builds</li> -->
+		<? foreach($myBuilds as $build): ?>
+		<li class='build-select'>
+			<a href="/b/{{ $build->id }}">
+				<img src="/img/icons/{{ $build->class }}.png" class="build-icon pull-left">
+				<div class='build-name'>{{ $build->name }}</div>
+				<small>
+					<span class="level">{{ __('build.level') }} {{ $build->level }}</span>, {{ __('build.paragon') }} <span class="paragon">{{ $build->paragon }}</span>
+				</small>
+			</a>
+		</li>
+		<? endforeach; ?>
+		<li>
+			<div class='btn-group'>
+				<a href="#" class='btn btn-mini'>Create Build</a>
+				<a href="#" class='btn btn-mini'>All Builds</a>
+			</div>
+		</li>
+   </ul>
+</div>
