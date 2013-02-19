@@ -16,7 +16,7 @@ class Github_Task {
 				$idx++;
 			}
 		}
-		Cache::put('github_commits', $data, 5);
+		Cache::put('github_commits', $data, 120);
 	}
 	
 }
