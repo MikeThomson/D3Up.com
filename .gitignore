@@ -1,3 +1,4 @@
 bundles/*
 application/config/application.php
+application/config/github.php
 .DS_Store
