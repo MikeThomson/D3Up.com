@@ -7,7 +7,7 @@ class Github_Task {
 	public function run($args) {
 		$token = Config::get('github.token');
 		$content = file_get_contents($this->_rss."&token=".$token);  
-    $rss = new SimpleXmlElement($content);
+		$rss = new SimpleXmlElement($content);
 		$data = array();
 		$idx = 1;
 		foreach($rss as $entry) {
