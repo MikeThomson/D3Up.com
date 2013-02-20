@@ -6,5 +6,6 @@ return array(
 	'schema' => 'D3Up_Schema',
 	'typemap' => array(
 		'build' => 'D3Up_Build',
+		'item' => 'D3Up_Item',
 	)
 );

@@ -74,7 +74,7 @@
 					@endif
 
         </ul>
-        <form class="navbar-search pull-right" action="">
+        <form class="navbar-search pull-right" action="/search">
           <input type="text" class="search-query span3" placeholder="Search by BattleTag (Name#1234)">
         </form>
       </div><!-- /.nav-collapse -->
