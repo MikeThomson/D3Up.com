@@ -1,7 +1,7 @@
 <div>
   <ul class="nav nav-tabs">
     <li class="active">
-			<a href="#gear-paperdoll" data-toggle="tab" data-toggle="tooltip" title="first tooltip" data-placement="bottom">Paperdoll</a>
+			<a href="#gear-paperdoll" data-toggle="tab">Paperdoll</a>
 		</li>
     <li><a href="#gear-overview" data-toggle="tab">Overview</a></li>
     <li><a href="#gear-contributions" data-toggle="tab">DPS/EHP Contributions</a></li>
