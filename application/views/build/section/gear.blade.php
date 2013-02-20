@@ -8,7 +8,9 @@
 			<div>
 				<div class='tab-content'>
 					@foreach($build->gear as $item) 
-						{{ View::make('build.section.item')->with('item', $item) }}
+						@if($item->id)
+							{{ View::make('build.section.item')->with('item', $item) }}
+						@endif
 					@endforeach
 				</div>
 				<ul class='nav'>
