@@ -84,5 +84,9 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('.dropdown-toggle').dropdown();
+		$('.navbar .dropdown-menu').click(function(e) {
+		    e.stopPropagation();
+		});
 	});
+	
 </script>
