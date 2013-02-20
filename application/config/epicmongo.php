@@ -7,5 +7,6 @@ return array(
 	'typemap' => array(
 		'build' => 'D3Up_Build',
 		'item' => 'D3Up_Item',
+		'gearset' => 'D3Up_GearSet',
 	)
 );
