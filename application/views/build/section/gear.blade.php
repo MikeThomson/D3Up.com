@@ -1,10 +1,13 @@
 <div>
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#gear-overview" data-toggle="tab">Overview</a></li>
+    <li class="active">
+			<a href="#gear-paperdoll" data-toggle="tab" data-toggle="tooltip" title="first tooltip" data-placement="bottom">Paperdoll</a>
+		</li>
+    <li><a href="#gear-overview" data-toggle="tab">Overview</a></li>
     <li><a href="#gear-contributions" data-toggle="tab">DPS/EHP Contributions</a></li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane active" id="gear-overview">
+    <div class="tab-pane" id="gear-overview">
 			<div>
 				<div class='tab-content'>
 					@foreach($build->gear as $item) 
@@ -22,6 +25,9 @@
     </div>
     <div class="tab-pane" id="gear-contributions">
 			Contributions
+    </div>
+    <div class="tab-pane active" id="gear-paperdoll">
+			<img src="http://placehold.it/500x400&text=Full Paper Doll for Character, like Battle.net">
     </div>
   </div>
 </div>
