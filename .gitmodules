@@ -4,3 +4,6 @@
 [submodule "bundles/epic_mongo"]
 	path = bundles/epic_mongo
 	url = git@github.com:aaroncox/EpicMongo.git
+[submodule "bundles/myunit"]
+	path = bundles/myunit
+	url = git://github.com/etherealite/myunit.git
