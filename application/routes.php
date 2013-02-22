@@ -6,7 +6,10 @@
 |--------------------------------------------------------------------------
 */
 
-// Builds a route to a build
+
+// Route to Sync a Build
+Route::get('/b/(:num)/sync', 'build@sync');
+// Route to View a build
 Route::get('/b/(:num)/(:any?)', 'build@view');
 
 // Detect Controllers and Build Routes for them

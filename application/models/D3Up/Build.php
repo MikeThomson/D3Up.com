@@ -8,4 +8,8 @@ class D3Up_Build extends Epic_Mongo_Document {
 		'_createdBy' => array('doc:user', 'ref'),
   );
 
+	public function sync() {
+		$tool = new D3Up_Sync();
+		return $tool->run($this);
+	}
 }
