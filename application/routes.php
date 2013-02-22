@@ -7,13 +7,7 @@
 */
 
 // Builds a route to a build
-Route::get('/b/(:num)/(:any?)', function($id) {
-	$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
-	if(!$build) {
-		return Response::error('404');
-	}
-	return View::make('build.view')->with('build', $build);
-});
+Route::get('/b/(:num)/(:any?)', 'build@view');
 
 // Detect Controllers and Build Routes for them
 Route::controller(Controller::detect());
