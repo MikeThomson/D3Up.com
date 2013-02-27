@@ -241,3 +241,23 @@
 .navbar .container .dropdown-menu a {
 	margin: 0;
 }
+.alert-warning {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+}
+
+.alert-warning,
+.alert-warning h4 {
+  color: #c09853;
+}
+
+.label-error,
+.badge-error {
+  background-color: #b94a48;
+}
+
+.label-error[href],
+.badge-error[href] {
+  background-color: #953b39;
+}

@@ -1,7 +1,10 @@
 <?php
-class D3Up_Item extends Epic_Mongo_Document {
+class D3Up_Item extends Epic_Mongo_Document_Sequenced {
 	protected $_collection = 'items';
-	
+	protected $_typeMap = array(
+		'_createdBy' => array('doc:user', 'ref'),
+  );
+	protected $_sequenceKey = 'item';
 	protected $_tooltipData = array(
 		'id',
 		'name',
