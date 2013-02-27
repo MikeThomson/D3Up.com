@@ -213,8 +213,9 @@ class D3Up_Sync {
 		$this->setBuild($build);
 		// Check to see if we can even sync this build
 		if($this->_canSync()) {
-			return $this->_sync();
+			$this->_sync();
 		}
+		return $this->_log;
 	}
 	
 	// The steps needed to sync a build
@@ -236,7 +237,6 @@ class D3Up_Sync {
 		// TODO - Items, more?
 		// var_dump($this->_log);
 		// exit;
-		return $this->_log;
 	}
 	
 	protected function _getGear(array $json) {
