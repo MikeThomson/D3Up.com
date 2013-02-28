@@ -23,5 +23,11 @@ class Build_Controller extends Base_Controller {
 		$results = $build->sync();
 		return View::make('build.sync')->with('build', $build)->with('results', $results);
 	}
+	
+	public function action_create() {
+		$characters = array();
+		return View::make('build.create')
+								->with('characters', $characters);
+	}
 
 }
