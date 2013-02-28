@@ -232,8 +232,8 @@ class D3Up_Sync {
 			// Gather the Item Data needed
 			$this->_log("Beginning API Requests for Item Information.");
 			$build->gear = $this->_getGear($json);			
-			// var_dump($build->export());
 		}	
+		$build->save();
 		// TODO - Items, more?
 		// var_dump($this->_log);
 		// exit;
@@ -244,7 +244,12 @@ class D3Up_Sync {
 		foreach($json['items'] as $slot => $meta) {
 			// Determine what D3Up considered the slot as
 			$d3upSlot = $this->_slotMap[$slot];
-			if(!$this->_itemExists($meta['tooltipParams'])) {
+			// Does this item already exist as one of your items?
+			if($item = $this->_itemExists($meta['tooltipParams'])) {
+				// If so, just set it
+				$gear[$d3upSlot] = $item; 				
+			} else {
+				// Else, fetch and create
 				$this->_log("Fetching JSON for slot: ".$d3upSlot.".");
 				// Build the URL to fetch the item
 				$url = $this->urlItem . $meta['tooltipParams'];
@@ -283,7 +288,7 @@ class D3Up_Sync {
 		// If we found the item, return it!
 		// --------------------------------------------------------
 		if($item) {
-			$this->_log("<a href='/i/".$item->id."' class='quality-".$item->quality."'>".$item->name."</a> already exists as one of your items, skipping.", "warning");
+			$this->_log("<a href='/i/".$item->id."' class='quality-".$item->quality."'>".$item->name."</a> already exists as one of your items, skipping import but equipping on your build.", "warning");
 		}
 		return $item;
 	}
