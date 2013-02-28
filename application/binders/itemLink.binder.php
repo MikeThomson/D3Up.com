@@ -14,6 +14,9 @@ return array('html itemLink' => function($item, $params = array()) {
 		)),
 	);
 	// Conditional Options
+	if(isset($params['slot'])) {
+		$options['data-slot'] = $params['slot'];
+	}
 	if(isset($params['toggle']) && $params['toggle'] === true) {
 		$options['data-toggle'] = 'tab';
 		$link = "#tab-item-".$item->id;

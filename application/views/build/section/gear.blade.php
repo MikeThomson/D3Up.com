@@ -11,14 +11,14 @@
 			<div>
 				<div class='tab-content'>
 					@foreach($build->gear as $item) 
-						@if($item->id)
+						@if($item && $item->id)
 							{{ View::make('build.section.item')->with('item', $item) }}
 						@endif
 					@endforeach
 				</div>
-				<ul class='nav'>
-					@foreach($build->gear as $gear) 
-						<li>{{ HTML::itemLink($gear, array('toggle' => true)) }}</li>
+				<ul id='build-gear'>
+					@foreach($build->gear as $slot => $gear) 
+						<li>{{ HTML::itemLink($gear, array('toggle' => true, 'slot' => $slot)) }}</li>
 					@endforeach
 				</ul>
 			</div>

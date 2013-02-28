@@ -1,0 +1,372 @@
+.quality-1 {
+	color: #FFFFFF !important;		
+}
+.quality-2 {
+	color: #FFFFFF !important;
+}
+.quality-3 {
+	color: #FFFFFF !important;
+}
+.quality-4 {
+  color: #7979D4 !important;				
+}
+.quality-5 {
+  color: #F8CC35 !important;		
+}
+.quality-6 {
+  color: #BF642F !important;	
+}
+.quality-7 {
+  color: #8BD442 !important;		
+}
+.d3up-tooltip {
+	z-index: 2000;
+}
+.d3-item {
+  color: #FFFFFF;
+	background: #000;
+	font-size: 14px;
+	border: 1px solid #000000;
+  box-shadow: 0 0 10px #000000;
+	width: 350px;
+  max-width: 355px;
+	border: 1px solid #222;
+}
+.d3-item .top {
+	margin: 0;
+	height: 40px; 
+	width: 320px; 
+	padding: 0 15px; 
+	background: url("http://us.battle.net/d3/static/images/ui/tooltip-title.jpg") no-repeat;
+}
+.d3-item .top.quality-1,
+.d3-item .top.quality-2 { background-position: 0 -40px; }
+.d3-item .top.quality-4 { background-position: 0 -80px; }
+.d3-item .top.quality-5 { background-position: 0 -120px; }
+.d3-item .top.quality-6 { background-position: 0 -160px; }
+.d3-item .top.quality-8 { background-position: 0 -200px; }
+.d3-item .top.quality-7 { background-position: 0 -240px; }
+.d3-item .top p {
+	color: #F3E6D0; 
+	font-size: 22px; 
+	height: 40px; 
+	line-height: 40px; 
+	text-align: center; 
+	overflow: hidden;
+	white-space: nowrap; 
+	text-overflow: ellipsis; 
+	text-shadow: 1px 1px #000;
+}
+.d3-item .item {
+  padding: 10px;
+}
+.d3-item .item p {
+	margin: 0;
+}
+.d3-item .item .item-type {
+	margin-bottom: 8px;
+}
+.d3-item .item .big-stat {
+	font-size: 42px;
+	line-height: 42px;
+	display: block;
+}
+.d3-item .item .stat-helper {
+	color: #777;
+	font-size: 12px;
+	line-height: 12px;
+}
+.d3-item .item .stats-damage {
+	margin-top: 10px;
+}
+.d3-item .item p.item-type,
+.d3-item .item p.stats {
+	margin-bottom: 5px;
+	line-height: 1em;
+	font-size: 1em;
+	width: auto;
+	text-align: left;
+}
+.d3-item .item p.stats {
+	display: block;	
+}
+.d3-item .item .stats-primary {
+	margin-bottom: 10px;
+}
+.d3-item .item ul.attrs{
+	list-style: none;
+	color: #7979D4;
+	margin: 10px 5px 5px 10px;
+	padding: 0;
+	clear: both;
+}
+.d3-item .item ul.attrs .value {
+	color: #A4A4C0;
+}
+.d3-item .item ul {
+	font-size: 14px;
+	margin: 0;
+}
+.d3-item .item ul.attrs li {
+	padding: 1px 15px;
+	background-image: url("/img/bullet.gif");
+	background-repeat: no-repeat;
+	background-position: 0 7px;
+	overflow: hidden;
+}
+.d3-item .item .item-icon {
+	float: left;
+	margin: 0 20px 11px 10px;
+	border: 1px solid #000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.d3-item .item .item-icon img {
+	max-height: 100px;	
+}
+.d3-item .item .item-icon,
+.d3-item .item .item-icon.item-quality-1,
+.d3-item .item .item-icon.item-quality-2,
+.d3-item .item .item-icon.item-quality-3 {
+	border-color: #56402c;
+	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/brown.png);
+}
+.d3-item .item .item-icon.item-quality-4 {
+	border-color: #6ba9ba;
+	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/blue.png);
+}
+.d3-item .item .item-icon.item-quality-5 {
+	border-color: #b1a73c;
+	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/yellow.png);
+}
+.d3-item .item .item-icon.item-quality-6 {
+	border-color: #b07b38;
+	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/orange.png);
+}
+.d3-item .item .item-icon.item-quality-7 {
+	border-color: #87a73d;
+	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/green.png);
+}
+.d3-item .item ul.sockets {
+	margin: 0;
+}
+.sockets > li {
+	color: #7979D4;
+	list-style: none;	
+	background-size: 23px 23px;
+	background-image: url("/img/socket.png");
+	background-repeat: no-repeat;
+	background-position: 8px 1px;
+	padding: 1px 37px;
+	line-height: 25px;
+}
+.d3-item .item ul.sockets > li select {
+	color: #000;
+}
+.d3-item .bottom {
+	text-align: right;
+}
+.setBonus {
+	margin: 10px 10px 0;
+}
+.setBonus .bonusName {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.setBonus ul.bonuses {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.setBonus ul.bonuses div.data-count {
+	color: #909090;
+}
+.setBonus ul.bonuses ul.amountBonus {
+	margin: 0 0px 0 20px;
+	padding: 0;
+	list-style: none;
+}
+.d3-tooltip-wrapper * {
+	box-sizing: content-box;
+}
+.sockets .gem_chipped_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_01_demonhunter_male.png');
+}
+.sockets .gem_chipped_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_01_demonhunter_male.png');
+}
+.sockets .gem_chipped_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_01_demonhunter_male.png');
+}
+.sockets .gem_chipped_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_01_demonhunter_male.png');
+}
+.sockets .gem_flawed_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_02_demonhunter_male.png');
+}
+.sockets .gem_flawed_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_02_demonhunter_male.png');
+}
+.sockets .gem_flawed_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_02_demonhunter_male.png');
+}
+.sockets .gem_flawed_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_02_demonhunter_male.png');
+}
+.sockets .gem_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_03_demonhunter_male.png');
+}
+.sockets .gem_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_03_demonhunter_male.png');
+}
+.sockets .gem_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_03_demonhunter_male.png');
+}
+.sockets .gem_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_03_demonhunter_male.png');
+}
+.sockets .gem_flawless_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_04_demonhunter_male.png');
+}
+.sockets .gem_flawless_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_04_demonhunter_male.png');
+}
+.sockets .gem_flawless_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_04_demonhunter_male.png');
+}
+.sockets .gem_flawless_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_04_demonhunter_male.png');
+}
+.sockets .gem_perfect_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_05_demonhunter_male.png');
+}
+.sockets .gem_perfect_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_05_demonhunter_male.png');
+}
+.sockets .gem_perfect_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_05_demonhunter_male.png');
+}
+.sockets .gem_perfect_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_05_demonhunter_male.png');
+}
+.sockets .gem_radiant_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_06_demonhunter_male.png');
+}
+.sockets .gem_radiant_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_06_demonhunter_male.png');
+}
+.sockets .gem_radiant_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_06_demonhunter_male.png');
+}
+.sockets .gem_radiant_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_06_demonhunter_male.png');
+}
+.sockets .gem_square_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_07_demonhunter_male.png');
+}
+.sockets .gem_square_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_07_demonhunter_male.png');
+}
+.sockets .gem_square_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_07_demonhunter_male.png');
+}
+.sockets .gem_square_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_07_demonhunter_male.png');
+}
+.sockets .gem_flawless_square_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_08_demonhunter_male.png');
+}
+.sockets .gem_flawless_square_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_08_demonhunter_male.png');
+}
+.sockets .gem_flawless_square_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_08_demonhunter_male.png');
+}
+.sockets .gem_flawless_square_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_08_demonhunter_male.png');
+}
+.sockets .gem_perfect_square_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_09_demonhunter_male.png');
+}
+.sockets .gem_perfect_square_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_09_demonhunter_male.png');
+}
+.sockets .gem_perfect_square_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_09_demonhunter_male.png');
+}
+.sockets .gem_perfect_square_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_09_demonhunter_male.png');
+}
+.sockets .gem_radiant_square_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_10_demonhunter_male.png');
+}
+.sockets .gem_radiant_square_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_10_demonhunter_male.png');
+}
+.sockets .gem_radiant_square_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_10_demonhunter_male.png');
+}
+.sockets .gem_radiant_square_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_10_demonhunter_male.png');
+}
+.sockets .gem_star_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_11_demonhunter_male.png');
+}
+.sockets .gem_star_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_11_demonhunter_male.png');
+}
+.sockets .gem_star_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_11_demonhunter_male.png');
+}
+.sockets .gem_star_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_11_demonhunter_male.png');
+}
+.sockets .gem_flawless_star_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_12_demonhunter_male.png');
+}
+.sockets .gem_flawless_star_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_12_demonhunter_male.png');
+}
+.sockets .gem_flawless_star_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_12_demonhunter_male.png');
+}
+.sockets .gem_flawless_star_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_12_demonhunter_male.png');
+}
+.sockets .gem_perfect_star_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_13_demonhunter_male.png');
+}
+.sockets .gem_perfect_star_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_13_demonhunter_male.png');
+}
+.sockets .gem_perfect_star_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_13_demonhunter_male.png');
+}
+.sockets .gem_perfect_star_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_13_demonhunter_male.png');
+}
+.sockets .gem_radiant_star_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_14_demonhunter_male.png');
+}
+.sockets .gem_radiant_star_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_14_demonhunter_male.png');
+}
+.sockets .gem_radiant_star_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_14_demonhunter_male.png');
+}
+.sockets .gem_radiant_star_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_14_demonhunter_male.png');
+}
+.sockets .gem_marquise_amethyst {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/amethyst_15_demonhunter_male.png');
+}
+.sockets .gem_marquise_emerald {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/emerald_15_demonhunter_male.png');
+}
+.sockets .gem_marquise_ruby {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_15_demonhunter_male.png');
+}
+.sockets .gem_marquise_topaz {
+background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_demonhunter_male.png');
+}

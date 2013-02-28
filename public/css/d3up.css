@@ -20,7 +20,8 @@ a:focus {
 }
 
 .content-page {
-	margin: 5px;
+	margin: 0 5px 5px;
+	padding: 15px;
 	border: 1px solid #333;
 	background: #222;
 	border-radius: 4px;
@@ -110,3 +111,6 @@ a:focus {
   border-left: 15px solid #81DBEE;
 }
 
+.title-block {
+	margin-bottom: 10px;
+}
