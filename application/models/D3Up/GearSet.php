@@ -24,27 +24,28 @@ class D3Up_GearSet extends Epic_Mongo_Document
 		'offhand' => array('doc:item', 'ref'),
 	);
 	
-	// public $_gearMap = array(
-	// 	'helm' => array('spirit-stone','voodoo-mask','wizard-hat','helm'),
-	// 	'shoulders' => array('shoulders'),
-	// 	'amulet' => array('amulet'),
-	// 	'chest' => array('chest','cloak'),
-	// 	'gloves' => array('gloves'),
-	// 	'bracers' => array('bracers'),
-	// 	'belt' => array('belt','mighty-belt'),
-	// 	'pants' => array('pants'),
-	// 	'ring1' => array('ring'),
-	// 	'ring2' => array('ring'),
-	// 	'boots' => array('boots'),
-	// 	'mainhand' => array('2h-mace', '2h-axe', 'bow', 'daibo', 'crossbow', '2h-mighty', 'polearm', 'staff', '2h-sword', 'ceremonial-knife', 'wand', 'axe', 'hand-crossbow', 'dagger', 'fist-weapon', 'mace', 'mighty-weapon', 'spear', 'sword'),
-	// 	'offhand' => array('axe', 'hand-crossbow', 'dagger', 'fist-weapon', 'mace', 'mighty-weapon', 'spear', 'sword', 'mojo', 'source', 'quiver', 'shield'),
-	// );
-	// 
-	// public function getSlots() {
-	// 	$slots = array_keys($this->_requirements);
-	// 	unset($slots[13]);
-	// 	return $slots;
-	// }
+	public $_gearMap = array(
+		'helm' => array('spirit-stone','voodoo-mask','wizard-hat','helm'),
+		'shoulders' => array('shoulders'),
+		'amulet' => array('amulet'),
+		'chest' => array('chest','cloak'),
+		'gloves' => array('gloves'),
+		'bracers' => array('bracers'),
+		'belt' => array('belt','mighty-belt'),
+		'pants' => array('pants'),
+		'ring1' => array('ring'),
+		'ring2' => array('ring'),
+		'boots' => array('boots'),
+		'mainhand' => array('2h-mace', '2h-axe', 'bow', 'daibo', 'crossbow', '2h-mighty', 'polearm', 'staff', '2h-sword', 'ceremonial-knife', 'wand', 'axe', 'hand-crossbow', 'dagger', 'fist-weapon', 'mace', 'mighty-weapon', 'spear', 'sword'),
+		'offhand' => array('axe', 'hand-crossbow', 'dagger', 'fist-weapon', 'mace', 'mighty-weapon', 'spear', 'sword', 'mojo', 'source', 'quiver', 'shield'),
+	);
+
+	public function getSlots() {
+		$slots = array_keys($this->_requirements);
+		unset($slots[13]);
+		return $slots;
+	}
+
 	// 
 	// public function getAcceptableTypes($type) {
 	// 	if(!$type) return null;
