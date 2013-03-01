@@ -10,7 +10,7 @@ $.fn.tooltip = function() {
 			builder = new d3up.ItemBuilder,
 			gems = d3up.gameData.gemEffects;
 	// Build all the HTML parts
-	var container = $("<div class='d3-item'/>"),
+	var container = $("<div class='d3-tooltip'/>"),
 			header = $("<div class='top'/>"),
 			content = $("<div class='item'/>"),
 			footer = $("<div class='bottom'/>"),
@@ -146,8 +146,8 @@ $.fn.tooltip = function() {
 	
 }
 $.fn.bindSkilltip = function() {
-	var tooltip = $(".d3up-tooltip"),
-      container = $("<div class='d3-item'/>"),
+	var tooltip = $("#d3up-tooltip"),
+      container = $("<div class='d3-tooltip'/>"),
 			header = $("<div class='top'/>"),
 			content = $("<div class='item'/>"),
 			footer = $("<div class='bottom'/>");

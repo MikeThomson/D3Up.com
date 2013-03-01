@@ -22,7 +22,7 @@
 .d3up-tooltip {
 	z-index: 2000;
 }
-.d3-item {
+.d3-tooltip {
   color: #FFFFFF;
 	background: #000;
 	font-size: 14px;
@@ -32,21 +32,21 @@
   max-width: 355px;
 	border: 1px solid #222;
 }
-.d3-item .top {
+.d3-tooltip .top {
 	margin: 0;
 	height: 40px; 
 	width: 320px; 
 	padding: 0 15px; 
 	background: url("http://us.battle.net/d3/static/images/ui/tooltip-title.jpg") no-repeat;
 }
-.d3-item .top.quality-1,
-.d3-item .top.quality-2 { background-position: 0 -40px; }
-.d3-item .top.quality-4 { background-position: 0 -80px; }
-.d3-item .top.quality-5 { background-position: 0 -120px; }
-.d3-item .top.quality-6 { background-position: 0 -160px; }
-.d3-item .top.quality-8 { background-position: 0 -200px; }
-.d3-item .top.quality-7 { background-position: 0 -240px; }
-.d3-item .top p {
+.d3-tooltip .top.quality-1,
+.d3-tooltip .top.quality-2 { background-position: 0 -40px; }
+.d3-tooltip .top.quality-4 { background-position: 0 -80px; }
+.d3-tooltip .top.quality-5 { background-position: 0 -120px; }
+.d3-tooltip .top.quality-6 { background-position: 0 -160px; }
+.d3-tooltip .top.quality-8 { background-position: 0 -200px; }
+.d3-tooltip .top.quality-7 { background-position: 0 -240px; }
+.d3-tooltip .top p {
 	color: #F3E6D0; 
 	font-size: 22px; 
 	height: 40px; 
@@ -57,64 +57,72 @@
 	text-overflow: ellipsis; 
 	text-shadow: 1px 1px #000;
 }
-.d3-item .item {
+.d3-tooltip .item {
   padding: 10px;
+	color: #ececec;
 }
-.d3-item .item p {
+.d3-tooltip .item p {
 	margin: 0;
 }
-.d3-item .item .item-type {
+.d3-tooltip .item .item-type {
 	margin-bottom: 8px;
 }
-.d3-item .item .big-stat {
+.d3-tooltip .item .big-stat {
 	font-size: 42px;
 	line-height: 42px;
 	display: block;
 }
-.d3-item .item .stat-helper {
+.d3-tooltip .item .stat-helper {
 	color: #777;
 	font-size: 12px;
 	line-height: 12px;
 }
-.d3-item .item .stats-damage {
+.d3-tooltip .item .stats-damage {
 	margin-top: 10px;
 }
-.d3-item .item p.item-type,
-.d3-item .item p.stats {
+.d3-tooltip .item p.item-type,
+.d3-tooltip .item p.stats {
 	margin-bottom: 5px;
 	line-height: 1em;
 	font-size: 1em;
 	width: auto;
 	text-align: left;
 }
-.d3-item .item p.stats {
+.d3-tooltip .item p.stats {
 	display: block;	
 }
-.d3-item .item .stats-primary {
+.d3-tooltip .item .stats-primary {
 	margin-bottom: 10px;
 }
-.d3-item .item ul.attrs{
+.d3-tooltip .item ul.attrs{
 	list-style: none;
 	color: #7979D4;
 	margin: 10px 5px 5px 10px;
 	padding: 0;
 	clear: both;
 }
-.d3-item .item ul.attrs .value {
+.d3-tooltip .item ul.sockets .value,
+.d3-tooltip .item ul.attrs .value {
 	color: #A4A4C0;
 }
-.d3-item .item ul {
+.d3-tooltip .item ul {
 	font-size: 14px;
 	margin: 0;
 }
-.d3-item .item ul.attrs li {
+.d3-tooltip .item ul.attrs li {
 	padding: 1px 15px;
 	background-image: url("/img/bullet.gif");
 	background-repeat: no-repeat;
 	background-position: 0 7px;
 	overflow: hidden;
 }
-.d3-item .item .item-icon {
+.item .item-icon {
+	border: 1px solid #000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.d3-tooltip .item .item-icon {
 	float: left;
 	margin: 0 20px 11px 10px;
 	border: 1px solid #000;
@@ -122,33 +130,45 @@
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
-.d3-item .item .item-icon img {
+.d3-tooltip .item .item-icon img {
 	max-height: 100px;	
 }
-.d3-item .item .item-icon,
-.d3-item .item .item-icon.item-quality-1,
-.d3-item .item .item-icon.item-quality-2,
-.d3-item .item .item-icon.item-quality-3 {
+.item .item-icon-box.item-icon img,
+.item .item-icon-box {
+	height: 32px;
+}
+.item .item-icon-box.item-icon {
+	min-width: 32px;
+	display: inline-block;
+	text-align: center;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+.item .item-icon,
+.item .item-icon.item-quality-1,
+.item .item-icon.item-quality-2,
+.item .item-icon.item-quality-3 {
 	border-color: #56402c;
 	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/brown.png);
 }
-.d3-item .item .item-icon.item-quality-4 {
+.item .item-icon.item-quality-4 {
 	border-color: #6ba9ba;
 	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/blue.png);
 }
-.d3-item .item .item-icon.item-quality-5 {
+.item .item-icon.item-quality-5 {
 	border-color: #b1a73c;
 	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/yellow.png);
 }
-.d3-item .item .item-icon.item-quality-6 {
+.item .item-icon.item-quality-6 {
 	border-color: #b07b38;
 	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/orange.png);
 }
-.d3-item .item .item-icon.item-quality-7 {
+.item .item-icon.item-quality-7 {
 	border-color: #87a73d;
 	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/green.png);
 }
-.d3-item .item ul.sockets {
+.d3-tooltip .item ul.sockets {
 	margin: 0;
 }
 .sockets > li {
@@ -161,10 +181,10 @@
 	padding: 1px 37px;
 	line-height: 25px;
 }
-.d3-item .item ul.sockets > li select {
+.d3-tooltip .item ul.sockets > li select {
 	color: #000;
 }
-.d3-item .bottom {
+.d3-tooltip .bottom {
 	text-align: right;
 }
 .setBonus {
