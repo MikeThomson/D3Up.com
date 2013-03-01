@@ -231,7 +231,8 @@ class D3Up_Sync {
 			$build->passives = $this->_getPassives($json);
 			// Gather the Item Data needed
 			$this->_log("Beginning API Requests for Item Information.");
-			$build->gear = $this->_getGear($json);			
+			$build->gear = $this->_getGear($json, 'gearsetcache');			
+			$build->_gear = $this->_getGear($json);
 		}	
 		$build->save();
 		// TODO - Items, more?
@@ -239,8 +240,8 @@ class D3Up_Sync {
 		// exit;
 	}
 	
-	protected function _getGear(array $json) {
-		$gear = Epic_Mongo::db('doc:gearset');
+	protected function _getGear(array $json, $docType = 'gearset') {
+		$gear = Epic_Mongo::db('doc:'.$docType);
 		foreach($json['items'] as $slot => $meta) {
 			// Determine what D3Up considered the slot as
 			$d3upSlot = $this->_slotMap[$slot];

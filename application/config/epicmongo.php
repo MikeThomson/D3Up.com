@@ -8,5 +8,6 @@ return array(
 		'build' => 'D3Up_Build',
 		'item' => 'D3Up_Item',
 		'gearset' => 'D3Up_GearSet',
+		'gearsetcache' => 'D3Up_GearSet_Cache',
 	)
 );

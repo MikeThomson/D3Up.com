@@ -1,10 +1,13 @@
 <?php
 
-class D3Up_Build extends Epic_Mongo_Document {
+class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 	
 	protected $_collection = 'builds';
+	protected $_sequenceKey = 'build';
+	
   protected $_typeMap = array(
-		'gear' => array('doc:gearset', 'auto'),
+		'gear' => array('doc:gearsetcache'),
+		'_gear' => array('doc:gearset', 'auto'),
 		'_createdBy' => array('doc:user', 'ref'),
   );
 
@@ -32,7 +35,7 @@ class D3Up_Build extends Epic_Mongo_Document {
 		'descriptionSource' => null,
 		'_defaultToDescription' => null, 
 		// The characters gear/stats, we don't need it here
-		'gear' => null,
+		'_gear' => null,
 		'equipment' => null,
 		'equipmentCount' => null,
 		'stats' => null,
