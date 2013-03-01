@@ -5,8 +5,8 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 	protected $_collection = 'builds';
 	protected $_sequenceKey = 'build';
 	
-  protected $_typeMap = array(
-		'gear' => array('doc:gearsetcache'),
+  protected $_requirements = array(
+		'gear' => array('doc:gearset'),
 		'_gear' => array('doc:gearset', 'auto'),
 		'_createdBy' => array('doc:user', 'ref'),
   );
@@ -57,5 +57,9 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 			unset($data[$field]);				
 		}
 		return json_encode($data);
+	}
+	
+	public function save() {
+		throw new Exception("Saving is currently disabled.");
 	}
 }
