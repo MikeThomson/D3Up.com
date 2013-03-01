@@ -133,6 +133,8 @@ class D3Up_Sync {
 				if(!json_decode($json, true)) {
 					$this->_log("Failed parsing JSON from Battle.net @ <a href='".$url."'>" . $url . "</a>", "error");
 					return null;
+				} else {
+					$this->_log("Successfully accessed JSON from Battle.net @ <a href='".$url."'>" . $url . "</a>", "success");
 				}
 				return json_decode($json, true);
 			} else {
@@ -221,7 +223,7 @@ class D3Up_Sync {
 	// The steps needed to sync a build
 	protected function _sync() {
 		// Fetch the Profile API information about the Hero
-		$this->_log("Fetching information about the character.");
+		$this->_log("Beginning API requests for Character Information.");
 		if($json = $this->_getData($this->_profileUrl())) {
 			// Set the Meta Information on the Build	
 			$build = $this->_setMeta($json);
@@ -231,18 +233,19 @@ class D3Up_Sync {
 			$build->passives = $this->_getPassives($json);
 			// Gather the Item Data needed
 			$this->_log("Beginning API Requests for Item Information.");
-			$build->gear = $this->_getGear($json, 'gearsetcache');			
-			$build->_gear = $this->_getGear($json);
+			// Set gear as a GearSet_Cache (Embedded versions of the Items, will update when the item is saved)
+			$build->gear = $this->_getGear($json);			
+			// Set _gear as a GearSet (References to Actual Items)
+			// $build->_gear = $this->_getGear($json);
 		}	
+		// Finally save the build
 		$build->save();
-		// TODO - Items, more?
-		// var_dump($this->_log);
-		// exit;
 	}
 	
 	protected function _getGear(array $json, $docType = 'gearset') {
 		$gear = Epic_Mongo::db('doc:'.$docType);
 		foreach($json['items'] as $slot => $meta) {
+			$this->_log("Found item '".$meta['name']."' located in slot '".$slot."', checking to see if this item already exists...");
 			// Determine what D3Up considered the slot as
 			$d3upSlot = $this->_slotMap[$slot];
 			// Does this item already exist as one of your items?
@@ -250,8 +253,6 @@ class D3Up_Sync {
 				// If so, just set it
 				$gear[$d3upSlot] = $item; 				
 			} else {
-				// Else, fetch and create
-				$this->_log("Fetching JSON for slot: ".$d3upSlot.".");
 				// Build the URL to fetch the item
 				$url = $this->urlItem . $meta['tooltipParams'];
 				// Fetch the data
@@ -271,6 +272,7 @@ class D3Up_Sync {
 		// --------------------------------------------------------
 		// Check for Item's Existence in relation to this person
 		// --------------------------------------------------------
+		$item = null;
 		// Start building the Query
 		$query = array(
 			'_d3id' => $d3id,
@@ -289,8 +291,9 @@ class D3Up_Sync {
 		// If we found the item, return it!
 		// --------------------------------------------------------
 		if($item) {
-			$this->_log("<a href='/i/".$item->id."' class='quality-".$item->quality."'>".$item->name."</a> already exists as one of your items, skipping import but equipping on your build.", "warning");
+			$this->_log(HTML::itemLink($item)." located as one of your items in the database, skipping import and equipping.", "success");
 		}
+		$this->_log("Item not found, attempting import from Battle.net.");
 		return $item;
 	}
 	
@@ -336,8 +339,8 @@ class D3Up_Sync {
 		$item = $this->_buildItemSockets($data, $item);
 		// Save the item
 		$item->save();
-		$this->_log("Created new item, <a href='/i/".$item->id."' class='quality-".$item->quality."'>".$item->name."</a>", "success");
-		
+		// Display the item in the Log
+		$this->_log("Created new item, ".HTML::itemLink($item), "success");		
 		// Then return to the item
 		return $item;
 	}
