@@ -1,6 +1,6 @@
 <?php
 return array('html itemBoxIcon' => function($item) {
-	if(!$item->icon) {
+	if(!$item || !$item->icon) {
 		return null;
 	}
 	$options = array(
