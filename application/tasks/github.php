@@ -2,7 +2,7 @@
 class Github_Task {
 	
 	protected $_rss = 'https://github.com/aaroncox/D3Up.com/commits/master.atom?login=aaroncox';
-	protected $_limit = 5;
+	protected $_limit = 20;
 	
 	public function run($args) {
 		$token = Config::get('github.token');
