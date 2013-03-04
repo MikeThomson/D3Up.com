@@ -35,12 +35,15 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 		'descriptionSource' => null,
 		'_defaultToDescription' => null, 
 		// The characters gear/stats, we don't need it here
+		'gear' => null,
 		'_gear' => null,
 		'equipment' => null,
 		'equipmentCount' => null,
 		'stats' => null,
 		// Since JS reserves class, we use heroClass in JS
 		'class' => 'heroClass',
+		// This can be removed safely 
+		'test' => null,
 	);
 
 	public function sync() {
