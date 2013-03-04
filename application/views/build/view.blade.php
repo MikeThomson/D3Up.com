@@ -108,5 +108,20 @@
   // build.renderSkillsTo($("#build-header"));
   // build.renderSkillCatalog($("#skill-catalog"));
 
+	Handlebars.registerHelper('round', function(value, places) {
+		if(!places) {
+			return Math.round(value);
+		}
+		var exponent = Math.pow(10, places);
+		var num = Math.round((value * exponent)).toString();
+		return num.slice(0, -1 * places) + "." + num.slice(-1 * places)
+	  return Math.round(value * Math.pow());
+	});
+
+	var source   = $("#handlebar-stats").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.primary;
+	$("#handlebar-stats").replaceWith(template(data));
+
 </script>
 @endsection
