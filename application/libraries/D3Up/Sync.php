@@ -492,6 +492,8 @@ class D3Up_Sync {
 		$build = $this->getBuild();
 		// Set the time of this sync
 		$build->_lastCrawl = time();
+		// Set the time of the last battle.net update
+		$build->_lastBnetUpdate = (int) $json['last-updated'];
 		// Incremenent the number of times this build has been sync'd
 		$build->crawlCount++;
 		// Set the Class of the Character
@@ -502,6 +504,8 @@ class D3Up_Sync {
 		$build->hardcore = (bool) $json['hardcore'];
 		// Set the Hardcore Status of the Character
 		$build->paragon = (int) $json['paragonLevel'];
+		// Set the Gender of the Character
+		$build->gender = (int) $json['gender'];
 		// Return the Build
 		return $build;
 	}
