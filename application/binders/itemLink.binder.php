@@ -23,7 +23,7 @@ return array('html itemLink' => function($item, $params = array()) {
 	}
 	return HTML::link(
 		$link,
-		HTML::itemIcon($item) . $item->name, 
+		$item->name, 
 		$options
 	);
 });
