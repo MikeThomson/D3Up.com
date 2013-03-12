@@ -25,8 +25,8 @@
 							@if(Auth::check())
 								<a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
 									<img src="/img/icons/unknown.png" class="build-icon pull-left" style="width: 36px">
-									<div class='build-name'>Build Quick Select</div>
-									<small>My highest level builds</small>
+									<div class='build-name'>{{ __('d3up.build_quick_select') }}</div>
+									<small>{{ __('d3up.my_highest_level_builds') }}</small>
 									<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
 								</a>
 							@endif
@@ -72,11 +72,26 @@
 					@if(Auth::check())
 						@include("template.global.navbar.profile")
 					@endif
-
+					<li class="pull-right">
+						<form class="navbar-search pull-right" action="/search">
+		          <input type="text" class="search-query span3" placeholder="{{ __('d3up.search_by_battletag') }}">
+		        </form>
+					</li>
+					<li class='dropdown pull-right'>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							{{ Session::get('locale') }}
+						</a>
+						<ul class="dropdown-menu">
+						@foreach(Config::get('application.languages') as $lang)
+							<li>
+								<a href="/locale/{{ $lang }}">
+									<img src="/img/locale/{{ $lang }}.png"> {{ $lang }}
+								</a>
+							</li>
+						@endforeach
+						</ul>
+					</li>
         </ul>
-        <form class="navbar-search pull-right" action="/search">
-          <input type="text" class="search-query span3" placeholder="Search by BattleTag (Name#1234)">
-        </form>
       </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
   </div><!-- /.navbar-inner -->

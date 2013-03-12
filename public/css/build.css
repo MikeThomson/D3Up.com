@@ -7,7 +7,7 @@
 }
 .title-inner {
 	background: rgba(0, 0, 0, 0.6);
-	padding: 10px 0;
+	padding: 10px 0 0;
 }
 .title-inner .btn-group {
 	margin: 0 5px;
@@ -50,25 +50,21 @@ div.title-block .meta {
 div.title-block .meta small {
 	color: #ececec;
 }
+div.title-block .skill-row {
+	margin-top: 5px;
+	background: rgba(0, 0, 0, 0.6);	
+}
 .skill-bar {
 	margin-top: 10px;
 }
 .skill-icons {
-	border: 0px solid #000;
-	border-radius: 6px;
-	background: rgba(0, 0, 0, 0.6);
-	text-align: center;
-	
-}
-.skill-icons {
 	list-style: none;
-	padding: 5px;
-	margin: 5px 0 0;
-	display: inline-block;
+	float: left;
+	margin: 0;
+	padding: 0 0 5px 20px;
 }
 .skill-icons li {
 	display: inline-block;
-	float: left;
 	padding: 0 5px;
 }
 .skill-icons li img {

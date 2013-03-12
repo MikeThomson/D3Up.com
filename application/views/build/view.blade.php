@@ -6,17 +6,17 @@
 	<div class='span9'>
 		<div class="tabbable tabs-left">
 			<ul class="nav nav-tabs">
-	      <li class='divider'>Build</li>
-	      <li class='active'><a data-toggle="tab" href="#tab-gear">Gear</a></a></li>
-	      <li><a data-toggle="tab" href="#tab-skills">Skills</a></li>
-	      <li><a data-toggle="tab" href="#tab-buffs">Buffs</a></li>
-	      <li><a data-toggle="tab" href="#tab-edit">Edit</a></li>
-	      <li class='divider'>Tools</li>
-	      <li><a data-toggle="tab" href="#tab-sync">Battle.net Sync</a></li>
-	      <li><a data-toggle="tab" href="#tab-json">JSON Export</a></li>
+	      <li class='divider'>{{ __('build.build') }}</li>
+	      <li class='active'><a data-toggle="tab" href="#tab-gear">{{ __('build.gear') }}</a></a></li>
+	      <li><a data-toggle="tab" href="#tab-skills">{{ __('build.skills') }}</a></li>
+	      <li><a data-toggle="tab" href="#tab-buffs">{{ __('build.buffs') }}</a></li>
+	      <li><a data-toggle="tab" href="#tab-edit">{{ __('build.edit') }}</a></li>
+	      <li class='divider'>{{ __('build.tools') }}</li>
+	      <li><a data-toggle="tab" href="#tab-sync">{{ __('build.battlenet_sync') }}</a></li>
+	      <li><a data-toggle="tab" href="#tab-json">{{ __('build.json_export') }}</a></li>
 	      <li class='divider'>Meta</li>
-	      <li><a data-toggle="tab" href="#tab-math">Formulas</a></li>
-				<li><a data-toggle="tab" href="#tab-groups">Groups</a></a></li>
+	      <li><a data-toggle="tab" href="#tab-math">{{ __('build.formulas') }}</a></li>
+				<li><a data-toggle="tab" href="#tab-groups">{{ __('build.groups') }}</a></a></li>
 			</ul>
 			<div class="tab-content">
 				<div class='tab-pane active' id="tab-gear">

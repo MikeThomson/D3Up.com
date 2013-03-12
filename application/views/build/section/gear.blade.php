@@ -7,12 +7,12 @@
 <div>
   <ul class="nav nav-tabs">
     <li>
-			<a href="#gear-paperdoll" data-toggle="tab">Paperdoll</a>
+			<a href="#gear-paperdoll" data-toggle="tab">{{ __('build.paperdoll') }}</a>
 		</li>
     <li class="active">
-			<a href="#gear-overview" data-toggle="tab">Overview</a>
+			<a href="#gear-overview" data-toggle="tab">{{ __('build.overview') }}</a>
 		</li>
-    <li><a href="#gear-contributions" data-toggle="tab">DPS/EHP Contributions</a></li>
+    <li><a href="#gear-contributions" data-toggle="tab">{{ __('build.dps_ehp_contributions') }}</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="gear-overview">
@@ -35,7 +35,7 @@
 			</div>
     </div>
     <div class="tab-pane" id="gear-contributions">
-			Contributions
+			{{ __('build.contributions') }}
     </div>
     <div class="tab-pane" id="gear-paperdoll">
 			<img src="http://placehold.it/500x400&text=Full Paper Doll for Character, like Battle.net">
