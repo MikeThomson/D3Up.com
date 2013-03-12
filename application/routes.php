@@ -15,6 +15,8 @@ Route::get('/b/(:num)/(:any?)', 'build@view');
 // Detect Controllers and Build Routes for them
 Route::controller(Controller::detect());
 
+Route::get('locale/(:any)', 'base@locale');
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
