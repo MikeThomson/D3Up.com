@@ -79,7 +79,7 @@
 					</li>
 					<li class='dropdown pull-right'>
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							{{ Session::get('locale') }}
+							<img src="/img/locale/{{ Session::get('locale') }}.png"> {{ Session::get('locale') }}
 						</a>
 						<ul class="dropdown-menu">
 						@foreach(Config::get('application.languages') as $lang)
