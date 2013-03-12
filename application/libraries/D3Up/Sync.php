@@ -4,6 +4,8 @@ class D3Up_Sync {
 
 	// Storage for Log Messages
 	protected $_log = array();
+	// Storage for the fatal stopping error
+	protected $_fatal = null;
 	
 	// Item Data URL
 	public $urlItem = 'http://us.battle.net/api/d3/data/';
@@ -100,9 +102,13 @@ class D3Up_Sync {
 	
 	protected function _log($message, $type = 'info') {
 		$msg = new stdClass();
-		$msg->message = $message;
-		$msg->type = $type;
-		array_push($this->_log, $msg);
+		if($type == 'fatal') {
+			$this->_fatal = $message;
+		} else {
+			$msg->message = $message;
+			$msg->type = $type;			
+			array_push($this->_log, $msg);
+		}
 	}
 
 	// Fetch the Data from the specified URL
@@ -115,12 +121,12 @@ class D3Up_Sync {
 		// The limit of the number of tries
 		$limit = 5;
 		// A null context for the request, will be loaded with proxy settings if specified
-		$context = array(
+		$context = stream_context_create(array(
 			'http' => array(
 				'ignore_errors' => true,
 				'max_redirects' => 0,
 			),
-		);
+		));
 		// While we're not aborting, try to fetch specified URL
 		while($abort === false) {
 			// Do we have an application.proxy? Set it up!
@@ -174,7 +180,7 @@ class D3Up_Sync {
 		// Check to see if the BattleTag, Region and ID are set
 		if(!$build->_characterBt || !$build->_characterRg || !$build->_characterId) {
 			// If not, return false.
-			$this->_log("Build is missing one of: BattleTag, Region or ID", "error");
+			$this->_log("Build is missing one of: BattleTag, Region or ID", "fatal");
 			return false;			
 		}
 		// Check to see if this build has an owner
@@ -182,13 +188,13 @@ class D3Up_Sync {
 			if($user = Auth::user()) {
 				// If the user does NOT match the user that created the build, inform the user that they cannot sync it.
 				if($user->id !== $build->_createdBy->id) {
-					$this->_log("This build is owned by another user, you are not allowed to sync it.", "error");
+					$this->_log("This build is owned by another user, you are not allowed to sync it.", "fatal");
 					return false;
 					// throw new Exception("This build is owned by another user, you are not allowed to sync it.");
 				}
 			} else {
 				// If we aren't logged in and this build has a user, inform the user that they cannot sync it.
-				$this->_log("This build is owned by a registered user, you are not allowed to sync it.", "error");
+				$this->_log("This build is owned by a registered user, you are not allowed to sync it.", "fatal");
 				return false;
 				// throw new Exception("This build is owned by a registered user, you are not allowed to sync it.");
 			}
@@ -217,7 +223,10 @@ class D3Up_Sync {
 		if($this->_canSync()) {
 			$this->_sync();
 		}
-		return $this->_log;
+		return array(
+			'fatal' => $this->_fatal,
+			'messages' => $this->_log
+		);
 	}
 	
 	// The steps needed to sync a build
