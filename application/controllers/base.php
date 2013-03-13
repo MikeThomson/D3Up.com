@@ -16,7 +16,9 @@ class Base_Controller extends Controller {
 	
 	public function __construct() {
 		if(!Session::has('locale')) {
+			$langs = Config::get('application.languages');
 			Session::put('locale', Config::get('application.language'));
+			Session::put('locale_name', $langs[Config::get('application.language')]);
 		} else {
 			Config::set('application.language', Session::get('locale'));
 		}
@@ -25,9 +27,10 @@ class Base_Controller extends Controller {
 
 	public function action_locale($locale) {
 		if(isset($locale)) {
-			foreach(Config::get('application.languages') as $lang) {
+			foreach(Config::get('application.languages') as $lang => $name) {
 				if($locale == $lang) {
 					Session::put('locale', $locale);
+					Session::put('locale_name', $name);
 				}
 			}
 		}
