@@ -18,6 +18,10 @@ class Build_Controller extends Base_Controller {
 		// Fetch the Builds
 		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
 		$pagination = Paginator::make($builds->limit($perPage)->skip($skip), $builds->count(), $perPage);
+		$pagination->appends(array(
+			'class' => Request::get('class'),
+			'sort' => Request::get('sort'),
+		));
 		return View::make('build.index')->with('builds', $builds)->with('pagination', $pagination);
 	}
 
