@@ -8,6 +8,7 @@ return array(
 	'build' => 'Build',
 	'guide' => 'Guide',
 	'item' => 'Item',
+	'math' => 'D3 Math',
 	// Meta Information
 	'updated' => 'Updated',
 	'owner' => 'Owner',

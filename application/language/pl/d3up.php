@@ -8,6 +8,7 @@ return array(
 	'build' => 'Uild-bay',
 	'guide' => 'Uide-gay',
 	'item' => 'Tem-iay',
+	'math' => 'D3 Ath-may',
 	// Meta Information
 	'updated' => 'Dated-upay',
 	'owner' => 'Ner-oway',
