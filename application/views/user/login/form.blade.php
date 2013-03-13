@@ -1,4 +1,4 @@
-{{ Form::open('login', 'test', array('class' => 'form-signin')) }}
+{{ Form::open('/login', 'post', array('class' => 'form-signin')) }}
 	<!-- username field -->
 	<p>{{ Form::label('email', __('login.email')) }}</p>
 	<p>{{ Form::text('email', false, array('class' => 'input-block-level')) }}</p>
