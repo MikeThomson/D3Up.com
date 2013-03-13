@@ -114,3 +114,10 @@ a:focus {
 .title-block {
 	margin-bottom: 10px;
 }
+
+.table.build-table {
+	
+}
+.table.build-table .skills img {
+	height: 32px;
+}

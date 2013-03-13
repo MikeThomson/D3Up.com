@@ -2,6 +2,25 @@
 
 class Build_Controller extends Base_Controller {
 
+	public function action_index() {
+		// Build List Parameters
+		$curPage = Request::get('page') ?: 1;	// Either the currently requested page, or if null, page #1
+		$perPage = 20;
+		$skip = ($curPage - 1) * $perPage;
+		// Filtering on the Build List
+		$query = array();
+		// Do we have a class specified?
+		if($class = Request::get('class')) {
+			$query['class'] = $class;
+		}
+		// How are we sorting them?
+		$sort = array();
+		// Fetch the Builds
+		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
+		$pagination = Paginator::make($builds->limit($perPage)->skip($skip), $builds->count(), $perPage);
+		return View::make('build.index')->with('builds', $builds)->with('pagination', $pagination);
+	}
+
 	public function action_view($id, $data = false) {
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
 		if(!$build) {
