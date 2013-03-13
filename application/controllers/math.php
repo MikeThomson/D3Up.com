@@ -35,7 +35,6 @@ class Math_Controller extends Base_Controller {
 			'slug' => $this->slug($input['title']),
 			'locale' => $input['locale'],
 		);
-		var_dump($query);
 		$math = Epic_Mongo::db('math')->findOne($query);
 		if(!$math) {
 			// Create new if not found
@@ -47,7 +46,26 @@ class Math_Controller extends Base_Controller {
 		$math->title = $input['title'];
 		$math->explanation = $input['explanation'];
 		$math->locale = $input['locale'];
+		$math->_created = time();
 		$math->save();
-		return View::make('math.create');
+		if($math->id) {
+			return Redirect::to('/math/' . $math->id);			
+		}
+	}
+	
+	public function get_view($id) {
+		// Get the ID from the Route
+		$id = (int) $id;
+		// Query for it
+		$query = array('id' => $id);
+		$math = Epic_Mongo::db('math')->findOne($query);
+		if($math) {
+			return View::make('math.view')->with('math', $math);			
+		} else {
+			return Redirect::to('/math');
+		}
+		
+		
+		var_dump(Input::all(), $id, $math); exit;
 	}
 }

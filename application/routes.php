@@ -11,11 +11,15 @@
 Route::get('/b/(:num)/sync', 'build@sync');
 // Route to View a build
 Route::get('/b/(:num)/(:any?)', 'build@view');
+// Math by Slug routing
+Route::get('math/(:num)/(:any?)', 'math@view');
 
 // Detect Controllers and Build Routes for them
 Route::controller(Controller::detect());
 
+// Locale Swapping Route
 Route::get('locale/(:any)', 'base@locale');
+
 
 /*
 |--------------------------------------------------------------------------
