@@ -1,3 +1,3 @@
 <?php
-include(path('app') . "Markdown/Michelf/Markdown.php");
+include(path('app') . "libraries/Markdown/Michelf/Markdown.php");
 class Markdown extends \Michelf\Markdown { }
