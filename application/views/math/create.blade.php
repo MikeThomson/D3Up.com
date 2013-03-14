@@ -3,7 +3,7 @@
 @section('content')
 <div class='row'>
 	<div class='span9'>
-		@include('math.form.edit')
+		@include('math.form.create')
 	</div>
 	<div class='span3'>
 		

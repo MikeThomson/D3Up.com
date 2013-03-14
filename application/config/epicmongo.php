@@ -8,6 +8,7 @@ return array(
 		'build' => 'D3Up_Build',
 		'item' => 'D3Up_Item',
 		'math' => 'D3Up_Math',
+		'localized' => 'D3Up_Localized',
 		'gearset' => 'D3Up_GearSet',
 		'gearsetcache' => 'D3Up_GearSet_Cache',
 	)

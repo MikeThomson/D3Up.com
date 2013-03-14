@@ -11,7 +11,9 @@
 Route::get('/b/(:num)/sync', 'build@sync');
 // Route to View a build
 Route::get('/b/(:num)/(:any?)', 'build@view');
-// Math by Slug routing
+// Math Edit Routing
+Route::get('math/(:num)/edit', 'math@edit');
+// Math Routing
 Route::get('math/(:num)/(:any?)', 'math@view');
 
 // Detect Controllers and Build Routes for them
