@@ -4,3 +4,6 @@
 [submodule "bundles/myunit"]
 	path = bundles/myunit
 	url = git://github.com/etherealite/myunit.git
+[submodule "application/libraries/Markdown"]
+	path = application/libraries/Markdown
+	url = git://github.com/michelf/php-markdown.git
