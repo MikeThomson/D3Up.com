@@ -36,6 +36,7 @@ class Math_Controller extends Base_Controller {
 	    'title' => 'required|between:5,100',
 			'explanation' => 'between:5,100',
 			'content' => 'required|between:5,1000',
+			'locale' => 'required|in:' . implode(array_keys(Config::get('application.languages')), ","),
 		);
 		return Validator::make($input, $rules);
 	}
@@ -83,7 +84,7 @@ class Math_Controller extends Base_Controller {
 	public function post_edit() {
 		$validation = $this->_validate();
 		if($validation->fails()) {
-			return Redirect::to('math//edit')->with_errors($validation)->with_input();
+			return Redirect::to('math/edit')->with_errors($validation)->with_input();
 		}
 		$input = Input::all();
 		$math = Epic_Mongo::db('math')->findOne(array("id" => (int) $input['id']));

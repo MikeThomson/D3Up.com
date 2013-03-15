@@ -1,5 +1,4 @@
 <?php
-
 class D3Up_Math extends Epic_Mongo_Document_Sequenced {
 	
 	protected $_collection = 'math';
@@ -8,5 +7,11 @@ class D3Up_Math extends Epic_Mongo_Document_Sequenced {
   protected $_requirements = array(
 		'_localized' => array('doc:localized'),
   );
-
+	
+	public function save($entire = false) {
+		if(Request::cli()) {
+			$this->_unitTest = true;
+		}
+		return parent::save($entire);
+	}
 }
