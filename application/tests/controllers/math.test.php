@@ -11,6 +11,7 @@ class MathControllerTest extends ControllerTestCase {
 		$response = $this->get('math@create');
 		// Simulated Form Data
 		$data = array(
+			// 'title' => 'Sample Title to avoid Title Validation Failure', // Commented out Title to generate the error
 			'explanation' => 'Automatically generated record by PHPUnit (Testing Title Validity)',
 			'content' => 'Sample Content to avoid Content Validation Failure',
 			'locale' => 'en',
@@ -27,6 +28,7 @@ class MathControllerTest extends ControllerTestCase {
 		$data = array(
 			'title' => 'Sample Title to avoid Title Validation Failure',
 			'explanation' => 'Automatically generated record by PHPUnit (Testing Content Validity)',
+			// 'content' => 'Sample Content to avoid Content Validation Failure', // Commented out Content to generate the error
 			'locale' => 'en',
 		);
 		// Post the Data to the Form
@@ -42,6 +44,7 @@ class MathControllerTest extends ControllerTestCase {
 			'title' => 'Sample Title to avoid Title Validation Failure',
 			'explanation' => 'Automatically generated record by PHPUnit (Testing Locale Validity)',
 			'content' => 'Sample Content to avoid Content Validation Failure',
+			// 'locale' => 'en', // Commented out Locale to generate the error
 		);
 		// Post the Data to the Form
 		$response = $this->post('math@create', $data);
@@ -63,10 +66,6 @@ class MathControllerTest extends ControllerTestCase {
 		);
 		// Post the Data to the Form
 		$response = $this->post('math@create', $data);
-	}
-	
-	public function testEditAddLanguage() {
-		
 	}
 	
 	/**
@@ -102,9 +101,23 @@ class MathControllerTest extends ControllerTestCase {
 	/**
    * @depends testEdit
    */
+	public function testIndex() {
+		// Load math@index
+		$response = $this->get('math@index');
+		// Assert that the HTTP Status Code is 200 (OK)
+		$this->assertEquals('200', $response->foundation->getStatusCode());
+		// Assert that the View has a cursor
+		$this->assertInstanceOf('Epic_Mongo_Iterator_Cursor', $response->content->data['math']);
+		// Assert that it has data in it
+		$this->assertGreaterThan(0, $response->content->data['math']->count());
+	}
+	
+	/**
+   * @depends testEdit
+   */
 	public function testView() {
 		$sample = $this->getTestDocument();
-		// Load build@view with build #1
+		// Load math@view with sample math
 		$response = $this->get('math@view', array('id' => $sample->id));
 		// Assert that the HTTP Status Code is 200 (OK)
 		$this->assertEquals('200', $response->foundation->getStatusCode());
@@ -112,8 +125,21 @@ class MathControllerTest extends ControllerTestCase {
 		$this->assertInstanceOf('D3Up_Math', $response->content->data['math']);
 	}
 
+	/**
+   * @depends testView
+   */
 	public function testDelete() {
-		
+		$sample = $this->getTestDocument();
+		// Load math@delete with sample math
+		$response = $this->get('math@delete', array('id' => $sample->id));
+		// Assert that the HTTP Status Code is 200 (OK)
+		$this->assertEquals('200', $response->foundation->getStatusCode());
+		// Now send the request to delete the sample math
+		$this->post('math@delete', array('id' => $sample->id, 'confirm' => true));
+		// Request the view page for the math, and ensure it doesn't exist
+		$response = $this->get('math@view', array('id' => $sample->id));
+		// Assert that the HTTP Status Code is 302 (Redirect)
+		$this->assertEquals('302', $response->foundation->getStatusCode());
 	}
 	
 	/**
@@ -124,11 +150,11 @@ class MathControllerTest extends ControllerTestCase {
 		$query = array('_unitTest' => true);
 		// Get the Database
 		$db = Epic_Mongo::db('math')->getSchema()->getMongoDb();
-		// Remove all the results
+		// // Remove all the results
 		$result = $db->math->remove($query);
-		// Query again
+		// // Query again
 		$results = Epic_Mongo::db('math')->find($query);
-		// Ensure they're gone!
+		// // Ensure they're gone!
 		$this->assertEquals(0, $results->count());
 	}
 }
