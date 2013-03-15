@@ -63,16 +63,6 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('d3up.math') }} <b class="caret"></b></a>
 						@include("template.global.navbar.math")
 	        </li>
-	        <li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('d3up.items') }} <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Build #1</a></li>
-							<li><a href="#">Build #2</a></li>
-							<li><a href="#">Build #3</a></li>
-							<li><a href="#">Build #4</a></li>
-							<li><a href="#">Build #5</a></li>
-						</ul>
-	        </li>
 				</ul>
 				<ul class='nav pull-right'>
 					@if(Auth::check())
