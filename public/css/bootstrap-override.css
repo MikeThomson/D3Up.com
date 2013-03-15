@@ -226,6 +226,7 @@
 }
 
 .nav-collapse .navbar-search {
+	margin: 10px 25px 0 0 ;
 	border: 0;
   -webkit-box-shadow: none;
      -moz-box-shadow: none;
