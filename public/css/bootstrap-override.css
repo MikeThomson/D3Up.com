@@ -139,6 +139,9 @@
 	border: 0;
 }
 
+.navbar .nav li.dropdown:hover b.caret {
+	border-top: 4px solid #70b1d5;
+}
 .navbar .brand {
   display: block;
   font-size: 24px;
