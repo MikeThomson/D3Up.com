@@ -13,6 +13,10 @@ Route::get('/b/(:num)/sync', 'build@sync');
 Route::get('/b/(:num)/(:any?)', 'build@view');
 // Math Edit Routing
 Route::get('math/(:num)/edit', 'math@edit');
+// Math Edit Routing (Dialog)
+Route::get('math/(:num)/delete', 'math@delete');
+// Math Edit Routing (Confirmation)
+Route::post('math/(:num)/delete', 'math@delete');
 // Math Routing
 Route::get('math/(:num)/(:any?)', 'math@view');
 

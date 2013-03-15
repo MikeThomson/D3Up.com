@@ -3,7 +3,8 @@
 class Math_Controller extends Base_Controller {
 	public $restful = true;
 	public function get_index() {
-		return View::make('math.index');
+		$math = Epic_Mongo::db('math')->find();
+		return View::make('math.index')->with('math', $math);
 	}
 	
 	public function slug($text) {
@@ -109,8 +110,27 @@ class Math_Controller extends Base_Controller {
 		} else {
 			return Redirect::to('/math');
 		}
-		
-		
-		var_dump(Input::all(), $id, $math); exit;
+	}
+	
+	public function get_delete($id) {
+		$id = (int) $id;
+		// Query for it
+		$query = array('id' => $id);
+		$math = Epic_Mongo::db('math')->findOne($query);
+		return View::make('math.delete')->with('math', $math);
+	}
+	
+	public function post_delete() {
+		if($confirm = Input::get('confirm')) {
+			if($confirm == 'true') {
+				$id = (int) Input::get('id');
+				// Query for it
+				$query = array('id' => $id);
+				$math = Epic_Mongo::db('math')->findOne($query);
+				$math->delete();
+				return Redirect::to_action('math@index');
+			}
+		}		
+		throw new Exception("Unable to Delete");
 	}
 }
