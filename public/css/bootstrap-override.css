@@ -271,3 +271,7 @@
 .pagination {
   text-align: center;
 }
+
+ul.nav li.dropdown:hover > .dropdown-menu{
+    display: block;    
+}
