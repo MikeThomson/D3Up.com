@@ -64,22 +64,6 @@ Autoloader::map(array(
 
 /*
 |--------------------------------------------------------------------------
-| Auto-Loader Directories
-|--------------------------------------------------------------------------
-|
-| The Laravel auto-loader can search directories for files using the PSR-0
-| naming convention. This convention basically organizes classes by using
-| the class namespace to indicate the directory structure.
-|
-*/
-
-Autoloader::directories(array(
-	path('app').'models',
-	path('app').'libraries',
-));
-
-/*
-|--------------------------------------------------------------------------
 | Laravel View Loader
 |--------------------------------------------------------------------------
 |
@@ -174,5 +158,22 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 
 if (Request::cli())
 {
+	Session::load();
   Bundle::start('myunit');
 }
+
+/*
+|--------------------------------------------------------------------------
+| Auto-Loader Directories
+|--------------------------------------------------------------------------
+|
+| The Laravel auto-loader can search directories for files using the PSR-0
+| naming convention. This convention basically organizes classes by using
+| the class namespace to indicate the directory structure.
+|
+*/
+
+Autoloader::directories(array(
+	path('app').'models',
+	path('app').'libraries',
+));
