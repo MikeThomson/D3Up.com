@@ -144,7 +144,9 @@
   font-size: 24px;
   font-weight: 200;
   color: #FFF;
+	padding: 0;
 	margin: 0;
+	margin-right: 15px;
   text-shadow: 0 2px 2px #555;
 	font-weight: bold;
 	background-color: #70b1d5;
@@ -157,13 +159,17 @@
   background-repeat: repeat-x;
 }
 
+.navbar .brand img {
+	height: 50px;
+}
+
 .navbar-fixed-top .navbar-inner {
 	padding: 0;
 }
 
 .navbar .nav > li > a {
   float: none;
-  padding: 10px 15px 10px;
+  padding: 15px 15px 15px;
   color: #ececec;
   text-decoration: none;
   text-shadow: none;

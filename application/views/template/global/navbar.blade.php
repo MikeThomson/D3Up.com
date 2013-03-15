@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
       </a>
       <a class="brand" href="/">
-				D3Up
+				<img src='/img/logo_small.jpg'>
 			</a>
 			<div class='nav-collapse'>
 				<ul class="nav">
