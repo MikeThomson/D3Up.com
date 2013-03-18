@@ -14,7 +14,9 @@ class Build_Controller extends Base_Controller {
 			$query['class'] = $class;
 		}
 		// How are we sorting them?
-		$sort = array();
+		$sort = array(
+			'_created' => -1
+		);
 		// Fetch the Builds
 		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
 		$pagination = Paginator::make($builds->limit($perPage)->skip($skip), $builds->count(), $perPage);
