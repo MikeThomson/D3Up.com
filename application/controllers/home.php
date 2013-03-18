@@ -18,12 +18,10 @@ class Home_Controller extends Base_Controller {
 				if($build) {
 					$characters = $sync->getCharacters($build->_characterRg, $build->_characterBt);
 					$available[$region] = (bool) $characters;					
-					var_dump($build->export());
 				}
 			}			
 			Cache::put('api-status', $available, 5);
 		}
-		var_dump($available); exit;
 		return View::make('home.api-status')->with('status', $available);
 	}
 
