@@ -6,6 +6,9 @@ return array(
 	'schema' => 'D3Up_Schema',
 	'typemap' => array(
 		'build' => 'D3Up_Build',
+		'guide' => 'D3Up_Guide',
+		'guide_section' => 'D3Up_Guide_Section',
+		'guide_sections' => 'D3Up_Guide_Sections',
 		'item' => 'D3Up_Item',
 		'math' => 'D3Up_Math',
 		'localized' => 'D3Up_Localized',
