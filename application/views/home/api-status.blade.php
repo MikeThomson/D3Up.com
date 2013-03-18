@@ -12,4 +12,6 @@
 	<div class="alert {{ ($status[3]) ? 'alert-success' : 'alert-error' }}">
 		<strong>Asia</strong>: {{ ($status[3]) ? "Online" : "Unable to Connect" }}
 	</div>
+	<p>The API Status page here on D3Up.com refreshes every 5 minutes.</p>
+	<h3>Last API Status Check performed: {{ date("Y-m-d H:i:s", Cache::get('api-status-checked')) }}</h3>
 @endsection
