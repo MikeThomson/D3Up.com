@@ -15,8 +15,10 @@ class Home_Controller extends Base_Controller {
 			$available = array();
 			foreach(array(1,2,3) as $region) {
 				$build = Epic_Mongo::db('build')->findOne(array("_characterRg" => (string) $region));
-				$characters = $sync->getCharacters($build->_characterRg, $build->_characterBt);
-				$available[$region] = (bool) $characters;
+				if($build) {
+					$characters = $sync->getCharacters($build->_characterRg, $build->_characterBt);
+					$available[$region] = (bool) $characters;					
+				}
 			}			
 			$available = Cache::put('api-status', $available, 5);
 		}
