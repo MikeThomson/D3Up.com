@@ -20,6 +20,9 @@ Route::post('math/(:num)/delete', 'math@delete');
 // Math Routing
 Route::get('math/(:num)/(:any?)', 'math@view');
 
+// Guide Routing
+Route::get('guide/(:num)/(:any?)', 'guide@view');
+
 // Detect Controllers and Build Routes for them
 Route::controller(Controller::detect());
 
