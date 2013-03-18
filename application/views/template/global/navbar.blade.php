@@ -38,7 +38,7 @@
 						@endif
 					</li>
 	        <li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('d3up.builds') }} <b class="caret"></b></a>
+						<a href="/build" class="dropdown-toggle-clickable">{{ __('d3up.builds') }} <b class="caret"></b></a>
 						<div class="dropdown-menu">
 	            <ul>
 								<li class='barbarian'><a href="/build?class=barbarian">{{ __('build.barbarian') }}</a></li>
@@ -50,7 +50,7 @@
 						</div>
 					</li>
 	        <li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('d3up.guides') }} <b class="caret"></b></a>
+						<a href="/guide" class="dropdown-toggle-clickable">{{ __('d3up.guides') }} <b class="caret"></b></a>
 	         	<ul class="dropdown-menu">
 	           	<li><a href="#">Build #1</a></li>
 	           	<li><a href="#">Build #2</a></li>
@@ -60,7 +60,7 @@
 	         	</ul>
 					</li>
 	        <li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('d3up.math') }} <b class="caret"></b></a>
+						<a href="/math" class="dropdown-toggle-clickable">{{ __('d3up.math') }} <b class="caret"></b></a>
 						@include("template.global.navbar.math")
 	        </li>
 				</ul>
