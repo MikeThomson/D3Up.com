@@ -1,3 +1,4 @@
+.guide-block,
 .title-block {
 	position: relative;
 	background-image: url('/img/bgs/default.jpeg');
@@ -5,6 +6,7 @@
 	background-repeat: no-repeat;
 	outline: 1px solid #333;
 }
+.guide-block-inner,
 .title-inner {
 	background: rgba(0, 0, 0, 0.6);
 	padding: 10px 0 0;
@@ -12,41 +14,45 @@
 .title-inner .btn-group {
 	margin: 0 5px;
 }
+.guide-block[data-class=barbarian],
 .title-block[data-class=barbarian],
 #guide[data-class=barbarian] div.title-block {
 	background-image: url('/img/bgs/barbarian.jpeg');
 }
+.guide-block[data-class=demon-hunter],
 .title-block[data-class=demon-hunter],
 #guide[data-class=demon-hunter] div.title-block {
 	background-image: url('/img/bgs/demon-hunter.jpeg');
 }
+.guide-block[data-class=witch-doctor],
 .title-block[data-class=witch-doctor],
 #guide[data-class=witch-doctor] div.title-block {
 	background-image: url('/img/bgs/witch-doctor.jpeg');
 }
+.guide-block[data-class=monk],
 .title-block[data-class=monk],
 #guide[data-class=monk] div.title-block {
 	background-image: url('/img/bgs/monk.jpeg');
 }
+.guide-block[data-class=wizard],
 .title-block[data-class=wizard],
 #guide[data-class=wizard] div.title-block {
 	background-image: url('/img/bgs/wizard.jpeg');
 }
 #build div.title-block,
-#guide div.title-block {
+#guide div.guide-block {
 	border: 1px solid #333;
 	text-shadow: 1px 2px 2px #000;
 }
-
+div.guide-block .title,
+div.guide-block .meta,
 div.title-block .title, 
 div.title-block .meta {
 	padding: 0px 20px;
-}
-div.title-block .title, 
-div.title-block .meta {
 	margin: 0;
 	text-shadow: 1px 1px #111;
 }
+div.guide-block .meta small,
 div.title-block .meta small {
 	color: #ececec;
 }

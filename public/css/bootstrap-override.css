@@ -199,9 +199,14 @@
   background-color: transparent;
 }
 
-.navbar .nav li.dropdown.open > .dropdown-toggle,
-.navbar .nav li.dropdown.active > .dropdown-toggle,
-.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+.navbar .nav li.dropdown > .dropdown-toggle-clickable .caret {
+	border-top-color: #777777;
+	border-bottom-color: #777777;
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle-clickable,
+.navbar .nav li.dropdown.active > .dropdown-toggle-clickable,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle-clickable {
   color: #70b1d5;
   background-color: #222;
 }
