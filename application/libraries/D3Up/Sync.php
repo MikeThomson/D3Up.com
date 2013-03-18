@@ -555,4 +555,15 @@ class D3Up_Sync {
 			. strtolower(str_replace("#", "-", $this->getBuild()->_characterBt)) 
 			. "/hero/" . $this->getBuild()->_characterId;		
 	}
+	
+	// Get's characters by Region and BattleTag
+	public function getCharacters($rg, $bt) {
+		$url = $this->urlProfile[$rg] . strtolower(str_replace("#", "-", $bt)) . "/index";
+		$data = $this->_getData($url);
+		if(!isset($data['heroes'])) {
+			return null;
+		}
+		return $data['heroes'];		
+	}
+	
 }
