@@ -9,8 +9,9 @@
 	<tr>
 		<th></th>
 		<th class="views">SC/HC</th>
-		<th>Name</th>
+		<th>Level</th>
 		<th>Paragon</th>
+		<th>Name</th>
 		<th>Skills</th>
 		<th>Passives</th>
 		<th>DPS</th>
@@ -21,8 +22,9 @@
 	<tr class='build-row'>
 		<td class="icon"><img src="/img/icons/<?= $build->class ?>.png"/></td>
 		<td><?= ($build->hardcore) ? "<span class='neg' title='Hardcore'>HC</span>" : "<span class='pos' title='Softcore'>SC</span>" ?> </td>
-		<td class='name'><?= HTML::buildLink($build) ?></td>
+		<td class="stat"><?= $build->level ?></td>
 		<td class="stat"><?= $build->paragon ?></td>
+		<td class='name'><?= HTML::buildLink($build) ?></td>
 		<td class="skills">
 			<? if($build->actives): ?>
 				<? foreach($build->actives as $active): ?>
@@ -51,8 +53,8 @@
 				<? endforeach ?>
 			<? endif ?>
 		</td>
-		<td class="stat"><?= $build->stats['dps'] ?></td>
-		<td class="stat"><?= $build->stats['ehp'] ?></td>
+		<td class="stat"><?= HTML::prettyStat($build->stats['dps']) ?></td>
+		<td class="stat"><?= HTML::prettyStat($build->stats['ehp']) ?></td>
 	</tr>
 <? endforeach; ?>
 </tbody>
