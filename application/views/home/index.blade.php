@@ -17,6 +17,7 @@
 					<li>Localization Enabled - You can change from 'English' to 'Pig Latin' using the dropdown in the upper right of the menubar on the top (thanks to allan on #diablo for the idea!)</li>
 					<li>'<a href="/math">Math</a>' section added - A community 'wiki' type engine that will allow players to learn about different game mechanics.</li>
 					<li>'<a href="/guide">Guide</a>' section added - Formatting still broken, editing not working yet.</li>
+					<li>Added an <a href='/api-status'>API Status</a> check page to see if Battle.net's API is up or down.</li>
 				</ul>
 				@if(Cache::has('github_commits'))
 				<table class='recent-commits table'>
