@@ -15,7 +15,8 @@
 					<li><a href="/b/1">Viewing Builds</a> (http://v2.d3up.com/b/###### insert your number)</li>
 					<li><a href="http://cl.ly/image/1G2Y0W313Z2r">Preview of the new Sync Screen</a></li>
 					<li>Localization Enabled - You can change from 'English' to 'Pig Latin' using the dropdown in the upper right of the menubar on the top (thanks to allan on #diablo for the idea!)</li>
-					<li>'Math' section added - A community 'wiki' type engine that will allow players to learn about different game mechanics.</li>
+					<li>'<a href="/math">Math</a>' section added - A community 'wiki' type engine that will allow players to learn about different game mechanics.</li>
+					<li>'<a href="/guide">Guide</a>' section added - Formatting still broken, editing not working yet.</li>
 				</ul>
 				@if(Cache::has('github_commits'))
 				<table class='recent-commits table'>
