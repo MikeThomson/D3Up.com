@@ -4,7 +4,7 @@
 	background-image: url('/img/bgs/default.jpeg');
 	background-position: top right;
 	background-repeat: no-repeat;
-	outline: 1px solid #333;
+	outline: 0px solid #333;
 }
 .guide-block-inner,
 .title-inner {
@@ -50,6 +50,7 @@ div.title-block .title,
 div.title-block .meta {
 	padding: 0px 20px;
 	margin: 0;
+	margin-top: 10px;
 	text-shadow: 1px 1px #111;
 }
 div.guide-block .meta small,
@@ -163,4 +164,12 @@ div.title-block .skill-row {
 #build-gear {
 	padding: 0;
 	margin: 0;
+}
+.guide-block h1.title small {
+	font-size: 18px;
+	line-height: 18px;
+}
+.section .youtube-video {
+	padding: 23px;
+	text-align: center;
 }

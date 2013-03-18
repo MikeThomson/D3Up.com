@@ -35,6 +35,15 @@ class Build_Controller extends Base_Controller {
 		return View::make('build.view')->with('build', $build);
 	}
 	
+	public function action_compare($id1, $id2) {
+		$build1 = Epic_Mongo::db('build')->findOne(array('id' => (int) $id1));
+		$build2 = Epic_Mongo::db('build')->findOne(array('id' => (int) $id2));
+		if(!$build1 || !$build2) {
+			return Response::error('404');
+		}
+		return View::make('build.compare')->with('build1', $build1)->with('build2', $build2);
+	}
+	
 	public function action_sync($id, $data = false) {
 		// Sync this Build
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));

@@ -45,16 +45,23 @@
 				<div class="span9">
 					<h1 class="title">
 						<?= $guide->title ?>
-						<p>
-							<small>
-								By <span class='author'><?= $guide->author->username ?></span>
-								on <span class='date'><?= date('F j, Y', $guide->_created) ?></span>
-								<? if($guide->_updated): ?>
-								 <br/>Last Updated: <span class='date'><?= date('F j, Y', $guide->_updated) ?></span>
-								<? endif ?>
-							</small>
-						</p>
 					</h1>
+					<h4 class="meta">
+						<small>
+							Created by <span class='author'>
+								<a href="/user/{{ $guide->author->username }}"><?= $guide->author->username ?></a>
+							</span>
+							on 
+							<span class='date'>
+								<?= date('F j, Y', $guide->_created) ?>
+							</span>
+						</small>
+					</h4>
+					<? if($guide->_updated): ?>
+						<h4 class="meta">
+							<small>Last Updated: <span class='date'><?= date('F j, Y', $guide->_updated) ?></span></small>
+						</h4>
+					<? endif ?>
 				</div>
 				<div class="span3">
 					<div class="btn-group btn-group-vertical  pull-right">

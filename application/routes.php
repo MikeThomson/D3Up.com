@@ -9,6 +9,8 @@
 
 // Route to Sync a Build
 Route::get('/b/(:num)/sync', 'build@sync');
+// Route to Compare two builds
+Route::get('/c/(:num)/(:num)', 'build@compare');
 // Route to View a build
 Route::get('/b/(:num)/(:any?)', 'build@view');
 // Math Edit Routing

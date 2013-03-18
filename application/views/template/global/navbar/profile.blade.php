@@ -1,5 +1,5 @@
 <li class="dropdown pull-right">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">							
+  <a href="#" class="dropdown-toggle-clickable" data-toggle="dropdown">							
 		{{ ucwords(Auth::user()->username) }}
 		<b class="caret"></b>
 	</a>

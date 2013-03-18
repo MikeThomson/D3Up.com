@@ -13,7 +13,7 @@
 				<ul class="nav">
 					<li <?= (isset($build) || Auth::check()) ? 'class="dropdown"' : ''?>>
 						@if(isset($build))
-					  <a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
+					  <a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle-clickable' : '' ?>" data-toggle="dropdown">							
 							<img src="/img/icons/{{ $build->class }}.png" class="build-icon pull-left">
 							<div class='build-name'>{{ $build->name }}</div>
 							<small>
@@ -51,13 +51,15 @@
 					</li>
 	        <li class="dropdown">
 						<a href="/guide" class="dropdown-toggle-clickable">{{ __('d3up.guides') }} <b class="caret"></b></a>
-	         	<ul class="dropdown-menu">
-	           	<li><a href="#">Build #1</a></li>
-	           	<li><a href="#">Build #2</a></li>
-	           	<li><a href="#">Build #3</a></li>
-	           	<li><a href="#">Build #4</a></li>
-	           	<li><a href="#">Build #5</a></li>
-	         	</ul>
+						<div class="dropdown-menu">
+	            <ul>
+								<li class='barbarian'><a href="/guide?class=barbarian">{{ __('build.barbarian') }}</a></li>
+								<li class='demon-hunter'><a href="/guide?class=demon-hunter">{{ __('build.demon-hunter') }}</a></li>
+								<li class='monk'><a href="/guide?class=monk">{{ __('build.monk') }}</a></li>
+								<li class='witch-doctor'><a href="/guide?class=witch-doctor">{{ __('build.witch-doctor') }}</a></li>
+								<li class='wizard'><a href="/guide?class=wizard">{{ __('build.wizard') }}</a></li>
+	         		</ul>
+						</div>
 					</li>
 	        <li class="dropdown">
 						<a href="/math" class="dropdown-toggle-clickable">{{ __('d3up.math') }} <b class="caret"></b></a>
@@ -69,7 +71,7 @@
 						@include("template.global.navbar.profile")
 					@else
 					<li class='dropdown'>
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<a href="#" class="dropdown-toggle-clickable" data-toggle="dropdown">
 							<img src="/img/locale/{{ Session::get('locale') }}.png"> {{ Session::get('locale_name') }}
 						</a>
 						<ul class="dropdown-menu">
@@ -95,7 +97,6 @@
 </div><!-- /.navbar -->
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
-		$('.dropdown-toggle').dropdown();
 		$('.navbar .dropdown-menu').click(function(e) {
 		    e.stopPropagation();
 		});

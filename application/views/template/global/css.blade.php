@@ -6,4 +6,5 @@
 <link href="/css/d3up.css" rel="stylesheet">
 <link href="/css/d3up-tooltip.css" rel="stylesheet">
 <link href="/css/build.css" rel="stylesheet">
+<link href="/css/compare.css" rel="stylesheet">
 <link href="/css/responsive.css" rel="stylesheet">
