@@ -25,6 +25,9 @@ Route::get('math/(:num)/(:any?)', 'math@view');
 // Guide Routing
 Route::get('guide/(:num)/(:any?)', 'guide@view');
 
+// API Status Checker
+Route::get('api-status', 'home@apistatus');
+
 // Detect Controllers and Build Routes for them
 Route::controller(Controller::detect());
 
