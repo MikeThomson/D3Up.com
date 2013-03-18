@@ -20,7 +20,7 @@ class Home_Controller extends Base_Controller {
 					$available[$region] = (bool) $characters;					
 				}
 			}			
-			$available = Cache::put('api-status', $available, 5);
+			Cache::put('api-status', $available, 5);
 		}
 		return View::make('home.api-status')->with('status', $available);
 	}
