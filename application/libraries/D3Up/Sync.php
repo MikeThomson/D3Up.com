@@ -563,7 +563,13 @@ class D3Up_Sync {
 		if(!isset($data['heroes'])) {
 			return null;
 		}
+		foreach($data['heroes'] as $k => $v) {
+			$data['heroes'][$k]['region'] = $rg;
+		}
 		return $data['heroes'];		
 	}
-	
+
+	public function testURL($url) {
+		return $this->_getData($url);
+	}
 }
