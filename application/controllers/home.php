@@ -7,22 +7,30 @@ class Home_Controller extends Base_Controller {
 		return View::make('home.index');
 	}
 	
+
+	protected $_statusURLs = array(
+		'us' => 'http://us.battle.net/api/d3/data/follower/scoundrel',
+		'eu' => 'http://eu.battle.net/api/d3/data/follower/scoundrel',
+		'kr' => 'http://kr.battle.net/api/d3/data/follower/scoundrel',
+		'tw' => 'http://tw.battle.net/api/d3/data/follower/scoundrel',
+	);
+	
 	public function action_apistatus() {
-		if(Cache::has('api-status')) {
-			$available = Cache::get('api-status');
-		} else {
+		// if(Cache::has('api-status')) {
+		// 	$available = Cache::get('api-status');
+		// } else {
 			$sync = new D3Up_Sync();
 			$available = array();
-			foreach(array(1,2,3) as $region) {
-				$build = Epic_Mongo::db('build')->findOne(array("_characterRg" => (string) $region));
-				if($build) {
-					$characters = $sync->getCharacters($build->_characterRg, $build->_characterBt);
-					$available[$region] = (bool) $characters;					
+			foreach($this->_statusURLs as $region => $url) {
+				if($sync->testURL($url)) {
+					$available[$region] = true;
+				} else {
+					$available[$region] = false;					
 				}
 			}			
-			Cache::put('api-status', $available, 5);
-			Cache::put('api-status-checked', time(), 5);
-		}
+			// Cache::put('api-status', $available, 5);
+			// Cache::put('api-status-checked', time(), 5);
+		// }
 		return View::make('home.api-status')->with('status', $available);
 	}
 
