@@ -16,9 +16,9 @@ class Home_Controller extends Base_Controller {
 	);
 	
 	public function action_apistatus() {
-		// if(Cache::has('api-status')) {
-		// 	$available = Cache::get('api-status');
-		// } else {
+		if(Cache::has('api-status')) {
+			$available = Cache::get('api-status');
+		} else {
 			$sync = new D3Up_Sync();
 			$available = array();
 			foreach($this->_statusURLs as $region => $url) {
@@ -28,9 +28,9 @@ class Home_Controller extends Base_Controller {
 					$available[$region] = false;					
 				}
 			}			
-			// Cache::put('api-status', $available, 5);
-			// Cache::put('api-status-checked', time(), 5);
-		// }
+			Cache::put('api-status', $available, 5);
+			Cache::put('api-status-checked', time(), 5);
+		}
 		return View::make('home.api-status')->with('status', $available);
 	}
 

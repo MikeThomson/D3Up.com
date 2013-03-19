@@ -5,8 +5,8 @@
 	<p>D3Up uses the Battle.net API to retrieve your characters, items and skills. When the API is down (for Patching/Maintenence), it prevents D3Up from reading and updating your characters builds. This page is used to check on the status of the Battle.net API, to let you know if Battle.net is the reason your characters aren't syncing properly.</p>
 	@foreach($status as $region => $data)
 	<div class="alert {{ ($status[$region]) ? 'alert-success' : 'alert-error' }}">
-		<strong>{{ __('locale.'.$region) }}</strong>: {{ ($status[$region]) ? "Online" : "Unable to Connect" }}
-		(Tested against: <a href='http://{{ $region }}.battle.net/api/d3/data/follower/scoundrel'>Scoundrel Data</a>)
+		<strong>{{ __('locale.'.$region) }}</strong>: {{ ($status[$region]) ? __('locale.online') : __('locale.offline') }}
+		({{ __('locale.test_url') }}: <a href='http://{{ $region }}.battle.net/api/d3/data/follower/scoundrel'>{{ __('locale.scoundrel') }}</a>)
 	</div>
 	@endforeach
 	<p>The API Status page here on D3Up.com refreshes every 5 minutes.</p>
