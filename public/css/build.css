@@ -128,7 +128,7 @@ div.title-block .skill-row {
 	border-right: 1px solid #333;
 }
 .build-container .build-content {
-	padding: 0;
+	padding: 1px;
 }
 .build-container .build-content > .tab-content {
 }

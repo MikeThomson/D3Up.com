@@ -169,3 +169,10 @@ a:focus {
 	top: -50px; 
 	visibility: hidden;
 }
+footer {
+	background-color: #222;
+	margin-top: 25px;
+	padding: 25px;
+	text-align: center;
+	border-top: 1px solid #333;
+}

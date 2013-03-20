@@ -63,7 +63,7 @@
 		@include('build.section.stats')
 	</div>
 </div>
-<div id='character' data-json='{{ $build->json() }}'/>
+<div id='character' data-json='{{ $build->json() }}'></div>
 <script>
 	jQuery(document).ready(function ($) {
 		$('#build-tabs').tab();

@@ -32,18 +32,22 @@
 			</div> -->
 		</div>
 		<div class="skill-row clearfix">
+			@if($build->actives)
 	 		<ul id="active-display" class="skill-icons" data-skill-type="actives" data-display="icon">
 				<li><span class="skill-type">{{ __('build.skills') }}</span></li>
 				@foreach($build->actives as $skill)
 				<li><img class="skill-icon activatable" src="/img/icons/{{ $build->class}}-{{ explode("~", $skill)[0] }}.png"></li>
 				@endforeach
 			</ul>
+			@endif
+			@if($build->passives)
 	 		<ul id="passive-display" class="skill-icons" data-skill-type="passives" data-display="icon">
 				<li><span class="skill-type">{{ __('build.passives') }}</span></li>
 				@foreach($build->passives as $skill)
 				<li><img class="skill-icon activatable" src="/img/icons/{{ $build->class}}-{{ explode("~", $skill)[0] }}.png"></li>
 				@endforeach
 			</ul>
+			@endif
 		</div>
 	</div>
 </div>

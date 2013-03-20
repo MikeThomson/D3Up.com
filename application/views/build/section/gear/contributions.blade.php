@@ -14,15 +14,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($build->gear->getSlots() as $slot) 
-			<tr class='item'>
-				<td>{{ HTML::itemBoxIcon($build->gear[$slot]) }}</td>
-				<td>{{ HTML::itemLink($build->gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
-				<td>{{ HTML::hb('round stats.dps-'.$slot.' 2') }}</td>
-				<td>{{ HTML::hb('percent stats.dps-'.$slot.' stats.dps-gear-total') }}%</td>
-				<td>{{ HTML::hb('round stats.ehp-'.$slot.' 2') }}</td>
-				<td>{{ HTML::hb('percent stats.dps-'.$slot.' stats.dps-gear-total') }}%</td>
-			</tr>
-		@endforeach
+		@if($build->gear)			
+			@foreach($build->gear->getSlots() as $slot) 
+				<tr class='item'>
+					<td>{{ HTML::itemBoxIcon($build->gear[$slot]) }}</td>
+					<td>{{ HTML::itemLink($build->gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
+					<td>{{ HTML::hb('round stats.dps-'.$slot.' 2') }}</td>
+					<td>{{ HTML::hb('percent stats.dps-'.$slot.' stats.dps-gear-total') }}%</td>
+					<td>{{ HTML::hb('round stats.ehp-'.$slot.' 2') }}</td>
+					<td>{{ HTML::hb('percent stats.dps-'.$slot.' stats.dps-gear-total') }}%</td>
+				</tr>
+			@endforeach
+		@endif
 	</tbody>
 </table>
