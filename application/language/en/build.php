@@ -1,5 +1,6 @@
 <?php
 return array(
+	'build' => 'Build',
 	// Misc
 	'buffs' => 'Buffs',
 	'edit' => 'Edit',
