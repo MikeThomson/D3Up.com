@@ -1,5 +1,5 @@
 <div>
-	<script id="handlebar-stats" type="text/x-handlebars-template">
+	<script id="stats-sidebar" type="text/x-handlebars-template">
 	
 		{{-- Highlight: Used to highlight DPS/EHP and other major stats at the top. --}}
 		@include('build.section.stats.highlight')

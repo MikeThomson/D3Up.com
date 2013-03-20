@@ -127,7 +127,7 @@ div.title-block .skill-row {
 .build-container .build-content {
 	padding: 0 0 0 10px;
 }
-.build-container .build-content #gear-overview {
+.build-container .build-content .gear-table {
 	padding: 10px;
 }
 .nav-tabs > li > a {
@@ -171,11 +171,11 @@ div.title-block .skill-row {
 .build-container .build-content .tab-pane {
 	padding: 5px;
 }
-.build-container .build-content .tab-pane #build-gear td {
+.build-container .build-content .tab-pane .gear-table td {
 	border: none;
 	padding: 2px;
 	line-height: 32px;
 }
-.build-container .build-content .tab-pane #build-gear td:first-child {
+.build-container .build-content .tab-pane .gear-table td:first-child {
 	width: 38px;
 }

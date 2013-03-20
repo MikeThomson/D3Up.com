@@ -12,14 +12,16 @@
     <li class="active">
 			<a href="#gear-overview" data-toggle="tab">{{ __('build.overview') }}</a>
 		</li>
-    <li><a href="#gear-contributions" data-toggle="tab">{{ __('build.dps_ehp_contributions') }}</a></li>
+    <li>
+			<a href="#gear-contributions" data-toggle="tab">{{ __('build.dps_ehp_contributions') }}</a>
+		</li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="gear-overview">
 			@include("build.section.gear.overview")
     </div>
     <div class="tab-pane" id="gear-contributions">
-			{{ __('build.contributions') }}
+			@include("build.section.gear.contributions")
     </div>
     <div class="tab-pane" id="gear-paperdoll">
 			<img src="http://placehold.it/500x400&text=Full Paper Doll for Character, like Battle.net">

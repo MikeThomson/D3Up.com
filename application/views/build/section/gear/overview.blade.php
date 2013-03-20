@@ -6,12 +6,20 @@
 			@endif
 		@endforeach
 	</div>
-	<table id='build-gear' class='table'>
-		@foreach($build->gear->getSlots() as $slot) 
-			<tr class='item'>
-				<td>{{ HTML::itemBoxIcon($build->gear[$slot]) }}</td>
-				<td>{{ HTML::itemLink($build->gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
+	<table id='build-gear' class='table gear-table'>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Name</th>
 			</tr>
-		@endforeach
+		</thead>
+		<tbody>
+			@foreach($build->gear->getSlots() as $slot) 
+				<tr class='item'>
+					<td>{{ HTML::itemBoxIcon($build->gear[$slot]) }}</td>
+					<td>{{ HTML::itemLink($build->gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
+				</tr>
+			@endforeach
+		</tbody>
 	</table>
 </div>

@@ -118,7 +118,10 @@
   // build.renderSkillsTo($("#build-header"));
   // build.renderSkillCatalog($("#skill-catalog"));
 
+	<?= (isset($_GET['debug'])) ? 'console.log(d3up.builds.primary);' : ''; ?>
+
 	Handlebars.registerHelper('round', function(value, places) {
+		value = parseFloat(value);
 		if(!places) {
 			return Math.round(value);
 		}
@@ -128,10 +131,18 @@
 	  return Math.round(value * Math.pow());
 	});
 
-	var source   = $("#handlebar-stats").html();
-	var template = Handlebars.compile(source);
-	var data = d3up.builds.primary;
-	$("#handlebar-stats").replaceWith(template(data));
-
+	var sources = [
+		'#gear-overview table tbody',
+		'#gear-contributions table tbody',
+		'#stats-sidebar'
+	];
+	
+	$.each(sources, function(k,v) {
+		console.log(k,v);
+		var source   = $(v).html();
+		var template = Handlebars.compile(source);
+		var data = d3up.builds.primary;
+		$(v).replaceWith(template(data));		
+	});
 </script>
 @endsection
