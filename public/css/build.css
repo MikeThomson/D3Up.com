@@ -1,12 +1,11 @@
-.guide-block,
 .title-block {
 	position: relative;
 	background-image: url('/img/bgs/default.jpeg');
 	background-position: top right;
 	background-repeat: no-repeat;
 	outline: 0px solid #333;
+	border: 1px solid #333;
 }
-.guide-block-inner,
 .title-inner {
 	background: rgba(0, 0, 0, 0.6);
 	padding: 10px 0 0;
@@ -14,50 +13,36 @@
 .title-inner .btn-group {
 	margin: 0 5px;
 }
-.guide-block[data-class=barbarian],
-.title-block[data-class=barbarian],
-#guide[data-class=barbarian] div.title-block {
+.title-block[data-class=barbarian] {
 	background-image: url('/img/bgs/barbarian.jpeg');
 }
-.guide-block[data-class=demon-hunter],
-.title-block[data-class=demon-hunter],
-#guide[data-class=demon-hunter] div.title-block {
+.title-block[data-class=demon-hunter] {
 	background-image: url('/img/bgs/demon-hunter.jpeg');
 }
-.guide-block[data-class=witch-doctor],
-.title-block[data-class=witch-doctor],
-#guide[data-class=witch-doctor] div.title-block {
+.title-block[data-class=witch-doctor] {
 	background-image: url('/img/bgs/witch-doctor.jpeg');
 }
-.guide-block[data-class=monk],
-.title-block[data-class=monk],
-#guide[data-class=monk] div.title-block {
+.title-block[data-class=monk] {
 	background-image: url('/img/bgs/monk.jpeg');
 }
-.guide-block[data-class=wizard],
-.title-block[data-class=wizard],
-#guide[data-class=wizard] div.title-block {
+.title-block[data-class=wizard] {
 	background-image: url('/img/bgs/wizard.jpeg');
 }
-#build div.title-block,
-#guide div.guide-block {
+#build div.title-block {
 	border: 1px solid #333;
 	text-shadow: 1px 2px 2px #000;
 }
-div.guide-block .title,
-div.guide-block .meta,
 div.title-block .title, 
 div.title-block .meta {
-	padding: 0px 20px;
+	padding: 0px 20px 10px;
 	margin: 0;
-	margin-top: 10px;
 	text-shadow: 1px 1px #111;
 }
-div.guide-block .meta small,
 div.title-block .meta small {
 	color: #ececec;
 }
 div.title-block .skill-row {
+	text-align: center;
 	margin-top: 5px;
 	background: rgba(0, 0, 0, 0.6);	
 }
@@ -66,13 +51,13 @@ div.title-block .skill-row {
 }
 .skill-icons {
 	list-style: none;
-	float: left;
 	margin: 0;
-	padding: 0 0 5px 20px;
+	padding: 0;
+	display: inline;
 }
 .skill-icons li {
 	display: inline-block;
-	padding: 0 5px;
+	padding: 0;
 }
 .skill-icons li img {
 	width: 48px;
@@ -81,49 +66,6 @@ div.title-block .skill-row {
 	color: #888;
 	line-height: 48px;
 }
-
-.btn {
-	color: #fff;
-	cursor: pointer;
-	font-size: 14px;
-	outline: 0;
-	padding: 5px 12px;
-	text-align: center;
-	font-weight: bold;
-	text-shadow: 1px 1px #1f272b;
-	border: 1px solid #1c252b;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	background: #232B30; /* old browsers */
-	background: -moz-linear-gradient(top, #3D4850 3%, #313d45 4%, #232B30 100%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(3%,#3D4850), color-stop(4%,#313d45), color-stop(100%,#232B30)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3D4850', endColorstr='#232B30',GradientType=0 ); /* ie */
-	box-shadow: 1px 1px 1px rgba(0,0,0,0.2); /* CSS3 */
-	-moz-box-shadow: 1px 1px 1px rgba(0,0,0,0.2); /* Firefox */
-	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.2); /* Safari, Chrome */
-	text-shadow: 1px 1px #111;
-	font-weight: normal;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	outline: none;
-}
-.btn:hover {
-	color: #fff;
-	background: #4C5A64; /* old browsers */
-	background: -moz-linear-gradient(top, #4C5A64 3%, #404F5A 4%, #2E3940 100%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(3%,#4C5A64), color-stop(4%,#404F5A), color-stop(100%,#2E3940)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4C5A64', endColorstr='#2E3940',GradientType=0 ); /* ie */
-}
-.btn-bar .btn {
-	display: inline-block;
-	line-height: 1em;
-}
-
 .stats-table {
   width: 285px;
   margin: 0;
@@ -169,7 +111,59 @@ div.title-block .skill-row {
 	font-size: 18px;
 	line-height: 18px;
 }
-.section .youtube-video {
-	padding: 23px;
-	text-align: center;
+.build-container {
+	margin-top: 3px;
+}
+.build-container .build-content {
+	border: 1px solid #333;
+	-webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.build-container .build-content.tabs-left > .nav-tabs {
+	margin-right: 0;
+	border-right: 1px solid #333;
+}
+.build-container .build-content {
+	padding: 0 0 0 10px;
+}
+.build-container .build-content #gear-overview {
+	padding: 0px 10px 10px;
+}
+.build-container .build-content .nav-tabs {
+	border-bottom: 1px solid #333;
+}
+.nav-tabs > li > a {
+	border: none;
+}
+.build-container .build-content .nav-pills {
+	padding: 0 15px;
+}
+.build-container .build-content .nav-pills li a {
+	 margin: 5px 2px 0;
+}
+.build-container .build-content .nav-tabs a:hover,
+.build-container .build-content .nav-tabs > .active > a,
+.build-container .build-content .nav-tabs > .active > a:hover,
+.build-container .build-content .nav-tabs > .active > a:focus,
+.build-container .build-content .nav-pills a:hover,
+.build-container .build-content .nav-pills > .active > a,
+.build-container .build-content .nav-pills > .active > a:hover,
+.build-container .build-content .nav-pills > .active > a:focus {
+	color: #ececec;
+  background-color: #70b1d5;
+  background-image: -moz-linear-gradient(top, #4F86A9, #4F86A9);
+  background-image: -ms-linear-gradient(top, #4F86A9, #4F86A9);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4F86A9), to(#4F86A9));
+  background-image: -webkit-linear-gradient(top, #4F86A9, #4F86A9);
+  background-image: -o-linear-gradient(top, #4F86A9, #4F86A9);
+  background-image: linear-gradient(top, #4F86A9, #4F86A9);
+  background-repeat: repeat-x;
+	border: none;
+}
+.build-container .build-content .nav-tabs a:hover,
+.build-container .build-content .nav-tabs > .active > a,
+.build-container .build-content .nav-tabs > .active > a:hover,
+.build-container .build-content .nav-tabs > .active > a:focus {
+	border-right: 1px solid #333;
 }

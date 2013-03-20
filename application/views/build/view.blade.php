@@ -1,53 +1,63 @@
 @layout('template.main')
 
+@section('styles')
+<link href="/css/build.css" rel="stylesheet">
+<link href="/css/compare.css" rel="stylesheet">
+@endsection
+
+@section('scripts')
+<script src="http://d3up.com/js/gamedata.js"></script>
+<script src="/js/build.js"></script>
+<script src="http://d3up.com/js/unmin/calcv2.js"></script>
+<script src="http://d3up.com/js/unmin/itembuilder.js"></script>
+@endsection
+
 @section('content')
 @include('build.section.header')
 <div class='row build-container'>
-	<div class='span9'>
-		<div class="tabbable tabs-left">
-			<ul class="nav nav-tabs">
-	      <li class='divider'>{{ __('build.build') }}</li>
-	      <li class='active'><a data-toggle="tab" href="#tab-gear">{{ __('build.gear') }}</a></a></li>
-	      <li><a data-toggle="tab" href="#tab-skills">{{ __('build.skills') }}</a></li>
-	      <li><a data-toggle="tab" href="#tab-buffs">{{ __('build.buffs') }}</a></li>
-	      <li><a data-toggle="tab" href="#tab-edit">{{ __('build.edit') }}</a></li>
-	      <li class='divider'>{{ __('build.tools') }}</li>
-	      <li><a data-toggle="tab" href="#tab-sync">{{ __('build.battlenet_sync') }}</a></li>
-	      <li><a data-toggle="tab" href="#tab-json">{{ __('build.json_export') }}</a></li>
-	      <li class='divider'>Meta</li>
-	      <li><a data-toggle="tab" href="#tab-math">{{ __('build.formulas') }}</a></li>
-				<li><a data-toggle="tab" href="#tab-groups">{{ __('build.groups') }}</a></a></li>
-			</ul>
-			<div class="tab-content">
-				<div class='tab-pane active' id="tab-gear">
-					@include('build.section.gear')
-				</div>
-				<div class='tab-pane' id="tab-groups">
-					@include('build.section.groups')
-				</div>
-				<div class='tab-pane' id="tab-skills">
-					@include('build.section.skills')
-				</div>
-				<div class='tab-pane' id="tab-buffs">
-					@include('build.section.buffs')
-				</div>
-				<div class='tab-pane' id="tab-edit">
-					@include('build.section.edit')
-				</div>
-				<div class='tab-pane' id="tab-sync">
-					@include('build.section.sync')
-				</div>
-				<div class='tab-pane' id="tab-json">
-					@include('build.section.json')
-				</div>
-				<div class='tab-pane' id="tab-math">
-					@include('build.section.math')
-				</div>
-				<div class='tab-pane' id="tab-share">
-					@include('build.section.share')
-				</div>
-		  </div>
-		</div>
+	<div class="build-content span9 tabbable tabs-left">
+		<ul class="nav nav-tabs">
+      <li class='divider'>{{ __('build.build') }}</li>
+      <li class='active'><a data-toggle="tab" href="#tab-gear">{{ __('build.gear') }}</a></a></li>
+      <li><a data-toggle="tab" href="#tab-skills">{{ __('build.skills') }}</a></li>
+      <li><a data-toggle="tab" href="#tab-buffs">{{ __('build.buffs') }}</a></li>
+      <li><a data-toggle="tab" href="#tab-edit">{{ __('build.edit') }}</a></li>
+      <li class='divider'>{{ __('build.tools') }}</li>
+      <li><a data-toggle="tab" href="#tab-sync">{{ __('build.battlenet_sync') }}</a></li>
+      <li><a data-toggle="tab" href="#tab-json">{{ __('build.json_export') }}</a></li>
+      <li class='divider'>Meta</li>
+      <li><a data-toggle="tab" href="#tab-math">{{ __('build.formulas') }}</a></li>
+			<li><a data-toggle="tab" href="#tab-groups">{{ __('build.groups') }}</a></a></li>
+		</ul>
+		<div class="tab-content">
+			<div class='tab-pane active' id="tab-gear">
+				@include('build.section.gear')
+			</div>
+			<div class='tab-pane' id="tab-groups">
+				@include('build.section.groups')
+			</div>
+			<div class='tab-pane' id="tab-skills">
+				@include('build.section.skills')
+			</div>
+			<div class='tab-pane' id="tab-buffs">
+				@include('build.section.buffs')
+			</div>
+			<div class='tab-pane' id="tab-edit">
+				@include('build.section.edit')
+			</div>
+			<div class='tab-pane' id="tab-sync">
+				@include('build.section.sync')
+			</div>
+			<div class='tab-pane' id="tab-json">
+				@include('build.section.json')
+			</div>
+			<div class='tab-pane' id="tab-math">
+				@include('build.section.math')
+			</div>
+			<div class='tab-pane' id="tab-share">
+				@include('build.section.share')
+			</div>
+	  </div>
 	</div>
 	<div class='span3'>
 		@include('build.section.stats')

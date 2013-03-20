@@ -5,7 +5,7 @@
 
 </style>
 <div>
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-pills">
     <li>
 			<a href="#gear-paperdoll" data-toggle="tab">{{ __('build.paperdoll') }}</a>
 		</li>

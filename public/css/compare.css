@@ -1,4 +1,9 @@
 .compare-container .title-block {
-	border: 1px solid #333;
 	background-position: center top;
+}
+.compare-container .skill-row {
+	text-align: center;
+}
+.compare-container .skill-row .skill-icon {
+	width: 32px;
 }
