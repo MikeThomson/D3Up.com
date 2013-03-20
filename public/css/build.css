@@ -128,16 +128,14 @@ div.title-block .skill-row {
 	padding: 0 0 0 10px;
 }
 .build-container .build-content #gear-overview {
-	padding: 0px 10px 10px;
-}
-.build-container .build-content .nav-tabs {
-	border-bottom: 1px solid #333;
+	padding: 10px;
 }
 .nav-tabs > li > a {
 	border: none;
 }
 .build-container .build-content .nav-pills {
 	padding: 0 15px;
+	margin-bottom: 0;
 }
 .build-container .build-content .nav-pills li a {
 	 margin: 5px 2px 0;
