@@ -264,6 +264,9 @@
 	margin-bottom: 10px;
 	padding-bottom: 4px;
 }
+.alert h4 {
+	margin-bottom: 10px;
+}
 .navbar .container .dropdown-menu a {
 	margin: 0;
 }
