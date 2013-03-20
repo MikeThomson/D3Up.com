@@ -7,3 +7,21 @@
 .compare-container .skill-row .skill-icon {
 	width: 32px;
 }
+.compare-container .gear-table {
+	padding: 10px;
+}
+.compare-container .tab-pane .gear-table td {
+	border: none;
+	padding: 2px;
+	line-height: 32px;
+}
+.compare-container .tab-pane .gear-table td:first-child {
+	width: 38px;
+}
+.compare-container .nav.nav-pills {
+	text-align: center;
+}
+.compare-container .nav-pills > li {
+	display: inline-block;
+	float: none;
+}

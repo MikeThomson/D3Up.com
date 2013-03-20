@@ -13,28 +13,38 @@
 @endsection
 
 @section('content')
-<div class='row compare-container'>
+<div class='row compare-container tab-content'>
 	<div class='span6'>
-		<div class="tab-content">
-			@include('build.section.header')->with('build', $build1)
-			<div class='tab-pane active' id="tab-gear">
-				@include('build.section.gear.overview')->with('build', $build1)->with('compare', true);
-			</div>
-			<div class='tab-pane' id="tab-skills">
-				@include('build.section.skills')->with('build', $build1)
-			</div>
-	  </div>
+		@include('build.section.header')->with('build', $build1)
 	</div>
 	<div class='span6'>
-		<div class="tab-content">
-			@include('build.section.header')->with('build', $build2)
-			<div class='tab-pane active' id="tab-gear">
-				@include('build.section.gear.overview')->with('build', $build2)->with('compare', true);
-			</div>
-			<div class='tab-pane' id="tab-skills">
-				@include('build.section.skills')->with('build', $build2)
-			</div>
-	  </div>
+		@include('build.section.header')->with('build', $build2)
+	</div>
+	<div class='span12'>
+		<ul class="nav nav-pills">
+	    <li class="active">
+				<a href="#tab-gear" data-toggle="tab">Gear</a>
+			</li>
+	    <li>
+				<a href="#tab-skills" data-toggle="tab">Skills</a>
+			</li>
+	  </ul>
+	</div>
+	<div class='tab-pane active' id="tab-gear">
+		<div class='span6'>
+			@include('build.section.gear.overview')->with('build', $build1)->with('compare', true)
+		</div>
+		<div class='span6'>
+			@include('build.section.gear.overview')->with('build', $build2)->with('compare', true)
+		</div>
+	</div>
+	<div class='tab-pane' id="tab-skills">
+		<div class="span6">
+			@include('build.section.skills')->with('build', $build1)->with('compare', true)
+		</div>
+		<div class="span6">
+			@include('build.section.skills')->with('build', $build2)->with('compare', true)
+		</div>
 	</div>
 </div>
 <script>
