@@ -12,24 +12,13 @@
 			<div class='nav-collapse'>
 				<ul class="nav">
 					<li <?= (isset($build) || Auth::check()) ? 'class="dropdown"' : ''?>>
-						@if(isset($build))
-					  <a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle-clickable' : '' ?>" data-toggle="dropdown">							
-							<img src="/img/icons/{{ $build->class }}.png" class="build-icon pull-left">
-							<div class='build-name'>{{ $build->name }}</div>
-							<small>
-								<span class="level">{{ __('build.level') }} {{ $build->level }}</span>, {{ __('build.paragon') }} <span class="paragon">{{ $build->paragon }}</span>
-							</small>
-							<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
-						</a>
-						@else
-							@if(Auth::check())
-								<a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
-									<img src="/img/icons/unknown.png" class="build-icon pull-left" style="width: 36px">
-									<div class='build-name'>{{ __('d3up.build_quick_select') }}</div>
-									<small>{{ __('d3up.my_highest_level_builds') }}</small>
-									<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
-								</a>
-							@endif
+						@if(Auth::check())
+							<a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
+								<img src="/img/icons/unknown.png" class="build-icon pull-left" style="width: 36px">
+								<div class='build-name'>{{ __('d3up.build_quick_select') }}</div>
+								<small>{{ __('d3up.my_highest_level_builds') }}</small>
+								<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
+							</a>
 						@endif
 						@if(Auth::check())
 							@include("template.global.navbar.user")
