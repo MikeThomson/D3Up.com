@@ -21,7 +21,7 @@
 	<h4>Characters</h4>
 	<p>Please select which character to import into this build.</p>
 	<div>
-		<select name='character-id-manual' id="manual-characters">
+		<select name='character-id-manual' id="characters-manual">
 			<option value="">Loading ...</option>
 		</select>
 	</div>
