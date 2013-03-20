@@ -503,6 +503,10 @@ class D3Up_Sync {
 		$build->_lastCrawl = time();
 		// Set the time of the last battle.net update
 		$build->_lastBnetUpdate = (int) $json['last-updated'];
+		// If we're a user, put our reference in
+		if($user = Auth::user()) {
+			$build->_createdBy = $user;
+		}		
 		// Incremenent the number of times this build has been sync'd
 		$build->crawlCount++;
 		// Set the Class of the Character
