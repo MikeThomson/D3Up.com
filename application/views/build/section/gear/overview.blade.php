@@ -6,7 +6,7 @@
 			@endif
 		@endforeach
 	</div>
-	<table id='build-gear'>
+	<table id='build-gear' class='table'>
 		@foreach($build->gear->getSlots() as $slot) 
 			<tr class='item'>
 				<td>{{ HTML::itemBoxIcon($build->gear[$slot]) }}</td>

@@ -133,6 +133,9 @@ div.title-block .skill-row {
 .nav-tabs > li > a {
 	border: none;
 }
+.build-container .build-content .nav-tabs {
+	padding-right: 2px;
+}
 .build-container .build-content .nav-pills {
 	padding: 0 15px;
 	margin-bottom: 0;
@@ -164,4 +167,15 @@ div.title-block .skill-row {
 .build-container .build-content .nav-tabs > .active > a:hover,
 .build-container .build-content .nav-tabs > .active > a:focus {
 	border-right: 1px solid #333;
+}
+.build-container .build-content .tab-pane {
+	padding: 5px;
+}
+.build-container .build-content .tab-pane #build-gear td {
+	border: none;
+	padding: 2px;
+	line-height: 32px;
+}
+.build-container .build-content .tab-pane #build-gear td:first-child {
+	width: 38px;
 }
