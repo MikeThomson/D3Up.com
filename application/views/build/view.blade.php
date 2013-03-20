@@ -133,6 +133,10 @@
 		return num.slice(0, -1 * places) + "." + num.slice(-1 * places)
 	  return Math.round(value * Math.pow());
 	});
+	
+	Handlebars.registerHelper('percent', function(value, total) {
+		return Math.round((value / total) * 10000) / 100
+	})
 
 	var sources = [
 		'#gear-overview table tbody',
