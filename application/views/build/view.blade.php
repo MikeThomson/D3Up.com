@@ -122,6 +122,9 @@
 
 	Handlebars.registerHelper('round', function(value, places) {
 		value = parseFloat(value);
+		if(value == 0) {
+			return value;
+		}
 		if(!places) {
 			return Math.round(value);
 		}
