@@ -141,7 +141,6 @@
 	];
 	
 	$.each(sources, function(k,v) {
-		console.log(k,v);
 		var source   = $(v).html();
 		var template = Handlebars.compile(source);
 		var data = d3up.builds.primary;
