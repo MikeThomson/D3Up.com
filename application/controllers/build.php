@@ -26,7 +26,7 @@ class Build_Controller extends Base_Controller {
 		);
 		// If we're being passed a BattleTag, search for it.
 		if($battletag = strtolower(Request::get('battletag'))) {
-			$paginationOptions['battletag'] = $query['_characterBt'] = $battletag;
+			$paginationOptions['battletag'] = $query['_characterBt'] = str_replace("-", "#", $battletag);
 		}
 		// Fetch the Builds
 		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
@@ -114,7 +114,7 @@ class Build_Controller extends Base_Controller {
 		if(Input::get('character-id') && Input::get('character-bt') && Input::get('character-rg')) {
 			// Set the Battle.net Information on the Build
 			$build->_characterRg = Input::get('character-rg');
-			$build->_characterBt = strtolower(Input::get('character-bt'));	// Ensure it's always lower
+			$build->_characterBt = strtolower(str_replace("-","#", Input::get('character-bt')));	// Ensure it's always lower and has # instead of - in it
 			$build->_characterId = Input::get('character-id');
 			// Sync the Data from Battle.net
 			$results = $build->sync();
