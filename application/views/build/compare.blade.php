@@ -1,5 +1,17 @@
 @layout('template.main')
 
+@section('styles')
+<link href="/css/build.css" rel="stylesheet">
+<link href="/css/compare.css" rel="stylesheet">
+@endsection
+
+@section('scripts')
+<script src="http://d3up.com/js/gamedata.js"></script>
+<script src="/js/build.js"></script>
+<script src="http://d3up.com/js/unmin/calcv2.js"></script>
+<script src="http://d3up.com/js/unmin/itembuilder.js"></script>
+@endsection
+
 @section('content')
 <div class='row compare-container'>
 	<div class='span6'>
