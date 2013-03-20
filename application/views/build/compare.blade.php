@@ -18,7 +18,7 @@
 		<div class="tab-content">
 			@include('build.section.header')->with('build', $build1)
 			<div class='tab-pane active' id="tab-gear">
-				@include('build.section.gear.overview')->with('build', $build1)
+				@include('build.section.gear.overview')->with('build', $build1)->with('compare', true);
 			</div>
 			<div class='tab-pane' id="tab-skills">
 				@include('build.section.skills')->with('build', $build1)
@@ -29,7 +29,7 @@
 		<div class="tab-content">
 			@include('build.section.header')->with('build', $build2)
 			<div class='tab-pane active' id="tab-gear">
-				@include('build.section.gear.overview')->with('build', $build2)
+				@include('build.section.gear.overview')->with('build', $build2)->with('compare', true);
 			</div>
 			<div class='tab-pane' id="tab-skills">
 				@include('build.section.skills')->with('build', $build2)

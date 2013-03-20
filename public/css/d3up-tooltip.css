@@ -390,3 +390,9 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/ruby_15_de
 .sockets .gem_marquise_topaz {
 background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_demonhunter_male.png');
 }
+#d3up-tooltip-compare div {
+	vertical-align: top;
+}
+#d3up-tooltip-compare .d3-tooltip {
+	display: inline-block;
+}

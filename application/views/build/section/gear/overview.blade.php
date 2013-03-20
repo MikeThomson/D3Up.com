@@ -1,3 +1,8 @@
+<?
+if(!isset($compare)) {
+	$compare = false;
+}
+?>
 <div>
 	<div class='tab-content'>
 		@foreach($build->gear as $item) 
@@ -17,7 +22,7 @@
 			@foreach($build->gear->getSlots() as $slot) 
 				<tr class='item'>
 					<td>{{ HTML::itemBoxIcon($build->gear[$slot]) }}</td>
-					<td>{{ HTML::itemLink($build->gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
+					<td>{{ HTML::itemLink($build->gear[$slot], array('toggle' => true, 'slot' => $slot, 'compare' => $compare)) }}</td>
 				</tr>
 			@endforeach
 		</tbody>

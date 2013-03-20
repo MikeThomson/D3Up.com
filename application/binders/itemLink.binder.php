@@ -17,6 +17,9 @@ return array('html itemLink' => function($item, $params = array()) {
 	if(isset($params['slot'])) {
 		$options['data-slot'] = $params['slot'];
 	}
+	if(isset($params['compare']) && $params['compare'] != false) {
+		$options['data-compare'] = $params['slot'];	
+	}
 	if(isset($params['toggle']) && $params['toggle'] === true) {
 		$options['data-toggle'] = 'tab';
 		$link = "#tab-item-".$item->id;

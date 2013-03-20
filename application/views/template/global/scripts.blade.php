@@ -11,4 +11,5 @@
 <script src="/js/utils/tooltip.js"></script>
 <!-- The D3Up Tooltip Div -->
 <div id="d3up-tooltip"></div>
+<div id="d3up-tooltip-compare"></div>
 @yield('scripts')

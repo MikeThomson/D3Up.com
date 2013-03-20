@@ -1,12 +1,6 @@
-$.fn.tooltip = function() {
-	// Define the Tooltip Div
-	var tooltip = $("#d3up-tooltip");
-	// If we have no JSON, return false immediately
-	if(!$(this).attr('data-json')) {
-		return false;
-	}
+function buildTooltip(elem) {
 	// Parse the Items JSON
-	var item = $.parseJSON($(this).attr('data-json')),
+	var item = $.parseJSON(elem.attr('data-json')),
 			builder = new d3up.ItemBuilder,
 			gems = d3up.gameData.gemEffects;
 	// Build all the HTML parts
@@ -111,13 +105,13 @@ $.fn.tooltip = function() {
 	if(item.set) {
 		var data = builder.getBonusHtml(item.set);
 		itemSetBonus.empty().append(data.name, data.list);
-		// console.log($(this).attr("data-set-count"));
-		if($(this).attr("data-set-count")) {
-			var count = $(this).data("set-count");
+		// console.log(elem.attr("data-set-count"));
+		if(elem.attr("data-set-count")) {
+			var count = elem.data("set-count");
 			if(data.list) {
 				data.list.find("div.data-count").each(function() {
-					if($(this).data("count") <= count) {
-						$(this).addClass("quality-7");					
+					if(elem.data("count") <= count) {
+						elem.addClass("quality-7");					
 					}
 				});				
 			}
@@ -125,13 +119,62 @@ $.fn.tooltip = function() {
 		content.append(itemSetBonus);
 	}
 	
+	return container;
+}
+
+$.fn.tooltipCompare = function() {
+	// Define the Tooltip Div
+	var tooltip = $("#d3up-tooltip-compare");
+	// If we have no JSON, return false immediately
+	if(!$(this).attr('data-json') || !$(this).attr('data-compare')) {
+		return false;
+	}
+
+	
+	// Bind the mouse
+	$(this).mouseover(function() {
+		var $this = $(this);
+		var elements = $("a[data-compare=" + $(this).attr('data-compare') + "]"),
+				container = $("<div>"),
+				diff = $("<div>").css({backgroundColor: '#000', textAlign: 'center', fontSize: '2em'}).html("VERSUSSSSS!");
+		container.append(diff);
+		$.each(elements, function() {
+			container.append(buildTooltip($(this)));
+		});
+		tooltip.css({
+				position: 'absolute'
+		});
+		tooltip.empty().append(container);
+		var position = {
+			of: $this,
+			at: "right middle",
+			my: "left middle",
+			offset: "20 10",
+			collision: "flip"
+		};
+		tooltip.appendTo("body").position(position);
+	}).mouseout(function() {
+		tooltip.empty();
+	});
+}
+
+$.fn.tooltip = function() {
+	// Define the Tooltip Div
+	var tooltip = $("#d3up-tooltip");
+	// If we have no JSON, return false immediately
+	if(!$(this).attr('data-json')) {
+		return false;
+	}
+	
+	var tip = buildTooltip($(this));
+
 	// Bind the mouse
 	$(this).mouseover(function() {
 		var $this = $(this);
 		tooltip.css({
 				position: 'absolute'
 		});
-		tooltip.empty().append(container);
+		tooltip.empty().append(tip);
 		var position = {
 			of: $this,
 			at: "right middle",
@@ -173,8 +216,12 @@ $.fn.bindSkilltip = function() {
 	});
 }
 function checkTooltip() {
-	if($(this).attr('data-json')) {			
-		$(this).tooltip();
+	if($(this).attr('data-json')) {
+		if($(this).attr('data-compare')) {
+			$(this).tooltipCompare();			
+		} else {
+			$(this).tooltip();			
+		}
 	}
 }
 $(function() {

@@ -122,7 +122,7 @@ div.title-block .skill-row {
 }
 .build-container .build-content.tabs-left > .nav-tabs {
 	margin-right: 0;
-	border-right: 1px solid #333;
+/*	border-right: 1px solid #333;*/
 }
 .build-container .build-content {
 	padding: 0 0 0 10px;
