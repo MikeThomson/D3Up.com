@@ -19,14 +19,37 @@ class Build_Controller extends Base_Controller {
 		$sort = array(
 			'_created' => -1
 		);
-		// Fetch the Builds
-		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
-		$pagination = Paginator::make($builds->limit($perPage)->skip($skip), $builds->count(), $perPage);
-		$pagination->appends(array(
+		// Pagination Options
+		$paginationOptions = array(
 			'class' => Request::get('class'),
 			'sort' => Request::get('sort'),
-		));
-		return View::make('build.index')->with('builds', $builds)->with('pagination', $pagination);
+		);
+		// If we're being passed a BattleTag, search for it.
+		if($battletag = strtolower(Request::get('battletag'))) {
+			$paginationOptions['battletag'] = $query['_characterBt'] = $battletag;
+		}
+		// Fetch the Builds
+		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
+		// Add a paginator
+		$pagination = Paginator::make($builds->limit($perPage)->skip($skip), $builds->count(), $perPage);
+		$pagination->appends($paginationOptions);
+		// If we got a battletag, and no results, scan the API and present results
+		$characters = array();	// Array to return with characters
+		if($battletag && $builds->count() === 0) {
+			if(Cache::has('apicache-'.$battletag)) {
+				$characters = Cache::get('apicache-'.$battletag);
+			} else {
+				$sync = new D3Up_Sync();
+				foreach(array(1 => 'US', 2 => 'EU', 3 => 'AS') as $key => $region) {
+					$characters[$key] = $sync->getCharacters($key, $battletag);
+				} 
+				Cache::put('apicache-'.$battletag, $characters, 5);				
+			}
+		}
+		return View::make('build.index')
+						->with('builds', $builds)
+						->with('pagination', $pagination)
+						->with('characters', $characters);
 	}
 
 	public function get_view($id, $data = false) {
@@ -91,7 +114,7 @@ class Build_Controller extends Base_Controller {
 		if(Input::get('character-id') && Input::get('character-bt') && Input::get('character-rg')) {
 			// Set the Battle.net Information on the Build
 			$build->_characterRg = Input::get('character-rg');
-			$build->_characterBt = Input::get('character-bt');
+			$build->_characterBt = strtolower(Input::get('character-bt'));	// Ensure it's always lower
 			$build->_characterId = Input::get('character-id');
 			// Sync the Data from Battle.net
 			$results = $build->sync();
@@ -101,5 +124,4 @@ class Build_Controller extends Base_Controller {
 		// Redirect to the build
 		return Redirect::to_action('build@view', array('id' => $build->id));
 	}
-
 }

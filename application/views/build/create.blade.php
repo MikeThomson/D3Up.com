@@ -37,32 +37,39 @@
 		</div>
 	</div>
 	<div class='span6'>
-		<div class='content-page'>
-			<h3>Import your Character!</h3>
-			<div id="import-tabs">
-			<ul class="nav nav-tabs">
-				@if(Auth::user() && Auth::user()->battletag && Auth::user()->region)
-					<li class='active'><a href="#import-characters" data-toggle="tab">My Characters</a></li>
-					<li><a href="#import-others" data-toggle="tab">By BattleTag</a></li>
-				@else
-					<li class='active'><a href="#import-others" data-toggle="tab">By BattleTag</a></li>
-				@endif
-			</ul>
-			<div class='tab-content'>
-				@if(Auth::user())
-				<div id="import-characters" class="tab-pane active">
-					@include('build.create.user')
-				</div>
-				<div id="import-others" class="tab-pane">
-					@include('build.create.other')
-				</div>
-				@else
-				<div id="import-others" class="tab-pane active">
-					@include('build.create.other')
-				</div>
-				@endif
+		@if(Request::get('character-id') && Request::get('character-bt'))
+			<div class='alert alert-success'>
+				<h3>Character Data Imported</h3>
+				<p>We've automatically filled out the form for you based on the character you've chosen on the search page. Feel free to modify the fields in the left column and then hit Create to import the character build!</p>
+			</div>
+			@else
+			<div class='content-page'>
+				<h3>Import your Character!</h3>
+				<div id="import-tabs">
+				<ul class="nav nav-tabs">
+					@if(Auth::user() && Auth::user()->battletag && Auth::user()->region)
+						<li class='active'><a href="#import-characters" data-toggle="tab">My Characters</a></li>
+						<li><a href="#import-others" data-toggle="tab">By BattleTag</a></li>
+					@else
+						<li class='active'><a href="#import-others" data-toggle="tab">By BattleTag</a></li>
+					@endif
+				</ul>
+				<div class='tab-content'>
+					@if(Auth::user())
+					<div id="import-characters" class="tab-pane active">
+						@include('build.create.user')
+					</div>
+					<div id="import-others" class="tab-pane">
+						@include('build.create.other')
+					</div>
+					@else
+					<div id="import-others" class="tab-pane active">
+						@include('build.create.other')
+					</div>
+					@endif
 			</div>
 		</div>
+		@endif				
 		</div>
 	</div>
 </div>

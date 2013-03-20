@@ -32,12 +32,13 @@
     }
 
   </style>
+	@include('template.global.scripts')
 </head>
 <body>
 	<div class="container">
 		@include('template.global.header')
 		@yield('content')
 	</div>
-	@include('template.global.scripts')
+	@include('template.global.footer')
 </body>
 </html>

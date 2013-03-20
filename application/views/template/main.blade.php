@@ -12,5 +12,6 @@
 		@include('template.global.header')
 		@yield('content')
 	</div>
+	@include('template.global.footer')
 </body>
 </html>

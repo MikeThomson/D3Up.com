@@ -13,6 +13,8 @@ Route::get('/b/(:num)/sync', 'build@sync');
 Route::get('/c/(:num)/(:num)', 'build@compare');
 // Route to View a build
 Route::get('/b/(:num)/(:any?)', 'build@view');
+// Route to View a build
+Route::get('/search', 'build@index');
 // Math Edit Routing
 Route::get('math/(:num)/edit', 'math@edit');
 // Math Edit Routing (Dialog)

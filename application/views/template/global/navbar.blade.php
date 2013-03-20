@@ -76,7 +76,7 @@
 					@endif
 					<li>
 						<form class="navbar-search pull-right" action="/search">
-		          <input type="text" class="search-query span3" placeholder="{{ __('d3up.search_by_battletag') }}">
+		          <input type="text" class="search-query span3" name="battletag" placeholder="{{ __('d3up.search_by_battletag') }}" value="{{ Request::get('battletag') }}">
 		        </form>
 					</li>
 				</ul>
