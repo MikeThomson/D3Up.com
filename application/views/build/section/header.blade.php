@@ -34,11 +34,15 @@
 		<div class="skill-row clearfix">
 	 		<ul id="active-display" class="skill-icons" data-skill-type="actives" data-display="icon">
 				<li><span class="skill-type">{{ __('build.skills') }}</span></li>
-				<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
+				@foreach($build->actives as $skill)
+				<li><img class="skill-icon activatable" src="/img/icons/{{ $build->class}}-{{ explode("~", $skill)[0] }}.png"></li>
+				@endforeach
 			</ul>
 	 		<ul id="passive-display" class="skill-icons" data-skill-type="passives" data-display="icon">
 				<li><span class="skill-type">{{ __('build.passives') }}</span></li>
-				<li><img class="skill-icon activatable" src="/img/icons/barbarian-frenzy.png"></li>
+				@foreach($build->passives as $skill)
+				<li><img class="skill-icon activatable" src="/img/icons/{{ $build->class}}-{{ explode("~", $skill)[0] }}.png"></li>
+				@endforeach
 			</ul>
 		</div>
 	</div>
