@@ -17,8 +17,8 @@
 		<? endforeach; ?>
 		<li>
 			<div class='btn-group'>
-				<a href="#" class='btn btn-mini'>Create Build</a>
-				<a href="#" class='btn btn-mini'>All Builds</a>
+				<a href="/build/create" class='btn btn-mini'>Create Build</a>
+				<a href="/user/builds" class='btn btn-mini'>My Builds</a>
 			</div>
 		</li>
    </ul>
