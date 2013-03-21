@@ -9,4 +9,4 @@
 	url = git://github.com/michelf/php-markdown.git
 [submodule "application/language"]
 	path = application/language
-	url = https://github.com/aaroncox/D3Up.com-Lang
+	url = git://github.com/aaroncox/D3Up.com-Lang.git
