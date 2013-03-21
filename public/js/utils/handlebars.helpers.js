@@ -6,9 +6,16 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 					'aps-oh': 4,				
 				}, 
 				percents: [
+					'critical-hit',
+					'critical-hit-damage',
 					'percent-melee-reduce',
 					'percent-elite-reduce',
 					'percent-range-reduce',
+				],
+				x100: [
+					'percent-melee-reduce',
+					'percent-elite-reduce',
+					'percent-range-reduce',				
 				]
 			},
 			decimals = 2,
@@ -17,8 +24,10 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 	if(stat && special.decimals[stat]) {
 		decimals = special.decimals[stat];
 	}
-	if(stat && _.indexOf(special.percents, stat) >= 0) {
+	if(stat && _.indexOf(special.x100, stat) >= 0) {
 		value *= 100;
+	}
+	if(stat && _.indexOf(special.percents, stat) >= 0) {
 		append = "%";
 	}
 	if(typeof(value) == "undefined" || isNaN(value)) {
