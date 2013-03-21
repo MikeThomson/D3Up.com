@@ -66,7 +66,7 @@
 <div id='character2' data-json='{{ $build2->json() }}'></div>
 <script>
 	// Build #1
-  var data1 = $("#character1").data("json"),
+	var data1 = $("#character1").data("json"),
 			skills1 = {
 	        actives: data1.actives,
 	        passives: data1.passives
@@ -83,7 +83,7 @@
         meta: meta1
       });
 	// Build #2
-  var data2 = $("#character2").data("json"),
+	var data2 = $("#character2").data("json"),
 			skills2 = {
 	        actives: data2.actives,
 	        passives: data2.passives
@@ -100,10 +100,10 @@
         meta: meta2
       });	
 	// Store the Builds
-  d3up.builds = {
-    build1: build1,
-    build2: build2
-  };
+	d3up.builds = {
+		build1: build1,
+		build2: build2
+	};
 	// Run stats
 	d3up.builds.build1.run();
 	d3up.builds.build2.run();
