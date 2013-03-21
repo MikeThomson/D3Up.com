@@ -127,5 +127,6 @@
 	
 	<?= (isset($_GET['debug'])) ? 'console.log(d3up.builds);' : ''; ?>
 	
+	
 </script>
 @endsection
