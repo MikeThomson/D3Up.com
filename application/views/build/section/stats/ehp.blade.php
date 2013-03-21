@@ -1,10 +1,15 @@
 <div class="accordion-group">
   <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" href="#collapseEHP">
-			{{ __('diablo.ehp_statistics') }}
+    <a class="accordion-toggle" data-toggle="collapse" href=".collapseEHP">
+			@if(!$isCompare)
+			{{ (isset($name)) ? $name : "" }}
+			@else
+				{{ __('diablo.ehp_statistics') }}
+				{{ (isset($name)) ? $name : "" }}
+			@endif
     </a>
   </div>
-  <div id="collapseEHP" class="accordion-body collapse">
+  <div class="collapseEHP accordion-body collapse">
     <div class="accordion-inner">
 
     </div>

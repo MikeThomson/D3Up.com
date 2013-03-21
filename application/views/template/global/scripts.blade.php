@@ -4,6 +4,7 @@
 <script src="/js/underscore.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/handlebars.js"></script>
+<script src="/js/utils/handlebars.helpers.js"></script>
 <!-- Battle.net Scripts -->
 <script src="http://us.battle.net/d3/static/js/tooltips.js"></script>
 <!-- D3Up Scripts -->

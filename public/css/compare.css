@@ -25,3 +25,37 @@
 	display: inline-block;
 	float: none;
 }
+.stat-table td {
+	height: 22px;
+}
+.build-stats td {
+	border-top: 1px solid #333;
+}
+.build-stats[data-id=stats-sidebar-compare],
+.build-stats[data-id=stats-sidebar-compare] td {
+	text-align: center;	
+}
+.build-stats[data-id=stats-sidebar-compare] td {
+	position: relative;
+}
+.victor-1 {
+	position: absolute;
+	top: 9px;
+	left: -9px;
+	width: 0; 
+	height: 0; 
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;	
+	border-right: 15px solid green;
+}
+.victor-2 {
+	position: absolute;
+	top: 9px;
+	right: 10px;
+	width: 0; 
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;	
+	border-left: 15px solid green;
+	margin-right: -20px;
+}

@@ -8,6 +8,7 @@
 @section('scripts')
 <script src="http://d3up.com/js/gamedata.js"></script>
 <script src="/js/build.js"></script>
+<script src="/js/utils/compare.js"></script>
 <script src="http://d3up.com/js/unmin/calcv2.js"></script>
 <script src="http://d3up.com/js/unmin/itembuilder.js"></script>
 @endsection
@@ -119,24 +120,6 @@
   // build.renderSkillCatalog($("#skill-catalog"));
 
 	<?= (isset($_GET['debug'])) ? 'console.log(d3up.builds.primary);' : ''; ?>
-
-	Handlebars.registerHelper('round', function(value, places) {
-		value = parseFloat(value);
-		if(value == 0) {
-			return value;
-		}
-		if(!places) {
-			return Math.round(value);
-		}
-		var exponent = Math.pow(10, places);
-		var num = Math.round((value * exponent)).toString();
-		return num.slice(0, -1 * places) + "." + num.slice(-1 * places)
-	  return Math.round(value * Math.pow());
-	});
-	
-	Handlebars.registerHelper('percent', function(value, total) {
-		return Math.round((value / total) * 10000) / 100
-	})
 
 	var sources = [
 		'#gear-overview table tbody',

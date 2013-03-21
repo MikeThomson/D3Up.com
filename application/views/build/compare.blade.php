@@ -8,6 +8,7 @@
 @section('scripts')
 <script src="http://d3up.com/js/gamedata.js"></script>
 <script src="/js/build.js"></script>
+<script src="/js/utils/compare.js"></script>
 <script src="http://d3up.com/js/unmin/calcv2.js"></script>
 <script src="http://d3up.com/js/unmin/itembuilder.js"></script>
 @endsection
@@ -23,6 +24,9 @@
 	<div class='span12'>
 		<ul class="nav nav-pills">
 	    <li class="active">
+				<a href="#tab-stats" data-toggle="tab">Stats</a>
+			</li>
+	    <li>
 				<a href="#tab-gear" data-toggle="tab">Gear</a>
 			</li>
 	    <li>
@@ -30,11 +34,22 @@
 			</li>
 	  </ul>
 	</div>
-	<div class='tab-pane active' id="tab-gear">
-		<div class='span6'>
+	<div class='tab-pane active' id="tab-stats">
+		<div class='span5 build1-stats'>
+			@include('build.section.stats')->with('build', $build1)->with('id', 1)
+		</div>
+		<div class='span2'>
+			@include('build.section.stats')->with('id', 'compare')
+		</div>
+		<div class='span5 build2-stats'>
+			@include('build.section.stats')->with('build', $build2)->with('id', 2)
+		</div>
+	</div>
+	<div class='tab-pane' id="tab-gear">
+		<div class='span6' id="build1-gear">
 			@include('build.section.gear.overview')->with('build', $build1)->with('compare', true)
 		</div>
-		<div class='span6'>
+		<div class='span6' id="build2-gear">
 			@include('build.section.gear.overview')->with('build', $build2)->with('compare', true)
 		</div>
 	</div>
@@ -47,74 +62,70 @@
 		</div>
 	</div>
 </div>
+<div id='character1' data-json='{{ $build1->json() }}'></div>
+<div id='character2' data-json='{{ $build2->json() }}'></div>
 <script>
-	// jQuery(document).ready(function ($) {
-	// 	$('#build-tabs').tab();
-	//   });
-	// // Setup the Build and Calculators
-	//   var build = $("#character").data("json"),
-	// 		// Set the Skills Used
-	// 		skills = {
-	//         actives: build.actives,
-	//         passives: build.passives
-	//       },
-	// 		// Grab all the gear
-	//       gear = $("#build-gear a[data-json]"),
-	// 		// Set Meta information about the character
-	//       meta = {
-	//         level: build.level,
-	//         paragon: build.paragon,
-	//         heroClass: build.heroClass,
-	//       },
-	// 		// Set the Gear, Skills and Meta on the Primary Build
-	//       buildPrimary = new d3up.Build({
-	//         gear: gear, 
-	//         skills: skills,
-	//         meta: meta
-	//       }),
-	// 		// Set the Gear, Skills and Meta on the Compare Build
-	//       buildCompare = new d3up.Build({
-	//         gear: gear, 
-	//         skills: skills,
-	//         meta: meta
-	//       });
-	// // Store the Primary and Compare builds
-	//   d3up.builds = {
-	//     primary: buildPrimary,
-	//     compare: buildCompare
-	//   };
-	// // Run stats against the primary build
-	// d3up.builds.primary.run();
-	// // console.log(d3up.builds.primary);
-	//   // d3up.compare = compare;
-	//   // Render build to Statistics Panels
-	//   // build.renderTo($("#statistics"));
-	//   // build.renderTo($("#dps-math"));
-	//   // Render build to a few of the Gear tabs
-	//   // build.renderTo($("#gear"));
-	//   // Render the Skills into the Skills Tab
-	//   // build.renderSkillsTo($("#skills"));
-	//   // build.renderSkillsTo($("#passives"));
-	//   // build.renderSkillsTo($("#buffs"));
-	//   // build.renderSkillsTo($("#group-buffs"));
-	//   // Render the Skills and Data to the Header
-	//   // build.renderSkillsTo($("#build-header"));
-	//   // build.renderSkillCatalog($("#skill-catalog"));
-	// 
-	// Handlebars.registerHelper('round', function(value, places) {
-	// 	if(!places) {
-	// 		return Math.round(value);
-	// 	}
-	// 	var exponent = Math.pow(10, places);
-	// 	var num = Math.round((value * exponent)).toString();
-	// 	return num.slice(0, -1 * places) + "." + num.slice(-1 * places)
-	//   return Math.round(value * Math.pow());
-	// });
-	// 
-	// var source   = $("#handlebar-stats").html();
-	// var template = Handlebars.compile(source);
-	// var data = d3up.builds.primary;
-	// $("#handlebar-stats").replaceWith(template(data));
+	// Build #1
+  var data1 = $("#character1").data("json"),
+			skills1 = {
+	        actives: data1.actives,
+	        passives: data1.passives
+	      },
+      gear1 = $("#build1-gear .gear-table a[data-json]"),
+      meta1 = {
+        level: data1.level,
+        paragon: data1.paragon,
+        heroClass: data1.heroClass,
+      },
+      build1 = new d3up.Build({
+        gear: gear1, 
+        skills: skills1,
+        meta: meta1
+      });
+	// Build #2
+  var data2 = $("#character2").data("json"),
+			skills2 = {
+	        actives: data2.actives,
+	        passives: data2.passives
+	      },
+      gear2 = $("#build2-gear .gear-table a[data-json]"),
+      meta2 = {
+        level: data2.level,
+        paragon: data2.paragon,
+        heroClass: data2.heroClass,
+      },
+      build2 = new d3up.Build({
+        gear: gear2, 
+        skills: skills2,
+        meta: meta2
+      });	
+	// Store the Builds
+  d3up.builds = {
+    build1: build1,
+    build2: build2
+  };
+	// Run stats
+	d3up.builds.build1.run();
+	d3up.builds.build2.run();
+	
+	var source   = $("#stats-sidebar-1").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.build1;
+	$("#stats-sidebar-1").replaceWith(template(data));		
 
+	var source   = $("#stats-sidebar-2").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.build2;
+	$("#stats-sidebar-2").replaceWith(template(data));		
+	
+	var compare = new d3up.Compare;
+	var diff = compare.diff(build1, build2);
+	var source   = $("#stats-sidebar-compare").html();
+	var template = Handlebars.compile(source);
+	var data = diff;
+	$("#stats-sidebar-compare").replaceWith(template(data));
+	
+	<?= (isset($_GET['debug'])) ? 'console.log(d3up.builds);' : ''; ?>
+	
 </script>
 @endsection

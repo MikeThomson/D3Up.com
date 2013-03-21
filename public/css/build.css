@@ -89,6 +89,9 @@ div.title-block .skill-row {
 .stats-table td.hl-ehp .value {
   font-weight: bold;
 }
+.stats-table td {
+	height: 22px;
+}
 .item-stat {
 	text-align: center;
 	line-height: 1.25em;
@@ -189,4 +192,13 @@ div.title-block .skill-row {
 }
 .build-container .build-content .tab-pane .gear-table td:first-child {
 	width: 38px;
+}
+.build-stats .accordion-group {
+	border: 1px solid #333;
+	-webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+}
+.build-stats .accordion-inner {
+	border-top: 1px solid #333;
 }

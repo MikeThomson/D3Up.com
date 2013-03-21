@@ -1,5 +1,17 @@
-<div>
-	<script id="stats-sidebar" type="text/x-handlebars-template">
+<?
+	if(!isset($id)) {
+		$id = null;
+	}
+	$isCompare = ($id != 'compare');
+	$name = null;
+	if($id && $id != 'compare' && isset($build)) {
+		$name = "(".$build->name.")";
+	} else {
+		$name = "Compare";
+	}
+?>
+<div class="build-stats" data-id="stats-sidebar{{ (($id) ? ('-'.$id) : "") }}">
+	<script id="stats-sidebar{{ (($id) ? ('-'.$id) : "") }}" type="text/x-handlebars-template">
 	
 		{{-- Highlight: Used to highlight DPS/EHP and other major stats at the top. --}}
 		@include('build.section.stats.highlight')

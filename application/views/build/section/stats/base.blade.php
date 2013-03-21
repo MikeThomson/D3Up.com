@@ -1,40 +1,39 @@
+<?
+	$stats = array(
+		'strength',
+		'dexterity',
+		'intelligence',
+		'vitality',
+		'plus-magic-find',
+		'plus-gold-find',
+		'plus-movement'
+	);
+?>
 <div class="accordion-group">
   <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" href="#collapseBase">
-			{{ __('diablo.base_statistics') }}
+    <a class="accordion-toggle" data-toggle="collapse" href=".collapseBase">
+			@if(!$isCompare)
+			{{ (isset($name)) ? $name : "" }}
+			@else
+				{{ __('diablo.base_statistics') }}
+				{{ (isset($name)) ? $name : "" }}
+			@endif				
     </a>
   </div>
-  <div id="collapseBase" class="accordion-body collapse in">
+  <div class="collapseBase accordion-body collapse in">
     <div class="accordion-inner">
 			<table class='table stat-table'>
+				@foreach($stats as $stat)
 				<tr>
-					<td>{{ __('diablo.strength') }}</td>
-					<td>{{ HTML::hb('stats.strength') }}</td>
+					@if($isCompare)
+					<td>{{ __('diablo.'.$stat) }}</td>
+					@endif
+					<td>
+						&nbsp;
+						{{ HTML::hb('stats.'.$stat) }}
+					</td>
 				</tr>
-				<tr>
-					<td>{{ __('diablo.dexterity') }}</td>
-					<td>{{ HTML::hb('stats.dexterity') }}</td>
-				</tr>
-				<tr>
-					<td>{{ __('diablo.intelligence') }}</td>
-					<td>{{ HTML::hb('stats.intelligence') }}</td>
-				</tr>
-				<tr>
-					<td>{{ __('diablo.vitality') }}</td>
-					<td>{{ HTML::hb('stats.vitality') }}</td>
-				</tr>
-				<tr>
-					<td>{{ __('diablo.magic_find') }}</td>
-					<td>{{ HTML::hb('stats.plus-magic-find') }}</td>
-				</tr>
-				<tr>
-					<td>{{ __('diablo.gold_find') }}</td>
-					<td>{{ HTML::hb('stats.plus-gold-find') }}</td>
-				</tr>
-				<tr>
-					<td>{{ __('diablo.movement_speed') }}</td>
-					<td>{{ HTML::hb('stats.plus-movement') }}</td>
-				</tr>
+				@endforeach
 			</table>
     </div>
   </div>
