@@ -1,17 +1,16 @@
-<div class="accordion-group">
-  <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" href=".collapseDefensive">
-			@if(!$isCompare)
-			{{ (isset($name)) ? $name : "" }}
-			@else
-				{{ __('diablo.defensive_statistics') }}
-				{{ (isset($name)) ? $name : "" }}
-			@endif
-    </a>
-  </div>
-  <div class="collapseDefensive accordion-body collapse in">
-    <div class="accordion-inner">
-
-    </div>
-  </div>
-</div>
+<?
+	$stats = array(
+		'resist-physical',
+		'resist-cold',
+		'resist-fire',
+		'resist-lightning',
+		'resist-poison',
+		'resist-arcane',
+		'cc-reduce',
+		'percent-range-reduce',
+		'percent-melee-reduce',
+		'percent-elite-reduce',
+	);
+	$tabName = 'defensive';
+?>
+@include("build.section.stats.table")

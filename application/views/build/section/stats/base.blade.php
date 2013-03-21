@@ -8,21 +8,6 @@
 		'plus-gold-find',
 		'plus-movement'
 	);
+	$tabName = 'base';
 ?>
-<div class="accordion-group">
-  <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" href=".collapseBase">
-			@if(!$isCompare)
-			{{ (isset($name)) ? $name : "" }}
-			@else
-				{{ __('diablo.base_statistics') }}
-				{{ (isset($name)) ? $name : "" }}
-			@endif				
-    </a>
-  </div>
-  <div class="collapseBase accordion-body collapse in">
-    <div class="accordion-inner">
-			@include('build.section.stats.table')
-    </div>
-  </div>
-</div>
+@include("build.section.stats.table")
