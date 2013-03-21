@@ -1,5 +1,4 @@
 Handlebars.registerHelper('prettyStat', function(value, stat) {
-	
 	var special = {
 				decimals: {
 					'aps-mh': 4,
@@ -36,6 +35,10 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 	if(value) {
 		value = Handlebars.helpers.round.call(this, value, decimals);		
 	}
+	// Add Commas
+	var parts = value.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  value = parts.join(".");
 	return prepend + value + append;
 });
 Handlebars.registerHelper('round', function(number, decimal_points) {
