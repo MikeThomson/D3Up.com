@@ -7,3 +7,6 @@
 [submodule "application/libraries/Markdown"]
 	path = application/libraries/Markdown
 	url = git://github.com/michelf/php-markdown.git
+[submodule "application/language"]
+	path = application/language
+	url = https://github.com/aaroncox/D3Up.com-Lang
