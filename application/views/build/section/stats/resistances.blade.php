@@ -11,6 +11,6 @@
 		'percent-melee-reduce',
 		'percent-elite-reduce',
 	);
-	$tabName = 'resistances';
+	$tabName = 'resistance';
 ?>
 @include("build.section.stats.table")
