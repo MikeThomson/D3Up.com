@@ -35,12 +35,12 @@
 .build-stats[data-id=stats-sidebar-compare] td {
 	text-align: center;	
 }
-.build-stats[data-id=stats-sidebar-compare] td {
+.build-stats[data-id=stats-sidebar-compare] td .stat-container {
 	position: relative;
 }
 .victor-1 {
 	position: absolute;
-	top: 9px;
+	top: 0;
 	left: -9px;
 	width: 0; 
 	height: 0; 
@@ -50,12 +50,11 @@
 }
 .victor-2 {
 	position: absolute;
-	top: 9px;
-	right: 10px;
+	top: 0;
+	right: -9px;
 	width: 0; 
 	height: 0;
 	border-top: 10px solid transparent;
 	border-bottom: 10px solid transparent;	
 	border-left: 15px solid green;
-	margin-right: -20px;
 }
