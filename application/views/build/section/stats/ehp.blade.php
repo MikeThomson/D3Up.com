@@ -1,17 +1,19 @@
-<div class="accordion-group">
-  <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" href=".collapseEHP">
-			@if(!$isCompare)
-			{{ (isset($name)) ? $name : "" }}
-			@else
-				{{ __('diablo.ehp_statistics') }}
-				{{ (isset($name)) ? $name : "" }}
-			@endif
-    </a>
-  </div>
-  <div class="collapseEHP accordion-body collapse">
-    <div class="accordion-inner">
-
-    </div>
-  </div>
-</div>
+<?
+	$stats = array(
+		'ehp',
+		'ehp-dodge',
+		'ehp-block',
+		'ehp-block-dodge',
+		'ehp-melee',
+		'ehp-range',
+		'ehp-elite',
+		'ehp-physical',
+		'ehp-cold',
+		'ehp-fire',
+		'ehp-lightning',
+		'ehp-poison',
+		'ehp-arcane',
+	);
+	$tabName = 'ehp';
+?>
+@include("build.section.stats.table")

@@ -1,15 +1,12 @@
 <?
 	$stats = array(
-		'resist-physical',
-		'resist-cold',
-		'resist-fire',
-		'resist-lightning',
-		'resist-poison',
-		'resist-arcane',
-		'cc-reduce',
-		'percent-range-reduce',
-		'percent-melee-reduce',
-		'percent-elite-reduce',
+		'armor',
+		'resist-all',
+		'block-chance',
+		'dodge-chance',
+		'damage-reduction',
+		'total-damage-reduction',
+		'thorns',
 	);
 	$tabName = 'defensive';
 ?>
