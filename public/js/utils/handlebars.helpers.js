@@ -25,7 +25,6 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 		value = 0;
 	}
 	if(value) {
-		console.log(stat, value, decimals);
 		value = Handlebars.helpers.round.call(this, value, decimals);		
 	}
 	return prepend + value + append;
