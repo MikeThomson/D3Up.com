@@ -1,6 +1,6 @@
 <div class="accordion-group">
   <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" href=".collapse{{ $tabName }}">
+    <a class="accordion-toggle" data-toggle="collapse" href=".collapse-{{ $tabName }}">
 			@if(!$isCompare)
 			{{ (isset($name)) ? $name : "" }}
 			@else
