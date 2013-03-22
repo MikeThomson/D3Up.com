@@ -1,4 +1,4 @@
-<div class="navbar navbar-fixed-top">
+<div class="navbar">
   <div class="navbar-inner">
     <div class="container">
       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -11,21 +11,26 @@
 			</a>
 			<div class='nav-collapse'>
 				<ul class="nav">
-					<li <?= (isset($build) || Auth::check()) ? 'class="dropdown"' : ''?>>
-						@if(Auth::check())
-							<a href="#" class="build-select <?= (Auth::check()) ? 'dropdown-toggle' : '' ?>" data-toggle="dropdown">							
-								<img src="/img/icons/unknown.png" class="build-icon pull-left" style="width: 36px">
-								<div class='build-name'>{{ __('d3up.build_quick_select') }}</div>
-								<small>{{ __('d3up.my_highest_level_builds') }}</small>
-								<?= (Auth::check()) ? '<b class="caret"></b>' : '' ?>
-							</a>
-						@endif
-						@if(Auth::check())
-							@include("template.global.navbar.user")
-						@else
-							@include("template.global.navbar.anonymous")
-						@endif
+					@if(Auth::check())
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle-clickable profile-dropdown" data-toggle="dropdown">							
+							<span class='icon-frame icon-custom icon-custom-followers profile-icon'></span>
+						</a>
+						@include("template.global.navbar.user")
 					</li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle-clickable profile-dropdown" data-toggle="dropdown">							
+							<span class='icon-frame icon-custom icon-custom-gear profile-icon'></span>
+						</a>
+						<div class="dropdown-menu">
+							<ul>
+								<li>Hrm, what could this be? =)</li>
+							</ul>
+						</div>
+					</li>
+					@else
+						@include("template.global.navbar.anonymous")
+					@endif
 	        <li class="dropdown">
 						<a href="/build" class="dropdown-toggle-clickable">{{ __('d3up.builds') }} <b class="caret"></b></a>
 						<div class="dropdown-menu">
@@ -84,11 +89,3 @@
     </div><!-- /.container -->
   </div><!-- /.navbar-inner -->
 </div><!-- /.navbar -->
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$('.navbar .dropdown-menu').click(function(e) {
-		    e.stopPropagation();
-		});
-	});
-	
-</script>

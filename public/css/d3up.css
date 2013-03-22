@@ -4,8 +4,8 @@ body {
 }
 
 body > .container {
-	margin-top: 40px;
-	padding: 5px;
+/*	margin-top: 40px;*/
+/*	padding: 5px;*/
 }
 
 a {
@@ -20,7 +20,6 @@ a:focus {
 }
 
 .content-page {
-	margin: 0 5px 5px;
 	padding: 15px;
 	border: 1px solid #333;
 	background: #222;
@@ -169,10 +168,106 @@ a:focus {
 	top: -50px; 
 	visibility: hidden;
 }
-footer {
+.footer {
 	background-color: #222;
-	margin-top: 25px;
-	padding: 25px;
+	margin: 15px 0;
 	text-align: center;
-	border-top: 1px solid #333;
 }
+.footer .navbar-inner {
+	padding: 5px;
+	min-height: auto;
+}
+.navbar .nav > li > a.profile-dropdown {
+	padding: 0;
+	margin: 4px;
+}
+.navbar .nav > li > a.profile-dropdown .icon-frame {
+	width: 36px;
+	height: 36px;	
+}
+
+.navbar .nav > li > a.profile-dropdown .build-select .icon-custom-followers {
+	margin: 0;
+	margin-right: 5px;
+}
+
+/* Build Selection Tool */
+.navbar .nav > li > a.build-selector-container {
+	margin: 0;
+	padding: 5px 0 3px;
+	width: 195px;
+}
+.navbar .nav > li > a.build-selector-container .build-name {
+	padding-top: 3px;
+}
+.navbar .nav > li > a.build-selector-container .build-name:hover {
+	color: #fff;
+}
+.navbar .nav > li > a.build-selector-container .build-name small {
+	display: block;
+	color: #777;
+}
+.navbar .nav > li > a.build-selector-container .icon-frame {
+	float: left;
+	margin-right: 5px;
+}
+.navbar .nav > li > .build-selector {
+	padding: 0;
+	width: 225px;
+}
+.build-tools,
+.build-select {
+	display: inline-block;
+}
+.build-select {
+	min-width: 120px;
+	overflow: hidden;
+	word-wrap: none;
+	white-space:nowrap;	
+}
+.build-select a {
+	display: block;
+	padding-left: 46px;
+}
+.build-tools {
+	float: right;
+}
+.build-tools a {
+	display: inline-block;
+}
+.dropdown ul li .build-tools a {
+	padding: 0;
+}
+.dropdown ul li .build-tools a .icon-custom {
+	vertical-align: top;
+	margin: 0;
+	line-height: 40px;
+}
+/* reusable frame */
+.icon-frame { background-color: black; padding: 1px; border-left: 1px solid #3a2912; border-right: 1px solid #59411c; border-bottom: 1px solid #463419; border-top: 1px solid #574320; border-radius: 2px; }
+.icon-frame img { display: block; vertical-align: bottom; }
+li:hover a .icon-frame,
+a:hover .icon-frame,
+.hover .icon-frame { background-color: #222; border-color: #61461e; }
+.icon-frame.hardcore-frame,
+a:hover .icon-frame.hardcore-frame { border-color:#a20101 } /* hardcore frame */
+.icon-frame-text { vertical-align: middle; margin-top: -2px; margin-left: 2px; margin-right: 2px; } /* correctly aligns the frame within a line of text */
+
+/* custom */
+.icon-custom { background: url("/img/icons/tools.png") no-repeat; width: 36px; height: 36px; }
+.icon-custom-calculator { background-position: 1px 1px; }
+.icon-custom-gear { background-position: -36px 1px; }
+.icon-custom-tooltip { background-position: -73px 1px; }
+.icon-custom-followers { background-position: -109px 1px; }
+.icon-custom-anniversary { background-position: -171px 1px; }
+.icon-custom-ce { background-position: -215px 1px; }
+.icon-custom-status { background-position: -258px 1px }
+.icon-custom-ah-faq { background-position: -303px 1px }
+a:hover .icon-custom-calculator { background-position: 1px -42px; }
+li:hover a .icon-custom-gear,
+a:hover .icon-custom-gear { background-position: -36px -36px; }
+a:hover .icon-custom-tooltip { background-position: -73px -36px; }
+a:hover .icon-custom-anniversary { background-position: -171px -42px; }
+a:hover .icon-custom-ce { background-position: -215px -42px; }
+a:hover .icon-custom-status { background-position: -258px -42px }
+a:hover .icon-custom-ah-faq { background-position: -303px -42px }

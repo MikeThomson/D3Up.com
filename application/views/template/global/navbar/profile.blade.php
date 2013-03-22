@@ -1,6 +1,6 @@
 <li class="dropdown pull-right">
   <a href="#" class="dropdown-toggle-clickable" data-toggle="dropdown">							
-		{{ ucwords(Auth::user()->username) }}
+		<span class='build-name'>{{ ucwords(Auth::user()->username) }}</span>
 		<b class="caret"></b>
 	</a>
 	<div class="dropdown-menu">

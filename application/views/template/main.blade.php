@@ -11,7 +11,14 @@
 	<div class="container">
 		@include('template.global.header')
 		@yield('content')
+		@include('template.global.footer')
 	</div>
-	@include('template.global.footer')
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function () {
+			$("[data-toggle=popover]").popover({
+				// trigger: 'click',
+			});
+		});
+	</script>
 </body>
 </html>

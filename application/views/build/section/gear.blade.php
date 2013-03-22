@@ -10,7 +10,9 @@
 			<a href="#gear-paperdoll" data-toggle="tab">{{ __('build.paperdoll') }}</a>
 		</li>
     <li class="active">
-			<a href="#gear-overview" data-toggle="tab">{{ __('build.overview') }}</a>
+			<a href="#gear-overview" data-toggle="tab">
+				{{ __('build.overview') }}
+			</a>
 		</li>
     <li>
 			<a href="#gear-contributions" data-toggle="tab">{{ __('build.dps_ehp_contributions') }}</a>

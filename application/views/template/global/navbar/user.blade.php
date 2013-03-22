@@ -1,18 +1,26 @@
 <?
 	$myBuilds = Epic_Mongo::db('build')->find(array('_createdBy' => Auth::user()->createReference()))->sort(array('paragon' => -1, 'level' => -1))->limit(5);
 ?>
-<div class="dropdown-menu">
+<div class="dropdown-menu build-selector">
    <ul>
 		<!-- <li class='lead'>My Builds</li> -->
-		<? foreach($myBuilds as $build): ?>
-		<li class='build-select'>
-			<a href="/b/{{ $build->id }}">
-				<img src="/img/icons/{{ $build->class }}.png" class="build-icon pull-left">
-				<div class='build-name'>{{ $build->name }}</div>
-				<small>
-					<span class="level">{{ __('build.level') }} {{ $build->level }}</span>, {{ __('build.paragon') }} <span class="paragon">{{ $build->paragon }}</span>
-				</small>
-			</a>
+		<? foreach($myBuilds as $my): ?>
+		<li class='{{ $my->class }}'>
+			<div class="build-select">
+				<a href="/b/{{ $my->id }}">
+					<div class='build-name'>{{ $my->name }}</div>
+					<small>
+						<span class="level">{{ __('build.level') }} {{ $my->level }}</span>, {{ __('build.paragon') }} <span class="paragon">{{ $my->paragon }}</span>
+					</small>
+				</a>
+			</div>
+			@if(isset($build))
+				<div class="build-tools" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Compare your build, {{ $my->name }}, against this build." title="Quick Compare">
+					<a href="/c/{{ $my->id }}/{{ $build->id }}">
+						<span class='icon-frame icon-custom icon-custom-tooltip'>&nbsp;</span>
+					</a>
+				</div>
+			@endif
 		</li>
 		<? endforeach; ?>
 		<li>

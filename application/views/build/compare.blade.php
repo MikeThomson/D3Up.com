@@ -23,6 +23,9 @@
 	</div>
 	<div class='span12'>
 		<ul class="nav nav-pills">
+			<li class="brand">
+				<a>Test</a>
+			</li>
 	    <li class="active">
 				<a href="#tab-stats" data-toggle="tab">Stats</a>
 			</li>

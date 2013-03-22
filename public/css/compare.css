@@ -20,13 +20,19 @@
 }
 .compare-container .nav.nav-pills {
 	text-align: center;
+	border: 1px solid #333;
+	padding: 5px;
+	margin-bottom: 10px;
 }
 .compare-container .nav-pills > li {
 	display: inline-block;
 	float: none;
 }
-.stat-table td {
+/*.stat-table td {
 	height: 22px;
+}*/
+.compare-container .stat-table td {
+	width: 50%;
 }
 .build-stats td {
 	border-top: 1px solid #333;
@@ -34,6 +40,7 @@
 .build-stats[data-id=stats-sidebar-compare],
 .build-stats[data-id=stats-sidebar-compare] td {
 	text-align: center;	
+	color: #fff;
 }
 .build-stats[data-id=stats-sidebar-compare] td .stat-container {
 	position: relative;
@@ -41,7 +48,7 @@
 .victor-1 {
 	position: absolute;
 	top: 0;
-	left: -9px;
+	left: 0;
 	width: 0; 
 	height: 0; 
 	border-top: 10px solid transparent;
@@ -51,7 +58,7 @@
 .victor-2 {
 	position: absolute;
 	top: 0;
-	right: -9px;
+	right: 0;
 	width: 0; 
 	height: 0;
 	border-top: 10px solid transparent;

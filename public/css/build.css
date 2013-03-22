@@ -1,7 +1,7 @@
 .title-block {
 	position: relative;
 	background-image: url('/img/bgs/default.jpeg');
-	background-position: top right;
+	background-position: top center;
 	background-repeat: no-repeat;
 	outline: 0px solid #333;
 	border: 1px solid #333;
@@ -66,30 +66,30 @@ div.title-block .skill-row {
 	color: #888;
 	line-height: 48px;
 }
-.stats-table {
+.highlight-table {
   width: 285px;
   margin: 0;
   border: 1px solid #333;
   background: #222;
 }
-.stats-table td.hl-ehp, 
-.stats-table td.hl-dps {
+.highlight-table td.hl-ehp, 
+.highlight-table td.hl-dps {
   text-shadow: 2px 2px 2px #111;
   font-size: 18px;
   color: #ececec;
   padding: 5px;
 }
-.stats-table td.hl-dps .value {
+.highlight-table td.hl-dps .value {
   color: #F50;
 } 
-.stats-table td.hl-ehp .value {
+.highlight-table td.hl-ehp .value {
   color: #5F0;
 }   
-.stats-table td.hl-dps .value,
-.stats-table td.hl-ehp .value {
+.highlight-table td.hl-dps .value,
+.highlight-table td.hl-ehp .value {
   font-weight: bold;
 }
-.stats-table td {
+.highlight-table td {
 	height: 22px;
 }
 .item-stat {
@@ -193,12 +193,23 @@ div.title-block .skill-row {
 .build-container .build-content .tab-pane .gear-table td:first-child {
 	width: 38px;
 }
+.build-stats table {
+	margin: 0;
+}
 .build-stats .accordion-group {
 	border: 1px solid #333;
 	-webkit-border-radius: 0px;
      -moz-border-radius: 0px;
           border-radius: 0px;
 }
+.build-stats .accordion-group .accordion-inner {
+	padding: 0;
+}
 .build-stats .accordion-inner {
 	border-top: 1px solid #333;
+}
+.stat-table td:first-child{
+	text-align: right;
+	font-size: 0.9em;
+	color: #888;
 }

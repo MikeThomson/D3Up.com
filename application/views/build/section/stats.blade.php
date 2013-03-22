@@ -1,12 +1,20 @@
 <?
+	// Which tabs should collapse if it's a build?
+	$collapse = array(
+		'resistance',
+		'ehp',
+	);
+	// Did we get passed an ID? If not, set it to null
 	if(!isset($id)) {
 		$id = null;
 	}
-	$isCompare = ($id != 'compare');
+	// Is this tab a compare?
+	$isCompare = ($id == 'compare');
+	// Set the Name Affix of the Tab
 	$name = null;
 	if($id && $id != 'compare' && isset($build)) {
 		$name = "(".$build->name.")";
-	} else {
+	} elseif($isCompare) {
 		$name = "Compare";
 	}
 ?>

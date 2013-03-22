@@ -5,6 +5,7 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 					'aps-oh': 4,				
 				}, 
 				percents: [
+					'attack-speed-incs',
 					'critical-hit',
 					'critical-hit-damage',
 					'percent-melee-reduce',
