@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -13,20 +13,20 @@
 				<ul class="nav">
 					@if(Auth::check())
 					<li class="dropdown">
-					  <a href="#" class="dropdown-toggle-clickable profile-dropdown" data-toggle="dropdown">							
+					  <a href="#" class="dropdown-toggle-clickable iconmenu-dropdown" data-toggle="dropdown">							
 							<span class='icon-frame icon-custom icon-custom-followers profile-icon'></span>
 						</a>
 						@include("template.global.navbar.user")
 					</li>
 					<li class="dropdown">
-					  <a href="#" class="dropdown-toggle-clickable profile-dropdown" data-toggle="dropdown">							
-							<span class='icon-frame icon-custom icon-custom-gear profile-icon'></span>
+					  <a href="#" class="dropdown-toggle-clickable iconmenu-dropdown" data-toggle="dropdown">							
+							<span class='icon-frame icon-custom icon-custom-gear profile-icon'></span>							
 						</a>
-						<div class="dropdown-menu">
+						<!-- <div class="dropdown-menu">
 							<ul>
 								<li>Hrm, what could this be? =)</li>
 							</ul>
-						</div>
+						</div> -->
 					</li>
 					@else
 						@include("template.global.navbar.anonymous")

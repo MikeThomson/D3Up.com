@@ -50,22 +50,7 @@
 .dropdown ul li.demon-hunter > a,
 .dropdown ul li.monk > a, 
 .dropdown ul li.witch-doctor > a {
-	padding-left: 50px;
-}
-.dropdown ul li.barbarian {
-	background-image: url('/img/icons/barbarian.png');
-}
-.dropdown ul li.wizard {
-	background-image: url('/img/icons/wizard.png');
-}
-.dropdown ul li.demon-hunter {
-	background-image: url('/img/icons/demon-hunter.png');
-}
-.dropdown ul li.monk {
-	background-image: url('/img/icons/monk.png');
-}
-.dropdown ul li.witch-doctor {
-	background-image: url('/img/icons/witch-doctor.png');
+/*	padding-left: 50px;*/
 }
 
 .dropdown ul li.barbarian a:hover,
@@ -102,6 +87,7 @@
 	border-color: #444;
 	background-color: #222;
 	background-image: none;
+	padding-left: 0px;
   /* Gradients for modern browsers, replace as you see fit */
 /*  background-image: -moz-linear-gradient(top, #333333, #222222);
   background-image: -ms-linear-gradient(top, #333333, #222222);
@@ -305,10 +291,17 @@ ul.nav li.dropdown:hover > .dropdown-menu{
 .popover.left .arrow:after {
   border-left-color: #333;
 }
+.btn-group.btn-group-block {
+	display: block;
+	text-align: center;
+	width: auto;
+}
 
-@media (max-width: 767px) {
-  body {
-    padding-right: 1px;
-    padding-left: 1px;
-  }
-
+.navbar-fixed-top .navbar-inner,
+.navbar-static-top .navbar-inner,
+.navbar-fixed-top .navbar-inner .dropdown-menu,
+.navbar-static-top .navbar-inner .dropdown-menu {
+	-webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}

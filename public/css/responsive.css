@@ -58,9 +58,10 @@
 		line-height: 32px;
 	}
 }
-
 @media (max-width: 767px) {
 	body {
+    padding-right: 1px;
+    padding-left: 1px;
 	}
 	body > .container {
 		margin: 0;

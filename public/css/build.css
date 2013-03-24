@@ -208,6 +208,9 @@ div.title-block .skill-row {
 .build-stats .accordion-inner {
 	border-top: 1px solid #333;
 }
+.build-stats .accordion-inner:first-child {
+	border-top: 0;
+}
 .stat-table td:first-child{
 	text-align: right;
 	font-size: 0.9em;
