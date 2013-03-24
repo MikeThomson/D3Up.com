@@ -33,25 +33,77 @@
 					@endif
 	        <li class="dropdown">
 						<a href="/build" class="dropdown-toggle-clickable">{{ __('d3up.builds') }} <b class="caret"></b></a>
-						<div class="dropdown-menu">
+						<div class="dropdown-menu dropdown-classes">
+							<h3>Browse Builds</h3>
 	            <ul>
-								<li class='barbarian'><a href="/build?class=barbarian">{{ __('build.barbarian') }}</a></li>
-								<li class='demon-hunter'><a href="/build?class=demon-hunter">{{ __('build.demon-hunter') }}</a></li>
-								<li class='monk'><a href="/build?class=monk">{{ __('build.monk') }}</a></li>
-								<li class='witch-doctor'><a href="/build?class=witch-doctor">{{ __('build.witch-doctor') }}</a></li>
-								<li class='wizard'><a href="/build?class=wizard">{{ __('build.wizard') }}</a></li>
+								<li class='item'>
+									<a href="/build?class=barbarian">
+										<img src='/img/icons/barbarian.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.barbarian') }}
+									</a>
+								</li>
+								<li class='item'>
+									<a href="/build?class=demon-hunter">
+										<img src='/img/icons/demon-hunter.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.demon-hunter') }}
+									</a>
+								</li>
+								<li class='item'>
+									<a href="/build?class=monk">
+										<img src='/img/icons/monk.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.monk') }}
+									</a>
+								</li>
+								<li class='item'>
+									<a href="/build?class=witch-doctor">
+										<img src='/img/icons/witch-doctor.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.witch-doctor') }}
+									</a>
+								</li>
+								<li class='item'>
+									<a href="/build?class=wizard">
+										<img src='/img/icons/wizard.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.wizard') }}
+									</a>
+								</li>
 	            </ul>
 						</div>
 					</li>
 	        <li class="dropdown">
 						<a href="/guide" class="dropdown-toggle-clickable">{{ __('d3up.guides') }} <b class="caret"></b></a>
-						<div class="dropdown-menu">
+						<div class="dropdown-menu dropdown-classes">
+							<h3>Browse Guides</h3>
 	            <ul>
-								<li class='barbarian'><a href="/guide?class=barbarian">{{ __('build.barbarian') }}</a></li>
-								<li class='demon-hunter'><a href="/guide?class=demon-hunter">{{ __('build.demon-hunter') }}</a></li>
-								<li class='monk'><a href="/guide?class=monk">{{ __('build.monk') }}</a></li>
-								<li class='witch-doctor'><a href="/guide?class=witch-doctor">{{ __('build.witch-doctor') }}</a></li>
-								<li class='wizard'><a href="/guide?class=wizard">{{ __('build.wizard') }}</a></li>
+								<li class='item'>
+									<a href="/guide?class=barbarian">
+										<img src='/img/icons/barbarian.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.barbarian') }}
+									</a>
+								</li>
+								<li class='item'>
+									<a href="/guide?class=demon-hunter">
+										<img src='/img/icons/demon-hunter.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.demon-hunter') }}
+									</a>
+								</li>
+								<li class='item'>
+									<a href="/guide?class=monk">
+										<img src='/img/icons/monk.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.monk') }}
+									</a>
+								</li>
+								<li class='item'>
+									<a href="/guide?class=witch-doctor">
+										<img src='/img/icons/witch-doctor.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.witch-doctor') }}
+									</a>
+								</li>
+								<li class='item'>
+									<a href="/guide?class=wizard">
+										<img src='/img/icons/wizard.png' class='icon-frame icon-custom icon-blank pull-left'>
+										{{ __('build.wizard') }}
+									</a>
+								</li>
 	         		</ul>
 						</div>
 					</li>

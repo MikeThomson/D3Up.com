@@ -31,7 +31,6 @@
 }
 
 .dropdown ul li {
-	background: #222;
 	font-size: 12px;
 	text-align: left;
 	line-height: 40px;
@@ -41,7 +40,6 @@
 	background-position: middle left;	
 	cursor: pointer;		
 	overflow: hidden;
-	border: 1px solid #222;
 	border-radius: 3px;
 	margin: 1px 3px;
 }
@@ -88,17 +86,6 @@
 	background-color: #222;
 	background-image: none;
 	padding-left: 0px;
-  /* Gradients for modern browsers, replace as you see fit */
-/*  background-image: -moz-linear-gradient(top, #333333, #222222);
-  background-image: -ms-linear-gradient(top, #333333, #222222);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333333), to(#222222));
-  background-image: -webkit-linear-gradient(top, #333333, #222222);
-  background-image: -o-linear-gradient(top, #333333, #222222);
-  background-image: linear-gradient(top, #333333, #222222);
-  background-repeat: repeat-x;*/
-
-  /* IE8-9 gradient filter */
-/*  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);*/
 }
 
 .navbar-inner .container {
@@ -184,6 +171,18 @@
 }
 .dropdown-menu {
 	background-color: #222;
+	  /* Gradients for modern browsers, replace as you see fit */
+/*	  background-image: -moz-linear-gradient(top, #282828, #333333);
+	  background-image: -ms-linear-gradient(top, #282828, #333333);
+	  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#282828), to(#333333));
+	  background-image: -webkit-linear-gradient(top, #282828, #333333);
+	  background-image: -o-linear-gradient(top, #282828, #333333);
+	  background-image: linear-gradient(top, #282828, #333333);
+	  background-repeat: repeat-x;
+*/
+	  /* IE8-9 gradient filter */
+/*	  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#282828', endColorstr='#333333', GradientType=0);*/
+	
 	margin: 0px;
 	padding: 0;
 	border-radius: 0 0 6px 6px;

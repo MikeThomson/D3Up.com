@@ -196,34 +196,44 @@ a:focus {
 }
 
 /* Build Selection Tool */
-.navbar .nav > li > a.build-selector-container {
+.navbar .nav > li > a.dropdown-classes-container {
 	margin: 0;
 	padding: 5px 0 3px;
 	width: 195px;
 }
-.navbar .nav > li > a.build-selector-container .build-name {
+.navbar .nav > li > a.dropdown-classes-container .build-name {
 	padding-top: 3px;
 }
-.navbar .nav > li > a.build-selector-container .build-name:hover {
+.navbar .nav > li > a.dropdown-classes-container .build-name:hover {
 	color: #fff;
 }
-.navbar .nav > li > a.build-selector-container .build-name small {
+.navbar .nav > li > a.dropdown-classes-container .build-name small {
 	display: block;
 	color: #777;
 }
-.navbar .nav > li > a.build-selector-container .icon-frame {
+.navbar .nav > li > a.dropdown-classes-container .icon-frame {
 	float: left;
 	margin-right: 5px;
 }
-.navbar .nav > li > .build-selector {
+.navbar .nav > li > .dropdown-classes {
 	padding: 0;
 	width: 225px;
 }
-.navbar .nav > li > .build-selector ul {
+.navbar .nav > li > .dropdown-classes ul {
 	padding: 0;
 }
-.navbar .nav > li > .build-selector ul li:hover {
+.navbar .nav > li > .dropdown-classes ul li {
+	padding: 0;
+	margin: 0;
+}
+.navbar .nav > li > .dropdown-classes ul li.item:hover {
 	background-color: #111;
+}
+.navbar .nav > li > .dropdown-classes ul li.controls {
+	height: auto;
+}
+.navbar .nav > li > .dropdown-classes ul li.controls .btn-group {
+	margin-top: 0;
 }
 .build-tools,
 .build-select {
@@ -244,7 +254,7 @@ a:focus {
 	font-size: 14px;
 	line-height: 25px;
 }
-.build-select .icon-frame {
+.dropdown-classes .icon-frame {
 	margin-right: 5px;
 }
 .build-select small {
@@ -290,19 +300,20 @@ li:hover > a .icon-custom-ce { background-position: -215px -42px; }
 li:hover > a .icon-custom-status { background-position: -258px -42px }
 li:hover > a .icon-custom-ah-faq { background-position: -303px -42px }
 
-.dropdown-menu.build-selector {
+.dropdown-menu.dropdown-classes {
 /*	display: block;*/
 }
-.build-selector > h3 {
+.dropdown-classes > h3 {
 	margin: 0;
-	border: 1px solid #333;
+	padding: 0 0 0 5px;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
 	background-color: #111;
-	padding: 0 0 0 10px;
 	font-size: 1em;
 	line-height: 1.5em;
-	margin: 0 3px;
 }
 .icon-blank {
 	margin: 0;
 	background-image: none;
+	background-color: #111;
 }
