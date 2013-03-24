@@ -24,9 +24,14 @@ return array('html itemLink' => function($item, $params = array()) {
 		$options['data-toggle'] = 'tab';
 		$link = "#tab-item-".$item->id;
 	}
+	if(isset($params['text'])) {
+		$text = $params['text'];
+	} else {
+		$text = $item->name;
+	}
 	return HTML::link(
 		$link,
-		$item->name, 
+		$text, 
 		$options
 	);
 });

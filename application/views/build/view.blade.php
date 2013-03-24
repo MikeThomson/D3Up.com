@@ -3,6 +3,7 @@
 @section('styles')
 <link href="/css/build.css" rel="stylesheet">
 <link href="/css/compare.css" rel="stylesheet">
+<link href="/css/paperdoll.css" rel="stylesheet">
 @endsection
 
 @section('scripts')

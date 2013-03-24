@@ -1,0 +1,112 @@
+
+/* slots */
+.paperdoll { position: relative; width: 305px; height: 425px; margin-bottom: 6px; }
+.paperdoll li { position: absolute; display: block; outline: none; height: 88px; width: 66px; text-align: center; }
+.paperdoll li .slot-link { display:block; height: 86px; width: 64px; margin:1px; }
+.paperdoll li .image { display: block; width: 100%; height: 100%; overflow:hidden; }
+.paperdoll li .image img { position: relative; }
+.paperdoll li .d3-icon { position: absolute; top: 0; left: 0; display: block }
+.paperdoll li .d3-icon .icon-item-inner { display: block; height: 84px; width: 62px; }
+.paperdoll li .remove { top: 2px; left: 2px; }
+.paperdoll li .goto { top: 18px; left: 2px; }
+.paperdoll li.equipped:hover a { display: block; }
+
+.paperdoll li .sockets-wrapper { width:100%; height:100%; display:block; position:absolute; top:0; left:0; opacity:0.8 }
+.paperdoll li a:hover .sockets-wrapper { opacity:1 }
+.paperdoll li .sockets-wrapper .sockets-align { height: 88px; width: 66px; display:table-cell; vertical-align:middle }
+.paperdoll li .sockets-wrapper .socket { display:inline-block; vertical-align:middle; width:32px; height:32px; background:url(../../../images/profile/hero/skill-overlays.png) 0 -71px no-repeat; text-align:center; position:relative; left:1px; }
+.ie6 .paperdoll li .sockets-wrapper .socket {  background-image:url(../../../images/profile/hero/skill-overlays.gif) }
+.paperdoll li .sockets-wrapper .socket .gem { margin:6px auto 0;  width:20px; height:20px }
+
+/* slot sizes */
+.paperdoll .slot-helm,
+.paperdoll .slot-helm .sockets-wrapper .sockets-align { width: 66px; height: 66px; }
+.paperdoll .slot-helm .slot-link { width:64px; height:64px }
+.paperdoll .slot-helm .d3-icon .icon-item-inner { width: 62px; height: 62px; }
+
+.paperdoll .slot-chest,
+.paperdoll .slot-chest .sockets-wrapper .sockets-align { width: 82px; height: 115px; }
+.paperdoll .slot-chest .slot-link { width:80px; height:113px }
+.paperdoll .slot-chest .d3-icon .icon-item-inner { width: 78px; height: 111px; }
+
+.paperdoll .slot-amulet,
+.paperdoll .slot-amulet .sockets-wrapper .sockets-align { width: 56px; height: 56px; }
+.paperdoll .slot-amulet .slot-link { width:54px; height:54px }
+.paperdoll .slot-amulet .d3-icon .icon-item-inner { width: 52px; height: 52px; }
+
+.paperdoll .slot-belt,
+.paperdoll .slot-belt .sockets-wrapper .sockets-align { width: 82px; height: 34px; }
+.paperdoll .slot-belt .slot-link { width:80px; height:32px }
+.paperdoll .slot-belt .d3-icon .icon-item-inner { width: 78px; height: 30px; }
+
+.paperdoll .slot-ring1,
+.paperdoll .slot-ring2,
+.paperdoll .slot-ring1 .sockets-wrapper .sockets-align,
+.paperdoll .slot-ring2 .sockets-wrapper .sockets-align { width: 42px; height: 42px; }
+.paperdoll .slot-ring1 .slot-link,
+.paperdoll .slot-ring2 .slot-link { width:40px; height:40px }
+.paperdoll .slot-ring1 .d3-icon .icon-item-inner,
+.paperdoll .slot-ring2 .d3-icon .icon-item-inner { width: 38px; height: 38px; }
+
+.paperdoll .slot-offhand .disabled-off-hand { display:block; width: 66px; height: 130px; background:url(../../../images/profile/hero/disabled-offhand.gif) }
+.paperdoll .slot-offhand .disabled-off-hand .image { opacity:0.3; }
+.paperdoll .slot-offhand .disabled-off-hand .image img { top:1px; }
+
+.paperdoll .slot-offhand,
+.paperdoll .slot-mainhand,
+.paperdoll .slot-offhand .sockets-wrapper .sockets-align,
+.paperdoll .slot-mainhand .sockets-wrapper .sockets-align { width: 66px; height: 130px; }
+.paperdoll .slot-mainhand .slot-link,
+.paperdoll .slot-offhand .slot-link { width:64px; height:128px }
+.paperdoll .slot-offhand .d3-icon .icon-item-inner,
+.paperdoll .slot-mainhand .d3-icon .icon-item-inner { width: 62px; height: 126px; }
+
+/* slot image fixes */
+.paperdoll .slot-helm .image img { top: -31px; }
+.paperdoll .slot-shoulders .image img { top: -20px; }
+.paperdoll .slot-amulet .image img { width: 52px; height: 52px; top:1px; }
+.paperdoll .slot-chest .image img { top: -25px; left:-1px; }
+.paperdoll .slot-belt .image img { top: -15px; }
+.paperdoll .slot-gloves .image img,
+.paperdoll .slot-bracers .image img { top: -20px; }
+.paperdoll .slot-ring1 .image img,
+.paperdoll .slot-ring2 .image img {  }
+.paperdoll .slot-pants .image img { top: -20px; }
+.paperdoll .slot-boots .image img { top: -20px; }
+.paperdoll .slot-helm .image,
+.paperdoll .slot-shoulders .image,
+.paperdoll .slot-boots .image,
+.paperdoll .slot-bracers .image,
+.paperdoll .slot-gloves .image { overflow:visible; }
+.paperdoll .slot-shoulders { clip:rect(-19px, 76px, 99px, -10px); clip:rect(-19px 76px 99px -10px); }
+.paperdoll .slot-gloves { clip:rect(-19px, 76px, 100px, -10px); clip:rect(-19px 76px 100px -10px); }
+
+/* slot positioning */
+.paperdoll .slot-helm 		{ top: 4px; left: 121px; }
+.paperdoll .slot-shoulders { top: 28px; left: 39px; }
+.paperdoll .slot-amulet 	{ top: 48px; right: 44px; }
+.paperdoll .slot-chest 		{ top: 74px; left: 113px; }
+.paperdoll .slot-gloves 	{ top: 127px; left: 13px; }
+.paperdoll .slot-bracers 	{ top: 127px; right: 10px; }
+.paperdoll .slot-belt 		{ top: 193px; left: 113px; }
+.paperdoll .slot-pants 		{ bottom: 106px; left: 121px; }
+.paperdoll .slot-boots 		{ bottom: 14px; left: 121px; }
+.paperdoll .slot-offhand 	{ bottom: 13px; right: 10px; }
+.paperdoll .slot-mainhand { bottom: 13px; left: 13px; }
+.paperdoll .slot-ring1 		{ bottom: 156px; left: 25px; }
+.paperdoll .slot-ring2 		{ bottom: 156px; right: 22px; }
+
+/* slot item quality */
+.paperdoll .slot:hover .image { background: rgba(0, 0, 0, .20); }
+.paperdoll .slot.icon-active .image { background: rgba(0, 0, 0, .50); }
+.paperdoll .slot.slot-disabled { cursor: default; background: url("../../../images/tool/gear-calculator/slot-disabled.jpg") 50% 50% no-repeat; }
+.paperdoll .slot.slot-disabled .image { background: none; }
+.paperdoll .slot.is-quiver { background: url("../../../images/tool/gear-calculator/slot-quiver.jpg") 50% 50% no-repeat; }
+
+.paperdoll [class^="icon-"],
+.paperdoll [class*=" icon-"] {
+	width: auto;
+	height: auto;
+	background-image: none;
+	background-position: 0 0;
+}

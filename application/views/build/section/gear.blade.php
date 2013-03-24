@@ -19,14 +19,14 @@
 		</li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane active" id="gear-overview">
+    <div class="tab-pane" id="gear-overview">
 			@include("build.section.gear.overview")
     </div>
     <div class="tab-pane" id="gear-contributions">
 			@include("build.section.gear.contributions")
     </div>
-    <div class="tab-pane" id="gear-paperdoll">
-			<img src="http://placehold.it/500x400&text=Full Paper Doll for Character, like Battle.net">
+    <div class="tab-pane active" id="gear-paperdoll">
+			@include("build.section.gear.paperdoll")
     </div>
   </div>
 </div>

@@ -64,4 +64,7 @@ class User_Controller extends Base_Controller {
 		return Redirect::to('login');
 	}
 	
+	public function get_builds() {
+		return View::make('user/builds');
+	}
 }
