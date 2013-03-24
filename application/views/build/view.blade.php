@@ -125,7 +125,9 @@
 	var sources = [
 		'#gear-overview table tbody',
 		'#gear-contributions table tbody',
-		'#stats-sidebar'
+		'#stats-sidebar',
+		'#skill-overview',
+		'#dps-math',
 	];
 	
 	$.each(sources, function(k,v) {

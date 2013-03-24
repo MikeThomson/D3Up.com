@@ -10,6 +10,20 @@
 <!-- D3Up Scripts -->
 <script src="/js/d3up.js"></script>
 <script src="/js/utils/tooltip.js"></script>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+  var hash = window.location.hash;
+  hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+  $('html').scrollTop();
+
+  $('.nav-tabs a').click(function (e) {
+    var scrollmem = $('body').scrollTop();
+    window.location.hash = this.hash;
+    $('body').scrollTop(scrollmem);
+    $(this).tab('show');
+  });
+});
+</script>
 <!-- The D3Up Tooltip Div -->
 <div id="d3up-tooltip"></div>
 <div id="d3up-tooltip-compare"></div>

@@ -1,2 +1,8 @@
-<h3>Buffs</h3>
-<p>Any buff that a player can receive in-game from an external source can be activated here. Self-buffs will be still in the skills tab.</p>
+<ul class="nav nav-pills">
+  <li><a href="#skills-overview" data-toggle="tab">Group</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="buffs-overview">
+	Group Buffs
+  </div>
+</div>

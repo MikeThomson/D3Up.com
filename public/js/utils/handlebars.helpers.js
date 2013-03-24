@@ -69,3 +69,7 @@ Handlebars.registerHelper('if_gt', function(context, options) {
 		return options.fn(this);
 	return options.inverse(this);
 });
+
+Handlebars.registerHelper('skillName', function(name) {
+	return name.split("~")[0];
+});
