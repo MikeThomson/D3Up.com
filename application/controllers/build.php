@@ -65,7 +65,7 @@ class Build_Controller extends Base_Controller {
 		$pagination = $this->getPagination($builds);
 		// If we got a battletag, and no results, scan the API and present results
 		$characters = array();	// Array to return with characters
-		if($battletag && $builds->count() === 0) {
+		if($battletag = Request::get('battletag') && $builds->count() === 0) {
 			if(Cache::has('apicache-'.$battletag)) {
 				$characters = Cache::get('apicache-'.$battletag);
 			} else {
