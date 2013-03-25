@@ -6,7 +6,6 @@
     }
   }
 ?>
-<h5>Gear / Items</h5>
 <div class="page math" id="dps-math">
   <p>Note: This is an experimental tab! Still working out the bugs.</p>
   <p>In an effort to improve the calculator, this page outlines all of the steps to calculate this builds DPS. Please feel free to check it over and submit any corrections!</p>

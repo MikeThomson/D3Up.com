@@ -12,14 +12,27 @@
 <script src="/js/utils/tooltip.js"></script>
 <script type="text/javascript" charset="utf-8">
 $(function(){
+	/* 
+		Hash Change behaviour and Tabbing
+	*/
+	// Store the Hash
   var hash = window.location.hash;
-  hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+	// Store the Active tab and show it
+	var active = $('ul.nav a[href="' + hash + '"]').tab('show');
+	// Loop through parent elements to see if we're inside another tab
+	$.each(active.parents('.tab-pane'), function() {
+		// Activate the Parent Tab as well if it's a subtab
+		$('ul.nav a[href="#' + $(this).attr("id") + '"]').tab('show');
+	});
+	// Scroll to the Top
   $('html').scrollTop();
-
-  $('.nav-tabs a').click(function (e) {
+	// Bind the Click function to change the Hash
+  $('.nav-tabs a, .nav-pills a').click(function (e) {
     var scrollmem = $('body').scrollTop();
     window.location.hash = this.hash;
+		// Scroll to the Top
     $('body').scrollTop(scrollmem);
+		// Show the Tab
     $(this).tab('show');
   });
 });
