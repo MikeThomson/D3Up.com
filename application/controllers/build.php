@@ -4,11 +4,7 @@ class Build_Controller extends Base_Controller {
 
 	public $restful = true;
 
-	public function get_index() {
-		// Build List Parameters
-		$curPage = Request::get('page') ?: 1;	// Either the currently requested page, or if null, page #1
-		$perPage = 20;
-		$skip = ($curPage - 1) * $perPage;
+	public function getBuilds($params = array()) {
 		// Filtering on the Build List
 		$query = array();
 		// Do we have a class specified?
@@ -19,6 +15,35 @@ class Build_Controller extends Base_Controller {
 		$sort = array(
 			'_created' => -1
 		);
+		// Check our Params
+		if(!empty($params)) {
+			if(isset($params['filter'])) {
+				switch($params['filter']) {
+					case "user":
+						if($user = Auth::user()) {
+							$query['_createdBy'] = $user->createReference();
+							$sort = array(
+								'paragon' => -1,
+								'level' => -1,
+							);
+						}
+						
+						break;
+				}
+			}
+		}
+		// If we're being passed a BattleTag, search for it.
+		if($battletag = strtolower(Request::get('battletag'))) {
+			$query['_characterBt'] = str_replace("-", "#", $battletag);
+		}
+		return $builds = Epic_Mongo::db('build')->find($query)->sort($sort);
+	}
+	
+	public function getPagination($builds) {
+		// Build List Parameters
+		$curPage = Request::get('page') ?: 1;	// Either the currently requested page, or if null, page #1
+		$perPage = 20;
+		$skip = ($curPage - 1) * $perPage;
 		// Pagination Options
 		$paginationOptions = array(
 			'class' => Request::get('class'),
@@ -26,13 +51,18 @@ class Build_Controller extends Base_Controller {
 		);
 		// If we're being passed a BattleTag, search for it.
 		if($battletag = strtolower(Request::get('battletag'))) {
-			$paginationOptions['battletag'] = $query['_characterBt'] = str_replace("-", "#", $battletag);
+			$paginationOptions['battletag'] = str_replace("-", "#", $battletag);
 		}
-		// Fetch the Builds
-		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
 		// Add a paginator
 		$pagination = Paginator::make($builds->limit($perPage)->skip($skip), $builds->count(), $perPage);
-		$pagination->appends($paginationOptions);
+		return $pagination->appends($paginationOptions);
+	}
+
+	public function get_index() {
+		// Fetch the Builds
+		$builds = $this->getBuilds();
+		// Fetch the Pagination
+		$pagination = $this->getPagination($builds);
 		// If we got a battletag, and no results, scan the API and present results
 		$characters = array();	// Array to return with characters
 		if($battletag && $builds->count() === 0) {
@@ -123,5 +153,15 @@ class Build_Controller extends Base_Controller {
 		}
 		// Redirect to the build
 		return Redirect::to_action('build@view', array('id' => $build->id));
+	}
+	
+	public function get_user() {
+		// Fetch the Builds
+		$builds = $this->getBuilds(array('filter' => 'user'));
+		// Fetch the Pagination
+		$pagination = $this->getPagination($builds);
+		return View::make('build.index')
+						->with('builds', $builds)
+						->with('pagination', $pagination);
 	}
 }

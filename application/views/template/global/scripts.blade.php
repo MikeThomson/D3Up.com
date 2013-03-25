@@ -23,9 +23,8 @@ $(function(){
 	$.each(active.parents('.tab-pane'), function() {
 		// Activate the Parent Tab as well if it's a subtab
 		$('ul.nav a[href="#' + $(this).attr("id") + '"]').tab('show');
+		window.scrollTo(0);
 	});
-	// Scroll to the Top
-  $('html').scrollTop();
 	// Bind the Click function to change the Hash
   $('.nav-tabs a, .nav-pills a').click(function (e) {
     var scrollmem = $('body').scrollTop();
@@ -35,6 +34,7 @@ $(function(){
 		// Show the Tab
     $(this).tab('show');
   });
+	// Scroll to the Top
 });
 </script>
 <!-- The D3Up Tooltip Div -->

@@ -291,7 +291,7 @@ a:hover .icon-frame.hardcore-frame { border-color:#a20101 } /* hardcore frame */
 .icon-custom-ce { background-position: -215px 1px; }
 .icon-custom-status { background-position: -258px 1px }
 .icon-custom-ah-faq { background-position: -303px 1px }
-li:hover > a .icon-custom-calculator { background-position: 1px -42px; }
+li:hover > a .icon-custom-calculator { background-position: 1px -36px; }
 li:hover > a .icon-custom-gear { background-position: -36px -36px; }
 li:hover > a .icon-custom-tooltip,
 .icon-custom-tooltip:hover { background-position: -73px -36px; }

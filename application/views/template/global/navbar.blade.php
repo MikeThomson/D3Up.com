@@ -14,7 +14,7 @@
 					@if(Auth::check())
 					<li class="dropdown">
 					  <a href="#" class="dropdown-toggle-clickable iconmenu-dropdown" data-toggle="dropdown">							
-							<span class='icon-frame icon-custom icon-custom-followers profile-icon'></span>
+							<span class='icon-frame icon-custom icon-custom-calculator profile-icon'></span>
 						</a>
 						@include("template.global.navbar.user")
 					</li>

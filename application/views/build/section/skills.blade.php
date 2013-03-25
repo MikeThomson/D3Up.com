@@ -26,10 +26,10 @@
 <div class="tab-content">
   <div class="tab-pane active" id="skill-overview">
 		<ul class='skills'>
-			{{ HTML::hb('#each stats.skillData') }}
+			{{ HTML::hb('#each skills.actives') }}
 				<li class='skill' data-skill='{{ HTML::hb('@key') }}'>
 					<div class='skill-icon icon-frame'>
-						<img src='/img/icons/{{ $build->class }}-{{ HTML::hb('skillName @key') }}.png'>
+						<img src='/img/icons/{{ HTML::hb('../meta.heroClass') }}-{{ HTML::hb('skillName @key') }}.png'>
 					</div>
 					<div class='skill-details row-fluid'>
 						<div class='span9'>
@@ -54,13 +54,3 @@
 		</ul>
   </div>
 </div>
-<script type="text/javascript" charset="utf-8">
-	$('#gear-overview a[data-toggle="tab"]').on('show', function (e) {
-		$('#gear-overview .nav').hide();
-		$('#gear-overview .return-home').bind('click', function() {
-			$(this).closest('.item-detail').removeClass("active");
-			$('#gear-overview .nav').show();
-		});
-		// console.log(e.target);
-	})
-</script>

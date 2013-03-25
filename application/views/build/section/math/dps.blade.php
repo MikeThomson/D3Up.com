@@ -7,9 +7,9 @@
   }
 ?>
 <div class="page math" id="dps-math">
-  <p>Note: This is an experimental tab! Still working out the bugs.</p>
-  <p>In an effort to improve the calculator, this page outlines all of the steps to calculate this builds DPS. Please feel free to check it over and submit any corrections!</p>
-  <h4>SCRAM Basics</h4>
+	<h2>{{ __('build.math-dps-title', array('name' => HTML::buildLink($build))) }}</h2>
+	<p>{{ __('build.math-dps-intro') }}</p>
+  <h4>{{ __('build.math-dps-scram-title') }}</h4>
   <p>The basis of the calculations uses the SCRAM method, as follows:</p>
   <ul>
     <li>S = Primary Attribute Bonus</li>

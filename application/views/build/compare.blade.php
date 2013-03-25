@@ -57,10 +57,10 @@
 		</div>
 	</div>
 	<div class='tab-pane' id="tab-skills">
-		<div class="span6">
+		<div class="span6" id="build1-skills">
 			@include('build.section.skills')->with('build', $build1)->with('compare', true)
 		</div>
-		<div class="span6">
+		<div class="span6" id="build2-skills">
 			@include('build.section.skills')->with('build', $build2)->with('compare', true)
 		</div>
 	</div>
@@ -123,10 +123,22 @@
 	
 	var compare = new d3up.Compare;
 	var diff = compare.diff(build1, build2);
+
 	var source   = $("#stats-sidebar-compare").html();
 	var template = Handlebars.compile(source);
 	var data = diff;
 	$("#stats-sidebar-compare").replaceWith(template(data));
+
+	var source   = $("#build1-skills .tab-content").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.build1;
+	$("#build1-skills .tab-content").replaceWith(template(data));		
+
+	var source   = $("#build2-skills .tab-content").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.build2;
+	$("#build2-skills .tab-content").replaceWith(template(data));		
+	
 	
 	<?= (isset($_GET['debug'])) ? 'console.log(d3up.builds);' : ''; ?>
 	
