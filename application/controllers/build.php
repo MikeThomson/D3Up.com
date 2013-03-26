@@ -102,6 +102,9 @@ class Build_Controller extends Base_Controller {
 	public function get_sync($id, $data = false) {
 		// Get the Build
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
+		if(!$build) {
+			return Response::error('404');
+		}
 		// Sync the Build and get the results
 		$results = $build->sync();
 		// Return the Results and Build to the View
