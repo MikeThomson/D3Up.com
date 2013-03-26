@@ -33,7 +33,7 @@
 		</ul>
 		<div class="tab-content">
 			<div class='tab-pane active' id="tab-gear">
-				@include('build.section.gear')
+				@render('build.section.gear', array('gear' => $build->getGear()))
 			</div>
 			<div class='tab-pane' id="tab-groups">
 				@include('build.section.groups')

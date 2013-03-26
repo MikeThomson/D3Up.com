@@ -41,16 +41,16 @@
 					</div>
 				</li>
 			{{ HTML::hb('/each') }}
-			@foreach($build->passives as $skill)
-			<li class='skill' data-skill='{{ $skill }}'>
+			{{ HTML::hb('#each skills.passives') }}
+			<li class='skill' data-skill='{{ HTML::hb('@key') }}'>
 				<div class='skill-icon icon-frame'>
-					<img src='/img/icons/{{ $build->class }}-{{ explode("~", $skill)[0] }}.png'>
+					<img src='/img/icons/{{ HTML::hb('../meta.heroClass') }}-{{ HTML::hb('skillName @key') }}.png'>
 				</div>
 				<div class='skill-details'>
-					<h3>{{ $skill }}</h3>
+					<h3>{{ HTML::hb('@key') }}</h3>
 				</div>
 			</li>
-			@endforeach
+			{{ HTML::hb('/each') }}
 		</ul>
   </div>
 </div>

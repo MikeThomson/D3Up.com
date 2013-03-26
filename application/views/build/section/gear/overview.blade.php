@@ -5,13 +5,10 @@ if(!isset($compare)) {
 ?>
 <div>
 	<div class='tab-content'>
-		@if($build->gear)
-			@foreach($build->gear as $item) 
-				@if($item && $item->id)
-					{{ View::make('build.section.item')->with('item', $item) }}
-				@endif
-			@endforeach
-		@endif
+		@foreach($gear as $item) 
+			@if($item && $item->id)
+			@endif
+		@endforeach
 	</div>
 	<table id='build-gear' class='table gear-table'>
 		<thead>
@@ -21,14 +18,12 @@ if(!isset($compare)) {
 			</tr>
 		</thead>
 		<tbody>
-			@if($build->gear)			
-				@foreach($build->gear->getSlots() as $slot) 
-					<tr class='item'>
-						<td>{{ HTML::itemBoxIcon($build->gear[$slot]) }}</td>
-						<td>{{ HTML::itemLink($build->gear[$slot], array('toggle' => true, 'slot' => $slot, 'compare' => $compare)) }}</td>
-					</tr>
-				@endforeach
-			@endif
+			@foreach($gear->getSlots() as $slot) 
+				<tr class='item'>
+					<td>{{ HTML::itemBoxIcon($gear[$slot]) }}</td>
+					<td>{{ HTML::itemLink($gear[$slot], array('toggle' => true, 'slot' => $slot, 'compare' => $compare)) }}</td>
+				</tr>
+			@endforeach
 		</tbody>
 	</table>
 </div>

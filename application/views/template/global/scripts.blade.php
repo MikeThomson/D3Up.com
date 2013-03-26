@@ -35,6 +35,8 @@ $(function(){
     $(this).tab('show');
   });
 	// Scroll to the Top
+	window.scrollTo(0);
+	
 });
 </script>
 <!-- The D3Up Tooltip Div -->

@@ -14,11 +14,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		@if($build->gear)			
-			@foreach($build->gear->getSlots() as $slot) 
+		@if($gear)			
+			@foreach($gear->getSlots() as $slot) 
 				<tr class='item'>
-					<td>{{ HTML::itemBoxIcon($build->gear[$slot]) }}</td>
-					<td>{{ HTML::itemLink($build->gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
+					<td>{{ HTML::itemBoxIcon($gear[$slot]) }}</td>
+					<td>{{ HTML::itemLink($gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
 					<td>{{ HTML::hb('round stats.dps-'.$slot.' 2') }}</td>
 					<td>{{ HTML::hb('percent stats.dps-'.$slot.' stats.dps-gear-total') }}%</td>
 					<td>{{ HTML::hb('round stats.ehp-'.$slot.' 2') }}</td>
