@@ -15,10 +15,10 @@
 @endsection
 
 @section('scripts')
-<script src="http://d3up.com/js/gamedata.js"></script>
+<script src="http://local.d3up.com/js/gamedata.js"></script>
 <script src="/js/build.js"></script>
-<script src="http://d3up.com/js/unmin/calcv2.js"></script>
-<script src="http://d3up.com/js/unmin/itembuilder.js"></script>
+<script src="http://local.d3up.com/js/unmin/calcv2.js"></script>
+<script src="http://local.d3up.com/js/unmin/itembuilder.js"></script>
 @endsection
 
 @section('content')
@@ -40,11 +40,46 @@
 	@endif
 </div>
 @else
-<p class='alert alert-success'>No errors were generated during this process, you will be redirected to your build in 5 seconds. If you are not redirected automatically, <a href="/b/{{ $build->id }}" class='badge badge-success'>click here to proceed</a>.</p>
+<div class='alert alert-success'>
+	<h2>Successfully Imported from Battle.net</h2>
+	<p>No errors were generated during the import of your character. Feel free to review the information below to see exactly what occurred, or use one of the buttons below to continue on.</p>
+	<div class='btn-group'>
+		<a href='/b/{{ $build->id }}' class='btn btn-primary'>View Build</a>
+		<a href='/api-status' class='btn'>Check Battle.net API Status</a>
+	</div>
+</div>
 @endif
 @if(!empty($results['messages']))
-	<div class="content-page sync-results">		
-		<h4>Results/API Log</h4>
+	<div class="content-page sync-results">
+		<h4>Testing Calculated Values</h4>
+		<div id="sync-stats">
+			<span class="label label-important">Absolute Unbuffed DPS: {{ HTML::hb('prettyStat stats.dps') }}</span>
+			<span class="label label-success">Absolute Unbuffed EHP: {{ HTML::hb('prettyStat stats.ehp') }}</span>
+		</div>
+		<h4>Items Detected and Equipped</h4>
+		<div class='items-horizontal'>
+		@foreach($build->getGear() as $slot => $item)
+			<span class='item icon-link'>
+				<a href="/i/{{ $item->id }}" data-json="{{ e(json_encode($item->tooltip())) }}" data-slot="{{ $slot }}">
+					{{ HTML::itemBoxIcon($item) }}
+				</a>
+			</span>
+		@endforeach
+		</div>
+		<h4>Skills and Passives Detected</h4>
+		<ul class='skills skills-horizontal'>
+			@foreach($build->actives as $skill)
+			<li class='skill-icon icon-frame'>
+				<img src='/img/icons/{{ $build->class }}-{{ explode("~", $skill)[0] }}.png'>
+			</li>
+			@endforeach
+			@foreach($build->passives as $skill)
+			<li class='skill-icon icon-frame'>
+				<img src='/img/icons/{{ $build->class }}-{{ explode("~", $skill)[0] }}.png'>
+			</li>		
+			@endforeach
+		</ul>
+		<h4>Battle.net Sync/API Results</h4>
 		<p>
 		@foreach($totals as $type => $total)
 			<span class='badge badge-{{ $type }}'>{{ $total }} {{ $type }} messages</span>
@@ -57,4 +92,60 @@
 		</ul>
 	</div>
 @endif
+
+<div id='character' data-json='{{ $build->json() }}'></div>
+<script>
+	jQuery(document).ready(function ($) {
+		$('#build-tabs').tab();
+  });
+	// Setup the Build and Calculators
+  var build = $("#character").data("json"),
+			// Set the Skills Used
+			skills = {
+        actives: build.actives,
+        passives: build.passives
+      },
+			// Grab all the gear
+      gear = $(".items-horizontal a[data-json]"),
+			// Set Meta information about the character
+      meta = {
+        level: build.level,
+        paragon: build.paragon,
+        heroClass: build.heroClass,
+      },
+			// Set the Gear, Skills and Meta on the Primary Build
+      buildPrimary = new d3up.Build({
+        gear: gear, 
+        skills: skills,
+        meta: meta
+      });
+	// Store the Primary and Compare builds
+  d3up.builds = {
+    primary: buildPrimary
+  };
+	// Run stats against the primary build
+	d3up.builds.primary.run();
+	console.log(d3up.builds.primary);
+	// Now lets update the "Saved" stats in the Database for Sorting on the Build Screen (Only works for Registered Users)
+	$.ajax({
+		url: '/b/' + {{ $build->id }} + '/cache',
+		cache: false,
+		data: {
+			stats: d3up.builds.primary.stats
+		},
+		type: 'post',
+		dataType: 'json'
+	});
+	// Now show a few stats on the Sync screen
+	var sources = [
+		'#sync-stats',
+	];
+	$.each(sources, function(k,v) {
+		var source   = $(v).html();
+		var template = Handlebars.compile(source);
+		var data = d3up.builds.primary;
+		$(v).replaceWith(template(data));		
+	});
+</script>
 @endsection
+

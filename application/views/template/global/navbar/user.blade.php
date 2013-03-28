@@ -27,8 +27,8 @@
 	<? endforeach; ?>
 	<li class='controls'>
 		<div class='btn-group btn-group-block'>
-			<a href="/build/create" class='btn btn-mini'><i class='icon-plus icon-white'></i> Create Build</a>
-			<a href="/user/builds" class='btn btn-mini'><i class='icon-th-list icon-white'></i> My Builds</a>
+			<a href="/build/create" class='btn btn-d3up btn-mini'><i class='icon-plus icon-white'></i> Create Build</a>
+			<a href="/user/builds" class='btn btn-d3up btn-mini'><i class='icon-th-list icon-white'></i> My Builds</a>
 		</div>
 	</li>
   </ul>

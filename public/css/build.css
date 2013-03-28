@@ -216,3 +216,18 @@ div.title-block .skill-row {
 	font-size: 0.9em;
 	color: #888;
 }
+.item.icon-link {
+	display: inline-block;
+	width: auto;
+	height: auto;
+}
+.skills-horizontal,
+.items-horizontal {
+	margin: 0px 15px;
+	padding: 0;
+}
+.skills .skill-icon[class^="icon-"],
+.skills .skill-icon[class*=" icon-"] {
+	width: 32px;
+	height: auto;
+}

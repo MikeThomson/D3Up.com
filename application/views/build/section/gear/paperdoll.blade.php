@@ -10,7 +10,9 @@
 						</span>
 					</span>
 					<span class="image">
-						<img src="http://media.blizzard.com/d3/icons/items/large/{{ $gear[$slot]->icon }}.png" alt="" />
+						@if($gear[$slot]->icon)
+							<img src="http://media.blizzard.com/d3/icons/items/large/{{ $gear[$slot]->icon }}.png" alt="" />
+						@endif
 					</span>
 					<!-- <span class="sockets-wrapper">
 						<span class="sockets-align">

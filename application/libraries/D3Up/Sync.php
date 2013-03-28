@@ -261,6 +261,7 @@ class D3Up_Sync {
 			if($item = $this->_itemExists($meta['tooltipParams'])) {
 				// If so, just set it
 				$gear[$d3upSlot] = $item; 				
+				// var_dump($item->export());
 			} else {
 				// Build the URL to fetch the item
 				$url = $this->urlItem . $meta['tooltipParams'];
@@ -273,6 +274,7 @@ class D3Up_Sync {
 				}				
 			}
 		}
+		// var_dump($gear->export()); exit;
 		// Return the Gearset
 		return $gear;
 	}
@@ -301,8 +303,9 @@ class D3Up_Sync {
 		// --------------------------------------------------------
 		if($item) {
 			$this->_log(HTML::itemLink($item)." located as one of your items in the database, skipping import and equipping.", "success");
+		} else {
+			$this->_log("Item not found, attempting import from Battle.net.");			
 		}
-		$this->_log("Item not found, attempting import from Battle.net.");
 		return $item;
 	}
 	

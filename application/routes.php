@@ -6,9 +6,12 @@
 |--------------------------------------------------------------------------
 */
 
-
 // Route to Sync a Build
 Route::get('/b/(:num)/sync', 'build@sync');
+// Route to Cache a Build's Stats
+Route::post('/b/(:num)/cache', 'build@cache');
+// Route to Redirect to a Build's Signature
+Route::get('/b/(:num)/signature', 'build@signature');
 // Route to Compare two builds
 Route::get('/c/(:num)/(:num)', 'build@compare');
 // Route to View a build

@@ -6,15 +6,23 @@ class Build_Controller extends Base_Controller {
 
 	public function getBuilds($params = array()) {
 		// Filtering on the Build List
-		$query = array();
-		// Do we have a class specified?
-		if($class = Request::get('class')) {
-			$query['class'] = $class;
-		}
+		$query = array(
+			'_private' => array('$ne' => true)
+		);
 		// How are we sorting them?
 		$sort = array(
 			'_created' => -1
 		);
+		// Do we have a class specified?
+		if($class = Request::get('class')) {
+			$query['class'] = $class;
+		}
+		// Did the user request a sort?
+		if($sortBy = Request::get('sort')) {
+			$sort = array('stats.'.$sortBy => -1);
+			$query['stats.'.$sortBy] = array('$gt' => 0);
+		}
+		
 		// Check our Params
 		if(!empty($params)) {
 			if(isset($params['filter'])) {
@@ -36,7 +44,8 @@ class Build_Controller extends Base_Controller {
 		if($battletag = strtolower(Request::get('battletag'))) {
 			$query['_characterBt'] = str_replace("-", "#", $battletag);
 		}
-		return $builds = Epic_Mongo::db('build')->find($query)->sort($sort);
+		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
+		return $builds;
 	}
 	
 	public function getPagination($builds) {
@@ -166,5 +175,45 @@ class Build_Controller extends Base_Controller {
 		return View::make('build.index')
 						->with('builds', $builds)
 						->with('pagination', $pagination);
+	}
+	
+	public function post_cache($id) {
+		// Get the Stats from the AJAX Request (Generated via the Calculator)
+		$toCache = Request::get('stats');
+		// Unset the Skill Data, we don't need this
+		unset($toCache['skillData']);
+		// Load the build up
+		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
+		// 404 if no build is found
+		if(!$build) {
+			return Response::error('404');
+		}
+		// Does this build have an owner?
+		if($build->_createdBy) {
+			// If so, is our user logged in the owner?
+			if(Auth::user()->id === $build->_createdBy->id) {
+				// Set the Stats array on the build equal to the data from the calculator
+				$build->stats = $toCache;
+				// Save it
+				$build->save();				
+			}
+		}
+	}
+	
+	public function get_signature($id) {
+		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
+		if(!$build) {
+			return Response::error('404');
+		}
+		$signature = new D3Up_Signature($build);
+		header("Content-type: image/png");
+		$string = $build->name;
+		$im     = imagecreatefromjpeg(path('app') . "signatures/wizard.jpeg");
+		$orange = imagecolorallocate($im, 220, 210, 60);
+		$px     = (imagesx($im) - 7.5 * strlen($string)) / 2;
+		imagestring($im, 3, $px, 9, $string, $orange);
+		imagepng($im);
+		imagedestroy($im);
+		exit;
 	}
 }

@@ -24,6 +24,6 @@
 			</a>
 		</li>
 		@endforeach
-		<li class='controls'><a href="/math" class='btn btn-block'>Diablo 3 Math Explained</a></li>
+		<li class='controls'><a href="/math" class='btn btn-d3up btn-block'>Diablo 3 Math Explained</a></li>
 	</ul>
 </div>
