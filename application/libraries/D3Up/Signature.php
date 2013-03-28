@@ -45,7 +45,7 @@ class D3Up_Signature {
 		// Sample Generate for Debugging
 		header("Content-type: image/png");
 		ob_start();
-		imagepng($this->_image);
+		imagejpeg($this->_image, null, 80);
 		$image_data = ob_get_contents();
 		ob_end_clean();
 		S3::put_object($image_data, 'sigs.d3up.com', 'b/'.$build->id.'.jpg', S3::ACL_PUBLIC_READ);		
