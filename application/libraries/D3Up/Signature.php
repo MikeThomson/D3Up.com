@@ -44,9 +44,12 @@ class D3Up_Signature {
 		$this->addShadowText("d3up.com", 10, 385, 14, "#fff", 'sans', 'right');
 		// Sample Generate for Debugging
 		header("Content-type: image/png");
+		ob_start();
 		imagepng($this->_image);
+		$image_data = ob_get_contents();
+		ob_end_clean();
+		S3::put_object($image_data, 'sigs.d3up.com', 'b/'.$build->id.'.jpg', S3::ACL_PUBLIC_READ);		
 		imagedestroy($this->_image);
-		exit;
 	}
 	
 	public function addShadowText($text, $size, $x, $y, $hex = "#fff", $font = "d3", $align = null) {

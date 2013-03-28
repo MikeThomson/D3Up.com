@@ -4,4 +4,5 @@ return array(
 	'epic_mongo' => array('auto' => true),
 	'binder' => array('auto' => true),
 	'myunit',
+	's3' => array('auto' => true),
 );

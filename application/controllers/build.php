@@ -205,15 +205,24 @@ class Build_Controller extends Base_Controller {
 		if(!$build) {
 			return Response::error('404');
 		}
-		$signature = new D3Up_Signature($build);
-		header("Content-type: image/png");
-		$string = $build->name;
-		$im     = imagecreatefromjpeg(path('app') . "signatures/wizard.jpeg");
-		$orange = imagecolorallocate($im, 220, 210, 60);
-		$px     = (imagesx($im) - 7.5 * strlen($string)) / 2;
-		imagestring($im, 3, $px, 9, $string, $orange);
-		imagepng($im);
-		imagedestroy($im);
-		exit;
+
+		return View::make('build.signature')->with('build', $build);
+	}
+	public function post_signature($id) {
+		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
+		if(!Auth::user()) {
+			throw new Exception("You must be logged in to regenerate your signatures.");			
+		}
+		if(!$build->_createdBy) {
+			throw new Exception("Anonymous Builds (Builds created by non-registered users) are not allowed to have signatures");
+		}
+		if($build->_createdBy->id !== Auth::user()->id) {
+			throw new Exception("You do not own this build, and are not allowed to regenerate this signature.");
+		}
+		if(!$build) {
+			return Response::error('404');
+		}
+		$signature = new D3Up_Signature($build);		
+		return Redirect::to('/b/'.$build->id.'/signature');
 	}
 }
