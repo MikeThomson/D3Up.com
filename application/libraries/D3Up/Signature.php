@@ -14,7 +14,7 @@ class D3Up_Signature {
 		// Add the Level Information
 		$levelText = "Level ".$build->level;
 		if($build->paragon) {
-			$levelText .= ", Paragon ".$build->paragon;
+			$levelText .= " (".$build->paragon.")";
 		}
 		$this->addShadowText($levelText, 12, 15, 60, "#fff", 'sans');	// Insert Build Name
 		imagefilledrectangle($this->_image, 0, 65, 450, 450, imagecolorallocatealpha($this->_image, 0, 0, 0, 50));
