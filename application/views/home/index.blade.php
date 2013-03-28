@@ -18,6 +18,7 @@
 					<li>'<a href="/math">Math</a>' section added - A community 'wiki' type engine that will allow players to learn about different game mechanics.</li>
 					<li>'<a href="/guide">Guide</a>' section added - Formatting still broken, editing not working yet.</li>
 					<li>Added an <a href='/api-status'>API Status</a> check page to see if Battle.net's API is up or down.</li>
+					<li>Started on a "Forum Signature" generator for your builds (<a href='/b/1/signature'>Example</a>)</li>
 				</ul>
 				@if(Cache::has('github_commits'))
 				<table class='recent-commits table'>
