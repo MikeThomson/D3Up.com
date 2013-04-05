@@ -19,10 +19,19 @@
 				<tr class='item'>
 					<td>{{ HTML::itemBoxIcon($gear[$slot]) }}</td>
 					<td>{{ HTML::itemLink($gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
-					<td>{{ HTML::hb('round stats.dps-'.$slot.' 2') }}</td>
-					<td>{{ HTML::hb('percent stats.dps-'.$slot.' stats.dps-gear-total') }}%</td>
-					<td>{{ HTML::hb('round stats.ehp-'.$slot.' 2') }}</td>
-					<td>{{ HTML::hb('percent stats.dps-'.$slot.' stats.dps-gear-total') }}%</td>
+					<td style="{{ HTML::hb('heatmap \'dps\' stats.dps-'.$slot.' stats.dps-gear-total') }}">
+						
+						{{ HTML::hb('prettyStat stats.dps-'.$slot.' 2') }}
+					</td>
+					<td style="{{ HTML::hb('heatmap \'dps\' stats.dps-'.$slot.' stats.dps-gear-total') }}">
+						{{ HTML::hb('percent stats.dps-'.$slot.' stats.dps-gear-total') }}%
+					</td>
+					<td style="{{ HTML::hb('heatmap \'ehp\' stats.ehp-'.$slot.' stats.ehp-gear-total') }}">
+						{{ HTML::hb('prettyStat stats.ehp-'.$slot.' 2') }}
+					</td>
+					<td style="{{ HTML::hb('heatmap \'ehp\' stats.ehp-'.$slot.' stats.ehp-gear-total') }}">
+						{{ HTML::hb('percent stats.ehp-'.$slot.' stats.ehp-gear-total') }}%
+					</td>
 				</tr>
 			@endforeach
 		@endif

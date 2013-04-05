@@ -64,6 +64,32 @@ Handlebars.registerHelper('percent', function(value, total) {
 	return Math.round((value / total) * 10000) / 100
 });
 
+Handlebars.registerHelper('heatmap', function(stat, value, total) {
+	var color = {
+		r: 255,
+		g: 255,
+		b: 255
+	};
+	var min = 0.5,
+			percent = Math.round((value / total) * 10000) / 10000 * 10;
+	if(percent < 0.7) {
+		percent = 0.7;
+	}
+	switch(stat) {
+		case "ehp":
+			color.r = 0;
+			color.b = 0;
+			color.g = Math.round(255 * percent);
+			break;
+		case "dps":
+			color.g = 0;
+			color.b = 0;
+			color.r = Math.round(255 * percent);
+			break;
+	}
+	return "color: rgba(" + color.r + "," + color.g + "," + color.b + ", 1)";
+});
+
 Handlebars.registerHelper('if_gt', function(context, options) {
 	if (context > options.hash.compare)
 		return options.fn(this);
