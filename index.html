@@ -31,15 +31,59 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h2>D3Up.com</h2>
+        <h2>D3Up.com - Version 2.0</h2>
+
+<p>Welcome to the D3Up.com Github Repository!</p>
+
+<p>I've finally made the decision to release the source code to D3Up.com so that everyone able can help contribute and possibly modify it for other games!</p>
+
+<h1>Components</h1>
+
+<p>D3Up uses the following frameworks/bundles:</p>
+
+<ul>
+<li>
+<a href="http://laravel.com">Laravel v3</a> - PHP MVC/MVR Framework
+
+<ul>
+<li>MyUnit (Bundle) - PHPUnit Wrapper for Laravel</li>
+<li>Binder (Bundle) - HTML Helpers</li>
+<li>S3 (Bundle) - Allows communication with Amazon S3</li>
+</ul>
+</li>
+<li>
+<a href="http://github.com/aaroncox/epicmongo">EpicMongo</a> - PHP/MongoDB ORM</li>
+<li>
+<a href="http://jquery.com">jQuery</a> - Javascript Engine</li>
+<li>
+<a href="http://underscorejs.org">underscore</a> - Javascript Framework (the Calculators use)</li>
+<li>
+<a href="http://handlebarsjs.com">HandleBars</a> - Javascript Templating Engine</li>
+<li>
+<a href="twitter.github.com/bootstrap/base-css.html">Bootstrap</a> - CSS Framework / Utilities</li>
+</ul><h1>Installation</h1>
 
 <p>If you're wanting to setup a local instance of D3Up, here's a few things you'll need to do:</p>
 
 <ul>
-<li>Copy <code>application/config/application.template</code> to <code>application/config/application.php</code> and change the key value for MCrypt Encryption.<br>
-</li>
-<li>Make sure to run <code>git submodule update --init</code> to pull in a copy of Epic_Mongo and Laravel (both submodules of the project).</li>
-</ul>
+<li>Fork the repository so you have your own copy to work on and submit pull requests from.</li>
+<li>Copy <code>application/config/application.template</code> to <code>application/config/application.php</code> and change the <code>key</code> in the file to a unique value.</li>
+<li>Make sure to run <code>git submodule update --init</code> to pull in a copy of the libraries/bundles it uses.</li>
+</ul><h1>Passing the Unit Tests</h1>
+
+<p>My goal here is to ensure all tests (located in the <code>application/tests</code> folder) pass after any changes are made. More and more tests will be added to test the PHP code and ensure no changes break the site's functionality.</p>
+
+<p>A javascript testing framework will be added as well in the future, but right now, the javascript is kinda an abomination :)</p>
+
+<p>You can run the tests by executing the following command from the command line (in the D3Up.com folder):</p>
+
+<p><code>php artisan myunit</code></p>
+
+<p>This requires that PHPUnit is installed on your system, just google for <code>phpunit installation [insert your OS here]</code> to find out how.</p>
+
+<h1>Submitting Changes</h1>
+
+<p>All changes submitted must be in the form of a <em>Pull Request</em>, which will then be reviewed by the community and once accepted, will be merged into the live codebase and deployed to D3Up.com.</p>
       </section>
     </div>
 
