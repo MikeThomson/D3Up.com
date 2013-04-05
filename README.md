@@ -20,6 +20,8 @@ D3Up uses the following frameworks/bundles:
 - [HandleBars](http://handlebarsjs.com) - Javascript Templating Engine
 - [Bootstrap](twitter.github.com/bootstrap/base-css.html) - CSS Framework / Utilities
 
+**EditorConfig** - D3Up uses [EditorConfig](http://editorconfig.org) to ensure everyones tabs and spaces are properly aligned. Please make sure you're using an Editor/IDE that supports EditorConfig and please enable it!
+
 Installation
 ===
 
