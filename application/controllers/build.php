@@ -22,22 +22,18 @@ class Build_Controller extends Base_Controller {
 			$sort = array('stats.'.$sortBy => -1);
 			$query['stats.'.$sortBy] = array('$gt' => 0);
 		}
-		
 		// Check our Params
-		if(!empty($params)) {
-			if(isset($params['filter'])) {
-				switch($params['filter']) {
-					case "user":
-						if($user = Auth::user()) {
-							$query['_createdBy'] = $user->createReference();
-							$sort = array(
-								'paragon' => -1,
-								'level' => -1,
-							);
-						}
-						
-						break;
-				}
+		if(!empty($params) && isset($params['filter'])) {
+			switch($params['filter']) {
+				case "user":
+					if($user = Auth::user()) {
+						$query['_createdBy'] = $user->createReference();
+						$sort = array(
+							'paragon' => -1,
+							'level' => -1,
+						);
+					}					
+					break;
 			}
 		}
 		// If we're being passed a BattleTag, search for it.
@@ -208,6 +204,7 @@ class Build_Controller extends Base_Controller {
 
 		return View::make('build.signature')->with('build', $build);
 	}
+	
 	public function post_signature($id) {
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
 		if(!Auth::user()) {

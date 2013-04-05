@@ -1,3 +1,5 @@
 The following is a list of features that will NOT work for non-registered users. 
 
+- Editing Item and Build information: Since we don't know who the owner is, we can't allow editing of this data. 
 - The saving of calculated stats to the database: The build controller does not allow stats from the calculator to be cached on the build if the build is created/sync'd anonymously. This is to prevent anyone (or a malicious user) from spamming the cache URL and forcing DB updates constantly. 
+- Creation of Signatures based on builds: To prevent abuse, non-registered users will NOT be able to create signatures and upload them to the S3 cloud on D3Up's server.

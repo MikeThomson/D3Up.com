@@ -183,8 +183,8 @@ class D3Up_Sync {
 			$this->_log("Build is missing one of: BattleTag, Region or ID", "fatal");
 			return false;			
 		}
-		// Check to see if this build has an owner
-		if($build->_createdBy) {
+		// Check to see if this build has an owner, or just skip the check if the sync is being run via the command line (testing)
+		if($build->_createdBy && !Request::cli()) {
 			if($user = Auth::user()) {
 				// If the user does NOT match the user that created the build, inform the user that they cannot sync it.
 				if($user->id !== $build->_createdBy->id) {

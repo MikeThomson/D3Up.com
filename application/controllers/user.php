@@ -1,47 +1,57 @@
 <?php
 
 class User_Controller extends Base_Controller {
+
 	public $restful = true;
 	
 	public function get_login() {
+		// If we're already logged in, send em to the homepage
 		if(Auth::check()) {
 			return Redirect::to('/');
 		}
+		// Render the Login View
 		return View::make('user/login');
 	}
 	
 	public function post_login() {
+		// If we're already logged in, send em to the homepage		
 		if(Auth::check()) {
 			return Redirect::to('/');
 		}
-		// get POST data
+		// Setup the Query for the Login
 		$data = array(
-			'username' => Input::get('email'),
+			'email' => Input::get('email'),
 			'password' => Input::get('password'),
 		);
-		if ( Auth::attempt(Input::all()) ) {
-			// we are now logged in, go to home
+		// Attempt to Authenticate
+		if(Auth::attempt($data)) {
+			// We logged in successfully, redirect to the homepage
 			return Redirect::to('/');
 		} else {
-		// auth failure! lets go back to the login
-		return Redirect::to('login')
-		  ->with('login_errors', true)
-			->with_input('only', array('email'));
+			// Authentication Failure, redirect to the login form with errors and only the email address input
+			return Redirect::to('login')
+			  ->with('login_errors', true)
+				->with_input('only', array('email'));
 		}
 	}
 	
 	public function get_register() {
+		// Registration is Disabled on the V2 Staging Site (for now)
 		throw new Exception("Registration currently Disabled.");
+		// If we're already logged in, send em to the homepage				
 		if(Auth::check()) {
 			return Redirect::to('/');
 		}
+		// Render the Registration view
 		return View::make('user/register');
 	}
 	
 	public function post_register() {
+		// If we're already logged in, send em to the homepage		
 		if(Auth::check()) {
 			return Redirect::to('/');
 		}
+		// Get all the Inputs 
 		$input = Input::all();
 		$rules = array(
 	    'email' => 'required|email',
