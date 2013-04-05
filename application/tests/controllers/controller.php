@@ -12,7 +12,9 @@ abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
 		return \Laravel\Routing\Controller::call($destination, $parameters);
 	}
 
-	public function get($destination, $parameters = array()) {
+	public function get($destination, $parameters = array(), $get_data = array()) {
+		$this->clean_request();
+		\Laravel\Request::foundation()->request->add($get_data);
 		return $this->call($destination, $parameters, 'GET');
 	}
 
