@@ -8,6 +8,12 @@ I've finally made the decision to release the source code to D3Up.com so that ev
 Components
 ===
 
+Server Components:
+
+- [PHP 5.4](http://php.net)
+- [MongoDB 2.0+](http://mongodb.org)
+- A web server that supports URL rewrites, nginx, apache, etc
+
 D3Up uses the following frameworks/bundles:
 
 - [Laravel v3](http://laravel.com) - PHP MVC/MVR Framework
