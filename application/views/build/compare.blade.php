@@ -23,17 +23,14 @@
 	</div>
 	<div class='span12'>
 		<ul class="nav nav-pills">
-			<li class="brand">
-				<a>Test</a>
-			</li>
 	    <li class="active">
-				<a href="#tab-stats" data-toggle="tab">Stats</a>
+				<a href="#tab-stats" data-toggle="tab">{{ __('build.stats') }}</a>
 			</li>
 	    <li>
-				<a href="#tab-gear" data-toggle="tab">Gear</a>
+				<a href="#tab-gear" data-toggle="tab">{{ __('build.gear') }}</a>
 			</li>
 	    <li>
-				<a href="#tab-skills" data-toggle="tab">Skills</a>
+				<a href="#tab-skills" data-toggle="tab">{{ __('build.skills') }}</a>
 			</li>
 	  </ul>
 	</div>
@@ -50,10 +47,10 @@
 	</div>
 	<div class='tab-pane' id="tab-gear">
 		<div class='span6' id="build1-gear">
-			@include('build.section.gear.overview')->with('build', $build1)->with('compare', true)
+			@include('build.section.gear.overview', array('gear' => $build1->getGear(), 'compare' => true))
 		</div>
 		<div class='span6' id="build2-gear">
-			@include('build.section.gear.overview')->with('build', $build2)->with('compare', true)
+			@include('build.section.gear.overview', array('gear' => $build2->getGear(), 'compare' => true))
 		</div>
 	</div>
 	<div class='tab-pane' id="tab-skills">

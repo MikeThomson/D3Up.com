@@ -8,14 +8,14 @@
 <tbody>
 	<tr>
 		<th></th>
-		<th class="views">SC/HC</th>
-		<th>Level</th>
-		<th>Paragon</th>
-		<th>Name</th>
-		<th>Skills</th>
-		<th>Passives</th>
-		<th>DPS</th>
-		<th>EHP</th>
+		<th class="views">{{ __('build.hcsc') }}</th>
+		<th>{{ __('build.level') }}</th>
+		<th>{{ __('build.paragon') }}</th>
+		<th>{{ __('build.name') }}</th>
+		<th>{{ __('build.skills') }}</th>
+		<th>{{ __('build.passives') }}</th>
+		<th>{{ __('diablo.dps') }}</th>
+		<th>{{ __('diablo.ehp') }}</th>
 		<th></th>
 	</tr>
 <? foreach($builds as $build): ?>

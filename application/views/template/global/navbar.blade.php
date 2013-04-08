@@ -29,7 +29,7 @@
 	        <li class="dropdown">
 						<a href="/build" class="dropdown-toggle-clickable">{{ __('d3up.builds') }} <b class="caret"></b></a>
 						<div class="dropdown-menu dropdown-classes">
-							<h3>Browse Builds</h3>
+							<h3>{{ __('d3up.browse') }} {{ __('d3up.builds') }}</h3>
 	            <ul>
 								<li class='item'>
 									<a href="/build?class=barbarian">
@@ -67,7 +67,7 @@
 	        <li class="dropdown">
 						<a href="/guide" class="dropdown-toggle-clickable">{{ __('d3up.guides') }} <b class="caret"></b></a>
 						<div class="dropdown-menu dropdown-classes">
-							<h3>Browse Guides</h3>
+							<h3>{{ __('d3up.browse') }} {{ __('d3up.guides') }}</h3>
 	            <ul>
 								<li class='item'>
 									<a href="/guide?class=barbarian">

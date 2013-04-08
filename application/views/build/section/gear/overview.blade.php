@@ -21,7 +21,7 @@ if(!isset($compare)) {
 			@foreach($gear->getSlots() as $slot) 
 				<tr class='item'>
 					<td>{{ HTML::itemBoxIcon($gear[$slot]) }}</td>
-					<td>{{ HTML::itemLink($gear[$slot], array('toggle' => true, 'slot' => $slot, 'compare' => $compare)) }}</td>
+					<td>{{ HTML::itemLink($gear[$slot], array('slot' => $slot, 'compare' => $compare)) }}</td>
 				</tr>
 			@endforeach
 		</tbody>

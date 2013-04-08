@@ -15,7 +15,7 @@
 	if($id && $id != 'compare' && isset($build)) {
 		$name = "(".$build->name.")";
 	} elseif($isCompare) {
-		$name = "Compare";
+		$name = __('build.compare');
 	}
 ?>
 <div class="build-stats" data-id="stats-sidebar{{ (($id) ? ('-'.$id) : "") }}">

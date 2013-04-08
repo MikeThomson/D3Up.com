@@ -27,7 +27,7 @@
       <li class='divider'>{{ __('build.tools') }}</li>
       <li><a data-toggle="tab" href="#tab-sync">{{ __('build.battlenet_sync') }}</a></li>
       <li><a data-toggle="tab" href="#tab-json">{{ __('build.json_export') }}</a></li>
-      <li class='divider'>Meta</li>
+      <li class='divider'>{{ __('build.meta') }}</li>
       <li><a data-toggle="tab" href="#tab-math">{{ __('build.formulas') }}</a></li>
 			<li><a data-toggle="tab" href="#tab-groups">{{ __('build.groups') }}</a></a></li>
 		</ul>

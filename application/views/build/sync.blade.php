@@ -125,7 +125,6 @@
   };
 	// Run stats against the primary build
 	d3up.builds.primary.run();
-	console.log(d3up.builds.primary);
 	// Now lets update the "Saved" stats in the Database for Sorting on the Build Screen (Only works for Registered Users)
 	$.ajax({
 		url: '/b/' + {{ $build->id }} + '/cache',

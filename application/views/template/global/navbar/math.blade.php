@@ -8,7 +8,7 @@
 	$langs = Config::get('application.languages');
 ?>
 <div class="dropdown-menu dropdown-classes">
-	<h3>Browse Diablo 3 Math</h3>
+	<h3>{{ __('d3up.browse') }} {{ __('d3up.d3') }} {{ __('d3up.math') }}</h3>
 	<ul>
 		@foreach($recent as $math)
 	  <li>
@@ -24,6 +24,6 @@
 			</a>
 		</li>
 		@endforeach
-		<li class='controls'><a href="/math" class='btn btn-d3up btn-block'>Diablo 3 Math Explained</a></li>
+		<li class='controls'><a href="/math" class='btn btn-d3up btn-block'>{{ __('d3up.math_explained') }}</a></li>
 	</ul>
 </div>
