@@ -18,6 +18,8 @@ Route::post('/b/(:num)/signature', 'build@signature');
 Route::get('/c/(:num)/(:num)', 'build@compare');
 // Route to View a build
 Route::get('/b/(:num)/(:any?)', 'build@view');
+// Route to View an Item
+Route::get('/i/(:num)/(:any?)', 'item@view');
 // Route to View a build
 Route::get('/search', 'build@index');
 // Math Edit Routing
