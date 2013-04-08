@@ -7,7 +7,7 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 	
   protected $_requirements = array(
 		'gear' => array('doc:gearset'),
-		'_gear' => array('doc:gearset', 'auto'),
+		'_gear' => array('doc:gearsetcache', 'auto'),
 		'_createdBy' => array('doc:user', 'ref'),
   );
 
@@ -54,7 +54,7 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 	public function json() {
 		$data = $this->export();
 		foreach($this->_fieldMod as $field => $mod) {
-			if($mod) {
+			if($mod && isset($data[$field])) {
 				$data[$mod] = $data[$field];
 			}
 			unset($data[$field]);				
@@ -63,10 +63,14 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 	}
 	
 	public function getGear() {
+		if($this->_gear) {
+			return $this->_gear;
+		}
 		return $this->gear;
 	}
 	
-	public function save($whole = false) {
-		throw new Exception("Saving is currently disabled.");
+	public function save($whole = true) {
+		// throw new Exception("Saving is currently disabled.");
+		return parent::save($whole);
 	}
 }
