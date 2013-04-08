@@ -4,8 +4,8 @@ body {
 }
 
 body > .container {
-/*	margin-top: 40px;*/
-/*	padding: 5px;*/
+	margin-top: 40px;
+	padding: 5px;
 }
 
 a {
@@ -27,7 +27,7 @@ a:focus {
 }
 
 .btn-d3up {
-	color: #fff;
+	color: #fff !important;
 	cursor: pointer;
 	font-size: 14px;
 	outline: 0;

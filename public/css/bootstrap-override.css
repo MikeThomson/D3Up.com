@@ -20,6 +20,10 @@
 .dropdown a:visited {
 	color: #ececec;
 }
+.dropdown a.btn {
+	color: #000;
+}
+
 .navbar .nav > li > a.build-select .icon-custom {
 	float: left;
 }
