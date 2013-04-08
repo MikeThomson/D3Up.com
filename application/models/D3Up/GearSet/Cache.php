@@ -5,7 +5,7 @@
  * @package default
  * @author Aaron Cox
  **/
-class D3Up_GearSet_Cache extends Epic_Mongo_Document
+class D3Up_GearSet_Cache extends D3Up_GearSet
 {
 	protected $_requirements = array(
 		'helm' => array('doc:item'),
@@ -21,5 +21,6 @@ class D3Up_GearSet_Cache extends Epic_Mongo_Document
 		'boots' => array('doc:item'),
 		'mainhand' => array('doc:item'),
 		'offhand' => array('doc:item'),
-	);	
+	);
+
 }
