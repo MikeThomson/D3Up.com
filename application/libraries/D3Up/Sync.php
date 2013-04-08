@@ -180,7 +180,7 @@ class D3Up_Sync {
 		// Check to see if the BattleTag, Region and ID are set
 		if(!$build->_characterBt || !$build->_characterRg || !$build->_characterId) {
 			// If not, return false.
-			$this->_log("Build is missing one of: BattleTag, Region or ID", "fatal");
+			$this->_log("Build is missing one of: BattleTag, Region or ID. Please <a href='/b/".$build->id."/".($build->slug?:"~")."/edit'>edit the build</a> to correct this information.", "fatal");
 			return false;			
 		}
 		// Check to see if this build has an owner, or just skip the check if the sync is being run via the command line (testing)
@@ -245,7 +245,7 @@ class D3Up_Sync {
 			// Set gear as a GearSet_Cache (Embedded versions of the Items, will update when the item is saved)
 			$build->gear = $this->_getGear($json);			
 			// Set _gear as a GearSet (References to Actual Items)
-			// $build->_gear = $this->_getGear($json);
+			$build->_gear = $this->_getGear($json, 'gearsetcache');
 		}	
 		// Finally save the build
 		$build->save();
@@ -260,7 +260,7 @@ class D3Up_Sync {
 			// Does this item already exist as one of your items?
 			if($item = $this->_itemExists($meta['tooltipParams'])) {
 				// If so, just set it
-				$gear[$d3upSlot] = $item; 				
+				$gear[$d3upSlot] = $item->cleanedFor($docType);
 				// var_dump($item->export());
 			} else {
 				// Build the URL to fetch the item
@@ -270,7 +270,7 @@ class D3Up_Sync {
 					// Build the Item into D3Up's structure
 					$item = $this->_buildItem($data);
 					// Set the slot as the item in the gearset
-					$gear[$d3upSlot] = $item; 				
+					$gear[$d3upSlot] = $item->cleanedFor($docType);
 				}				
 			}
 		}
