@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-    bootstrap="laravel/cli/tasks/test/phpunit.php"
-    verbose="true">
+<phpunit bootstrap="laravel/cli/tasks/test/phpunit.php" verbose="true">
     <!-- set Laravel environmet -->
     <php>
         <env name="LARAVEL_ENV" value="test" />
