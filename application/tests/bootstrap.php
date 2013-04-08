@@ -13,7 +13,7 @@ require 'paths.php';
 // --------------------------------------------------------------
 // Override the application paths when testing the core.
 // --------------------------------------------------------------
-$path = path('sys').'tests'.DS;
+// $path = path('sys').'tests'.DS;
 
 // set_path('app', $path.'application'.DS);
 // 
@@ -25,6 +25,11 @@ $path = path('sys').'tests'.DS;
 // Bootstrap the Laravel core.
 // --------------------------------------------------------------
 require path('sys').'core.php';
+
+Laravel\Event::listen(Laravel\Config::loader, function($bundle, $file)
+{
+	return Laravel\Config::file($bundle, $file);
+});
 
 // --------------------------------------------------------------
 // Start the default bundle.
