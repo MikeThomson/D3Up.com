@@ -32,6 +32,17 @@ class D3Up_Item extends Epic_Mongo_Document_Sequenced {
 		return $data;
 	}
 	
+	
+	public function cleanedFor($type) {
+		if($type == 'gearsetcache') {
+			// If we're caching an item, 
+			$this->_created = null;
+			$this->_createdBy = null;
+			$this->_id = null;
+		}
+		return $this;
+	}
+	
 	public function save($whole = false) {
 		throw new Exception("Saving is currently disabled.");
 	}
