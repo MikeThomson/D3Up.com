@@ -36,7 +36,7 @@ Laravel\Event::listen(Laravel\Config::loader, function($bundle, $file)
 // --------------------------------------------------------------
 Laravel\Bundle::start(DEFAULT_BUNDLE);
 
-Laravel\Bundle::register('epic_mongo', array('auto' => true));
+// Laravel\Bundle::register('epic_mongo', array('auto' => true));
 
 include(path('app').'../bundles/epic_mongo/Mongo.php');
 // Laravel\Bundle::start('myunit');
