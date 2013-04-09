@@ -105,8 +105,21 @@ return array(
 	|
 	*/
 
-	'languages' => array(),
-
+	'languages' => array(
+		'en' => 'English (US/EU)', 
+		'de' => 'Deutsch (German)',
+		'es' => 'Español (Spanish)',
+		'fr' => 'Français (French)',
+		'it' => 'Italiano (Italian)',
+		'ko' => '한국어 (Korea)',
+		'pl' => 'Polski (Polish)',
+		'pt' => 'Português (Portuguese)',
+		'ru' => 'Русский (Russian)',
+		'tw' => '繁體中文 (Taiwan)',
+		'zh' => '繁體中文 (Chinese)',
+		'pig' => 'Pig Latin',
+	),
+	
 	/*
 	|--------------------------------------------------------------------------
 	| SSL Link Generation
