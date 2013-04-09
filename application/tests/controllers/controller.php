@@ -1,12 +1,11 @@
 <?php
+// --------------------------------------------------------------
+// Test Data Creation
+// --------------------------------------------------------------
+require_once(path('app')."tests/data.php");
 
-abstract class ControllerTestCase extends PHPUnit_Framework_TestCase
-{
-	
-	public function __construct() {
-		Bundle::start('epic_mongo');
-	}
-	
+abstract class ControllerTestCase extends D3Up_TestCase
+{	
 	public function call($destination, $parameters = array(), $method = 'GET') {
 		\Laravel\Request::foundation()->setMethod($method);
 		return \Laravel\Routing\Controller::call($destination, $parameters);

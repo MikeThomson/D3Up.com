@@ -4,8 +4,7 @@ require_once('model.php');
 class BuildModelTest extends ModelTestCase {
 
 	protected $_build = null; // Storage for Test Build
-	public function __construct() {
-		// Load up Build #1 for testing purposes
+	public function setUp() {
 		$this->_build = Epic_Mongo::db('build')->findOne(array('id' => 1));
 	}
 
@@ -26,6 +25,7 @@ class BuildModelTest extends ModelTestCase {
 	}
 
 	public function testBuildOwner() {
+		// var_dump($this->_build->export());
 		// Ensure the reference to the build's owner is properly resolving
 		$this->assertInstanceOf('D3Up_User', $this->_build->_createdBy);
 	}

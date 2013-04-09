@@ -1,8 +1,9 @@
 <?php
-abstract class ToolTestCase extends PHPUnit_Framework_TestCase {
-	
-	public function __construct() {
-		Bundle::start('epic_mongo');
-	}
+// --------------------------------------------------------------
+// Test Data Creation
+// --------------------------------------------------------------
+require_once(path('app')."tests/data.php");
+
+abstract class ToolTestCase extends D3Up_TestCase {
 	
 }

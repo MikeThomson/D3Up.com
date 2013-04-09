@@ -3,8 +3,8 @@ require_once('tool.php');
 class SyncToolTest extends ToolTestCase {
 
 	protected $_build = null; // Storage for Test Build
-	public function __construct() {
-		// Load up Build #1 for testing purposes
+	
+	public function setUp() {
 		$this->_build = Epic_Mongo::db('build')->findOne(array('id' => 1));
 	}
 
