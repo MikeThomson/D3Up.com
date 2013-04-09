@@ -54,3 +54,8 @@ Submitting Changes
 ===
 
 All changes submitted must be in the form of a *Pull Request*, which will then be reviewed by the community and once accepted, will be merged into the live codebase and deployed to D3Up.com.
+
+License
+===
+
+This code is released under the [MIT License](/aaroncox/D3Up.com/blob/master/license.txt).
