@@ -17,7 +17,7 @@
 		@if($gear)			
 			@foreach($gear->getSlots() as $slot) 
 				<tr class='item'>
-					<td>{{ HTML::itemBoxIcon($gear[$slot]) }}</td>
+					<td>{{ HTML::itemIcon($gear[$slot]) }}</td>
 					<td>{{ HTML::itemLink($gear[$slot], array('toggle' => true, 'slot' => $slot)) }}</td>
 					<td style="{{ HTML::hb('heatmap \'dps\' stats.dps-'.$slot.' stats.dps-gear-total') }}">
 						

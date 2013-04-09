@@ -61,7 +61,7 @@
 		@foreach($build->getGear() as $slot => $item)
 			<span class='item icon-link'>
 				<a href="/i/{{ $item->id }}" data-json="{{ e(json_encode($item->tooltip())) }}" data-slot="{{ $slot }}">
-					{{ HTML::itemBoxIcon($item) }}
+					{{ HTML::itemIcon($item) }}
 				</a>
 			</span>
 		@endforeach
