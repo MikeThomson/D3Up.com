@@ -142,12 +142,4 @@ class MathControllerTest extends ControllerTestCase {
 		$this->assertEquals('302', $response->foundation->getStatusCode());
 	}
 	
-	public function __destruct() {
-		// Find and remove any math entry that has the test flag
-		$query = array('_unitTest' => true);
-		// Get the Database
-		$db = Epic_Mongo::db('math')->getSchema()->getMongoDb();
-		// Remove all the results
-		$result = $db->math->remove($query);
-	}
 }
