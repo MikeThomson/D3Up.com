@@ -70,6 +70,9 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 	}
 	
 	public function save($whole = true) {
+		if(Request::cli()) {
+			return parent::save();
+		}
 		// throw new Exception("Saving is currently disabled.");
 		return parent::save($whole);
 	}

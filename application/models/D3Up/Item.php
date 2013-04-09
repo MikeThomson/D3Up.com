@@ -44,6 +44,9 @@ class D3Up_Item extends Epic_Mongo_Document_Sequenced {
 	}
 	
 	public function save($whole = false) {
+		if(Request::cli()) {
+			return parent::save();
+		}
 		throw new Exception("Saving is currently disabled.");
 	}
 	
