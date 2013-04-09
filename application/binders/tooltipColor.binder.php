@@ -1,4 +1,15 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| tooltipColor - Tooltip Color Helper
+|--------------------------------------------------------------------------
+|
+| Converts INT versions of build 'quality' to the colors of items
+|
+| Usage: HTML::tooltipColor(number)
+| Output: "green"
+|
+*/
 return array('html tooltipColor' => function($color) {
 	$colors = array(
 		1 => "white",
