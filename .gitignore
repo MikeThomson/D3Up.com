@@ -2,4 +2,5 @@ bundles/*
 application/config/application.php
 application/config/s3.php
 application/config/github.php
+cache.properties
 .DS_Store
