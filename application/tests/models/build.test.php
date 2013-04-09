@@ -5,6 +5,7 @@ class BuildModelTest extends ModelTestCase {
 
 	protected $_build = null; // Storage for Test Build
 	public function setUp() {
+		parent::setUp();
 		$this->_build = Epic_Mongo::db('build')->findOne(array('id' => 1));
 	}
 
