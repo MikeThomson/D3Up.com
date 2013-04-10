@@ -37,12 +37,12 @@
 .build-stats td {
 	border-top: 1px solid #333;
 }
-.build-stats[data-id=stats-sidebar-compare],
-.build-stats[data-id=stats-sidebar-compare] td {
+.build-stats[data-id*=-sidebar-compare],
+.build-stats[data-id*=-sidebar-compare] td {
 	text-align: center;	
 	color: #fff;
 }
-.build-stats[data-id=stats-sidebar-compare] td .stat-container {
+.build-stats[data-id*=-sidebar-compare] td .stat-container {
 	position: relative;
 }
 .victor-1 {

@@ -1,5 +1,5 @@
-<!-- {{ var_dump($id, $tabName, $isCompare, $collapse, (!$isCompare && in_array($tabName, $collapse))) }} -->
 <div class="accordion-group">
+	@if($tabName)
   <div class="accordion-heading">
     <a class="accordion-toggle" data-toggle="collapse" href=".collapse-{{ $tabName }}">
 			@if($isCompare)
@@ -10,6 +10,7 @@
 			@endif				
     </a>
   </div>
+	@endif
   <div class="collapse-{{ $tabName }} accordion-body {{ (!$id && in_array($tabName, $collapse)) ? 'collapse' : 'in' }}">
     <div class="accordion-inner">
 			<table class='table stat-table'>

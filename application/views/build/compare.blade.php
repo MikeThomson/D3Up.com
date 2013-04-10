@@ -9,7 +9,7 @@
 <script src="http://d3up.com/js/gamedata.js"></script>
 <script src="/js/build.js"></script>
 <script src="/js/utils/compare.js"></script>
-<script src="http://d3up.com/js/unmin/calcv2.js"></script>
+<script src="http://local.d3up.com/js/unmin/calcv2.js"></script>
 <script src="http://d3up.com/js/unmin/itembuilder.js"></script>
 @endsection
 
@@ -32,6 +32,9 @@
 	    <li>
 				<a href="#tab-skills" data-toggle="tab">{{ __('build.skills') }}</a>
 			</li>
+	    <li>
+				<a href="#tab-mitigation" data-toggle="tab">{{ __('build.mitigation') }}</a>
+			</li>
 	  </ul>
 	</div>
 	<div class='tab-pane active' id="tab-stats">
@@ -51,6 +54,20 @@
 		</div>
 		<div class='span6' id="build2-gear">
 			@include('build.section.gear.overview', array('gear' => $build2->getGear(), 'compare' => true))
+		</div>
+	</div>
+	<div class='tab-pane' id="tab-mitigation">
+		<div class='span12'>
+			@include('build.section.stats.mitigation-calc')
+		</div>
+		<div class='span5 build2-stats' id="build1-mitigation">
+			@include('build.section.mitigation', array('build' => $build1, 'id' => 1))
+		</div>
+		<div class='span2'>
+			@include('build.section.mitigation')->with('id', 'compare')
+		</div>
+		<div class='span5 build2-stats' id="build2-mitigation">
+			@include('build.section.mitigation', array('build' => $build2, 'id' => 2))
 		</div>
 	</div>
 	<div class='tab-pane' id="tab-skills">
@@ -126,6 +143,11 @@
 	var data = diff;
 	$("#stats-sidebar-compare").replaceWith(template(data));
 
+	var source   = $("#mitigation-sidebar-compare").html();
+	var template = Handlebars.compile(source);
+	var data = diff;
+	$("#mitigation-sidebar-compare").replaceWith(template(data));
+
 	var source   = $("#build1-skills .tab-content").html();
 	var template = Handlebars.compile(source);
 	var data = d3up.builds.build1;
@@ -135,7 +157,17 @@
 	var template = Handlebars.compile(source);
 	var data = d3up.builds.build2;
 	$("#build2-skills .tab-content").replaceWith(template(data));		
-	
+
+	var source   = $("#mitigation-sidebar-1").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.build1;
+	$("#mitigation-sidebar-1").replaceWith(template(data));		
+
+	var source   = $("#mitigation-sidebar-2").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.build2;
+	$("#mitigation-sidebar-2").replaceWith(template(data));		
+
 	
 	<?= (isset($_GET['debug'])) ? 'console.log(d3up.builds);' : ''; ?>
 	

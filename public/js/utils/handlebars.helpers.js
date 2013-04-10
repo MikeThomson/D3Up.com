@@ -1,18 +1,27 @@
 Handlebars.registerHelper('prettyStat', function(value, stat) {
 	var special = {
+				skip: [
+					'hp-ehp-ratio',
+				],
 				decimals: {
 					'aps-mh': 4,
 					'aps-oh': 4,				
 				}, 
 				percents: [
+					'armorReduction',
 					'attack-speed-incs',
 					'critical-hit',
 					'critical-hit-damage',
+					'damage-reduction',
+					'plus-life',
 					'percent-melee-reduce',
 					'percent-elite-reduce',
 					'percent-range-reduce',
+					'percent-resist-all',
 				],
 				x100: [
+					'armorReduction',
+					'percent-resist-all',
 					'percent-melee-reduce',
 					'percent-elite-reduce',
 					'percent-range-reduce',				
@@ -21,6 +30,9 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 			decimals = 2,
 			prepend = "",
 			append = "";
+	if(stat && _.indexOf(special.skip, stat) >= 0) {
+		return value;
+	}
 	if(stat && special.decimals[stat]) {
 		decimals = special.decimals[stat];
 	}
@@ -35,11 +47,11 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 	}
 	if(value) {
 		value = Handlebars.helpers.round.call(this, value, decimals);		
+		var parts = value.toString().split(".");
+	  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	  value = parts.join(".");
 	}
 	// Add Commas
-	var parts = value.toString().split(".");
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  value = parts.join(".");
 	return prepend + value + append;
 });
 Handlebars.registerHelper('round', function(number, decimal_points) {
