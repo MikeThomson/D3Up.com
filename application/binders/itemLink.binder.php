@@ -31,6 +31,8 @@ return array('html itemLink' => function($item, $params = array()) {
 			'quality-'.$item->quality,
 		)),
 	);
+	// Set the Text for the Link
+	$text = $item->name;
 	// Conditional Parameters
 	if(!empty($params)) {
 		// The slot parameter is appended to data-slot on the item and used for the calculator
@@ -44,8 +46,6 @@ return array('html itemLink' => function($item, $params = array()) {
 		// Replacement text for the Link
 		if(isset($params['text'])) {
 			$text = $params['text'];
-		} else {
-			$text = $item->name;
 		}		
 	}
 	// Return the Link
