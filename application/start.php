@@ -177,3 +177,25 @@ Autoloader::directories(array(
 	path('app').'models',
 	path('app').'libraries',
 ));
+
+/*
+|--------------------------------------------------------------------------
+| Whoops Error Logging
+|--------------------------------------------------------------------------
+|
+| A Pretty Error wrapper
+|
+| TODO - Need to wrap a check to see if we're in production or not, and disable on production. 
+|
+*/
+if (!IoC::registered('whoops')) {
+    IoC::singleton('whoops', function ($from = true) {
+            $run = new Whoops\Run;
+            $handler = new Whoops\Handler\PrettyPageHandler;
+            $run->pushHandler($handler);
+            $run->register();
+            return $run;
+        }
+    );
+} 
+IoC::resolve('whoops');
