@@ -35,7 +35,13 @@
 	width: 50%;
 }
 .build-stats td {
+	border: 0;
+}
+.build-stats tr {
 	border-top: 1px solid #333;
+}
+.build-stats tr:first-child {
+	border-top: 0px solid #333;
 }
 .build-stats[data-id*=-sidebar-compare],
 .build-stats[data-id*=-sidebar-compare] td {
@@ -64,4 +70,7 @@
 	border-top: 10px solid transparent;
 	border-bottom: 10px solid transparent;	
 	border-left: 15px solid green;
+}
+.mitigation-controls {
+	font-size: 16px;
 }

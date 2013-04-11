@@ -231,3 +231,9 @@ div.title-block .skill-row {
 	width: 32px;
 	height: auto;
 }
+.neg {
+	color: #d00;
+}
+.pos {
+	color: #0d0;
+}
