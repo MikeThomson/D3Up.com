@@ -65,9 +65,12 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 	}
 	
 	public function getGear() {
-		if($this->_gear) {
+		// If our cached gearset is a brand new document, skip over it
+		if(!$this->_gear->isNewDocument()) {
+			// If it's not a new document, return the cached version
 			return $this->_gear;
 		}
+		// And use our normal gear
 		return $this->gear;
 	}
 	
