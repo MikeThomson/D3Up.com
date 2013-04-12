@@ -22,9 +22,9 @@
 */
 
 $environments = array(
-
-	'local' => array('http://localhost*', '*.dev'),
-
+	'development' => array('http://laravel.d3up.com'),
+	'production' => array('http://d3up.com', 'http://www.d3up.com'),
+	'staging' => array('http://v2.d3up.com'),
 );
 
 // --------------------------------------------------------------
