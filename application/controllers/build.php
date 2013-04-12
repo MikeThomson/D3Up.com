@@ -7,7 +7,7 @@ class Build_Controller extends Base_Controller {
 	public function getBuilds($params = array()) {
 		// Filtering on the Build List
 		$query = array(
-			'_private' => array('$ne' => true)
+			'private' => false,
 		);
 		// How are we sorting them?
 		$sort = array(
