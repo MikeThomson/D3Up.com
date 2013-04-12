@@ -9,6 +9,7 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 		'gear' => array('doc:gearset'),
 		'_gear' => array('doc:gearsetcache', 'auto'),
 		'_createdBy' => array('doc:user', 'ref'),
+		'_original' => array('doc:build', 'ref'),
   );
 
 	// These fields will be renamed/removed, null = remove, rename = string
@@ -37,6 +38,7 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 		// The characters gear/stats, we don't need it here
 		'gear' => null,
 		'_gear' => null,
+		'_original' => null,
 		'equipment' => null,
 		'equipmentCount' => null,
 		'stats' => null,
@@ -73,7 +75,7 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 		if(Request::cli()) {
 			return parent::save();
 		}
-		// throw new Exception("Saving is currently disabled.");
+		throw new Exception("Saving is currently disabled.");
 		return parent::save($whole);
 	}
 }
