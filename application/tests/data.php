@@ -48,6 +48,7 @@ abstract class D3Up_TestCase extends PHPUnit_Framework_TestCase
 		$build1->_characterId = '1963090';
 		$build1->_characterRg = '1';
 		$build1->_createdBy = $user;
+		$build1->private = false;
 		$build1->gear = $gearset;
 		$build1->stats = array('dps' => 1);
 		$build1->save();
@@ -59,6 +60,7 @@ abstract class D3Up_TestCase extends PHPUnit_Framework_TestCase
 		$build2->_characterId = '1963090';
 		$build2->_characterRg = '1';
 		$build2->_createdBy = $user;
+		$build2->private = false;
 		$build2->gear = $gearset;
 		$build2->stats = array('dps' => 2);
 		$build2->save();
