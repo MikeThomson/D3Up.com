@@ -111,3 +111,8 @@ Handlebars.registerHelper('if_gt', function(context, options) {
 Handlebars.registerHelper('skillName', function(name) {
 	return name.split("~")[0];
 });
+
+Handlebars.registerHelper('passiveInfo', function(name, heroClass) {
+	console.log(d3up.gameData.passives[heroClass]);
+	return name.split("~")[0];
+});

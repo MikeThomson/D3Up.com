@@ -148,12 +148,12 @@
 	var data = diff;
 	$("#mitigation-sidebar-compare").replaceWith(template(data));
 
-	var source   = $("#build1-skills .tab-content").html();
+	var source   = $("#build1-skills #skill-overview").html();
 	var template = Handlebars.compile(source);
 	var data = d3up.builds.build1;
 	$("#build1-skills .tab-content").replaceWith(template(data));		
-
-	var source   = $("#build2-skills .tab-content").html();
+	
+	var source   = $("#build2-skills #skill-overview").html();
 	var template = Handlebars.compile(source);
 	var data = d3up.builds.build2;
 	$("#build2-skills .tab-content").replaceWith(template(data));		

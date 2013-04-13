@@ -308,3 +308,6 @@ ul.nav li.dropdown:hover > .dropdown-menu{
      -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
 }
+.table .table {
+	background: transparent;
+}

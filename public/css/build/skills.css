@@ -1,0 +1,90 @@
+	.skills {
+/*		padding: 0;
+		margin: 0;
+		list-style: none;*/
+/*		border: 1px solid #fff;*/
+	}
+	.skills th,
+	.skills td {
+		border: 0;
+	}
+	.skills .skill {
+		background: #222;
+		border: 1px solid #333;
+	}
+	.skills .skill td:first-child {
+		width: 32px;
+		line-height: 32px;
+		padding: 0 10px;
+	}
+	.skills .skill td {
+		line-height: 32px;
+	}
+	.skills .skill td.enable {
+		text-align: right;
+	}
+	.skills .skill td.enable label {
+		display: inline;
+	}
+	.skills .skill td.enable input {
+		margin: -4px 8px 0;
+	}
+	.skills .skill .skill-name {
+		font-size: 18px;
+	}
+	.skills .skill .skill-icon {
+		margin: 0;
+		padding: 0;
+		background: transparent;
+	}
+	.skills .skill .skill-details h3 {
+		font-size: 28px;
+	}
+	.skills .skill .skill-details {
+		margin-left: 40px;
+	}
+	.skill-extra td {
+		border-top: 0;
+	}
+	.skill-details .dps {
+		padding: 0 5px;
+		font-size: 12px;
+		color: #F50;
+		text-align: center;
+	}
+	.skill-details .dps strong {
+		font-size: 16px;
+		display: block;
+	}
+	.skill-breakdown {
+		border-spacing: 5px;
+		border-collapse: separate;
+		margin-bottom: 0;
+	}
+	.skill-breakdown td,
+	.skill-breakdown th {
+		padding: 4px;
+	}
+	.skill-breakdown th {
+		border: 1px solid #333;
+		background: #222;
+		margin: 1px;
+		text-align: center;
+	}
+	.skill-breakdown td {
+		color: #888;
+		text-align: right;
+	}
+	.skill-breakdown dl {
+		border-collapse: collapse;
+		margin: 0;
+	}
+	.skill-breakdown dl dt {
+		font-weight: normal;
+		width: 70px;
+	}
+	.skill-breakdown dl dd {
+		color: #ececec;
+		text-align: left;
+		margin-left: 75px;
+	}
