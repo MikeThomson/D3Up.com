@@ -6,6 +6,8 @@ class D3Up_Sync {
 	protected $_log = array();
 	// Storage for the fatal stopping error
 	protected $_fatal = null;
+	// Should the logger be disabled? (Used to remove unwanted dupes for gearsetcache)
+	protected $_logEnabled = true;
 	
 	// Item Data URL
 	public $urlItem = 'http://us.battle.net/api/d3/data/';
@@ -101,6 +103,10 @@ class D3Up_Sync {
 	);
 	
 	protected function _log($message, $type = 'info') {
+		// If logging is disabled, don't do anything
+		if($this->_logEnabled === false) {
+			return null;
+		}
 		$msg = new stdClass();
 		if($type == 'fatal') {
 			$this->_fatal = $message;
@@ -245,7 +251,9 @@ class D3Up_Sync {
 			// Set gear as a GearSet_Cache (Embedded versions of the Items, will update when the item is saved)
 			$build->gear = $this->_getGear($json);			
 			// Set _gear as a GearSet (References to Actual Items)
+			$this->_logEnabled = false;	// Disable Logging for this action
 			$build->_gear = $this->_getGear($json, 'gearsetcache');
+			$this->_logEnabled = true;	// Re-enable Logging for from here on out
 		}	
 		// Finally save the build
 		$build->save();
