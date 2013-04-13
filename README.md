@@ -5,6 +5,12 @@ Welcome to the D3Up.com Github Repository!
 
 I've finally made the decision to release the source code to D3Up.com so that everyone able can help contribute and possibly modify it for other games!
 
+Area's to Discuss the Code
+===
+
+- **Bugs and Features** - Please use the [Github Issues](https://github.com/aaroncox/D3Up.com/issues) section of the project for any bugs or features you'd like to request, talk about or get help with.
+- **IRC Chatroom** - If you're IRC savvy, feel free to join the chat on `irc.esper.net` in the channel `#d3up`.
+
 Components
 ===
 
