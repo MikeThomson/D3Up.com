@@ -9,19 +9,26 @@
 	{{ $math->title }} - {{ $math->explanation }}
 @endsection
 
+@section('styles')
+<link href="/css/math.css" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class='row'>
-	<div class='span9'>
+	<div class='span9 math-explanation'>
+		@include('math.breadcrumb')
 		@if(isset($math->_localized[$lang]))
 			<h1>{{ $math->_localized[$lang]['title'] }}</h1>
-			<h5>
+			<h2 class='lead'>{{ $math->_localized[$lang]['explanation'] }}</h2>
+			<h5 class='lead'>
 				Languages available: 
 				@foreach($math->_localized as $lang => $data) 
 					<a href='/locale/{{ $lang }}'>{{ $langs[$lang] }}</a>
 				@endforeach
 			</h5>
-			<h2>{{ $math->_localized[$lang]['explanation'] }}</h2>
-			{{ $math->_localized[$lang]['html'] }}
+			<div class='content'>
+				{{ $math->_localized[$lang]['html'] }}
+			</div>
 		@else 
 			<h3>The '{{ $math->title }}' explanation is not available in {{ Session::get('locale_name') }}.</h3>
 			<h5>

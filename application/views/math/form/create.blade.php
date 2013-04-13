@@ -1,3 +1,7 @@
+@include('math.breadcrumb')
+<h1>Create an Diablo 3 Math Entry</h1>
+<h5 class='lead'>Share what you know about Diablo 3's math. Please avoid creating duplicates and use the search feature to see if one already exists!</h5>
+<div class='content'>
 {{ Form::open('math/create', 'POST', array('class' => 'form-math')) }}
 	<!-- Title field -->
 	<p>{{ Form::label('title', __('math.title')) }}</p>
@@ -19,3 +23,4 @@
 		{{ Form::submit(__('math.submit'), array('class' => 'btn')) }}
 	</div>
 {{ Form::close() }}
+</div>

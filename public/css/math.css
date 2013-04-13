@@ -1,0 +1,30 @@
+.math-explanation {
+	padding: 0px 15px;
+	background-color: #222;
+	color: #ececec;
+	border-radius: 5px;
+}
+.math-explanation h2.lead {
+	margin-bottom: 0px;
+}
+.math-explanation h5.lead {
+	font-size: 1em;
+	margin: 0 35px 10px;
+}
+.math-explanation .btn-group {
+}
+.math-explanation .content {
+	border-top: 1px solid #111;
+	padding: 10px;
+}
+.math-explanation .breadcrumb {
+	margin-top: 10px;
+	background: #333;
+	margin: 10px 0;
+}
+.math-explanation .breadcrumb li {
+	line-height: 22px;
+}
+.math-explanation .breadcrumb a {
+	text-shadow: none;
+}
