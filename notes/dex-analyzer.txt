@@ -1,0 +1,8 @@
+Found at:
+	https://github.com/mongolab/dex
+
+Read Logs:
+	dex -f /var/log/mongodb/mongodb.log mongodb://localhost/com_d3up
+
+Watch DB Queries: 
+	dex -w -p -n "com_d3up.*" mongodb://localhost/com_d3up
