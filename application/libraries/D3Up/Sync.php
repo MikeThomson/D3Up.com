@@ -256,7 +256,7 @@ class D3Up_Sync {
 			$this->_logEnabled = true;	// Re-enable Logging for from here on out
 		}	
 		// Finally save the build
-		$build->save();
+		$build->save(true);
 	}
 	
 	protected function _getGear(array $json, $docType = 'gearset') {

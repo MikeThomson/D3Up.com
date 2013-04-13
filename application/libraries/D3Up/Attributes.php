@@ -49,6 +49,12 @@ class D3Up_Attributes
 			'plus-holy-damage' => '+[v]% to Holy Damage',
 			'plus-lightning-damage' => '+[v]% to Lightning Damage',
 			'plus-poison-damage' => '+[v]% to Poison Damage',
+			'plus-arcane-damage~2' => 'Adds [v]% to Arcane Damage',
+			'plus-cold-damage~2' => 'Adds [v]% to Cold Damage',
+			'plus-fire-damage~2' => 'Adds [v]% to Fire Damage',
+			'plus-holy-damage~2' => 'Adds [v]% to Holy Damage',
+			'plus-lightning-damage~2' => 'Adds [v]% to Lightning Damage',
+			'plus-poison-damage~2' => 'Adds [v]% to Poison Damage',
 			// Elemental Damage Additions
 			'arcane-damage' => '+[v] Arcane Damage',
 			'cold-damage' => '+[v] Cold Damage',
