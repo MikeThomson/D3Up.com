@@ -33,6 +33,21 @@
 			</div>
 		</div>
 		<div class='span3'>
+			@if(Cache::has('reddit-activity'))
+			<table class='table'>
+				<tr>
+					<th colspan='2'>
+						<a href='http://reddit.com/r/d3up'>/r/D3Up Discussions</a>
+					</th>
+				</tr>
+				@foreach(Cache::get('reddit-activity') as $post)
+					<tr>
+						<td>+{{ $post['score'] }}</td>
+						<td><a href='{{ $post['url'] }}'>{{ $post['title'] }}</a></td>
+					</tr>
+				@endforeach
+			</table>
+			@endif
 			<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/D3Up" data-widget-id="302248766797398016">Tweets by @D3Up</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
