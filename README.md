@@ -9,6 +9,7 @@ Area's to Discuss the Code
 ===
 
 - **Bugs and Features** - Please use the [Github Issues](https://github.com/aaroncox/D3Up.com/issues) section of the project for any bugs or features you'd like to request, talk about or get help with.
+- **General Discussion** - For anything else, or if you just are a bigger reddit fan, feel free to anything on [/r/d3up](http://reddit.com/r/d3up).
 - **IRC Chatroom** - If you're IRC savvy, feel free to join the chat on `irc.esper.net` in the channel `#d3up`.
 
 Components
