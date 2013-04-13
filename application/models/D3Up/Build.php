@@ -1,6 +1,6 @@
 <?php
 
-class D3Up_Build extends Epic_Mongo_Document_Sequenced {
+class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 	
 	protected $_collection = 'builds';
 	protected $_sequenceKey = 'build';
@@ -48,9 +48,9 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 		'test' => null,
 	);
 
-	public function sync() {
+	public function sync($type = null) {
 		$tool = new D3Up_Sync();
-		return $tool->run($this);
+		return $tool->run($this, $type);
 	}
 	
 	public function json() {
@@ -74,11 +74,11 @@ class D3Up_Build extends Epic_Mongo_Document_Sequenced {
 		return $this->gear;
 	}
 	
-	public function save($whole = true) {
-		if(Request::cli()) {
-			return parent::save();
-		}
-		throw new Exception("Saving is currently disabled.");
-		return parent::save($whole);
-	}
+	// public function save($whole = true) {
+	// 	if(Request::cli()) {
+	// 		return parent::save();
+	// 	}
+	// 	throw new Exception("Saving is currently disabled.");
+	// 	return parent::save($whole);
+	// }
 }

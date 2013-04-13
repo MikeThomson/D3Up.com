@@ -5,7 +5,7 @@
  * @package default
  * @author Aaron Cox
  **/
-class D3Up_Guide extends Epic_Mongo_Document_Sequenced
+class D3Up_Guide extends D3Up_Mongo_Document_Sequenced
 {
 	protected static $_documentType = 'guide';
 	protected $_collection = 'posts';

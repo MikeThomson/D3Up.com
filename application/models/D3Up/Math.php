@@ -1,5 +1,5 @@
 <?php
-class D3Up_Math extends Epic_Mongo_Document_Sequenced {
+class D3Up_Math extends D3Up_Mongo_Document_Sequenced {
 	
 	protected $_collection = 'math';
 	protected $_sequenceKey = 'math';

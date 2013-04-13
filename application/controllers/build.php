@@ -113,7 +113,7 @@ class Build_Controller extends Base_Controller {
 			return Response::error('404');
 		}
 		// Sync the Build and get the results
-		$results = $build->sync();
+		$results = $build->sync(Request::get('type'));
 		// Return the Results and Build to the View
 		return View::make('build.sync')->with('build', $build)->with('results', $results);
 	}

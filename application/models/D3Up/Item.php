@@ -1,5 +1,5 @@
 <?php
-class D3Up_Item extends Epic_Mongo_Document_Sequenced {
+class D3Up_Item extends D3Up_Mongo_Document_Sequenced {
 	protected $_collection = 'items';
 	protected $_typeMap = array(
 		'_createdBy' => array('doc:user', 'ref'),
@@ -43,11 +43,11 @@ class D3Up_Item extends Epic_Mongo_Document_Sequenced {
 		return $this;
 	}
 	
-	public function save($whole = false) {
-		if(Request::cli()) {
-			return parent::save();
-		}
-		throw new Exception("Saving is currently disabled.");
-	}
+	// public function save($whole = false) {
+	// 	if(Request::cli()) {
+	// 		return parent::save();
+	// 	}
+	// 	throw new Exception("Saving is currently disabled.");
+	// }
 	
 }

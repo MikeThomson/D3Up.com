@@ -8,6 +8,8 @@ class D3Up_Sync {
 	protected $_fatal = null;
 	// Should the logger be disabled? (Used to remove unwanted dupes for gearsetcache)
 	protected $_logEnabled = true;
+	// What kind of sync is this?
+	protected $_syncType = null;
 	
 	// Item Data URL
 	public $urlItem = 'http://us.battle.net/api/d3/data/';
@@ -222,7 +224,9 @@ class D3Up_Sync {
 	}
 
 	// Runs the Sync against a Build
-	public function run(D3Up_Build $build) {
+	public function run(D3Up_Build $build, $type = null) {
+		// Is this a specific sync type?
+		$this->_syncType = $type;
 		// Store the Build on the Object
 		$this->setBuild($build);
 		// Check to see if we can even sync this build
@@ -242,18 +246,24 @@ class D3Up_Sync {
 		if($json = $this->_getData($this->_profileUrl())) {
 			// Set the Meta Information on the Build	
 			$build = $this->_setMeta($json);
-			// Set the Active Skills on the Build
-			$build->actives = $this->_getActives($json);
-			// Set the Passive Skills on the Build
-			$build->passives = $this->_getPassives($json);
-			// Gather the Item Data needed
-			$this->_log("Beginning API Requests for Item Information.");
-			// Set gear as a GearSet_Cache (Embedded versions of the Items, will update when the item is saved)
-			$build->gear = $this->_getGear($json);			
-			// Set _gear as a GearSet (References to Actual Items)
-			$this->_logEnabled = false;	// Disable Logging for this action
-			$build->_gear = $this->_getGear($json, 'gearsetcache');
-			$this->_logEnabled = true;	// Re-enable Logging for from here on out
+			// If the syncType is "gear", don't bother with skills
+			if($this->_syncType != "gear") {
+				// Set the Active Skills on the Build
+				$build->actives = $this->_getActives($json);
+				// Set the Passive Skills on the Build
+				$build->passives = $this->_getPassives($json);				
+			}
+			// If the syncType is "skills", don't bother with gear
+			if($this->_syncType != "skills") {
+				// Gather the Item Data needed
+				$this->_log("Beginning API Requests for Item Information.");
+				// Set gear as a GearSet_Cache (Embedded versions of the Items, will update when the item is saved)
+				$build->gear = $this->_getGear($json);			
+				// Set _gear as a GearSet (References to Actual Items)
+				$this->_logEnabled = false;	// Disable Logging for this action
+				$build->_gear = $this->_getGear($json, 'gearsetcache');
+				$this->_logEnabled = true;	// Re-enable Logging for from here on out				
+			}
 		}	
 		// Finally save the build
 		$build->save(true);
@@ -265,11 +275,10 @@ class D3Up_Sync {
 			$this->_log("Found item '".$meta['name']."' located in slot '".$slot."', checking to see if this item already exists...");
 			// Determine what D3Up considered the slot as
 			$d3upSlot = $this->_slotMap[$slot];
-			// Does this item already exist as one of your items?
-			if($item = $this->_itemExists($meta['tooltipParams'])) {
+			// Does this item already exist as one of your items? Are we skipping this because of a forced refresh?
+			if($this->_syncType != "forced" && $item = $this->_itemExists($meta['tooltipParams'])) {
 				// If so, just set it
 				$gear[$d3upSlot] = $item->cleanedFor($docType);
-				// var_dump($item->export());
 			} else {
 				// Build the URL to fetch the item
 				$url = $this->urlItem . $meta['tooltipParams'];
@@ -282,7 +291,6 @@ class D3Up_Sync {
 				}				
 			}
 		}
-		// var_dump($gear->export()); exit;
 		// Return the Gearset
 		return $gear;
 	}
