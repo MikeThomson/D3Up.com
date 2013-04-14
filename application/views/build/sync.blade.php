@@ -15,10 +15,10 @@
 @endsection
 
 @section('scripts')
-<script src="http://local.d3up.com/js/gamedata.js"></script>
+<script src="http://d3up.com/js/gamedata.js"></script>
 <script src="/js/build.js"></script>
-<script src="http://local.d3up.com/js/unmin/calcv2.js"></script>
-<script src="http://local.d3up.com/js/unmin/itembuilder.js"></script>
+<script src="http://d3up.com/js/unmin/calcv2.js"></script>
+<script src="http://d3up.com/js/unmin/itembuilder.js"></script>
 @endsection
 
 @section('content')
