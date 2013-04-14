@@ -36,8 +36,8 @@
 
       <section>
         <div id="title">
-          <h1>D3up.com</h1>
-          <p>The code behind D3Up.com</p>
+          <h1>D3up.com Development</h1>
+          <p>Help develop Diablo 3 Tools</p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/aaroncox">aaroncox</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
@@ -49,9 +49,10 @@
 
 <p>I've finally made the decision to release the source code to D3Up.com so that everyone able can help contribute and possibly modify it for other games!</p>
 
-<h1>Sections of this Document</h1>
+<h2>Sections of this Document</h2>
 
 <ul>
+<li><a href="#intro">Project Introduction</a></li>
 <li><a href="#communication">Ways to Communicate</a></li>
 <li><a href="#components">Frameworks, Languages, and Components</a></li>
 <li><a href="#environment">Setting up a Development Environment</a></li>
@@ -60,8 +61,25 @@
 <li><a href="#contributors">Contributors and Thanks</a>
 <li><a href="#license">License</a></li>
 </ul>
+<h2><a id="communicate"></a>Project Introduction</h2>
+<p>I've been working on D3Up.com solo since June of 2012 and decided to make this a much more community project. Up until this point, I've never released any codebase this large on github or as open source, so please bear with me and feel free to make suggestions on how things should or shouldn't be done (in a constructive way).</p>
+<p>I would first off like to say that I still have an overall vision for the site and plan on steering towards it, focusing on being a learning tool first and everything else second. I plan on being the only person accepting pull requests in the beginning, which will most likely change over time if people contribute.</p>
+<p>Please don't get offended if I ask you to change something in your pull request. Feel free to try to convince me otherwise, but if I have a good reason, I'm not just going to cave. For example, if you try to:</p>
+<ul>
+	<li>Add a forum to the site, I'll say no. Remember, learning game mechanics, exploring stats, theorycrafting, not talking.</li>
+	<li>Provide a Logo, Design or graphic I don't like, I'll say no. While my design skills may not be top notch, I do have an opinion on design matters.</li>
+	<li>Write code that's poorly optimized / implemented, I'll probably say no. Mind you, if I commit some crappy code, call me out on it or comment what could be done better, I'll listen. I plan on doing the same, providing constructive feedback.</li>
+	<li>Commit stuff that breaks unit tests, I'll complain probably. Please test stuff, don't break things! If I break things, by all means, complain.</li>
+</ul>
+<p>I'd also like to say that some of you are going to cringe at code you find, as I'm going to cringe right back at some of the code submitted in your pull requests. Parts of the code were written almost a year ago and in a rush, in what extra free time I had. The calculator is a monster and has been hacked apart so much I barely recognize it. So, I apologize when your head explodes inside `/public/js/unmin`.</p>
+<p>My plan for Version 2 here is as follows:</p>
+<ol>
+	<li>Build the PHP/Laravel/MongoDB Backend using Handlebars to serve out V1 Calculator values</li>
+	<li>Rewrite the Calculator and Game Data tools</li>
+	<li>TBD - Wherever the community leads</li>
+</ol>
 
-<h1><a id="communicate"></a>Ways to Communicate</h1>
+<h2><a id="communicate"></a>Ways to Communicate</h2>
 <p>I've setup numerous ways for anyone wishing to participate to join in the development discussion. Listed below are the three primary methods of communication I use.</p>
 <ul>
 <li>
@@ -69,9 +87,9 @@
 <li>
 <strong>General Discussion</strong> - For anything else, or if you just are a bigger reddit fan, feel free to post anything D3Up related on <a href="http://reddit.com/r/d3up">/r/d3up</a>.</li>
 <li>
-<strong>IRC Chatroom</strong> - If you're IRC savvy, feel free to join the chat on <code>irc.esper.net</code> in the channel <code>#d3up</code>.</li>
-</ul><h1>
-<a id="components"></a>Frameworks, Languages, and Components</h1>
+<strong>IRC Chatroom</strong> - If you're IRC savvy, feel free to join the chat on <code>irc.esper.net</code> in the channel <code>#d3up</code>. Github notifications and Jenkins both notify the #d3up channel of any activity on the master branch of the project.</li>
+</ul><h2>
+<a id="components"></a>Frameworks, Languages, and Components</h2>
 
 <p>Server Languages/Components:</p>
 
@@ -103,8 +121,8 @@
 <a href="twitter.github.com/bootstrap/base-css.html">Bootstrap</a> - CSS Framework / Utilities</li>
 </ul><p><strong>EditorConfig</strong> - D3Up uses <a href="http://editorconfig.org">EditorConfig</a> to ensure everyones tabs and spaces are properly aligned. Please make sure you're using an Editor/IDE that supports EditorConfig and please enable it!</p>
 
-<h1>
-<a id="environment"></a>Setting up your Environement</h1>
+<h2>
+<a id="environment"></a>Setting up your Environement</h2>
 
 <p>If you're wanting to setup a local instance of D3Up, here's a few things you'll need to do:</p>
 
@@ -112,29 +130,33 @@
 <li>Fork the repository so you have your own copy to work on and submit pull requests from.</li>
 <li>Copy <code>application/config/application.template</code> to <code>application/config/application.php</code> and change the <code>key</code> in the file to a unique value.</li>
 <li>Make sure to run <code>git submodule update --init</code> to pull in a copy of the libraries/bundles it uses.</li>
-</ul><h1>
-<a id="unittests"></a>Passing the Unit Tests</h1>
+</ul><h2>
+<a id="unittests"></a>Passing the Unit Tests</h2>
 
-<p>My goal here is to ensure all tests (located in the <code>application/tests</code> folder) pass after any changes are made. More and more tests will be added to test the PHP code and ensure no changes break the site's functionality.</p>
+<p>My goal here is to ensure all tests (located in the <code>application/tests</code> folder) pass after any changes are made..</p>
 
-<p>A javascript testing framework will be added as well in the future, but right now, the javascript is kinda an abomination :)</p>
+<p>Currently, there is no javascript testing framework. The javascript is still a monstrosity from Version 1, and I'd honestly like to rewrite it with some guidance from the JS community.</p>
 
-<p>You can run the tests by executing the following command from the command line (in the D3Up.com folder):</p>
+<p>Laravel makes testing easy, you can run the tests by executing the following command from the command line (in the D3Up.com folder):</p>
 
 <p><code>php artisan myunit</code></p>
 
-<p>This requires that PHPUnit is installed on your system, just google for <code>phpunit installation [insert your OS here]</code> to find out how.</p>
+<p>This requires that PHPUnit is installed on your system, just google for <code>phpunit install [insert your OS here]</code> to find out how.</p>
 
-<h1>
-<a id="pullrequests"></a>Submitting Changes</h1>
+<p>I also have Jenkins running to notify the #d3up IRC channel whenever changes are applies to the master branch and whether or not they pass the unit tests. You can view all of the results on [jenkins.greymass.com](http://jenkins.greymass.com).</p>
+
+<h2>
+<a id="pullrequests"></a>Submitting Changes</h2>
 
 <p>All changes submitted must be in the form of a <em>Pull Request</em>, which will then be reviewed by the community and once accepted, will be merged into the live codebase and deployed to D3Up.com.</p>
 
-<h1>
-<a id="contributions"></a>Contributors and Thanks</h1>
+<p>I'd recommend reading [Using Pull Requests](https://help.github.com/articles/using-pull-requests) on github:help or doing some searches for more information. I don't want to clutter up this documentation too much with how pull requests work.</p>
 
-<h1>
-<a id="license"></a>License</h1>
+<h2>
+<a id="contributions"></a>Contributors and Thanks</h2>
+
+<h2>
+<a id="license"></a>License</h2>
 
 <p>This code is released under the <a href="/aaroncox/D3Up.com/blob/master/license.txt">MIT License</a>.</p>
       </section>
