@@ -113,6 +113,6 @@ Handlebars.registerHelper('skillName', function(name) {
 });
 
 Handlebars.registerHelper('passiveInfo', function(name, heroClass) {
-	console.log(d3up.gameData.passives[heroClass]);
+	// console.log(d3up.gameData.passives[heroClass]);
 	return name.split("~")[0];
 });
