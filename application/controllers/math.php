@@ -36,7 +36,7 @@ class Math_Controller extends Base_Controller {
 		$rules = array(
 	    'title' => 'required|between:5,100',
 			'explanation' => 'between:5,100',
-			'content' => 'required|between:5,1000',
+			'content' => 'required|between:5,10000',
 			'locale' => 'required|in:' . implode(array_keys(Config::get('application.languages')), ","),
 		);
 		return Validator::make($input, $rules);
@@ -51,7 +51,6 @@ class Math_Controller extends Base_Controller {
 		
 		// Get all Inputs
 		$input = Input::all();
-
 		$math = Epic_Mongo::db('doc:math');
 		$math->title = $input['title'];
 		$math->slug = $this->slug($input['title']);
@@ -83,11 +82,12 @@ class Math_Controller extends Base_Controller {
 	}
 	
 	public function post_edit() {
+		$input = Input::all();
 		$validation = $this->_validate();
 		if($validation->fails()) {
-			return Redirect::to('math/edit')->with_errors($validation)->with_input();
+			// var_dump($input, $validation->errors); exit;
+			return Redirect::to('math/'.$input['id'].'/edit?language='.$input['locale'])->with_errors($validation);
 		}
-		$input = Input::all();
 		$math = Epic_Mongo::db('math')->findOne(array("id" => (int) $input['id']));
 		$math->_localized->$input['locale'] = array(
 			'title' => $input['title'],
