@@ -6,7 +6,7 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 	protected $_sequenceKey = 'build';
 	
   protected $_requirements = array(
-		'gear' => array('doc:gearset'),
+		'gear' => array('doc:gearset', 'auto'),
 		'_gear' => array('doc:gearsetcache', 'auto'),
 		'_createdBy' => array('doc:user', 'ref'),
 		'_original' => array('doc:build', 'ref'),
