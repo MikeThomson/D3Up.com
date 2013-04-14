@@ -1,4 +1,16 @@
 @if($gear)
+	<ul class='pdanalyzer'>
+		<li>
+			<h4>Gear Analyzer</h4>
+			<select id="pdanalyzer" class='input input-block-level' multiple data-placeholder="Click an Item or start typing an affix to start analysis">
+				
+			</select>
+		</li>
+		<li>
+			<ul class='pdanalyzer-results'>
+			</ul>
+		</li>
+	</ul>
 	<ul class='paperdoll'>
 	@foreach($gear->getSlots() as $slot) 
 		@if($gear[$slot])
@@ -14,13 +26,17 @@
 							<img src="http://media.blizzard.com/d3/icons/items/large/{{ $gear[$slot]->icon }}.png" alt="" />
 						@endif
 					</span>
-					<!-- <span class="sockets-wrapper">
+					<span class="sockets-wrapper">
 						<span class="sockets-align">
-							<span class="socket">
-								<img class="gem" src="http://media.blizzard.com/d3/icons/items/small/ruby_14_demonhunter_male.png" />
-							</span><br />
+							@if(count($gear[$slot]->sockets))
+								@foreach($gear[$slot]->sockets as $gem)
+									<span class="socket">
+										<img class="gem" src="http://media.blizzard.com/d3/icons/items/small/ruby_{{ HTML::getGemId($gem) }}_demonhunter_male.png" />
+									</span><br />
+								@endforeach
+							@endif
 						</span>
-					</span> -->
+					</span>
 				</a>
 			</li>
 		@endif

@@ -4,6 +4,7 @@
 <link href="/css/build.css" rel="stylesheet">
 <link href="/css/compare.css" rel="stylesheet">
 <link href="/css/paperdoll.css" rel="stylesheet">
+<link href="/css/utils/chosen.css" rel="stylesheet">
 @endsection
 
 @section('scripts')
@@ -12,6 +13,7 @@
 <script src="/js/utils/compare.js"></script>
 <script src="http://d3up.com/js/unmin/calcv2.js"></script>
 <script src="http://d3up.com/js/unmin/itembuilder.js"></script>
+<script src="/js/utils/chosen.min.js"></script>
 @endsection
 
 @section('content')
@@ -135,6 +137,73 @@
 		var template = Handlebars.compile(source);
 		var data = d3up.builds.primary;
 		$(v).replaceWith(template(data));		
+	});
+	
+	$(function() {
+		var analyzer = $("#pdanalyzer"),
+				container = $(".pdanalyzer"),
+				results = container.find('.pdanalyzer-results'),
+				paperdoll = analyzer.closest("#gear-paperdoll").find(".paperdoll");
+				builder = new d3up.ItemBuilder();
+		$.each(builder.skillText, function(k,v) {
+			var option = $("<option>");
+			// Replace my placeholder value with X
+			option.html(v.replace("VVV", "X"));
+			// Append the Value
+			option.attr("value", k);
+			// Add it to the Analyzer
+			analyzer.append(option);
+		});
+		// Activate Chosen on the Select
+		analyzer.chosen();
+		paperdoll.find("a[data-json]").on('click', function(e) {
+			var	json = $(this).data('json'),
+					toFilter = Object.keys(json.attrs);
+			analyzer.val(toFilter).trigger('change').trigger("liszt:updated");
+			return false;
+		});
+		// Bind to it's change event
+		analyzer.on('change', function(){
+			var filters = $(this).val();
+			// Empty out old Results
+			results.empty();
+			// Loop through the Paperdoll's Items
+			paperdoll.find("li").each(function() {
+				// If we don't have filters anymore, reset
+				if(!filters) {
+					$(this).css({opacity: 1});
+					return;
+				}
+				var $this = $(this),
+						slot = $(this).attr("class").replace("slot-", ""),
+						item = $(this).find("a[data-json]").data("json"),
+						intersected = _.intersection(Object.keys(item.attrs), filters);
+				// Highlight the Items that have all filtered values
+				if(intersected.length == filters.length) {
+					// Set Opacity to Full
+					$this.css({opacity: 1});
+					var itemLink = $("<a>"),
+							entry = $("<li>"),
+							attrs = $("<ul>");
+					// Build the Link for the Item
+					itemLink.addClass("quality-" + item.quality);
+					itemLink.attr("href", $(this).find("a").attr("href"));
+					itemLink.html(item.name);
+					entry.append(itemLink);
+					$.each(intersected, function(k,v) {
+						var attr = $("<li>");
+						attr.html(v + " " + item.attrs[v]);
+						attrs.append(attr);
+					});
+					if(attrs) {
+						results.append(entry.append(attrs));						
+					}
+				} else {
+					// Half the Opacity
+					$this.css({opacity: 0.5});
+				}
+			})
+		});
 	});
 </script>
 @endsection
