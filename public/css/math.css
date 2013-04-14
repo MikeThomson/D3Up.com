@@ -14,8 +14,8 @@
 .math-explanation .btn-group {
 }
 .math-explanation .content {
-	border-top: 1px solid #111;
-	padding: 10px;
+	border-top: 1px solid #555;
+	padding: 20px;
 }
 .math-explanation .breadcrumb {
 	margin-top: 10px;
@@ -27,4 +27,11 @@
 }
 .math-explanation .breadcrumb a {
 	text-shadow: none;
+}
+.math-explanation h5.divider {
+	margin-top: 30px;
+	color: #555;
+	border-bottom: 1px solid #555;
+	padding: 5px;
+	font-size: 2em;
 }

@@ -5,6 +5,9 @@
 @include('math.breadcrumb')
 <h1>{{ $math->_localized[$language]['title'] }}</h1>
 <h5 class='lead'>{{ $math->_localized[$language]['explanation'] }}</h5>
+@if(count($errors->messages))
+	<div class="alert alert-error">There was an error saving this entry, please see below.</div>
+@endif
 <div class='content'>
 	{{ Form::open('math/edit', 'POST', array('class' => 'form-math')) }}
 		<!-- Pass the ID -->
