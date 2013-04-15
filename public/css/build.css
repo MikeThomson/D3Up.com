@@ -238,3 +238,6 @@ div.title-block .skill-row {
 .pos {
 	color: #0d0;
 }
+#math-section pre span {
+	color: blue;
+}

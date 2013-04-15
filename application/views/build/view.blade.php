@@ -130,6 +130,7 @@
 		'#stats-sidebar',
 		'#skill-overview',
 		'#dps-math',
+		'#ehp-math',
 	];
 	
 	$.each(sources, function(k,v) {

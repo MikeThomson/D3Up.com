@@ -9,6 +9,7 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 				}, 
 				percents: [
 					'armorReduction',
+					'damageTaken',
 					'attack-speed-incs',
 					'critical-hit',
 					'critical-hit-damage',
@@ -21,6 +22,7 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 				],
 				x100: [
 					'armorReduction',
+					'damageTaken',
 					'percent-resist-all',
 					'percent-melee-reduce',
 					'percent-elite-reduce',
@@ -66,7 +68,6 @@ Handlebars.registerHelper('round', function(number, decimal_points) {
 		for(var i=0;i<decimal_points;i++) decimals += "0";
 		return "0."+decimals;
 	}
-
 	var exponent = Math.pow(10,decimal_points);
 	var num = Math.round((number * exponent)).toString();
 	return parseFloat(num.slice(0,-1*decimal_points) + "." + num.slice(-1*decimal_points));
