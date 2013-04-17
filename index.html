@@ -22,6 +22,12 @@
 			section {
 				margin-top: 10px;
 			}
+			code {
+				color: #111;
+				background-color: #ececec;
+				margin: 0px;
+				padding: 2px;
+			}
 		</style>
   </head>
   <body>
@@ -46,8 +52,6 @@
         <h2>D3Up.com - Version 2.0</h2>
 
 <p>Welcome to the D3Up.com Github Repository!</p>
-
-<p>I've finally made the decision to release the source code to D3Up.com so that everyone able can help contribute and possibly modify it for other games!</p>
 
 <h2>Sections of this Document</h2>
 
@@ -74,7 +78,7 @@
 	<li>Write code that's poorly optimized / implemented, I'll probably say no. Mind you, if I commit some crappy code, call me out on it or comment what could be done better, I'll listen. I plan on doing the same, providing constructive feedback.</li>
 	<li>Commit stuff that breaks unit tests, I'll complain probably. Please test stuff, don't break things! If I break things, by all means, complain.</li>
 </ul>
-<p>I'd also like to say that some of you are going to cringe at code you find, as I'm going to cringe right back at some of the code submitted in your pull requests. Parts of the code were written almost a year ago and in a rush, in what extra free time I had. Parts of the code were also learning experiences for me that never got revisited and improved upon, which lead me to... The Calculator. It's a monster and has been hacked apart so much I barely recognize it. So, I apologize when your head explodes inside `/public/js/unmin`. It works however, and as you'll see below, I'm not planning on focusing on it for the 2.0 release.</p>
+<p>I'd also like to say that some of you are going to cringe at code you find, as I'm going to cringe right back at some of the code submitted in your pull requests. Parts of the code were written almost a year ago and in a rush, in what extra free time I had. Other parts of the code were somewhat of a learning experiences for me that never got revisited and improved upon, which lead me to... The Calculator. It's a monster and has been hacked apart so much I barely recognize it. So, I apologize when your head explodes inside `/public/js`. It works however, and as you'll see below, I'm not planning on focusing on it for the 2.0 release.</p>
 <p>I think I've put enough disclaimers, so to wrap up the introduction, here's my plan for Version 2:</p>
 <ol>
 	<li>(v2.0) Build the PHP/Laravel/MongoDB Backend using Handlebars to serve out V1 Calculator values</li>
@@ -87,11 +91,11 @@
 <p>I've setup numerous ways for anyone wishing to participate to join in the development discussion. Listed below are the three primary methods of communication I use.</p>
 <ul>
 <li>
-<strong>Bugs and Features</strong> - Please use the <a href="https://github.com/aaroncox/D3Up.com/issues">Github Issues</a> section of the project for any bugs or features you'd like to request, talk about or get help with.</li>
+<strong>Github Issues</strong> - Please use the <a href="https://github.com/aaroncox/D3Up.com/issues">Github Issues</a> section of the project for any bugs or features you'd like to request, talk about or get help with.</li>
 <li>
-<strong>General Discussion</strong> - For anything else, or if you just are a bigger reddit fan, feel free to post anything D3Up related on <a href="http://reddit.com/r/d3up">/r/d3up</a>.</li>
+<strong>Reddit</strong> - For anything else, or if you just are a bigger reddit fan, feel free to post anything D3Up related on <a href="http://reddit.com/r/d3up">/r/d3up</a>.</li>
 <li>
-<strong>IRC Chatroom</strong> - If you're IRC savvy, feel free to join the chat on <code>irc.esper.net</code> in the channel <code>#d3up</code>. Github notifications and Jenkins both notify the #d3up channel of any activity on the master branch of the project.</li>
+<strong>IRC</strong> - If you're IRC savvy, feel free to join the chat on <code>irc.esper.net</code> in the channel <code>#d3up</code>. Github notifications and Jenkins both notify the #d3up channel of any activity on the master branch of the project.</li>
 </ul><h2>
 <a id="components"></a>Frameworks, Languages, and Components</h2>
 
@@ -132,6 +136,8 @@
 
 <ul>
 <li>Fork the repository so you have your own copy to work on and submit pull requests from.</li>
+<li>Clone the Repository to your machine and setup your web server to handle requests to it.</li>
+<li>Please make sure to use `local.d3up.com` as the vhost/dns name for your version, it will force the application to use the development environment. If you need to use something else, please add the hostname to <a href="https://github.com/aaroncox/D3Up.com/blob/master/paths.php#L25">paths.php</a> under 'development'.</li>
 <li>Copy <code>application/config/application.template</code> to <code>application/config/application.php</code> and change the <code>key</code> in the file to a unique value.</li>
 <li>Make sure to run <code>git submodule update --init</code> to pull in a copy of the libraries/bundles it uses.</li>
 </ul><h2>
@@ -147,14 +153,14 @@
 
 <p>This requires that PHPUnit is installed on your system, just google for <code>phpunit install [insert your OS here]</code> to find out how.</p>
 
-<p>I also have Jenkins running to notify the #d3up IRC channel whenever changes are applies to the master branch and whether or not they pass the unit tests. You can view all of the results on [jenkins.greymass.com](http://jenkins.greymass.com).</p>
+<p>I also have Jenkins running to notify the #d3up IRC channel whenever changes are applies to the master branch and whether or not they pass the unit tests. You can view all of the results on <a href="http://jenkins.greymass.com">jenkins.greymass.com</a>.</p>
 
 <h2>
 <a id="pullrequests"></a>Submitting Changes</h2>
 
 <p>All changes submitted must be in the form of a <em>Pull Request</em>, which will then be reviewed by the community and once accepted, will be merged into the live codebase and deployed to D3Up.com.</p>
 
-<p>I'd recommend reading [Using Pull Requests](https://help.github.com/articles/using-pull-requests) on github:help or doing some searches for more information. I don't want to clutter up this documentation too much with how pull requests work.</p>
+<p>I'd recommend reading <a href="https://help.github.com/articles/using-pull-requests">Using Pull Requests</a> on github:help or doing some searches for more information. I don't want to clutter up this documentation too much with how pull requests work.</p>
 
 <h2>
 <a id="contributions"></a>Contributors and Thanks</h2>
