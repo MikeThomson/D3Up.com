@@ -1,15 +1,6 @@
 <!-- Bootstrap/Core Scripts -->
-<script src="/js/jquery.js"></script>
-<script src="/js/jquery-ui.js"></script>
-<script src="/js/underscore.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/handlebars.js"></script>
-<script src="/js/utils/handlebars.helpers.js"></script>
-<!-- Battle.net Scripts -->
+{{ HTML::scripts() }}
 <script src="http://us.battle.net/d3/static/js/tooltips.js"></script>
-<!-- D3Up Scripts -->
-<script src="/js/d3up.js"></script>
-<script src="/js/utils/tooltip.js"></script>
 <script type="text/javascript" charset="utf-8">
 $(function(){
 	/* 
