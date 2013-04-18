@@ -110,7 +110,7 @@ Handlebars.registerHelper('if_gt', function(context, options) {
 });
 
 Handlebars.registerHelper('skillName', function(name) {
-	return name.split("~")[0];
+	return name.split("~")[0].replace(/-/g, "");
 });
 
 Handlebars.registerHelper('passiveInfo', function(name, heroClass) {

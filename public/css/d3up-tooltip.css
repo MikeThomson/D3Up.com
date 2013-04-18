@@ -398,3 +398,22 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 #d3up-tooltip-compare .d3-tooltip {
 	display: inline-block;
 }
+/* skills */
+.d3-icon-skill {  vertical-align:middle; cursor: pointer; }
+.d3-icon-skill .frame { display: block; background: no-repeat; }
+.d3-icon-skill-21,
+.d3-icon-skill-21 .frame { width: 21px; height: 21px; }
+.d3-icon-skill-42,
+.d3-icon-skill-42 .frame { width: 42px; height: 42px; }
+.d3-icon-skill-64,
+.d3-icon-skill-64 .frame { width: 64px; height: 64px; }
+.d3-icon-skill-21 .frame { background-image: url("http://us.battle.net/d3/static/images/icons/frames/skill-21.png"); }
+.d3-icon-skill-42 .frame { background-image: url("http://us.battle.net/d3/static/images/icons/frames/skill-42.png"); }
+.d3-icon-skill-64 .frame { background-image: url("http://us.battle.net/d3/static/images/icons/frames/skill-64.png"); }
+.d3-icon-skill.selected .frame { background-position: top right; }
+.d3-icon-skill .frame:hover { background-position: bottom left; }
+/* passive */
+.passive-skills .passive-icon { background:url(/img/passive-skills.png) -41px -41px no-repeat; display:inline-block; width:31px; height:31px; padding:5px; vertical-align:middle }
+.passive-skills .passive-icon:hover { background-position: -82px -41px }
+.passive-skills .empty-passive,
+.passive-skills .passive-icon.selected { display:block; background-position: 0 -41px }

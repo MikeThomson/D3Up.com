@@ -36,15 +36,23 @@
 	 		<ul id="active-display" class="skill-icons" data-skill-type="actives" data-display="icon">
 				<li><span class="skill-type">{{ __('build.skills') }}</span></li>
 				@foreach($build->actives as $skill)
-				<li><img class="skill-icon activatable" src="/img/icons/{{ $build->class}}-{{ explode("~", $skill)[0] }}.png"></li>
+				<li>
+					<span class="d3-icon d3-icon-skill d3-icon-skill-42 " style="background-image: url('http://media.blizzard.com/d3/icons/skills/42/{{ str_replace("-", "", $build->class) }}_{{ explode("~", str_replace("-", "", $skill))[0] }}.png'); width: 42px; height: 42px;">
+						<span class="frame"></span>
+					</span>
+				</li>
 				@endforeach
 			</ul>
 			@endif
 			@if($build->passives)
-	 		<ul id="passive-display" class="skill-icons" data-skill-type="passives" data-display="icon">
+	 		<ul id="passive-display" class="skill-icons passive-skills" data-skill-type="passives" data-display="icon">
 				<li><span class="skill-type">{{ __('build.passives') }}</span></li>
 				@foreach($build->passives as $skill)
-				<li><img class="skill-icon activatable" src="/img/icons/{{ $build->class}}-{{ explode("~", $skill)[0] }}.png"></li>
+				<li>
+					<span class="passive-icon">
+						<img src="http://media.blizzard.com/d3/icons/skills/42/{{ str_replace("-", "", $build->class) }}_passive_{{ explode("~", str_replace("-", "", $skill))[0] }}.png" style="width:32px; height:32px" />
+					</span>					
+				</li>
 				@endforeach
 			</ul>
 			@endif
