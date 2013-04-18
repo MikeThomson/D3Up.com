@@ -15,10 +15,10 @@
 
 @section('content')
 <div class='row compare-container tab-content'>
-	<div class='span6'>
+	<div class='span6' id="build-header-1">
 		@include('build.section.header')->with('build', $build1)
 	</div>
-	<div class='span6'>
+	<div class='span6' id="build-header-2">
 		@include('build.section.header')->with('build', $build2)
 	</div>
 	<div class='span12'>
@@ -129,6 +129,18 @@
 	var template = Handlebars.compile(source);
 	var data = d3up.builds.build1;
 	$("#stats-sidebar-1").replaceWith(template(data));		
+
+	
+	var source   = $("#build-header-1 .skill-row").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.build1;
+	$("#build-header-1 .skill-row").replaceWith(template(data));				
+
+	var source   = $("#build-header-2 .skill-row").html();
+	var template = Handlebars.compile(source);
+	var data = d3up.builds.build2;
+	$("#build-header-2 .skill-row").replaceWith(template(data));				
+
 
 	var source   = $("#stats-sidebar-2").html();
 	var template = Handlebars.compile(source);

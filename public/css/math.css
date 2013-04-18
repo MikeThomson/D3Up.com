@@ -4,6 +4,9 @@
 	color: #ececec;
 	border-radius: 5px;
 }
+.math-explanation.span4 {
+	padding: 0;
+}
 .math-explanation h2.lead {
 	margin-bottom: 0px;
 }
@@ -34,4 +37,13 @@
 	border-bottom: 1px solid #555;
 	padding: 5px;
 	font-size: 2em;
+}
+.math-explanation ins {
+	background-color: #c6ffc6;
+	color: #000;
+  text-decoration: none;
+}
+.math-explanation del {
+	color: #000;
+	background-color: #ffc6c6;
 }

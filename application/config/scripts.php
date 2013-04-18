@@ -13,5 +13,7 @@ return array(
 		'utils/tooltip.js',
 		'utils/skilltip.js',
 		'utils/handlebars.helpers.js',
+		'utils/diff_match_patch.js',
+		'utils/pretty-diff.js',
 	)
 );
