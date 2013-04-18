@@ -188,33 +188,6 @@ $.fn.tooltip = function() {
 	});
 	
 }
-$.fn.bindSkilltip = function() {
-	var tooltip = $("#d3up-tooltip"),
-      container = $("<div class='d3-tooltip'/>"),
-			header = $("<div class='top'/>"),
-			content = $("<div class='item'/>"),
-			footer = $("<div class='bottom'/>");
-	header.html($("<p>").append($(this).data("name")));
-	content.html($("<p>").append($(this).data("tooltip")));
-	container.append(header, content, footer);
-	$(this).mouseover(function() {
-		var $this = $(this);
-		tooltip.css({
-				position: 'absolute'
-		});
-		tooltip.empty().append(container);
-		var position = {
-			of: $this,
-			at: "right top",
-			my: "left bottom",
-			offset: "0 10",
-			collision: "flip"
-		};
-		tooltip.appendTo("body").position(position);
-	}).mouseout(function() {
-		tooltip.empty();
-	});
-}
 function checkTooltip() {
 	if($(this).attr('data-json')) {
 		if($(this).attr('data-compare')) {

@@ -59,6 +59,9 @@
 	text-overflow: ellipsis; 
 	text-shadow: 1px 1px #000;
 }
+.d3-tooltip .top.skill p {
+	font-size: 16px;
+}
 .d3-tooltip .item {
   padding: 10px;
 	color: #ececec;
@@ -413,7 +416,29 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 .d3-icon-skill.selected .frame { background-position: top right; }
 .d3-icon-skill .frame:hover { background-position: bottom left; }
 /* passive */
-.passive-skills .passive-icon { background:url(/img/passive-skills.png) -41px -41px no-repeat; display:inline-block; width:31px; height:31px; padding:5px; vertical-align:middle }
-.passive-skills .passive-icon:hover { background-position: -82px -41px }
-.passive-skills .empty-passive,
-.passive-skills .passive-icon.selected { display:block; background-position: 0 -41px }
+.passive-icon { background:url(/img/passive-skills.png) -41px -41px no-repeat; display:inline-block; width:31px; height:31px; padding:5px; vertical-align:middle }
+.passive-icon:hover { background-position: -82px -41px }
+.passive-icon.selected { display:block; background-position: 0 -41px }
+.d3-tooltip .d3-icon-skill,
+.d3-tooltip .passive-icon {
+	float: left;
+	margin-right: 20px;
+	height: 38px;
+	width: 38px;
+}
+.d3-tooltip .passive-icon {
+	background:url(/img/passive-skills.png) -41px -41px no-repeat;
+}
+.d3-tooltip .skill-desc {
+	font-size: 14px;
+	padding-left: 58px;
+}
+.d3-tooltip .skill-desc p {
+	margin-bottom: 10px;
+}
+.d3-tooltip .skill-desc ul {
+	margin-top: 10px;
+}
+.d3-tooltip .skill-desc .skill-highlight {
+	color: lime;
+}

@@ -37,9 +37,7 @@
 				<li><span class="skill-type">{{ __('build.skills') }}</span></li>
 				@foreach($build->actives as $skill)
 				<li>
-					<span class="d3-icon d3-icon-skill d3-icon-skill-42 " style="background-image: url('http://media.blizzard.com/d3/icons/skills/42/{{ str_replace("-", "", $build->class) }}_{{ explode("~", str_replace("-", "", $skill))[0] }}.png'); width: 42px; height: 42px;">
-						<span class="frame"></span>
-					</span>
+					{{ HTML::hb("skillIcon '$build->class' '$skill'") }}
 				</li>
 				@endforeach
 			</ul>
@@ -49,9 +47,7 @@
 				<li><span class="skill-type">{{ __('build.passives') }}</span></li>
 				@foreach($build->passives as $skill)
 				<li>
-					<span class="passive-icon">
-						<img src="http://media.blizzard.com/d3/icons/skills/42/{{ str_replace("-", "", $build->class) }}_passive_{{ explode("~", str_replace("-", "", $skill))[0] }}.png" style="width:32px; height:32px" />
-					</span>					
+					{{ HTML::hb("passiveIcon '$build->class' '$skill'") }}
 				</li>
 				@endforeach
 			</ul>

@@ -11,6 +11,7 @@ return array(
 		// D3Up Scripts
 		'd3up.js',		
 		'utils/tooltip.js',
+		'utils/skilltip.js',
 		'utils/handlebars.helpers.js',
 	)
 );

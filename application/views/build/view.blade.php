@@ -131,6 +131,7 @@
 		'#skill-overview',
 		'#dps-math',
 		'#ehp-math',
+		'.title-inner .skill-row',
 	];
 	
 	$.each(sources, function(k,v) {
