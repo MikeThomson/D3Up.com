@@ -54,6 +54,12 @@
 			<h2 class='lead lead-original'>{{ $selected->_localized[$lang]['explanation'] }}</h2>
 			<h5 class='lead'>
 				Language Edited:
+				@foreach($current->_localized as $lang => $data) 
+					<a href='/locale/{{ $lang }}'>{{ $langs[$lang] }}</a>
+				@endforeach
+			</h5>
+			<h5 class='lead'>
+				Language Edited:
 				@foreach($selected->_localized as $lang => $data) 
 					<a href='/locale/{{ $lang }}'>{{ $langs[$lang] }}</a>
 				@endforeach
