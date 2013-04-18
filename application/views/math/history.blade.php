@@ -16,6 +16,16 @@
 @section('content')
 <div class='row'>
 	<div class='span4 math-explanation'>
+		<div class='alert'>
+			<h3>Differences</h3>
+			<p><del>Red = Removed</del>, <ins>Green = Added</ins></p>
+		</div>
+		<h1 id="title-diff">{{ $selected->_localized[$lang]['title'] }}</h1>
+		<h2 class='lead' id="lead-diff">{{ $selected->_localized[$lang]['explanation'] }}</h2>
+		<div class='content' id="content-diff">
+		</div>
+	</div>
+	<div class='span4 math-explanation'>
 		<div class='alert alert-success'>
 			<h3>Current Version </h3>
 			<p>By {{ $current->_localized[$lang]->author }} on {{ date("Y-m-d", $current->_localized[$lang]->timestamp) }}</p>
@@ -52,16 +62,6 @@
 				{{ $selected->_localized[$lang]['html'] }}
 			</div>
 		@endif
-	</div>
-	<div class='span4 math-explanation'>
-		<div class='alert'>
-			<h3>Differences</h3>
-			<p><del>Red = Removed</del>, <ins>Green = Added</ins></p>
-		</div>
-		<h1 id="title-diff">{{ $selected->_localized[$lang]['title'] }}</h1>
-		<h2 class='lead' id="lead-diff">{{ $selected->_localized[$lang]['explanation'] }}</h2>
-		<div class='content' id="content-diff">
-		</div>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
