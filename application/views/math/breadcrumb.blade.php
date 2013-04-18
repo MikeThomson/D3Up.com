@@ -1,6 +1,6 @@
 <ul class='breadcrumb'>
 	<li><a href='/math'>Math</a></li>
-	@if(isset($math) && isset($lang))
+	@if(isset($math) && isset($lang) && isset($math->_localized[$lang]))
 		<li><span class="divider">/</span></li>
 		<li><a href='/math/{{ $math->id }}'>{{ $math->_localized[$lang]['title'] }}</a></li>
 	@endif

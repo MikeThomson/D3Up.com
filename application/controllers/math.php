@@ -4,7 +4,7 @@ class Math_Controller extends Base_Controller {
 	public $restful = true;
 	public function get_index() {
 		$math = Epic_Mongo::db('math')->find();
-		return View::make('math.index')->with('math', $math);
+		return View::make('math.index')->with('math', $math)->with('lang', Session::get('locale'));
 	}
 	
 	public function slug($text) {
@@ -138,12 +138,16 @@ class Math_Controller extends Base_Controller {
 	}
 	
 	public function get_history($id) {
+		if(!Request::get('language')) {
+			throw new Exception("A language must be specified to view revision history.");
+		}
 		$query = array(
 			'lang' => Request::get('language'),
 			"_originalId" => (int) $id,
 		);
 		$history = Epic_Mongo::db("math_revision")->find($query);
-		$cursor = Epic_Mongo::db("math_revision")->find($query)->skip(0); 
+		$cursor = Epic_Mongo::db("math_revision")->find($query)->skip(0)->sort(array("_timestamp" => -1)); 
+		// var_dump($cursor->export()); exit;
 		$cursor->rewind();
 		$selected = $cursor->current();
 		$current = Epic_Mongo::db("math")->findOne(array("id" => (int) $id));
