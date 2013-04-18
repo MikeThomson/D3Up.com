@@ -22,6 +22,12 @@
 		</div>
 		<h1 id="title-diff">{{ $selected->_localized[$lang]['title'] }}</h1>
 		<h2 class='lead' id="lead-diff">{{ $selected->_localized[$lang]['explanation'] }}</h2>
+		<h5 class='lead'>
+			Language Edited:
+			@foreach($current->_localized as $lang => $data) 
+				<a href='/locale/{{ $lang }}'>{{ $langs[$lang] }}</a>
+			@endforeach
+		</h5>
 		<div class='content' id="content-diff">
 		</div>
 	</div>
@@ -52,12 +58,6 @@
 		@if(isset($selected->_localized[$lang]))
 			<h1 class='title-original'>{{ $selected->_localized[$lang]['title'] }}</h1>
 			<h2 class='lead lead-original'>{{ $selected->_localized[$lang]['explanation'] }}</h2>
-			<h5 class='lead'>
-				Language Edited:
-				@foreach($current->_localized as $lang => $data) 
-					<a href='/locale/{{ $lang }}'>{{ $langs[$lang] }}</a>
-				@endforeach
-			</h5>
 			<h5 class='lead'>
 				Language Edited:
 				@foreach($selected->_localized as $lang => $data) 
