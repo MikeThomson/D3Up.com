@@ -30,6 +30,7 @@ return array(
 		'guide_sections' => 'D3Up_Guide_Sections',
 		'item' => 'D3Up_Item',
 		'math' => 'D3Up_Math',
+		'math_revision' => 'D3Up_Math_Revision',
 		'localized' => 'D3Up_Localized',
 		'gearset' => 'D3Up_GearSet',
 		'gearsetcache' => 'D3Up_GearSet_Cache',

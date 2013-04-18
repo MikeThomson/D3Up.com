@@ -89,11 +89,14 @@ class Math_Controller extends Base_Controller {
 			return Redirect::to('math/'.$input['id'].'/edit?language='.$input['locale'])->with_errors($validation);
 		}
 		$math = Epic_Mongo::db('math')->findOne(array("id" => (int) $input['id']));
+		$math->saveRevision($input['locale']); 
 		$math->_localized->$input['locale'] = array(
+			'author' => Auth::user()->username,
 			'title' => $input['title'],
 			'explanation' => $input['explanation'],
 			'content' => $input['content'],
 			'html' => Markdown::defaultTransform($input['content']),
+			'timestamp' => time(),
 		);
 		$math->save();
 		return Redirect::to('/math/' . $math->id . '/edit');			
@@ -132,5 +135,18 @@ class Math_Controller extends Base_Controller {
 			}
 		}		
 		throw new Exception("Unable to Delete");
+	}
+	
+	public function get_history($id) {
+		$query = array(
+			'lang' => Request::get('language'),
+			"_originalId" => (int) $id,
+		);
+		$history = Epic_Mongo::db("math_revision")->find($query);
+		$cursor = Epic_Mongo::db("math_revision")->find($query)->skip(0); 
+		$cursor->rewind();
+		$selected = $cursor->current();
+		$current = Epic_Mongo::db("math")->findOne(array("id" => (int) $id));
+		return View::make('math.history')->with('current', $current)->with('history', $history)->with('selected', $selected);
 	}
 }
