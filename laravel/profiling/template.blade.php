@@ -100,7 +100,7 @@
 	<ul id="anbu-open-tabs" class="anbu-tabs">
 		<li><a data-anbu-tab="anbu-log" class="anbu-tab" href="#">Log <span class="anbu-count">{{ count($logs) }}</span></a></li>
 		<li>
-			<a data-anbu-tab="anbu-sql" class="anbu-tab" href="#">SQL 
+			<a data-anbu-tab="anbu-sql" class="anbu-tab" href="#">DB 
 				<span class="anbu-count">{{ count($queries) }}</span>
 				@if (count($queries))
 				<span class="anbu-count">{{ array_sum(array_map(function($q) { return $q[1]; }, $queries)) }}ms</span>
