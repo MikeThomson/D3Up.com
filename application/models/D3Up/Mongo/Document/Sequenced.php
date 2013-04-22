@@ -7,7 +7,7 @@ class D3Up_Mongo_Document_Sequenced extends Epic_Mongo_Document_Sequenced {
 		$results = parent::findOne($query, $fields);
 		if(Config::get('application.profiler') && $results) {
 			$time += microtime(true);
-			Profiler::query("db.".$results->getCollection().".find(" . json_encode($query) .")", array(), round($time, 4));
+			Profiler::query("db.".$results->getCollection().".findOne(" . json_encode($query) .")", array(), round($time, 4));
 		}		
 		return $results;
 	}
