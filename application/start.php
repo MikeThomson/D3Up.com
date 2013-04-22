@@ -158,6 +158,7 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 
 if (Request::cli())
 {
+	Request::set_env('testing');
 	Session::load();
   Bundle::start('myunit');
 }
