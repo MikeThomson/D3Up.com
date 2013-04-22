@@ -241,3 +241,11 @@ div.title-block .skill-row {
 #math-section pre span {
 	color: blue;
 }
+.passive-icon, .d3-icon-skill {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}

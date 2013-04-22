@@ -62,7 +62,11 @@
 				damage[name] = Math.round(build.calc.calcDmgTaken(build.meta.heroClass, value, type, element) * 100) / 100;
 				$("#" + name + "-inc-hit").html(damage[name]);
 			});
-			damage['diff'] = 100 - Math.round(damage['build1'] / damage['build2'] * 10000) / 100;
+			damage['diff'] = 100 - (damage['build1'] / damage['build2'] * 100);
+			if(damage['diff'] < 0) {
+				damage['diff'] *= -1;
+			}
+			damage['diff'] = Math.round(damage['diff'] * 100) / 100;
 			if(damage['build1'] < damage['build2']) {
 				damage['victor'] = 'build1';
 			} else {

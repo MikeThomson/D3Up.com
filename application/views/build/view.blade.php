@@ -141,6 +141,10 @@
 		$(v).replaceWith(template(data));		
 	});
 	
+	$(".d3-icon-skill, .passive-icon").bind('click', function() {
+		$(this).toggleClass('selected')	
+	});
+	
 	$(function() {
 		var analyzer = $("#pdanalyzer"),
 				container = $(".pdanalyzer"),
