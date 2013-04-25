@@ -43,7 +43,7 @@
 									link = $("<a href='" + url + "'>" + url + "</a>"),
 									query = $("<td>URL: </td>").append(link),
 									loading = $("<td>Timing...</td>");
-							target.append(row.append(query));
+							target.append(row.append(query, loading));
 					  }
 				}).done(function () {
 					var row = $("<tr>"),
