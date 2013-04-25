@@ -15,5 +15,6 @@ return array(
 		'utils/handlebars.helpers.js',
 		'utils/diff_match_patch.js',
 		'utils/pretty-diff.js',
+		'utils/jquery.cookie.js',
 	)
 );
