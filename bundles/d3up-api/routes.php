@@ -26,8 +26,7 @@ Route::get('(:bundle)/build', function() {
 								->skip($skip)
 								->limit($limit);
 	if(Input::get('explain')) {		
-		var_dump($results->getInnerIterator()->info());
-		var_dump($results->getInnerIterator()->explain()); exit;
+		return View::make('api.explain')->with('info', $results->getInnerIterator()->info())->with('explain', $results->getInnerIterator()->explain());
 	}
 	return Response::json($results->json());
 });
