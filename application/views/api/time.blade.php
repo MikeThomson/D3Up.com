@@ -31,10 +31,13 @@
 			var target = $("#results"),
 					tests = [
 						'/api/build',
-						'/api/build?class=barbarian',
-						'/api/build?class=barbarian&skills=sprint~c|whirlwind~c',
+						'/api/build/witch-doctor',
+						'/api/build/barbarian?skills=sprint~c|whirlwind~c',
 						'/api/build?sort=dps',
 						'/api/build?sort=ehp',
+						'/api/build/monk?sort=dps',
+						'/api/build/demon-hunter?sort=ehp',
+						'/api/build/wizard?skills=blizzard~c&sort=dps',
 					];
 			$.each(tests, function(idx, url) {
 				var before = now();
@@ -47,15 +50,17 @@
 							var row = $("<tr id='temp' class='info'>"),
 									link = $("<a href='" + url + "'>" + url + "</a>"),
 									query = $("<td>URL: </td>").append(link),
-									loading = $("<td>Timing...</td>");
-							target.append(row.append(query, loading));
+									loading = $("<td>Timing...</td>"),
+									results = $("<td>Timing...</td>");
+							target.append(row.append(query, loading, results));
 					  }
-				}).done(function () {
+				}).done(function (data) {
 					var row = $("<tr>"),
 							link = $("<a href='" + url + "'>" + url + "</a>"),
 							query = $("<td>URL: </td>").append(link),
 							diff = (now() - before),
-							time = $("<td>" + diff + "ms</td>");
+							time = $("<td>" + diff + "ms</td>"),
+							count = $("<td>" + Object.keys(data).length + " Objects</td>");
 					if(diff < 100) {
 						row.addClass('success');
 					} else if(diff < 300) {
@@ -63,7 +68,7 @@
 					} else {
 						row.addClass('error');												
 					}
-					target.append(row.append(query, time));
+					target.append(row.append(query, time, count));
 					$("#temp").remove();
 				});
 			});
