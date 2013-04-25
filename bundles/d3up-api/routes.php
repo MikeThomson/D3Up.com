@@ -3,9 +3,7 @@ Route::get('(:bundle)/build', function() {
 	$query = array(
 		'public' => true,
 	);
-	$sort = array(
-		'stats.dps' => -1
-	);
+	$sort = array();
 	$limit = Input::get('limit', 100);
 	$skip = $limit * (Input::get('page', 1) - 1);
 	if(Input::get('skills') && $skills = explode("|",Input::get('skills'))) {
@@ -26,7 +24,9 @@ Route::get('(:bundle)/build', function() {
 								->skip($skip)
 								->limit($limit);
 	if(Input::get('explain')) {		
-		return View::make('api.explain')->with('info', $results->getInnerIterator()->info())->with('explain', $results->getInnerIterator()->explain());
+		return View::make('api.explain')
+								->with('info', $results->getInnerIterator()->info())
+								->with('explain', $results->getInnerIterator()->explain());
 	}
 	return Response::json($results->json());
 });
