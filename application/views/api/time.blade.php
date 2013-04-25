@@ -39,6 +39,11 @@
 				    url: url,
 					  beforeSend: function () {
 							before = now();
+							var row = $("<tr id='temp' class='info'>"),
+									link = $("<a href='" + url + "'>" + url + "</a>"),
+									query = $("<td>URL: </td>").append(link),
+									loading = $("<td>Timing...</td>");
+							target.append(row.append(query));
 					  }
 				}).done(function () {
 					var row = $("<tr>"),
@@ -54,6 +59,7 @@
 						row.addClass('error');												
 					}
 					target.append(row.append(query, time));
+					$("#temp").remove();
 				});
 			});
 		});
