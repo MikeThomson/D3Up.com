@@ -25,11 +25,11 @@
 	$(document).ready(function() {
 			var target = $("#results"),
 					tests = [
-						'http://laravel.d3up.com/api/build',
-						'http://laravel.d3up.com/api/build?class=barbarian',
-						'http://laravel.d3up.com/api/build?class=barbarian&skills=sprint~c|whirlwind~c',
-						'http://laravel.d3up.com/api/build?sort=dps',
-						'http://laravel.d3up.com/api/build?sort=ehp',
+						'/api/build',
+						'/api/build?class=barbarian',
+						'/api/build?class=barbarian&skills=sprint~c|whirlwind~c',
+						'/api/build?sort=dps',
+						'/api/build?sort=ehp',
 					];
 			$.each(tests, function(idx, url) {
 				var before = now();
