@@ -31,7 +31,7 @@
 			var target = $("#results"),
 					tests = [
 						'/api/build',
-						'/api/build/witch-doctor',
+						'/api/build/barbarian',
 						'/api/build/barbarian?skills=sprint~c|whirlwind~c',
 						'/api/build?sort=dps',
 						'/api/build?sort=ehp',
