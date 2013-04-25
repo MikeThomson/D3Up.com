@@ -7,8 +7,13 @@
 			color: #000;
 		}
 	</style>
-	<h2>D3Up.com API Response Times</h2>
-	<p>Test page for how long API calls take to make</p>
+	<h2>D3Up.com API Response Timers</h2>
+	<div class="pull-right">
+		<span class='label label-success'>&lt; 100ms</span>
+		<span class='label label-warning'>101ms - 299ms</span>
+		<span class='label label-error'>&gt; 300ms</span>
+	</div>
+	<p>Issues a request against all API calls and measures the time it takes to respond.</p>
 	<table id="results" class='table table-bordered'></table>
 	
 	<script type="text/javascript" charset="utf-8">
