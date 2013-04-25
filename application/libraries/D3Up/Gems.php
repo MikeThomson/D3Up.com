@@ -1,4 +1,5 @@
 <?php
+
 /**
  * undocumented class
  *

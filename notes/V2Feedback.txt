@@ -1,0 +1,39 @@
+- Homepage
+	- Users get a build list and item list, letting them quickly access their builds and items. 	People want to jump to their builds quickly without having to visit /user/builds.
+- Items
+	- Legendary/Set Item Templates - Auto fill out min/max stats or atleast add stats possible.
+		- Possibly a crowd sourced DB of these items
+		- Possibly querying/aggregating the ItemDB for base templates
+	- A way to easily equip/compare an item on one build to one of your characters. A "what if I had this" engine
+	- Simulating 
+		- Prevent editing of the Top Values, which will make IAS, Damage and other stats work and cause less confusion.
+- Builds
+	- Add Archon Skills for Archon Builds
+	- New Hierarchy of Builds. Currently it's Users with Builds, but research on what it would take to make Users with Characters, which each character can have multiple builds. Either that or maybe just create a hierarchy grouping by battletag for ease of reference.
+	- Ability to save your buffs (so you don't have to turn em on over and over)
+	- Ability to edit/create items without leaving your build
+	- Set a "Default Tab", which would allow users to pick which info is displayed first on their build.
+	- PVP Mode, which will include the 30% bonus for ranged classes and 5% for melee. Essentially changing your stats into a PVP simulated mode. 
+	- Option to not sync items. If you're importing someone elses character, and don't want the items shoved into "My Items", there should be an option.
+	- Ability to save a "Simulate" or "Compare" result. There's no way currently to share what a compare/simulate would do or save it for later reference.
+	- When you tooltip someone elses items, show what it would do to your character.
+	- Add Life per Spirit Spent into LPS (Life Per Second) for Monks
+	- Tabs
+		- Skills Tab - Add "DPS vs Elites", "DPS vs Demons", etc to each skill.
+		- (Possible New Tab) tDPS/Breakpoints, explaining what the breakpoints are and more info
+		- (Possible New Tab) DPS/EHP by Stat - "What I REALLY want to know is DPS, EHP(with and without dodge), DPS gains by stat, and EHP gains by stat."
+		- (Possible New Tab) Defenses - Could list all % damage reductions and defensive stats
+- Build Browser
+	- Ability to filter out "Fake Builds" from "Real Builds".
+	- Ability to find builds between X-Y EHP and/or DPS
+- User
+	- Ability to customize the "Quick Jump" build list instead of just being last 5.
+	- Reorder builds page to last modified/sync'd, as opposed to newest to oldest.
+- General
+	- Mobile Friendly
+- Instruction/Help	
+	- Show people how to use the AutoComplete on the Attributes of Items
+	- Make people realize the builds are saved and they don't have to keep making new ones.
+- Possible new Calculations
+	- WW/SRLTW fury generation score calculations @ https://docs.google.com/file/d/0B0gMgiAJ3WsmWUticGkzc20xLUU/edit?usp=sharing
+	- Another is life per second return on single target WW/SRLTW against normal targets and most importantly against reflect elites - https://docs.google.com/file/d/0B0gMgiAJ3WsmT3Jsbm9jQlUyTG8/edit?usp=sharing

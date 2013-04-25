@@ -28,4 +28,6 @@ return array(
 	| s3 - Amazon S3 Wrapper for Easy Uploading
 	|------------------------------------------------------------------------ */
 	's3' => array('auto' => true),
+	// Startings of a D3Up API
+	'd3up-api' => array('handles' => 'api'),
 );

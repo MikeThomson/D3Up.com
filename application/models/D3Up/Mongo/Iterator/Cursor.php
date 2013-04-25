@@ -25,4 +25,5 @@ class D3Up_Mongo_Iterator_Cursor extends Epic_Mongo_Iterator_Cursor {
 			return $value;
 		}
 	}
+	
 }
