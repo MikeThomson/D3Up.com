@@ -177,6 +177,20 @@ class Build_Controller extends Base_Controller {
 						->with('pagination', $pagination);
 	}
 	
+	public function makeFloats($array) {
+		$data = array();
+		foreach($array as $k => $v) {
+			if(is_array($v)) {
+				$data[$k] = $this->makeFloats($v);
+			} else if(is_numeric($v)) {
+				$data[$k] = (float) $v;
+			} else {
+				$data[$k] = $v;
+			}
+		}
+		return $data;
+	}
+	
 	public function post_cache($id) {
 		// Get the Stats from the AJAX Request (Generated via the Calculator)
 		$toCache = Request::get('stats');
@@ -193,7 +207,7 @@ class Build_Controller extends Base_Controller {
 			// If so, is our user logged in the owner?
 			if(Auth::user()->id === $build->_createdBy->id) {
 				// Set the Stats array on the build equal to the data from the calculator
-				$build->stats = $toCache;
+				$build->stats = $this->makeFloats($toCache);
 				// Save it
 				$build->save();				
 			}
