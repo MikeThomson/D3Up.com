@@ -30,14 +30,20 @@
 	$(document).ready(function() {
 			var target = $("#results"),
 					tests = [
-						'/api/build',
-						'/api/build/barbarian',
-						'/api/build/barbarian?skills=sprint~c|whirlwind~c',
-						'/api/build?sort=dps',
-						'/api/build?sort=ehp',
-						'/api/build/monk?sort=dps',
-						'/api/build/demon-hunter?sort=ehp',
-						'/api/build/wizard?skills=blizzard~c&sort=dps',
+						'/api/builds',
+						'/api/builds/barbarian',
+						'/api/builds/barbarian?actives=sprint~c|whirlwind~c',
+						'/api/builds?sort=dps',
+						'/api/builds?sort=ehp',
+						'/api/builds/monk?sort=dps',
+						'/api/builds/demon-hunter?sort=ehp',
+						'/api/builds/wizard?actives=blizzard~c&sort=dps',
+						'/api/user/item',
+						'/api/user/item?type=chest',
+						'/api/user/item?type=sword&sort=newest',
+						'/api/user/build',
+						'/api/user/build?class=barbarian',
+						'/api/user/build?class=monk&sort=dps',
 					];
 			$.each(tests, function(idx, url) {
 				var before = now();
