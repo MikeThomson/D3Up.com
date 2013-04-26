@@ -30,4 +30,6 @@ return array(
 	's3' => array('auto' => true),
 	// Startings of a D3Up API
 	'd3up-api' => array('handles' => 'api'),
+	// Startings of a D3Up API
+	'd3up-cache' => array('auto' => true),
 );

@@ -94,6 +94,8 @@ class Build_Controller extends Base_Controller {
 		if(!$build) {
 			return Response::error('404');
 		}
+		// Possible Caching Mechanism, found in the Bundle D3Up-Cache
+		// return View::cached('build.view', array('build' => $build));
 		return View::make('build.view')->with('build', $build);
 	}
 	

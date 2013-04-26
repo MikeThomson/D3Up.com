@@ -31,6 +31,8 @@ Laravel\Event::listen(Laravel\Config::loader, function($bundle, $file)
 	return Laravel\Config::file($bundle, $file);
 });
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Class Aliases
@@ -46,6 +48,23 @@ Laravel\Event::listen(Laravel\Config::loader, function($bundle, $file)
 $aliases = Laravel\Config::get('application.aliases');
 
 Laravel\Autoloader::$aliases = $aliases;
+
+/*
+|--------------------------------------------------------------------------
+| Auto-Loader Directories
+|--------------------------------------------------------------------------
+|
+| The Laravel auto-loader can search directories for files using the PSR-0
+| naming convention. This convention basically organizes classes by using
+| the class namespace to indicate the directory structure.
+|
+*/
+
+Autoloader::directories(array(
+	path('app').'models',
+	path('app').'libraries',
+	Bundle::path('d3up-cache'),
+));
 
 /*
 |--------------------------------------------------------------------------
@@ -163,21 +182,6 @@ if (Request::cli())
   Bundle::start('myunit');
 }
 
-/*
-|--------------------------------------------------------------------------
-| Auto-Loader Directories
-|--------------------------------------------------------------------------
-|
-| The Laravel auto-loader can search directories for files using the PSR-0
-| naming convention. This convention basically organizes classes by using
-| the class namespace to indicate the directory structure.
-|
-*/
-
-Autoloader::directories(array(
-	path('app').'models',
-	path('app').'libraries',
-));
 
 /*
 |--------------------------------------------------------------------------
@@ -199,4 +203,4 @@ if (!IoC::registered('whoops')) {
         }
     );
 } 
-IoC::resolve('whoops');
+// IoC::resolve('whoops');
