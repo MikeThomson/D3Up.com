@@ -9,7 +9,7 @@
 	url = git://github.com/michelf/php-markdown.git
 [submodule "application/language"]
 	path = application/language
-	url = git://github.com/aaroncox/D3Up.com-Lang.git
+	url = git://github.com/D3Up/Languages.git
 [submodule "bundles/s3"]
 	path = bundles/s3
 	url = git://github.com/swt83/laravel-s3.git
