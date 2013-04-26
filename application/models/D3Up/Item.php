@@ -5,33 +5,15 @@ class D3Up_Item extends D3Up_Mongo_Document_Sequenced {
 		'_createdBy' => array('doc:user', 'ref'),
   );
 	protected $_sequenceKey = 'item';
-	protected $_tooltipData = array(
-		'id',
-		'name',
-		'quality',
-		'sockets',
-		'stats',
-		'type',
-		'attrs',
-		'icon',
+	protected $_jsonData = array(
+		'id'						=> null,
+		'name'					=> null,
+		'attrs'					=> null,
+		'stats'					=> null,
+		'type'					=> null,
+		'quality'				=> null,
+		'_created'			=> 'created',
 	);
-	
-	public function tooltip() {
-		// Data to Return for the Tooltip
-		$data = array();
-		// Use the keys specified on the object
-		foreach($this->_tooltipData as $key) {
-			if($this->$key) {
-				if($this->$key instanceOf Epic_Mongo_Document) {
-					$data[$key] = $this->$key->export();				
-				} else {
-					$data[$key] = $this->$key;									
-				}
-			}
-		}
-		return $data;
-	}
-	
 	
 	public function cleanedFor($type) {
 		if($type == 'gearsetcache') {
@@ -42,12 +24,5 @@ class D3Up_Item extends D3Up_Mongo_Document_Sequenced {
 		}
 		return $this;
 	}
-	
-	// public function save($whole = false) {
-	// 	if(Request::cli()) {
-	// 		return parent::save();
-	// 	}
-	// 	throw new Exception("Saving is currently disabled.");
-	// }
-	
+
 }

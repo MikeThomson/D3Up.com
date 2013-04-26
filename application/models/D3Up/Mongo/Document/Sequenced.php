@@ -20,4 +20,26 @@ class D3Up_Mongo_Document_Sequenced extends Epic_Mongo_Document_Sequenced {
 		}		
 		return $results;
 	}
+	
+	public function json() {
+		$data = array();
+		foreach($this->_jsonData as $idx => $rename) {
+			if($this->$idx) {
+				if($rename) {
+					if($this->$idx instanceOf Epic_Mongo_Document) {
+						$data[$rename] = $this->$idx->export();																								
+					} else {
+						$data[$rename] = $this->$idx;																		
+					}
+				} else {
+					if($this->$idx instanceOf Epic_Mongo_Document) {
+						$data[$idx] = $this->$idx->export();																								
+					} else {
+						$data[$idx] = $this->$idx;						
+					}
+				}
+			}
+		}
+		return $data;		
+	}
 } // END class Epic_Mongo_Document_Sequenced

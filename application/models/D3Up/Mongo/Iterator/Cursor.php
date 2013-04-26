@@ -26,4 +26,12 @@ class D3Up_Mongo_Iterator_Cursor extends Epic_Mongo_Iterator_Cursor {
 		}
 	}
 	
+	public function json() {
+		$data = array();
+		foreach($this as $doc) {
+			$data[(string)$doc->_id] = $doc->json();
+		}
+		return $data;
+	}
+	
 }

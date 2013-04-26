@@ -34,7 +34,7 @@ return array(
 		'localized' => 'D3Up_Localized',
 		'gearset' => 'D3Up_GearSet',
 		'gearsetcache' => 'D3Up_GearSet_Cache',
-		'cursor:build' => 'D3Up_Mongo_Iterator_Cursor_Build',
+		'cursor:build' => 'D3Up_Mongo_Iterator_Cursor',
 		'cursor:item' => 'D3Up_Mongo_Iterator_Cursor',
 	)
 );

@@ -13,55 +13,23 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
   );
 
 	// These fields will be renamed/removed, null = remove, rename = string
-	protected $_fieldMod = array(
-		// Internal Flags / Timestamps
-		'_id' => null, 
-		'_created' => null, 
-		'_lastCrawl' => null,
-		'crawlCount' => null,
-		'_type' => null,
-		'private' => null,
-		'_createdBy' => null,
-		'views' => null,
-		// Twitch Information
-		'_twitchEnabled' => null,
-		'_twitchLastCheck' => null,
-		'_twitchOnline' => null,
-		// Character BattleNet Info
-		'_characterBt' => 'battletag',
-		'_characterId' => null,
-		'_characterRg' => null,
-		// Old Description Fields
-		'description' => null,
-		'descriptionSource' => null,
-		'_defaultToDescription' => null, 
-		// The characters gear/stats, we don't need it here
-		'gear' => null,
-		'_gear' => null,
-		'_original' => null,
-		'equipment' => null,
-		'equipmentCount' => null,
-		'stats' => null,
-		// Since JS reserves class, we use heroClass in JS
-		'class' => 'heroClass',
-		// This can be removed safely 
-		'test' => null,
+	protected $_jsonData = array(
+		'id'						=> null,
+		'name'					=> null,
+		'class'					=> 'heroClass',
+		'level'					=> null,
+		'hardcore'			=> null,
+		'paragon'				=> null,
+		'actives'				=> null,
+		'passives'			=> null,
+		'_characterId'	=> 'bt-id',
+		'_characterBt'	=> 'bt-tag',
+		'_characterRg'	=> 'bt-srv'
 	);
 
 	public function sync($type = null) {
 		$tool = new D3Up_Sync();
 		return $tool->run($this, $type);
-	}
-	
-	public function json() {
-		$data = $this->export();
-		foreach($this->_fieldMod as $field => $mod) {
-			if($mod && isset($data[$field])) {
-				$data[$mod] = $data[$field];
-			}
-			unset($data[$field]);				
-		}
-		return json_encode($data);
 	}
 	
 	public function getGear() {
@@ -74,11 +42,15 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 		return $this->gear;
 	}
 	
-	// public function save($whole = true) {
-	// 	if(Request::cli()) {
-	// 		return parent::save();
-	// 	}
-	// 	throw new Exception("Saving is currently disabled.");
-	// 	return parent::save($whole);
-	// }
+	public function json() {
+		$data = parent::json();
+		if(isset($this->stats['dps'])) {
+			$data['dps'] = round($this->stats['dps'], 2);
+		}
+		if(isset($this->stats['ehp'])) {
+			$data['ehp'] = round($this->stats['ehp'], 2);
+		}
+		return $data;
+	}
+
 }
