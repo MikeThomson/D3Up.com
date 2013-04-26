@@ -60,7 +60,7 @@
 		<div class='items-horizontal'>
 		@foreach($build->getGear() as $slot => $item)
 			<span class='item icon-link'>
-				<a href="/i/{{ $item->id }}" data-json="{{ e(json_encode($item->tooltip())) }}" data-slot="{{ $slot }}">
+				<a href="/i/{{ $item->id }}" data-json="{{ e(json_encode($item->json())) }}" data-slot="{{ $slot }}">
 					{{ HTML::itemIcon($item) }}
 				</a>
 			</span>
@@ -93,7 +93,7 @@
 	</div>
 @endif
 
-<div id='character' data-json='{{ $build->json() }}'></div>
+<div id='character' data-json='{{ json_encode($build->json()) }}'></div>
 <script>
 	jQuery(document).ready(function ($) {
 		$('#build-tabs').tab();

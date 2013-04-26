@@ -79,8 +79,8 @@
 		</div>
 	</div>
 </div>
-<div id='character1' data-json='{{ $build1->json() }}'></div>
-<div id='character2' data-json='{{ $build2->json() }}'></div>
+<div id='character1' data-json='{{ json_encode($build1->json()) }}'></div>
+<div id='character2' data-json='{{ json_encode($build2->json()) }}'></div>
 <script>
 	// Build #1
 	var data1 = $("#character1").data("json"),

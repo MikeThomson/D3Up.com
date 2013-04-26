@@ -26,7 +26,7 @@ return array('html itemLink' => function($item, $params = array()) {
 	$options = array(
 		'data-id' => $item->id,
 		'data-type' => 'item',
-		'data-json' => json_encode($item->tooltip()),
+		'data-json' => json_encode($item->json()),
 		'class' => implode(" ", array(
 			'quality-'.$item->quality,
 		)),

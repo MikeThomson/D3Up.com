@@ -5,7 +5,7 @@
 		@foreach($gear->getSlots() as $slot) 
 			@if($gear[$slot])
 				<li class="slot-{{ $slot }}">
-					<a class="slot-link" href="/i/{{ $gear[$slot]->id }}" data-json="{{ e(json_encode($gear[$slot]->tooltip())) }}" data-slot="{{ $slot }}">
+					<a class="slot-link" href="/i/{{ $gear[$slot]->id }}" data-json="{{ e(json_encode($gear[$slot]->json())) }}" data-slot="{{ $slot }}">
 						<span class="d3-icon d3-icon-item d3-icon-item-{{ HTML::tooltipColor($gear[$slot]->quality) }}">
 							<span class="icon-item-gradient">
 								<span class="icon-item-inner"></span>
