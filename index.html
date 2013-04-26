@@ -28,6 +28,13 @@
 				margin: 0px;
 				padding: 2px;
 			}
+			pre {
+				border: 0;
+				padding: 2px;
+			}
+			pre .comment {
+				color: #888;
+			}
 		</style>
   </head>
   <body>
@@ -62,6 +69,7 @@
 <li><a href="#environment">Setting up a Development Environment</a></li>
 <li><a href="#unittests">Unit Testing your Code</a></li>
 <li><a href="#pullrequests">Submitting your Code</a></li>
+<li><a href="#database">The Database</a></li>
 <li><a href="#contributors">Contributors and Thanks</a>
 <li><a href="#license">License</a></li>
 </ul>
@@ -162,11 +170,184 @@
 
 <p>I'd recommend reading <a href="https://help.github.com/articles/using-pull-requests">Using Pull Requests</a> on github:help or doing some searches for more information. I don't want to clutter up this documentation too much with how pull requests work.</p>
 
-<h2>
-<a id="contributions"></a>Contributors and Thanks</h2>
+<h2><a id="database"></a>The Database</h2>
+<p>D3Up.com uses <a href="http://www.mongodb.org/">MongoDB</a> for it's database engine. If you're interested in doing anything regarding the database itself, I'd recommend learning about MongoDB. I won't be distributing access to the live database, but I will make a copy of the database available for testing.</p>
+<h3>MongoDB Collections</h3>
+<p>The site primarily uses two collections, <strong>Builds</strong> and <strong>Items</strong>. The site also has about 8 other collections, but they are primarily system related, and as this documentation evolves, I'll review them as well.</p>
+<h3>The Builds Collection</h3>
+<p>The build's collection is where all of the character builds are stored. I'm going to use my build as an example of how the data is laid out, with comments on each field.</p>
+<pre>
+{
+<span class='comment'>// MongoDB Assigned ObjectID</span>
+"_id" : ObjectId("5015ead717bbcb1a6b000eab"),
+<span class='comment'>// Battle.net BattleTag</span>
+"_characterBt" : "jesta#1121",
+<span class='comment'>// Battle.net Character ID</span>
+"_characterId" : "1107072",
+<span class='comment'>// Battle.net Region (1 = US, 2 = EU, 3 = CN)</span>
+"_characterRg" : "1",
+<span class='comment'>// When this build was created</span>
+"_created" : NumberLong(1343613655),
+<span class='comment'>// Who created this build and owns it</span>
+"_createdBy" : DBRef("users", ObjectId("4fe8ccb617bbcbdd59000dfe")),
+<span class='comment'>// This is a gear cache, which caches the characters gear as embedded documents</span>
+"_gear" : {
+	<span class='comment'>(I emptied this data, they look like the items below)</span>
+	"helm" : {},
+	"chest" : {},
+	"boots" : {},
+	"gloves" : {},
+	"shoulders" : {},
+	"pants" : {},
+	"bracers" : {},
+	"mainhand" : {},
+	"offhand" : {},
+	"belt" : {},
+	"ring2" : {},
+	"ring1" : {},
+	"amulet" : {}
+},
+<span class='comment'>// Battle.net's Time on the last update to the armory</span>
+"_lastBnetUpdate" : NumberLong(1361039573),
+<span class='comment'>// Last time the user issued a Battle.net Sync</span>
+"_lastCrawl" : NumberLong(1365996786),
+<span class='comment'>// The Active Skills used by this build</span>
+"actives" : [
+	"weapon-throw~c",
+	"whirlwind~c",
+	"sprint~c",
+	"battle-rage~d",
+	"war-cry~c",
+	"wrath-of-the-berserker~d"
+],
+<span class='comment'>// The Class of the Build</span>
+"class" : "barbarian",
+<span class='comment'>// Database references to all of your gear by slot</span>
+"gear" : {
+	"helm" : DBRef("items", ObjectId("50fb864b17bbcbaf1c000030")),
+	"chest" : DBRef("items", ObjectId("50fb864b17bbcbaf1c000032")),
+	"boots" : DBRef("items", ObjectId("50fb864b17bbcbaf1c000034")),
+	"gloves" : DBRef("items", ObjectId("50fb864c17bbcbaf1c000036")),
+	"shoulders" : DBRef("items", ObjectId("50fb864c17bbcbaf1c000038")),
+	"pants" : DBRef("items", ObjectId("50fb864c17bbcbaf1c00003a")),
+	"bracers" : DBRef("items", ObjectId("50fb864c17bbcbaf1c00003c")),
+	"offhand" : DBRef("items", ObjectId("515fa83817bbcb2c74000acf")),
+	"mainhand" : DBRef("items", ObjectId("515d92b317bbcb24390000e7")),
+	"belt" : DBRef("items", ObjectId("50fb864d17bbcbaf1c000042")),
+	"ring2" : DBRef("items", ObjectId("50fb864d17bbcbaf1c000046")),
+	"ring1" : DBRef("items", ObjectId("50fb864d17bbcbaf1c000044")),
+	"amulet" : DBRef("items", ObjectId("50fb864d17bbcbaf1c000048"))
+},
+<span class='comment'>// Gender (0 = Male, 1 = Female)</span>
+"gender" : NumberLong(0),
+<span class='comment'>// Is this character hardcore?</span>
+"hardcore" : false,
+<span class='comment'>// Numeric ID (Used in the URL)</span>
+"id" : 1,
+<span class='comment'>// Level</span>
+"level" : NumberLong(60),
+<span class='comment'>// Character Name</span>
+"name" : "Jesta",
+<span class='comment'>// Paragon Level</span>
+"paragon" : NumberLong(60),
+<span class='comment'>// The Passive Skills this build uses</span>
+"passives" : [
+	"ruthless",
+	"weapons-master",
+	"no-escape"
+],
+"stats" : {
+	<span class='comment'>// A gigantic array of stats, cached from the Javascript Calculator.</span>
+	<span class='comment'>// Again, I remove this to reduce the size of this code block.</span>
+},
+<span class='comment'>// How many Views this build has received</span>
+"views" : NumberLong(21349)
+}
+</pre>
+<p>If you're familiar with MongoDB, the document shouldn't seem too strange to you. However, if you've never experienced MongoDB before, you should note that the documents stored within are JSON. This lets us store arrays and objects within fields and do some awesome querying.</p>
+<p>I'm not going to list out all the indexes and extra info, but you can find that information contained in the <a href="https://github.com/aaroncox/D3Up.com/blob/master/application/models/D3Up/Schema.php">application/models/D3Up/Schema.php</a>. These indexes are build/ensured whenever the artisan command <code>php artisan dbcheck</code> is executed. It only does indexes currently, but I plan on making this task execute other maintenance tasks as well.</p>
+<p>A small preview of some of the queries issued against builds are as follows:</p>
+<pre>
+<span class='comment'>// Loads Build #1</span>
+db.builds.findOne({id: 1});
+<span class='comment'>// Loads Demon Hunters</span>
+db.builds.find({class: 'demon-hunter'});
+<span class='comment'>// Loads Monks and sorts by EHP descending</span>
+db.builds.find({class: 'monk'}).sort({'stats.ehp': -1});
+<span class='comment'>// Loads Barbarians that use Whirlwind - Hurricane and Sprint - RtlW </span>
+<span class='comment'>// and then sorts by DPS descending</span>
+db.builds.find({
+	class: 'barbarian', 
+	actives: {$all: ['sprint~c', 'whirlwind~c']}
+}).sort({'stats.dps': -1});
+</pre>
+<p>This documentation on builds will eventually be broken out into it's own documentation, but to get the ball rolling, it will exist here. Feel free to ask questions!</p>
+<h3>The Items Collection</h3>
+<p>The Item collection is a bit less complex, as it just contains single instances of items. However, it's also the largest collection, and requires the most indexing and disk space.</p>
+<pre>
+{
+<span class='comment'>// MongoDB Assigned ObjectID</span>
+"_id" : ObjectId("50fb864b17bbcbaf1c000030"),
+<span class='comment'>// Once again, time created</span>
+"_created" : NumberLong(1358661195),
+<span class='comment'>// The owner of the item, who can edit</span>
+"_createdBy" : DBRef("users", ObjectId("4fe8ccb617bbcbdd59000dfe")),
+<span class='comment'>// The last time this item was accessed, for future cleanup</span>
+"_lastViewed" : NumberLong(1358661320),
+<span class='comment'>// The Attributes of the Item (<a href="http://cl.ly/image/362U0b0q0s2c">These Values</a>)</span>
+"attrs" : {
+	"strength" : 155,
+	"poison-resist" : 48,
+	"attack-speed" : 9,
+	"life-regen" : 180,
+	"critical-hit" : 4.5
+},
+<span class='comment'>// Battle.net's icon name</span>
+"icon" : "unique_helm_003_104_demonhunter_male",
+<span class='comment'>// The Numeric ID for the Item</span>
+"id" : NumberLong(4070159),
+<span class='comment'>// Item's Name</span>
+"name" : "Andariel's Visage",
+<span class='comment'>// The quality, (6 = Legendary)</span>
+"quality" : NumberLong(6),
+<span class='comment'>// The "Ratings" of each attribute</span>
+"rating" : {
+	"strength" : 77.5,
+	"poison-resist" : 80,
+	"life-regen" : 52.6,
+	"critical-hit" : 75,
+	"total" : 71.275
+},
+<span class='comment'>// An array of sockets, each containing a gem</span>
+"sockets" : [
+	"radiant_star_ruby" <span class='comment'>// A Gem (<a href="https://github.com/aaroncox/D3Up.com/blob/master/application/libraries/D3Up/Gems.php">Referenced Here</a></span>)
+],
+<span class='comment'>// The Item's generated Stats (<a href="http://cl.ly/image/2s3Y3G3H2t1C">These Values</a>)</span>
+"stats" : {
+	"armor" : 377
+},
+<span class='comment'>// The Type of Item</span>
+"type" : "helm"
+}
+</pre>
+<p>The item itself contains any and all information needed to use that item in calculations and build a tooltip. It's not incredibly complex, but the complexity comes in from the sheer amount of them existing in the database.</p>
+<p>If you didn't notice, that's actually the helmet that my barbarian uses.
+<pre>
+<span class='comment'>// My Build, the gear field</span>
+gear: {
+	"helm" : DBRef("items", ObjectId("50fb864b17bbcbaf1c000030")),
+}
+<span class='comment'>// The above item's _id field</span>
+"_id" : ObjectId("50fb864b17bbcbaf1c000030")
+</pre>
+<p>Those two collections make up for the vast majority of database activity, and the corresponding PHP models can be located here:</p>
+<ul>
+	<li><strong>Build:</strong> <a href="https://github.com/aaroncox/D3Up.com/blob/master/application/models/D3Up/Build.php">/application/models/D3Up/Build.php</a></li>
+	<li><strong>Item:</strong> <a href="https://github.com/aaroncox/D3Up.com/blob/master/application/models/D3Up/Item.php">/application/models/D3Up/Item.php</a></li>
+</ul>
+<h2><a id="contributions"></a>Contributors and Thanks</h2>
 
-<h2>
-<a id="license"></a>License</h2>
+<h2><a id="license"></a>License</h2>
 
 <p>This code is released under the <a href="/aaroncox/D3Up.com/blob/master/license.txt">MIT License</a>.</p>
       </section>
