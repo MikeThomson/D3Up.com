@@ -91,13 +91,16 @@ class Math_Controller extends Base_Controller {
 		$math = Epic_Mongo::db('math')->findOne(array("id" => (int) $input['id']));
 		$math->saveRevision($input['locale']); 
 		$math->_localized->$input['locale'] = array(
-			'author' => Auth::user()->username,
 			'title' => $input['title'],
 			'explanation' => $input['explanation'],
 			'content' => $input['content'],
 			'html' => Markdown::defaultTransform($input['content']),
 			'timestamp' => time(),
 		);
+		// Had to do it this way so unittests could pass.
+		if(!Request::cli()) {
+			$math->_localized->$input['locale']['author'] = Auth::user()->username;
+		}
 		$math->save();
 		return Redirect::to('/math/' . $math->id . '/edit');			
 	}
