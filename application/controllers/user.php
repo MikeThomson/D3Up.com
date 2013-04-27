@@ -25,8 +25,9 @@ class User_Controller extends Base_Controller {
 		);
 		// Attempt to Authenticate
 		if(Auth::attempt($data)) {
+			Cookie::forever('d3up_user', Auth::user()->id);
 			// We logged in successfully, redirect to the homepage
-			return Redirect::to('/');
+			// return Redirect::to('/');
 		} else {
 			// Authentication Failure, redirect to the login form with errors and only the email address input
 			return Redirect::to('login')
@@ -70,8 +71,12 @@ class User_Controller extends Base_Controller {
 	}
 	
 	public function get_logout() {
+		Cookie::forget('d3up_user');
 		Auth::logout();
 		return Redirect::to('login');
 	}
 
+	public function get_items() {
+		return View::make('user.items');
+	}
 }
