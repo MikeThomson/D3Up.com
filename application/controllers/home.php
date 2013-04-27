@@ -7,6 +7,9 @@ class Home_Controller extends Base_Controller {
 		return View::make('home.index');
 	}
 	
+	public function action_cacheCheck() {
+		return View::make('home.cache-check');
+	}
 
 	protected $_statusURLs = array(
 		'us' => 'http://us.battle.net/api/d3/data/follower/scoundrel',
