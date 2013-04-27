@@ -49,6 +49,9 @@ Route::get('(:bundle)/(:any)/(:num)/(:all?)', function($collection, $id) {
 		'id' => (int) $id,
 	);
 	$result = Epic_Mongo::db($collection)->findOne($query);
+	if(!$result) {
+		return Response::json(['error' => 'Unable to load '.$collection." with id ".$id]);
+	}
 	if(Input::get('explain')) {		
 		return View::make('api.explain')
 								->with('info', $results->getInnerIterator()->info())
