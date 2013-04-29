@@ -15,12 +15,11 @@ class Base_Controller extends Controller {
 	}
 	
 	public function __construct() {
-		if(!Session::has('locale')) {
+		if(!Cookie::has('d3up_lang')) {
 			$langs = Config::get('application.languages');
-			Session::put('locale', Config::get('application.language'));
-			Session::put('locale_name', $langs[Config::get('application.language')]);
+			Cookie::put('d3up_lang', Config::get('application.language'));
 		} else {
-			Config::set('application.language', Session::get('locale'));
+			Config::set('application.language', Cookie::get('d3up_lang'));
 		}
 		parent::__construct();
 	}
@@ -29,8 +28,12 @@ class Base_Controller extends Controller {
 		if(isset($locale)) {
 			foreach(Config::get('application.languages') as $lang => $name) {
 				if($locale == $lang) {
-					Session::put('locale', $locale);
-					Session::put('locale_name', $name);
+					// This cookie is now required to tell nginx which localization we're working with
+					if($locale == 'en') {
+						Cookie::forget('d3up_lang');												
+					} else {
+						Cookie::forever('d3up_lang', $locale);						
+					}	
 				}
 			}
 		}

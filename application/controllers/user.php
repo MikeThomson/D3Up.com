@@ -27,7 +27,7 @@ class User_Controller extends Base_Controller {
 		if(Auth::attempt($data)) {
 			Cookie::forever('d3up_user', Auth::user()->id);
 			// We logged in successfully, redirect to the homepage
-			// return Redirect::to('/');
+			return Redirect::to('/');
 		} else {
 			// Authentication Failure, redirect to the login form with errors and only the email address input
 			return Redirect::to('login')
