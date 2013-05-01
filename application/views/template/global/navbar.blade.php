@@ -113,7 +113,7 @@
 					@else
 					<li class='dropdown'>
 						<a href="#" class="dropdown-toggle-clickable" data-toggle="dropdown">
-							<img src="/img/locale/{{ Session::get('locale') }}.png"> {{ Session::get('locale_name') }}
+							<img src="/img/locale/{{ Cookie::get('d3up_lang') }}.png"> {{ strtoupper(Cookie::get('d3up_lang')) }}
 						</a>
 						<ul class="dropdown-menu">
 						@foreach(Config::get('application.languages') as $lang => $name)
