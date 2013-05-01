@@ -12,13 +12,50 @@ class D3Up_Schema extends Epic_Mongo_Schema_Laravel {
 		| 	'index name' => array('field' => true)		The Index to Maintain (will be JSON encoded)
 		| )
 		|------------------------------------------------------------------------*/
-		'builds' => array(
+		'builds' => array(	
 			/*-------------------------------------------------------------------------
 			| Indexes for Builds
 			|   All new indexes for V2 and some from V1 will be moved into this section
 			|   as they are deemed needed.
 			|------------------------------------------------------------------------*/
-			
+			'public_1' => [
+				'public' => 1,
+			],
+			'public_1_statsehp_1' => [
+				'public' => 1, 
+				'stats.ehp' => -1, 
+				'sparse' => true,
+			],
+			'public_1_statsdps_1' => [
+				'public' => 1, 
+				'stats.dps' => -1, 
+				'sparse' => true,
+			],
+			'public_1_class_1_actives_1' => [
+				'actives' => 1,
+				'class' => 1,
+				'public' => 1,
+				'sparse' => true,
+			],
+			'public_1_statsdps_1' => [
+				'public' => 1, 
+				'class' => 1,
+				'stats.dps' => -1, 
+				'sparse' => true,
+			],
+			'public_1_statsehp_1' => [
+				'public' => 1, 
+				'class' => 1,
+				'stats.dps' => -1, 
+				'sparse' => true,
+			],
+			// Build Quick Access
+			//		Used by the User Navbar to load the user's builds
+			'_createdBy_1_paragon_1_level_1' => [
+				'_createdBy' => 1,
+				'paragon' => -1,
+				'level' => -1
+			],	
 			/*-------------------------------------------------------------------------
 			| Legacy Indexes for Builds
 			|   These indexes are used for V1 of D3Up. Some of them could possibly be 
@@ -84,6 +121,12 @@ class D3Up_Schema extends Epic_Mongo_Schema_Laravel {
 			);
 			echo "?? Checking on existance of Indexes\n";
 			foreach($indexes as $name => $index) {
+				$sparse = false;
+				// Check to see if we have a sparse key
+				if(isset($index['sparse']) && $index['sparse'] == true) {
+					$sparse = true;
+					unset($index['sparse']);	// Unset it in the array
+				}
 				$used[] = $name;
 				if(!in_array($name, $this->_existing[$collectionName])) {
 					echo "  ++ Creating ".$name." on ".$collectionName."\n";
