@@ -61,8 +61,8 @@ class D3Up_Schema extends Epic_Mongo_Schema_Laravel {
 			|   These indexes are used for V1 of D3Up. Some of them could possibly be 
 			|   removed after V2 goes live to free up disk space. 
 			|------------------------------------------------------------------------*/
-			'stats.ehp_1' => array('stats.ehp' => 1),
-			'stats.dps_1' => array('stats.ehp' => 1),
+			'stats.ehp_1' => array('stats.ehp' => 1, 'sparse' => true),
+			'stats.dps_1' => array('stats.ehp' => 1, 'sparse' => true),
 			'_created_1' => array('_created' => 1),
 			'_createdBy_1__type_1' => array('_createdBy' => 1, '_type' => 1),
 			'_characterBt_1' => array('_characterBt' => 1),
@@ -90,13 +90,13 @@ class D3Up_Schema extends Epic_Mongo_Schema_Laravel {
 			|   All new indexes for V2 and some from V1 will be moved into this section
 			|   as they are deemed needed.
 			|------------------------------------------------------------------------*/
-			'_d3id' => array('_d3id' => 1),			
+			'_d3id' => array('_d3id' => 1, 'sparse' => true),			
 			/*-------------------------------------------------------------------------
 			| Legacy Indexes for Builds
 			|   These indexes are used for V1 of D3Up. Some of them could possibly be 
 			|   removed after V2 goes live to free up disk space. 
 			|------------------------------------------------------------------------*/
-			'_created_1' => array('_created'),
+			'_created_1' => array('_created' => 1),
 			'_createdBy_1__type_1' => array('_createdBy' => 1, '_type' => 1),
 			'id_1__type_1' => array('id' => 1, '_type' => 1),
 		)
@@ -107,7 +107,7 @@ class D3Up_Schema extends Epic_Mongo_Schema_Laravel {
 	/*
 		ensureAllIndexes - Ensures the Existance of any indexes specified on a document class
 	*/
-	public function ensureIndexes() {
+	public function ensureIndexes($drop = false) {
 		// Loop through our indexes array
 		foreach($this->_indexes as $collectionName => $indexes) {
 			// Get the Collection
@@ -121,6 +121,11 @@ class D3Up_Schema extends Epic_Mongo_Schema_Laravel {
 			);
 			echo "?? Checking on existance of Indexes\n";
 			foreach($indexes as $name => $index) {
+				// Are we forcing a drop?
+				if($drop) {
+					$collection->deleteIndex($name);
+					echo "  !! Forcing Drop of ".$name." on ".$collectionName."\n";
+				}
 				$sparse = false;
 				// Check to see if we have a sparse key
 				if(isset($index['sparse']) && $index['sparse'] == true) {
@@ -129,7 +134,8 @@ class D3Up_Schema extends Epic_Mongo_Schema_Laravel {
 				}
 				$used[] = $name;
 				if(!in_array($name, $this->_existing[$collectionName])) {
-					echo "  ++ Creating ".$name." on ".$collectionName."\n";
+					echo "  ++ Creating ".$name." on ".$collectionName." (Sparse: ".(string)$sparse.")\n";
+					echo "       ".json_encode($index)."\n";
 					$results = $collection->ensureIndex($index, array(
 						"background" => true,
 						"name" => $name,
@@ -137,9 +143,13 @@ class D3Up_Schema extends Epic_Mongo_Schema_Laravel {
 					));						
 				} else {
 					echo "     Skipping ".$name." on ".$collectionName." (Exists)\n";
+					echo "       ".json_encode($index)."\n";
 				}
 			}
 			$this->_checkUnused($used, $collection);
+			echo "============================\n";
+			echo "Total Indexes on ".$collection.": ".count($indexes)."\n";
+			echo "============================\n";
 		}
 	}
 	
