@@ -13,3 +13,6 @@
 [submodule "bundles/s3"]
 	path = bundles/s3
 	url = git://github.com/swt83/laravel-s3.git
+[submodule "api"]
+	path = api
+	url = git://github.com/D3Up/API.git
