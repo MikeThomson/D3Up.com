@@ -318,7 +318,7 @@ class D3Up_Sync {
 		// If we found the item, return it!
 		// --------------------------------------------------------
 		if($item) {
-			$this->_log(HTML::itemLink($item)." located as one of your items in the database, skipping import and equipping.", "success");
+			$this->_log($this->itemLink($item)." located as one of your items in the database, skipping import and equipping.", "success");
 		} else {
 			$this->_log("Item not found, attempting import from Battle.net.");			
 		}
@@ -368,7 +368,7 @@ class D3Up_Sync {
 		// Save the item
 		$item->save();
 		// Display the item in the Log
-		$this->_log("Created new item, ".HTML::itemLink($item), "success");		
+		$this->_log("Created new item, ".$this->itemLink($item), "success");		
 		// Then return to the item
 		return $item;
 	}
@@ -594,5 +594,46 @@ class D3Up_Sync {
 
 	public function testURL($url) {
 		return $this->_getData($url);
+	}
+	
+	public function itemLink($item, $params = array()) {
+		// If we didn't recieve an item, return null
+		if(!$item || !$item instanceOf D3Up_Item) {
+			return null;
+		}
+		// Default Link
+		$link = '/i/'.$item->id;
+		// Define the Default Data for the Link
+		$options = array(
+			'data-id' => $item->id,
+			'data-type' => 'item',
+			'data-json' => json_encode($item->json()),
+			'class' => implode(" ", array(
+				'quality-'.$item->quality,
+			)),
+		);
+		// Set the Text for the Link
+		$text = $item->name;
+		// Conditional Parameters
+		if(!empty($params)) {
+			// The slot parameter is appended to data-slot on the item and used for the calculator
+			if(isset($params['slot'])) {
+				$options['data-slot'] = $params['slot'];
+			}
+			// The compare parameter can be set to true and will cause all tooltips with a matching slot to tooltip
+			if(isset($params['compare']) && $params['compare'] != false) {
+				$options['data-compare'] = $params['slot'];	
+			}
+			// Replacement text for the Link
+			if(isset($params['text'])) {
+				$text = $params['text'];
+			}		
+		}
+		// Return the Link
+		return HTML::link(
+			$link,
+			$text, 
+			$options
+		);
 	}
 }

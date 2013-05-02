@@ -12,9 +12,9 @@ class SyncToolTest extends ToolTestCase {
 		$this->_syncResults = $this->_build->sync();
 	}
 	
-	// public function testSyncNotFatal() {
-	// 	// We should NOT get a fatal error by sync'ing this build.
-	// 	$this->assertNull($this->_syncResults['fatal']);
-	// }
+	public function testSyncNotFatal() {
+		// We should NOT get a fatal error by sync'ing this build.
+		$this->assertNull($this->_syncResults['fatal']);
+	}
 
 }
