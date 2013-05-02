@@ -1,9 +1,15 @@
 @layout('template.main')
 
 @section('content')
-	@if(isset($characters) && count($characters) > 0)
-		@include("build.table-api")
-	@else
-		@include("build.table")
-	@endif
+	<table class='table' id="browser">
+		<thead></thead>
+		<tbody></tbody>
+		<tfoot></tfoot>
+	</table>
+	<script type="text/javascript" charset="utf-8">
+		$("#browser").buildBrowser({
+			filters: $("#browser").find("thead"),
+			container: $("#browser").find("tbody")
+		});
+	</script>
 @endsection

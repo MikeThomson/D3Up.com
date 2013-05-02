@@ -64,6 +64,9 @@ class Build_Controller extends Base_Controller {
 	}
 
 	public function get_index() {
+		return View::make('build.index');
+	}
+	public function get_index2() {
 		// Fetch the Builds
 		$builds = $this->getBuilds();
 		// Fetch the Pagination
