@@ -48,7 +48,8 @@
 	<script type="text/javascript" charset="utf-8">
 		$("#browser").buildBrowser({
 			filters: $("#browser").find("thead"),
-			container: $("#browser").find("tbody")
+			container: $("#browser").find("tbody"),
+			columns: ['icon', 'name', 'level', 'paragon', 'actives', 'passives', 'dps', 'ehp']
 		});
 	</script>
 @endsection

@@ -1,19 +1,3 @@
-function getParameterByName(name, defaultValue) {
-	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-	var regexS = "[\\?&]" + name + "=([^&#]*)";
-	var regex = new RegExp(regexS);
-	var results = regex.exec(window.location.search);
-	if(results == null && defaultValue)
-		return defaultValue;
-	else if(results == null)
-		return null;
-	else if(results[1].replace(/\+/g, " ") == "null")
-		return null;
-	else if(results[1].replace(/\+/g, " ") == "NaN")
-		return null;
-	else
-		return decodeURIComponent(results[1].replace(/\+/g, " "));
-}
 (function($) {
 	$.widget( "d3up.buildBrowser", {
 		results: {},
@@ -27,17 +11,27 @@ function getParameterByName(name, defaultValue) {
 			],
 		},
 		options: {
-			url: 'http://api.d3up.com/builds',
+			url: 'http://phalcon.d3up.com/builds',
 			filters: false,
 			container: false,
 			paginator: $("<div class='btn-group pull-right'>"),
+			columns: [
+				'icon', 
+				'name', 
+				'level', 
+				'paragon', 
+				'actives', 
+				'passives', 
+				'dps', 
+				'ehp'
+			]
 		},
 		_create: function() {
 			// Set the Current State with whatever the URL Parameters are set to
 			History.replaceState({
-				'page': getParameterByName('page', 1),
-				'class': getParameterByName('class', null),
-				'sort': getParameterByName('sort', null)
+				'page': this.getParameterByName('page', 1),
+				'class': this.getParameterByName('class', null),
+				'sort': this.getParameterByName('sort', null)
 			});
 			// Bind the window statechange event to our update method
 			this._on(window, { statechange: "update" });
@@ -56,19 +50,21 @@ function getParameterByName(name, defaultValue) {
 					filters = this.options.filters.find(".filters td"),
 					nextBtn = $("<a class='btn next'>").html("Next"),
 					currBtn = $("<a class='btn curr'>"),
-					prevBtn = $("<a class='btn prev'>").html("Previous");
+					prevBtn = $("<a class='btn prev'>").html("Previous")
+					frstBtn = $("<a class='btn first'>").html("<<");
 			if(state['page'] > 1) {
 				currBtn.html(state['page']);
 			} else {
 				currBtn.html(1);
 				prevBtn.hide();
+				frstBtn.hide();
 			}
 			// Create our paginator html elements
-			paginator.append(prevBtn, currBtn, nextBtn);
+			paginator.append(frstBtn, prevBtn, currBtn, nextBtn);
 			filters.append(paginator);
 			nextBtn.bind('click', $.proxy(this, "changePage", 1));
 			prevBtn.bind('click', $.proxy(this, "changePage", -1));
-			
+			frstBtn.bind('click', $.proxy(this, "changePage", -1000));
 		},
 		changePage: function() {
 			// Grab a copy of the state's data
@@ -81,9 +77,11 @@ function getParameterByName(name, defaultValue) {
 			// Don't store null states
 			if(state['page'] <= 1) {
 				prevBtn.hide();
+				frstBtn.hide();
 				state['page'] = 1;
 			} else {
 				prevBtn.show();				
+				frstBtn.show();
 			}
 			currBtn.html(state['page']);
 			// Push the Updates to History
@@ -102,18 +100,20 @@ function getParameterByName(name, defaultValue) {
 				select.append($("<option value='" + k + "'>" + v + "</option>"));
 			});
 			// Bind the Change event to push the modified state to History
-			select.on('change', function() {
-				// Grab a copy of the state's data
-				var state = History.getState().data;
-				// Modify the Value we're changing
-				state[name] = $(this).val();
-				// Push the Updates to History
-				if(state[name] == null || state[name] == "null") {
-					delete state[name];
-				}
-				History.pushState(state, "", "?" + $.param(state));
-			});
+			this._on(select, {change: '_updateState'});
 			return select;
+		},
+		_updateState: function(select) {
+			// Grab a copy of the state's data
+			var state = History.getState().data,
+					name = $(event.currentTarget).attr("name");
+			// Modify the Value we're changing
+			state[name] = $(event.currentTarget).val();
+			// Push the Updates to History
+			if(state[name] == null || state[name] == "null") {
+				delete state[name];
+			}
+			History.pushState(state, "", "?" + $.param(state));
 		},
 		_createSkillFilter: function(name, options) {
 			// Create the Select Element 
@@ -168,7 +168,9 @@ function getParameterByName(name, defaultValue) {
 			// Append it to the container
 			container.append(classFilter);
 			// Bind the updateSkillFilters function to the class changer
-			classFilter.on('change', $.proxy(this, 'updateSkillFilters'));
+			this._on(classFilter, {
+				change: $.proxy(this, 'updateSkillFilters')
+			});
 			// Build the Sort Filter
 			var options = {
 				null: '-- Sort By --',
@@ -185,12 +187,12 @@ function getParameterByName(name, defaultValue) {
 		},
 		updateSkillFilters: function() {
 			var state = History.getState().data;
+			// Find the Filters
+			var filters = this.options.filters.find(".filters td");
+			// Remove the old Filter
+			filters.find("select[name=actives], .actives").remove();
 			// Do we have the skill data loaded and a class selected?
 			if(window.d3up && window.d3up.gameData && state['class']) {
-				// Find the Filters
-				var filters = this.options.filters.find(".filters td");
-				// Remove the old Filter
-				filters.find("select[name=actives], .actives").remove();
 				// Build the Active Skill filter
 				var wrapper = $('<div class="input-append btn-toolbar actives">'),
 						select = this._createSkillFilter("actives", window.d3up.gameData.actives[state['class']], 'poison-dart~b'),
@@ -241,27 +243,86 @@ function getParameterByName(name, defaultValue) {
 			.done($.proxy(this, 'process'));
 		},
 		process: function(data) {
+			// Grab the Container 
+			var container = this.options.container,
+					$this = this;
 			// Store the Results on the browser
 			this.results = data;
-			// Grab the Container 
-			var container = this.options.container;
 			// Remove the Previous Results
 			container.empty();
 			// Iterate through our results and add new rows
-			$.each(data, function(id,data) {
+			$.each(data, function(id, data) {
 				var row = $("<tr>");
-				row.append($("<td>").html(data.name));
-				row.append($("<td>").html(data.level));
-				row.append($("<td>").html(data.paragon));
-				row.append($("<td>").html(data.heroClass));
-				if(data.actives) {
-					row.append($("<td>").html(data.actives.join(" ")));							
-				}
-				if(data.passives) {
-					row.append($("<td>").html(data.passives.join(" ")));														
-				}
+				$.each($this.options.columns, function(idx, col) {
+					switch(col) {
+						case "icon":
+							row.append($this.makeColumn(col, [data.heroClass, data.gender]));
+							break;
+						case "actives":
+							if(data.actives)
+								row.append($this.makeColumn(col, [data.heroClass, data.actives]));								
+							break;
+						case "passives":
+							if(data.passives)
+								row.append($this.makeColumn(col, [data.heroClass, data.passives]));
+							break;
+						default:
+							row.append($this.makeColumn(col, data[col]));
+							break;
+					}
+				});
 				container.append(row);
 			});
+			// Hook all Tooltips
+			$(".d3-icon-skill, .passive-icon").each(checkSkillTip);	
+		},
+		makeColumn: function(name, data) {
+			var $this = this,
+					td = $("<td>");
+			td.addClass("d_" + name);
+			switch(name) {
+				case "icon":
+					td.html($this.classIcon(data[0], data[1]));
+					break;
+				case "actives":
+					$.each(data[1], function(k,v) { 
+						var icon = $this.skillIcon(data[0], v);
+						td.append(Handlebars.helpers.skillIcon.apply(icon, [data[0], v]).string);
+					});
+					break;
+				case "passives":
+					$.each(data[1], function(k,v) { 
+						var icon = $this.passiveIcon(data[0], v);
+						td.append(Handlebars.helpers.passiveIcon.apply(icon, [data[0], v]).string);
+					});
+					break;
+				default:
+					td.html(data);
+					break;
+			}
+			return td;
+		},
+		passiveIcon: function(heroClass, skill) {
+			// Some Cleanup to make our data match Blizzard's
+			heroClass = heroClass.replace(/-/g, "");
+			skill = skill.replace(/-/g, "");	
+			// Generate the Icon URL 
+			var url = "http://media.blizzard.com/d3/icons/skills/42/" + heroClass + "_passive_" + skill + ".png";
+			return $("<img src='" + url + "'>");			
+		},
+		skillIcon: function(heroClass, skill) {
+			// Some Cleanup to make our data match Blizzard's
+			heroClass = heroClass.replace(/-/g, "");
+			skill = skill.replace(/-/g, "").split("~")[0];	
+			// Generate the Icon URL 
+			var url = "http://media.blizzard.com/d3/icons/skills/42/" + heroClass + "_" + skill + ".png";
+			return $("<img src='" + url + "'>");			
+		},
+		classIcon: function(heroClass, gender) {
+			var heroClass = heroClass.replace("-", ""),
+					urlTemplate = 'http://media.blizzard.com/d3/icons/portraits/42/|heroClass|_|gender|.png',
+					url = urlTemplate.replace("|gender|", gender).replace("|heroClass|", heroClass);					
+			return $("<img src='" + url + "'>");
 		},
 		_hover: function() {
 			// Methods with an underscore are "private"
@@ -279,5 +340,21 @@ function getParameterByName(name, defaultValue) {
 			// Use the destroy method to reverse everything your plugin has applied
 			return this._super();
 		},
+		getParameterByName: function(name, defaultValue) {
+			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+			var regexS = "[\\?&]" + name + "=([^&#]*)";
+			var regex = new RegExp(regexS);
+			var results = regex.exec(window.location.search);
+			if(results == null && defaultValue)
+				return defaultValue;
+			else if(results == null)
+				return null;
+			else if(results[1].replace(/\+/g, " ") == "null")
+				return null;
+			else if(results[1].replace(/\+/g, " ") == "NaN")
+				return null;
+			else
+				return decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
 	});
 })( jQuery );
