@@ -17,6 +17,7 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 		'id'						=> null,
 		'name'					=> null,
 		'class'					=> 'heroClass',
+		'gender'				=> null,
 		'level'					=> null,
 		'hardcore'			=> null,
 		'paragon'				=> null,

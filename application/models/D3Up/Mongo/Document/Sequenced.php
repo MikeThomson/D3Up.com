@@ -24,6 +24,19 @@ class D3Up_Mongo_Document_Sequenced extends Epic_Mongo_Document_Sequenced {
 	public function json() {
 		$data = array();
 		foreach($this->_jsonData as $idx => $rename) {
+			// Hacky... I know... needs to be removed and done better
+			if($idx == "gender") {
+				if(!$this->$idx) {
+					$data['gender'] = "male";					
+				} else {
+					if($this->gender === 0) {
+						$data['gender'] = "male";					
+					} else {
+						$data['gender'] = "female";											
+					}
+				}
+			}
+			
 			if($this->$idx) {
 				if($rename) {
 					if($this->$idx instanceOf Epic_Mongo_Document) {
