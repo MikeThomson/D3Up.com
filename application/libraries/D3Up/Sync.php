@@ -538,6 +538,8 @@ class D3Up_Sync {
 		$build->paragon = (int) $json['paragonLevel'];
 		// Set the Gender of the Character
 		$build->gender = (int) $json['gender'];
+		// Set the flag stating this is an authentic character, not edited at all.
+		$build->_authentic = true;
 		// Return the Build
 		return $build;
 	}
