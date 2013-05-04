@@ -11,7 +11,7 @@
 			],
 		},
 		options: {
-			url: 'http://phalcon.d3up.com/builds',
+			url: 'http://api.d3up.com/builds',
 			filters: false,
 			container: false,
 			paginator: $("<div class='btn-group pull-right'>"),
