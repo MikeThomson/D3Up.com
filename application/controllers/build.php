@@ -102,6 +102,45 @@ class Build_Controller extends Base_Controller {
 		return View::make('build.view')->with('build', $build);
 	}
 	
+	public function post_view($id, $data = false) {
+		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
+		if(!$build) {
+			return Response::error('404');
+		}
+		$user = Auth::user();
+		if(!$user || $user->id != $build->_createdBy->id) {
+			return Response::error('404');
+		}
+		$input = Input::all();
+		$rules = array(
+			'name' => 'required|between:2,70',
+	    'class' => 'required|in:barbarian,demon-hunter,monk,wizard,witch-doctor',
+			'gender' => 'required|min:0|max:1',
+			'level' => 'min:1|max:60',
+			'paragon' => 'min:0|max:100',
+		);
+		$validation = Validator::make($input, $rules);
+		if ($validation->fails()) {
+			return Redirect::to('/b/'.$id.'#tab-edit')->with_errors($validation)->with_input();
+		}
+		// We've now modified this build.. it's no longer authentic to battle.net
+		//		Set this to null to avoid entry into the sparse index.
+		$build->_authentic = null;
+		// Set the Fields based on the Input
+		$build->name = $input['name'];
+		$build->class = $input['class'];
+		$build->gender = (int) $input['gender'];
+		$build->level = (int) $input['level'];
+		$build->paragon = (int) $input['paragon'];
+		// Is this build Hardcore? True or False
+		$build->hardcore = isset($input['hardcore']) ? true : false;
+		// Should this build be public? By default, builds are public. 
+		// 		If we aren't public, set this field to null to avoid indexing
+		$build->public =	isset($input['public']) ? true : null;
+		$build->save();
+		return Redirect::to('/b/'.$id);
+	}
+	
 	public function get_compare($id1, $id2) {
 		$build1 = Epic_Mongo::db('build')->findOne(array('id' => (int) $id1));
 		$build2 = Epic_Mongo::db('build')->findOne(array('id' => (int) $id2));
