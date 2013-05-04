@@ -16,6 +16,19 @@
 <script src="/js/utils/chosen.min.js"></script>
 @endsection
 
+<?
+	$isOwner = false;
+	$isAnony = true;
+	if($build->_createdBy && $build->_createdBy->id) {
+		$isAnony = false;
+		if(Auth::check()) {
+			if(Auth::user()->id == $build->_createdBy->id) {
+				$isOwner = true;
+			}
+		}
+	}
+?>
+
 @section('content')
 @include('build.section.header')
 <div class='row build-container'>
@@ -25,9 +38,13 @@
       <li class='active'><a data-toggle="tab" href="#tab-gear">{{ __('build.gear') }}</a></a></li>
       <li><a data-toggle="tab" href="#tab-skills">{{ __('build.skills') }}</a></li>
       <li><a data-toggle="tab" href="#tab-buffs">{{ __('build.buffs') }}</a></li>
+			@if($isOwner)
       <li><a data-toggle="tab" href="#tab-edit">{{ __('build.edit') }}</a></li>
+			@endif
       <li class='divider'>{{ __('build.tools') }}</li>
+			@if($isOwner || $isAnony)
       <li><a data-toggle="tab" href="#tab-sync">{{ __('build.battlenet_sync') }}</a></li>
+			@endif
       <li><a data-toggle="tab" href="#tab-json">{{ __('build.json_export') }}</a></li>
       <li class='divider'>{{ __('build.meta') }}</li>
       <li><a data-toggle="tab" href="#tab-math">{{ __('build.formulas') }}</a></li>
@@ -46,12 +63,16 @@
 			<div class='tab-pane' id="tab-buffs">
 				@include('build.section.buffs')
 			</div>
+			@if($isOwner)
 			<div class='tab-pane' id="tab-edit">
 				@include('build.section.edit')
 			</div>
+			@endif
+			@if($isOwner || $isAnony)
 			<div class='tab-pane' id="tab-sync">
 				@include('build.section.sync')
 			</div>
+			@endif
 			<div class='tab-pane' id="tab-json">
 				@include('build.section.json')
 			</div>
