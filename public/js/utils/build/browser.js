@@ -32,7 +32,7 @@
 				'page': this.getParameterByName('page', 1),
 				'class': this.getParameterByName('class', null),
 				'sort': this.getParameterByName('sort', null),
-				'actives': this.getParameterByName('actives', null)
+				'actives': this.getParameterByName('actives')
 			});
 			// Bind the window statechange event to our update method
 			this._on(window, { statechange: "update" });
@@ -139,14 +139,12 @@
 				// Grab a copy of the state's data
 				var state = History.getState().data,
 						value = $(this).val();
+				// Modify the Value we're changing
 				if(value != null) {
 					state[name] = value.join("|");					
-				} else {
-					state[name] = null;
-				}
-				// Modify the Value we're changing
+				} 
 				// Don't store null states
-				if(state[name] == null) {
+				if(state[name] == null || state[name] == "null") {
 					delete state[name];
 				}
 				// Push the Updates to History
@@ -234,12 +232,20 @@
 			var state = History.getState();			
 			// Update the Filters to match the state
 			$.each(state.data, function(k,v) {
+				// Never pass a null value, this ensures it.
+				if(v == null || v == 'null') {
+					delete state.data[k];
+					return;
+				}
+				// Update any filters to match what's in the state data
 				var el = $("#d3up_buildBrowser_" + k);
 				if(el) {
 					// Need special actions on actives
 					if(k == 'actives') {
-						el.val(v.split("|"));
-						el.multiselect('refresh');						
+						if(v != null) {
+							el.val(v.split("|"));
+							el.multiselect('refresh');						
+						}
 					} else {
 						el.val(v);					
 					}
