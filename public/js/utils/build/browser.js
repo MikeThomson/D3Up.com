@@ -31,7 +31,8 @@
 			History.replaceState({
 				'page': this.getParameterByName('page', 1),
 				'class': this.getParameterByName('class', null),
-				'sort': this.getParameterByName('sort', null)
+				'sort': this.getParameterByName('sort', null),
+				'actives': this.getParameterByName('actives', null)
 			});
 			// Bind the window statechange event to our update method
 			this._on(window, { statechange: "update" });
@@ -136,9 +137,14 @@
 			// Bind the Change event to push the modified state to History
 			select.on('change', function() {
 				// Grab a copy of the state's data
-				var state = History.getState().data;
+				var state = History.getState().data,
+						value = $(this).val();
+				if(value != null) {
+					state[name] = value.join("|");					
+				} else {
+					state[name] = null;
+				}
 				// Modify the Value we're changing
-				state[name] = $(this).val();
 				// Don't store null states
 				if(state[name] == null) {
 					delete state[name];
@@ -230,7 +236,13 @@
 			$.each(state.data, function(k,v) {
 				var el = $("#d3up_buildBrowser_" + k);
 				if(el) {
-					el.val(v);
+					// Need special actions on actives
+					if(k == 'actives') {
+						el.val(v.split("|"));
+						el.multiselect('refresh');						
+					} else {
+						el.val(v);					
+					}
 				}
 			});
 			// Perform the API call with the state data
@@ -273,6 +285,13 @@
 				});
 				container.append(row);
 			});
+			// No results? Return the row telling the user
+			if(!data.length) {
+				var row = $("<tr>"),
+						cell = $("<td colspan='100'>");
+				row.append(cell.html("No results found!"));
+				container.append(row);
+			}
 			// Hook all Tooltips
 			$(".d3-icon-skill, .passive-icon").each(checkSkillTip);	
 		},
