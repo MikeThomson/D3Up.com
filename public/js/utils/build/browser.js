@@ -15,6 +15,7 @@
 			filters: false,
 			container: false,
 			paginator: $("<div class='btn-group pull-right'>"),
+			paginators: false,
 			columns: [
 				'icon', 
 				'name', 
@@ -32,7 +33,8 @@
 				'page': this.getParameterByName('page', 1),
 				'class': this.getParameterByName('class', null),
 				'sort': this.getParameterByName('sort', null),
-				'actives': this.getParameterByName('actives')
+				'actives': this.getParameterByName('actives'),
+				'authentic': this.getParameterByName('authentic', null)
 			});
 			// Bind the window statechange event to our update method
 			this._on(window, { statechange: "update" });
@@ -40,32 +42,51 @@
 			this._createFilters();
 			// Create the Paginators
 			this._createPaginators();
+			// Add the Column Headers
+			this._buildColumnHeaders();
 			// Attempt to setup the Skill Filters
 			this.updateSkillFilters();
 			// Run update immediately to populate default data
 			this.update();
 		},
 		_createPaginators: function() {
+					// Get the Current State information
 			var state = History.getState().data,
-					paginator = this.options.paginator,
-					filters = this.options.filters.find(".filters td"),
+					// Grab the Paginator Template
+					paginator = this.options.paginator.clone(),
+					// Get all Elements defined as paginator containers
+					paginators = this.options.paginators,
+					// Build our Controls
 					nextBtn = $("<a class='btn next'>").html("Next"),
 					currBtn = $("<a class='btn curr'>"),
 					prevBtn = $("<a class='btn prev'>").html("Previous")
 					frstBtn = $("<a class='btn first'>").html("<<");
 			if(state['page'] > 1) {
+				// If the page is set, put it in the current button
 				currBtn.html(state['page']);
 			} else {
+				// Otherwise set page to 1 and hide the 1st/prev buttons
 				currBtn.html(1);
 				prevBtn.hide();
 				frstBtn.hide();
 			}
-			// Create our paginator html elements
-			paginator.append(frstBtn, prevBtn, currBtn, nextBtn);
-			filters.append(paginator);
+			// Create all the Bindings
 			nextBtn.bind('click', $.proxy(this, "changePage", 1));
 			prevBtn.bind('click', $.proxy(this, "changePage", -1));
 			frstBtn.bind('click', $.proxy(this, "changePage", -1000));
+			// Create our paginator html elements
+			paginator.append(frstBtn, prevBtn, currBtn, nextBtn);
+			// For each paginator specified
+			paginators.each(function() {
+				// Find the TD element
+				var target = $(this).find("td");
+				// If our element doesn't have one, make one
+				if(!target.length) {
+					$(this).append($("<tr>").append($("<td colspan='100'>")));
+				}
+				// Append a clone of our paginator with all events
+				$(this).find("td").append(paginator.clone(true));				
+			});
 		},
 		changePage: function() {
 			// Grab a copy of the state's data
@@ -73,16 +94,15 @@
 					inc = arguments[0];
 			// Modify the Value we're changing
 			state['page'] = parseInt(state['page']) + inc;
-			var currBtn = this.options.paginator.find(".btn.curr");
-					prevBtn = this.options.paginator.find(".btn.prev");
+			var currBtn = $(".btn.curr");
 			// Don't store null states
 			if(state['page'] <= 1) {
-				prevBtn.hide();
-				frstBtn.hide();
+				$(".btn.prev").hide();				
+				$(".btn.first").hide();
 				state['page'] = 1;
 			} else {
-				prevBtn.show();				
-				frstBtn.show();
+				$(".btn.prev").show();				
+				$(".btn.first").show();
 			}
 			currBtn.html(state['page']);
 			// Push the Updates to History
@@ -144,7 +164,7 @@
 					state[name] = value.join("|");					
 				} 
 				// Don't store null states
-				if(state[name] == null || state[name] == "null") {
+				if(value == null || state[name] == null || state[name] == "null") {
 					delete state[name];
 				}
 				// Push the Updates to History
@@ -177,13 +197,19 @@
 			});
 			// Build the Sort Filter
 			var options = {
-				null: '-- Sort By --',
-				updated: 'Recently Updated',
+				null: 'Recently Updated',
 				dps: 'Highest DPS',
 				ehp: 'Highest EHP',
 			}
 			// Build the Select and append it to the container
 			container.append(this._createFilter("sort", options, state['sort']));
+			// Build the Authentic Search Filter
+			var options = {
+				null: 'Show All Builds',
+				true: 'Authentic Only',
+			}
+			// Build the Select and append it to the container
+			container.append(this._createFilter("authentic", options, state['authentic']));
 			// Append the Container to the Wrapper
 			wrapper.html(container);
 			// Then finally add it into the filters
@@ -253,21 +279,58 @@
 			});
 			// Perform the API call with the state data
 			$.ajax({
+				type: 'GET',
 				url: this.options.url,
 				data: state.data,
-				dataType: 'jsonp'
+				dataType: 'jsonp',
+				jsonpCallback: 'd3up_bb_process',
 			})
 			// When the request completes, process the data
 			.done($.proxy(this, 'process'));
 		},
+		_buildColumnHeaders: function() {
+			var filters = this.options.filters,
+					columns = this.options.columns,
+					tr = $("<tr>");
+			$.each(columns, function(k,v) {
+				var td = $("<td>");
+				switch(v) {
+					case "dps":
+					case "ehp":
+						v = v.toUpperCase();
+						break;
+					default:
+						v = v.charAt(0).toUpperCase() + v.slice(1);
+						break;
+				}
+				td.html(v);
+				tr.append(td);
+			});
+			filters.append(tr);
+		},
 		process: function(data) {
 			// Grab the Container 
-			var container = this.options.container,
+			var container = this.options.container.empty(),
 					$this = this;
 			// Store the Results on the browser
 			this.results = data;
-			// Remove the Previous Results
-			container.empty();
+			// No results? Return the row telling the user
+			if($.isEmptyObject(data)) {
+				var row = $("<tr>"),
+						cell = $("<td colspan='100'>");
+				row.append(cell.html("No results found!"));
+				container.append(row);
+				$(".btn.next").hide();
+				return;
+			}
+			// Did we get an error back?
+			if(data['error']) {
+				var row = $("<tr>"),
+						cell = $("<td colspan='100'>");
+				row.append(cell.html(data['error']));
+				container.append(row);
+				return;				
+			}
 			// Iterate through our results and add new rows
 			$.each(data, function(id, data) {
 				var row = $("<tr>");
@@ -285,19 +348,14 @@
 								row.append($this.makeColumn(col, [data.heroClass, data.passives]));
 							break;
 						default:
-							row.append($this.makeColumn(col, data[col]));
+							row.append($this.makeColumn(col, [data[col], data.id]));
 							break;
 					}
 				});
 				container.append(row);
 			});
-			// No results? Return the row telling the user
-			if(!data.length) {
-				var row = $("<tr>"),
-						cell = $("<td colspan='100'>");
-				row.append(cell.html("No results found!"));
-				container.append(row);
-			}
+			// Show the next button incase it was hidden
+			$(".btn.next").show();
 			// Hook all Tooltips
 			$(".d3-icon-skill, .passive-icon").each(checkSkillTip);	
 		},
@@ -321,8 +379,12 @@
 						td.append(Handlebars.helpers.passiveIcon.apply(icon, [data[0], v]).string);
 					});
 					break;
+				case "name":
+					var link = $("<a href='/b/" + data[1] + "'>" + data[0] + "</a>");
+					td.html(link);
+					break;
 				default:
-					td.html(data);
+					td.html(data[0]);
 					break;
 			}
 			return td;

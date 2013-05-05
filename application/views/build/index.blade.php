@@ -8,39 +8,17 @@
 <link href="/css/utils/chosen.css" rel="stylesheet">
 @endsection
 
-<style type="text/css" media="screen">
-	#browser .btn-toolbar {
-		margin: 0;
-	}
-	#browser .filters select {
-		display: inline-block;
-		vertical-align: middle;
-		margin-bottom: 0;
-		margin-right: 10px;
-	}
-	#browser .multiselect-container.dropdown-menu .input-prepend {
-		width: auto;
-		display: block;
-	}
-	#browser .multiselect-search {
-		height: auto;
-		width: 90%;
-	}
-	#browser .input-append .active, 
-	#browser .input-prepend .active {
-		background-color: #70B1D5;
-	}
-	#browser .input-append .active a:hover, 
-	#browser .input-prepend .active a:hover {
-		color: #000;
-	}
-	#browser .input-append .btn-danger {
-		margin-left: 0;
-	}
-</style>
+@section('headerbar')
+	Browse Diablo 3 Builds by Class
+@endsection
+
+@section('notifications')
+	<span class='label label-error' data-toggle="popover" data-title="D3Up doens't rank Builds" data-content="D3Up doesn't contain every character on Battle.net, only those created by you. Therefore, we do not rank builds, but you can still sort by EHP/DPS.">No Rankings</span>
+	<span class='label label-info' data-toggle="popover" data-title="DPS/EHP Missing from Builds" data-content="Whenever you resync your build, the EHP and DPS numbers are calculated and saved to the database. If they do not show up here, simply resync.">Blank DPS/EHP</span>
+@endsection
 
 @section('content')
-	<table class='table' id="browser">
+	<table class='table table-bordered table-condensed table-builds' id="browser">
 		<thead></thead>
 		<tbody></tbody>
 		<tfoot></tfoot>
@@ -48,6 +26,7 @@
 	<script type="text/javascript" charset="utf-8">
 		$("#browser").buildBrowser({
 			filters: $("#browser").find("thead"),
+			paginators: $("#browser").find("thead, tfoot"),
 			container: $("#browser").find("tbody"),
 			columns: ['icon', 'name', 'level', 'paragon', 'actives', 'passives', 'dps', 'ehp']
 		});
