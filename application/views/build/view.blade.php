@@ -41,61 +41,63 @@
 
 @section('content')
 @include('build.section.header')
-<div class='row build-container'>
-	<div class="build-content span9 tabbable tabs-left">
-		<ul class="nav nav-tabs">
-      <li class='divider'>{{ __('build.build') }}</li>
-      <li class='active'><a data-toggle="tab" href="#tab-gear">{{ __('build.gear') }}</a></a></li>
-      <li><a data-toggle="tab" href="#tab-skills">{{ __('build.skills') }}</a></li>
-      <li><a data-toggle="tab" href="#tab-buffs">{{ __('build.buffs') }}</a></li>
-			@if($isOwner)
-      <li><a data-toggle="tab" href="#tab-edit">{{ __('build.edit') }}</a></li>
-			@endif
-      <li class='divider'>{{ __('build.tools') }}</li>
-			@if($isOwner || $isAnony)
-      <li><a data-toggle="tab" href="#tab-sync">{{ __('build.battlenet_sync') }}</a></li>
-			@endif
-      <li><a data-toggle="tab" href="#tab-json">{{ __('build.json_export') }}</a></li>
-      <li class='divider'>{{ __('build.meta') }}</li>
-      <li><a data-toggle="tab" href="#tab-math">{{ __('build.formulas') }}</a></li>
-			<li><a data-toggle="tab" href="#tab-groups">{{ __('build.groups') }}</a></a></li>
-		</ul>
-		<div class="tab-content">
-			<div class='tab-pane active' id="tab-gear">
-				@render('build.section.gear', array('gear' => $build->getGear()))
-			</div>
-			<div class='tab-pane' id="tab-groups">
-				@include('build.section.groups')
-			</div>
-			<div class='tab-pane' id="tab-skills">
-				@include('build.section.skills')
-			</div>
-			<div class='tab-pane' id="tab-buffs">
-				@include('build.section.buffs')
-			</div>
-			@if($isOwner)
-			<div class='tab-pane' id="tab-edit">
-				@include('build.section.edit')
-			</div>
-			@endif
-			@if($isOwner || $isAnony)
-			<div class='tab-pane' id="tab-sync">
-				@include('build.section.sync')
-			</div>
-			@endif
-			<div class='tab-pane' id="tab-json">
-				@include('build.section.json')
-			</div>
-			<div class='tab-pane' id="tab-math">
-				@include('build.section.math')
-			</div>
-			<div class='tab-pane' id="tab-share">
-				@include('build.section.share')
-			</div>
-	  </div>
-	</div>
-	<div class='span3'>
-		@include('build.section.stats')
+<div class='build-container'>
+	<div class='row-fluid'>
+		<div class="build-content span9 tabbable tabs-left">
+			<ul class="nav nav-tabs">
+	      <li class='divider'>{{ __('build.build') }}</li>
+	      <li class='active'><a data-toggle="tab" href="#tab-gear">{{ __('build.gear') }}</a></a></li>
+	      <li><a data-toggle="tab" href="#tab-skills">{{ __('build.skills') }}</a></li>
+	      <li><a data-toggle="tab" href="#tab-buffs">{{ __('build.buffs') }}</a></li>
+				@if($isOwner)
+	      <li><a data-toggle="tab" href="#tab-edit">{{ __('build.edit') }}</a></li>
+				@endif
+	      <li class='divider'>{{ __('build.tools') }}</li>
+				@if($isOwner || $isAnony)
+	      <li><a data-toggle="tab" href="#tab-sync">{{ __('build.battlenet_sync') }}</a></li>
+				@endif
+	      <li><a data-toggle="tab" href="#tab-json">{{ __('build.json_export') }}</a></li>
+	      <li class='divider'>{{ __('build.meta') }}</li>
+	      <li><a data-toggle="tab" href="#tab-math">{{ __('build.formulas') }}</a></li>
+				<li><a data-toggle="tab" href="#tab-groups">{{ __('build.groups') }}</a></a></li>
+			</ul>
+			<div class="tab-content">
+				<div class='tab-pane active' id="tab-gear">
+					@render('build.section.gear', array('gear' => $build->getGear()))
+				</div>
+				<div class='tab-pane' id="tab-groups">
+					@include('build.section.groups')
+				</div>
+				<div class='tab-pane' id="tab-skills">
+					@include('build.section.skills')
+				</div>
+				<div class='tab-pane' id="tab-buffs">
+					@include('build.section.buffs')
+				</div>
+				@if($isOwner)
+				<div class='tab-pane' id="tab-edit">
+					@include('build.section.edit')
+				</div>
+				@endif
+				@if($isOwner || $isAnony)
+				<div class='tab-pane' id="tab-sync">
+					@include('build.section.sync')
+				</div>
+				@endif
+				<div class='tab-pane' id="tab-json">
+					@include('build.section.json')
+				</div>
+				<div class='tab-pane' id="tab-math">
+					@include('build.section.math')
+				</div>
+				<div class='tab-pane' id="tab-share">
+					@include('build.section.share')
+				</div>
+		  </div>
+		</div>
+		<div class='span3'>
+			@include('build.section.stats')
+		</div>
 	</div>
 </div>
 <div id='character' data-json='{{ json_encode($build->json()) }}'></div>

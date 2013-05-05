@@ -24,7 +24,10 @@
 		- (Possible New Tab) DPS/EHP by Stat - "What I REALLY want to know is DPS, EHP(with and without dodge), DPS gains by stat, and EHP gains by stat."
 		- (Possible New Tab) Defenses - Could list all % damage reductions and defensive stats
 - Build Browser
-	- Ability to filter out "Fake Builds" from "Real Builds".
+	! Ability to filter out "Fake Builds" from "Real Builds".
+		X	Interface Created
+		- API needs to filter based on _authentic
+		- Indexes need to be created for _authentic
 	- Ability to find builds between X-Y EHP and/or DPS
 - User
 	- Ability to customize the "Quick Jump" build list instead of just being last 5.
