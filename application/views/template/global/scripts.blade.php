@@ -27,7 +27,10 @@ $(function(){
   });
 	// Scroll to the Top
 	window.scrollTo(0);
-	
+	// Add Toggle Icons swapping onto Accordions
+	$('.accordion-group').on('show hide', function (n) {
+    $(n.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-chevron-right icon-chevron-down');
+	});
 });
 </script>
 <!-- The D3Up Tooltip Div -->

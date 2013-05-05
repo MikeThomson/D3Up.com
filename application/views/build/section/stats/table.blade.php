@@ -2,6 +2,11 @@
 	@if($tabName)
   <div class="accordion-heading">
     <a class="accordion-toggle" data-toggle="collapse" href=".collapse-{{ $tabName }}">
+			@if(!$id && in_array($tabName, $collapse))
+			<i class="icon-chevron-right"></i>
+			@else
+			<i class="icon-chevron-down"></i>
+			@endif
 			@if($isCompare)
 				{{ (isset($name)) ? $name : "" }}
 			@else
