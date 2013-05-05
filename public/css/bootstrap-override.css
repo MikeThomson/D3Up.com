@@ -221,10 +221,6 @@
 	padding: 8px 15px 0 0;
 	height: 32px;
 }
-.alert {
-	margin-bottom: 10px;
-	padding-bottom: 4px;
-}
 .alert h4 {
 	margin-bottom: 10px;
 }
@@ -276,6 +272,7 @@ ul.nav li.dropdown:hover > .dropdown-menu{
 .popover {
 	background-color: #333;
 	min-width: 200px;
+	z-index: 1050;
 }
 .popover .popover-title {
 	background-color: #444;
@@ -310,4 +307,12 @@ ul.nav li.dropdown:hover > .dropdown-menu{
 }
 .table .table {
 	background: transparent;
+}
+.table-builds th,
+.table-builds td {
+  border-top: 1px solid #333;
+  border-left: 1px solid #333;
+}
+.table-builds {
+	border: 1px solid #333;
 }

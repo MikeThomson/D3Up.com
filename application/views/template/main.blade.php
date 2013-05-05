@@ -10,6 +10,19 @@
 <body>
 	<div class="container">
 		@include('template.global.header')
+		<div class='headerbar clearfix'>
+			<div class='pull-right notifications'>
+				@yield('notifications')
+				<span class='badge badge-inverse' data-toggle='popover' data-content="These small bubbles will provide site wide updates, facts, and information about the page you're visiting." data-title="Notifications">?</span>
+			</div>
+			<h1>@yield('headerbar')</h1>
+			<script type="text/javascript" charset="utf-8">
+				$("[data-toggle=popover]").popover({
+					trigger: "hover",
+					placement: "left"
+				});
+			</script>
+		</div>
 		@yield('content')
 		@include('template.global.footer')
 	</div>

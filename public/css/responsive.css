@@ -33,10 +33,9 @@
 		margin: 0;
 	}
 	.nav-collapse .nav {
-		margin-top: 5px;
 	}
 	body > .container {
-		margin-top: 0;
+		margin-top: 55px;
 		padding: 0 5px;
 	}
 	.span9 {
@@ -57,14 +56,22 @@
 	.skill-icons .skill-type {
 		line-height: 32px;
 	}
+	#browser tbody td {
+		padding: 2px;
+	}
+	#browser .d_actives {
+		width: 210px;
+		max-width: 210px;
+	}
 }
 @media (max-width: 767px) {
-	body {
+/*	body {
     padding-right: 1px;
     padding-left: 1px;
 	}
 	body > .container {
 		margin: 0;
+		margin-top: 55px;
 		background: none;
 		border: none;
 	}
@@ -72,7 +79,6 @@
 		margin: 0 0 5px;
 	}
 	.nav-collapse .nav {
-		margin-top: 5px;
 	}
 	.skill-icons {
 		margin: 1px 5px;
@@ -84,5 +90,5 @@
 	}
 	.skill-icons .skill-type {
 		line-height: 24px;
-	}
+	}*/
 }

@@ -1,5 +1,15 @@
 @layout('template.main')
 
+@section("headerbar")
+<a href="/build">{{ __('d3up.builds') }}</a> 
+\ <a href="/build?class={{ $build->class }}">{{ ucwords(str_replace("-", " ", $build->class)) }}</a> 
+\ <a href="/b/{{ $build-> id }}">{{ $build->name }}</a> 
+@endsection
+
+@section("notifications")
+	@include("build.notifications")
+@endsection
+
 @section('styles')
 <link href="/css/build.css" rel="stylesheet">
 <link href="/css/compare.css" rel="stylesheet">

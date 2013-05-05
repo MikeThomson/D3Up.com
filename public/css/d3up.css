@@ -4,10 +4,23 @@ body {
 }
 
 body > .container {
-	margin-top: 40px;
-	padding: 5px;
+	margin-top: 55px;
 }
-
+body > .container > .headerbar {
+	padding: 0 10px;
+}
+body > .container > .headerbar .notifications a {
+	color: #fff;
+}
+body > .container > .headerbar .notifications a:hover {
+	text-decoration: none;
+}
+body > .container > .headerbar h1 {
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0 0 5px;
+	padding: 0;
+}
 a {
   color: #70B1D5;
   text-decoration: none;
@@ -17,6 +30,10 @@ a:hover,
 a:focus {
   color: #70B1D5;
   text-decoration: underline;
+}
+
+.popover {
+	z-index: 1050;
 }
 
 .content-page {
@@ -77,9 +94,8 @@ a:focus {
 	margin: 10px 5px 20px;
 }
 
-.sysmsg img {
-	margin: 7px auto;
-	display: block;
+#sysmsg {
+	margin: 0 0 5px;
 }
 
 .quality-1 {
@@ -316,4 +332,97 @@ li:hover > a .icon-custom-ah-faq { background-position: -303px -42px }
 	margin: 0;
 	background-image: none;
 	background-color: #111;
+}
+
+/*
+ 
+	Build Browser CSS
+
+*/
+
+#browser .btn-toolbar {
+	margin: 0;
+	text-align: left;
+}
+#browser .filters .multiselect-container > ul > li > label {
+	background-color: #333;
+	font-weight: bold;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+#browser .filters select {
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 0;
+	margin-right: 10px;
+}
+#browser .multiselect-container.dropdown-menu .input-prepend {
+	width: auto;
+	display: block;
+}
+#browser .multiselect-search {
+	height: auto;
+	width: 90%;
+}
+#browser .input-append .active, 
+#browser .input-prepend .active {
+	background-color: #70B1D5;
+}
+#browser .input-append .active a:hover, 
+#browser .input-prepend .active a:hover {
+	color: #000;
+}
+#browser .input-append .btn-danger {
+	margin-left: 0;
+}
+#browser tbody td {
+	line-height: 42px;
+	font-size: 1.5em;
+	overflow: hidden;
+}
+#browser thead td {
+	text-align: center;
+}
+#browser .filters td {
+	text-align: left;
+}
+#browser .filters select {
+	width: 100px;
+}
+#browser .d_name {
+	width: auto;
+	font-size: 1.25em;
+}
+#browser .d_level,
+#browser .d_paragon {
+	text-align: center;
+	width: 50px;
+	max-width: 30px;
+}
+#browser .d_actives {
+	width: 252px;
+	max-width: 252px;
+}
+#browser .d_passives {
+	width: 123px;
+}
+#browser .d_passives img {
+	display: block;
+}
+#browser .d_dps,
+#browser .d_ehp {
+	text-align: center;
+	font-size: 1.25em;
+	font-weight: bold;
+	width: 90px;
+	max-width: 90px;
+}
+#browser .d_dps {
+	color: #F50;
+}
+#browser .d_ehp {
+	color: #5F0;
+}
+#browser .d_icon {
+	width: 42px;
 }

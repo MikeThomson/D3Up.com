@@ -21,6 +21,17 @@
 <script src="http://d3up.com/js/unmin/itembuilder.js"></script>
 @endsection
 
+@section("notifications")
+	@include("build.notifications")
+@endsection
+
+@section("headerbar")
+<a href="/build">{{ __('d3up.builds') }}</a> 
+\ <a href="/build?class={{ $build->class }}">{{ ucwords(str_replace("-", " ", $build->class)) }}</a> 
+\ <a href="/b/{{ $build-> id }}">{{ $build->name }}</a> 
+\ Sync
+@endsection
+
 @section('content')
 @if((isset($totals['error']) && $totals['error'] > 0) || $results['fatal']) 
 <div class='alert alert-error'>
