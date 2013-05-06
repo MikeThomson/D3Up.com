@@ -5,6 +5,17 @@ Validator::register('username', function($attribute, $value, $parameters) {
 	return !Epic_Mongo::db('user')->findOne(array('username' => strtolower($value)));
 });
 
+Validator::register('battletag', function($attribute, $value, $parameters) {	
+  $pattern = "/^[\p{L}\p{Mn}][\p{L}\p{Mn}0-9]{2,11}#[0-9]{4,5}+$/u";
+  return (preg_match($pattern, $value)) ? true : false;
+});
+
+Validator::register('password_match', function($attribute, $value, $parameters) {	
+	$user = Auth::user();
+	return Hash::check($value, $user->password);
+});
+
+
 class User_Controller extends Base_Controller {
 
 	public $restful = true;
@@ -14,7 +25,7 @@ class User_Controller extends Base_Controller {
 		if(!Auth::check()) {
 			return Redirect::to('user/login');
 		}
-		return View::make('user/index');
+		return View::make('user/index')->with('user', Auth::user());
 	}
 
 	public function get_items() {
@@ -31,6 +42,77 @@ class User_Controller extends Base_Controller {
 			return Redirect::to('user/login');
 		}
 		return View::make('user.builds');		
+	}
+	
+	public function get_edit() {
+		// Require Login
+		if(!Auth::check()) {
+			return Redirect::to('user/login');
+		}
+		return View::make('user.edit');
+	}
+	
+	public function post_edit() {
+		// Require Login
+		if(!Auth::check()) {
+			return Redirect::to('user/login');
+		}
+		$user = Auth::user();
+		// Get Valid Data from Input
+		$data = array(
+			'battletag' => Input::get('battletag'),
+			'region' => Input::get('region'),
+		);
+		// Define the Validation Rules for User Data
+		$rules = array(
+	    'battletag' => 'battletag',
+			'region' => 'integer',
+		);
+		// Validation Errors
+		$messages = array(
+		    'battletag' => 'Invalid Battle Tag, please use Name#1234 (with no spaces).',
+		);
+		$validation = Validator::make($data, $rules, $messages);
+		if ($validation->fails()) {
+			return Redirect::to('/user')->with_errors($validation)->with_input();
+		}
+		foreach($data as $k => $v) {
+			if($v) {
+				$user->$k = strtolower($v);
+			}
+		}
+		$user->save();
+		return Redirect::to('/user');
+	}
+	
+	public function get_password() {
+		// Require Login
+		if(!Auth::check()) {
+			return Redirect::to('user/login');
+		}
+		return View::make('user.password');
+	}
+	
+	public function post_password() {
+		// Require Login
+		if(!Auth::check()) {
+			return Redirect::to('user/login');
+		}
+		// Get all the Inputs 
+		$input = Input::all();
+		$rules = array(
+	    'current' => 'required|between:4,50|password_match',
+			'password'  => 'required|confirmed|between:4,50',
+			'password_confirmation'  => 'required|between:4,50',
+		);
+		$validation = Validator::make($input, $rules);
+		if ($validation->fails()) {
+			return Redirect::to('password')->with_errors($validation)->with_input();
+		}
+		$user = Auth::user();
+		$user->password = Hash::make($input['password']);
+		$user->save();
+		return Redirect::to("/user/");
 	}
 	
 	public function get_login() {

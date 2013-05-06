@@ -57,9 +57,14 @@ Create/Import your Diablo 3 Character Build
 						<p>Choose a method to access your characters.</p>
 						<div id="import-tabs">
 						<ul class="nav nav-pills nav-pills-block">
-							@if(Auth::user() && Auth::user()->battletag && Auth::user()->region)
+							@if(Auth::user())
+								@if(Auth::user()->battletag && Auth::user()->region)
 								<li><a href="#import-others" data-toggle="tab">Import by Battle.net Battle Tag</a></li>
 								<li class='active'><a href="#import-characters" data-toggle="tab">My Characters</a></li>
+								@else 
+								<li class='active'><a href="#import-others" data-toggle="tab">Import by Battle.net Battle Tag</a></li>
+								<li class='disabled'><a href="/user" data-toggle="popover" data-title="Complete your Profile to Access" data-content="Your user profile is missing it's BattleTag and Region. Click here to head to your profile to fill this information out.">My Characters (Battle Tag Missing)</a></li>
+								@endif
 							@else
 								<li class='active'><a href="#import-others" data-toggle="tab">Import by Battle.net Battle Tag</a></li>
 								<li class='disabled'  data-toggle="popover" data-trigger="hover" data-title="Login to gain access to more features" data-content="If you register first, you'll be able to edit your items, change your skills and make changes to your character. You'll also have quick access to them from the navigation.&lt;br&gt;&lt;br&gt;Your build will still be saved even if you don't register, just bookmark the URL.">
@@ -71,12 +76,18 @@ Create/Import your Diablo 3 Character Build
 						</ul>
 						<div class='tab-content'>
 							@if(Auth::user())
-							<div id="import-characters" class="tab-pane active">
-								@include('build.create.user')
-							</div>
-							<div id="import-others" class="tab-pane">
-								@include('build.create.other')
-							</div>
+								@if(Auth::user()->battletag && Auth::user()->region)
+									<div id="import-characters" class="tab-pane active">
+										@include('build.create.user')
+									</div>
+									<div id="import-others" class="tab-pane">
+										@include('build.create.other')
+									</div>
+								@else
+									<div id="import-others" class="tab-pane active">
+										@include('build.create.other')
+									</div>
+								@endif
 							@else
 							<div id="import-others" class="tab-pane active">
 								@include('build.create.other')
@@ -98,7 +109,7 @@ Create/Import your Diablo 3 Character Build
 				<div class='app-pane'>
 					<h2>Step #3</h2>
 					<p>Create your character build!</p>
-					@if(Auth::user() && Auth::user()->battletag && Auth::user()->region)
+					@if(Auth::user())
 					<p><span class='badge badge-success'>Please note the following information...</span></p>
 					@else 
 					<p><span class='badge badge-error'>Since you're not logged in, please note...</span></p>

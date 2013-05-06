@@ -1,8 +1,8 @@
 <div id="import-find">
-	{{ Form::label('region', 'Region') }}
-	{{ Form::select('class', array('1' => 'The Americas', '2' => 'Europe', '3' => 'Asia'), null, array('class' => 'input-block-level', 'id' => 'region')) }}
+	{{ Form::label('region', __('build.region')) }}
+	{{ Form::select('region', array('1' => 'The Americas', '2' => 'Europe', '3' => 'Asia'), null, array('class' => 'input-block-level', 'id' => 'region')) }}
 
-	{{ Form::label('battletag', 'Battle Tag') }}
+	{{ Form::label('battletag', __('build.battletag')) }}
 	{{ Form::text('battletag', false, array('class' => 'input-block-level', 'id' => 'battle-tag'))}}
 	<div style="text-align: center; padding: 10px">
 		<a class='btn' id="search-battle-tag">Find my Characters</a>

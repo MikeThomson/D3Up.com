@@ -105,4 +105,8 @@ Route::get('register', 'user@register');
 Route::post('register', 'user@register');
 Route::get('forgot', 'user@forgot');
 Route::post('forgot', 'user@forgot');
+Route::get('password', 'user@password');
+Route::post('password', 'user@password');
+Route::get('edit', 'user@edit');
+Route::post('edit', 'user@edit');
 Route::get('logout', 'user@logout');
