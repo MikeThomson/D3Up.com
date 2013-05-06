@@ -5,9 +5,10 @@
  * @package default
  * @author Aaron Cox
  **/
-class D3Up_User extends Epic_Mongo_Document
+class D3Up_User extends Epic_Mongo_Document_Sequenced
 {
 	protected $_collection = 'users';
+	protected $_sequenceKey = 'user';
 	// protected static $_documentType = 'user';
 	
 	// This should be embedded into something we extend?
