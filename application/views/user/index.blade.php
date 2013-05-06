@@ -17,6 +17,7 @@ User Dashboard for {{ $user->username }}
 			<p>This page will be used for quick access to all of your information. It's empty right now however except some user information below.</p>
 			<ul>
 				<li>Username: "{{ $user->username }}"</li>
+				<li>ID: "{{ $user->id }}"</li>
 				<li>Email: "{{ $user->email }}"</li>
 				<li>BattleTag: "{{ $user->battletag }}"</li>
 				<li>Region: "{{ $user->region }}"</li>
