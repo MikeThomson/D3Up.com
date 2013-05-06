@@ -18,19 +18,39 @@
 .title-inner .btn-group {
 	margin: 0 5px;
 }
-.title-block[data-class=barbarian] {
+.title-block[data-class=barbarian],
+.title-block[data-class=barbarian-0] {
 	background-image: url('/img/bgs/barbarian.jpeg');
 }
-.title-block[data-class=demon-hunter] {
+.title-block[data-class=demon-hunter],
+.title-block[data-class=demon-hunter-0] {
 	background-image: url('/img/bgs/demon-hunter.jpeg');
 }
-.title-block[data-class=witch-doctor] {
+.title-block[data-class=witch-doctor],
+.title-block[data-class=witch-doctor-0] {
 	background-image: url('/img/bgs/witch-doctor.jpeg');
 }
-.title-block[data-class=monk] {
+.title-block[data-class=monk],
+.title-block[data-class=monk-0] {
 	background-image: url('/img/bgs/monk.jpeg');
 }
-.title-block[data-class=wizard] {
+.title-block[data-class=wizard],
+.title-block[data-class=wizard-0] {
+	background-image: url('/img/bgs/wizard.jpeg');
+}
+.title-block[data-class=barbarian-1] {
+	background-image: url('/img/bgs/barbarian.jpeg');
+}
+.title-block[data-class=demon-hunter-1] {
+	background-image: url('/img/bgs/demon-hunter.jpeg');
+}
+.title-block[data-class=witch-doctor-1] {
+	background-image: url('/img/bgs/witch-doctor.jpeg');
+}
+.title-block[data-class=monk-1] {
+	background-image: url('/img/bgs/monk.jpeg');
+}
+.title-block[data-class=wizard-1] {
 	background-image: url('/img/bgs/wizard.jpeg');
 }
 #build div.title-block {

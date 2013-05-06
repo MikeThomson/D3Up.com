@@ -1,4 +1,4 @@
-<div id="build-header" class="title-block" data-class="{{ $build->class }}">
+<div id="build-header" class="title-block" data-class="{{ $build->class }}-{{ $build->gender ?: 0}}">
 	<div class="title-inner clearfix">
 		<h2 class="title">
 			<a href="/b/{{ $build-> id }}">{{ $build->name }}</a> 
