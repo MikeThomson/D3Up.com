@@ -40,7 +40,7 @@
   <body>
       <div id="header">
         <nav>
-          <li class="fork"><a href="https://github.com/aaroncox/D3Up.com">View On GitHub</a></li>
+          <li class="fork"><a href="https://github.com/D3Up/D3Up.com">View On GitHub</a></li>
 					<li class="fork downloads"><a href="http://d3up.com">Goto D3Up.com</a></li>
         </nav>
       </div><!-- end header -->
@@ -99,7 +99,7 @@
 <p>I've setup numerous ways for anyone wishing to participate to join in the development discussion. Listed below are the three primary methods of communication I use.</p>
 <ul>
 <li>
-<strong>Github Issues</strong> - Please use the <a href="https://github.com/aaroncox/D3Up.com/issues">Github Issues</a> section of the project for any bugs or features you'd like to request, talk about or get help with.</li>
+<strong>Github Issues</strong> - Please use the <a href="https://github.com/D3Up/D3Up.com/issues">Github Issues</a> section of the project for any bugs or features you'd like to request, talk about or get help with.</li>
 <li>
 <strong>Reddit</strong> - For anything else, or if you just are a bigger reddit fan, feel free to post anything D3Up related on <a href="http://reddit.com/r/d3up">/r/d3up</a>.</li>
 <li>
@@ -145,9 +145,10 @@
 <ul>
 <li>Fork the repository so you have your own copy to work on and submit pull requests from.</li>
 <li>Clone the Repository to your machine and setup your web server to handle requests to it.</li>
-<li>Please make sure to use `local.d3up.com` as the vhost/dns name for your version, it will force the application to use the development environment. If you need to use something else, please add the hostname to <a href="https://github.com/aaroncox/D3Up.com/blob/master/paths.php#L25">paths.php</a> under 'development'.</li>
+<li>Please make sure to use `local.d3up.com` as the vhost/dns name for your version, it will force the application to use the development environment. If you need to use something else, please add the hostname to <a href="https://github.com/D3Up/D3Up.com/blob/master/paths.php#L25">paths.php</a> under 'development'.</li>
 <li>Copy <code>application/config/application.template</code> to <code>application/config/application.php</code> and change the <code>key</code> in the file to a unique value.</li>
 <li>Make sure to run <code>git submodule update --init</code> to pull in a copy of the libraries/bundles it uses.</li>
+<li>Make sure to run <code>php artisan bundle:upgrade</code> to pull in a copy of the bundles needed in Laravel.</li>
 </ul><h2>
 <a id="unittests"></a>Passing the Unit Tests</h2>
 
@@ -265,7 +266,7 @@
 }
 </pre>
 <p>If you're familiar with MongoDB, the document shouldn't seem too strange to you. However, if you've never experienced MongoDB before, you should note that the documents stored within are JSON. This lets us store arrays and objects within fields and do some awesome querying.</p>
-<p>I'm not going to list out all the indexes and extra info, but you can find that information contained in the <a href="https://github.com/aaroncox/D3Up.com/blob/master/application/models/D3Up/Schema.php">application/models/D3Up/Schema.php</a>. These indexes are build/ensured whenever the artisan command <code>php artisan dbcheck</code> is executed. It only does indexes currently, but I plan on making this task execute other maintenance tasks as well.</p>
+<p>I'm not going to list out all the indexes and extra info, but you can find that information contained in the <a href="https://github.com/D3Up/D3Up.com/blob/master/application/models/D3Up/Schema.php">application/models/D3Up/Schema.php</a>. These indexes are build/ensured whenever the artisan command <code>php artisan dbcheck</code> is executed. It only does indexes currently, but I plan on making this task execute other maintenance tasks as well.</p>
 <p>A small preview of some of the queries issued against builds are as follows:</p>
 <pre>
 <span class='comment'>// Loads Build #1</span>
@@ -320,7 +321,7 @@ db.builds.find({
 },
 <span class='comment'>// An array of sockets, each containing a gem</span>
 "sockets" : [
-	"radiant_star_ruby" <span class='comment'>// A Gem (<a href="https://github.com/aaroncox/D3Up.com/blob/master/application/libraries/D3Up/Gems.php">Referenced Here</a></span>)
+	"radiant_star_ruby" <span class='comment'>// A Gem (<a href="https://github.com/D3Up/D3Up.com/blob/master/application/libraries/D3Up/Gems.php">Referenced Here</a></span>)
 ],
 <span class='comment'>// The Item's generated Stats (<a href="http://cl.ly/image/2s3Y3G3H2t1C">These Values</a>)</span>
 "stats" : {
@@ -342,14 +343,14 @@ gear: {
 </pre>
 <p>Those two collections make up for the vast majority of database activity, and the corresponding PHP models can be located here:</p>
 <ul>
-	<li><strong>Build:</strong> <a href="https://github.com/aaroncox/D3Up.com/blob/master/application/models/D3Up/Build.php">/application/models/D3Up/Build.php</a></li>
-	<li><strong>Item:</strong> <a href="https://github.com/aaroncox/D3Up.com/blob/master/application/models/D3Up/Item.php">/application/models/D3Up/Item.php</a></li>
+	<li><strong>Build:</strong> <a href="https://github.com/D3Up/D3Up.com/blob/master/application/models/D3Up/Build.php">/application/models/D3Up/Build.php</a></li>
+	<li><strong>Item:</strong> <a href="https://github.com/D3Up/D3Up.com/blob/master/application/models/D3Up/Item.php">/application/models/D3Up/Item.php</a></li>
 </ul>
 <h2><a id="contributions"></a>Contributors and Thanks</h2>
 
 <h2><a id="license"></a>License</h2>
 
-<p>This code is released under the <a href="/aaroncox/D3Up.com/blob/master/license.txt">MIT License</a>.</p>
+<p>This code is released under the <a href="/D3Up/D3Up.com/blob/master/license.txt">MIT License</a>.</p>
       </section>
 
     </div>
