@@ -5,6 +5,9 @@
 .dropdown-menu form p {
 	margin: 0;
 }
+.dropdown-menu form img {
+	display: none;
+}
 .dropdown-menu .lead {
 	margin-bottom: 7px;
 	padding-bottom: 3px;

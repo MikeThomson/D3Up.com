@@ -111,6 +111,7 @@
 					@if(Auth::check())
 						@include("template.global.navbar.profile")
 					@else
+					<li><a href="/login">Login</a></li>
 					<li class='dropdown'>
 						<a href="#" class="dropdown-toggle-clickable" data-toggle="dropdown">
 							<img src="/img/locale/{{ Cookie::get('d3up_lang') }}.png"> {{ strtoupper(Cookie::get('d3up_lang')) }}
