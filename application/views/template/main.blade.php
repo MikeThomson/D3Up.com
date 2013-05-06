@@ -13,7 +13,7 @@
 		<div class='headerbar clearfix'>
 			<div class='pull-right notifications'>
 				@yield('notifications')
-				<span class='badge badge-inverse' data-toggle='popover' data-content="These small bubbles will provide site wide updates, facts, and information about the page you're visiting." data-title="Notifications">?</span>
+				<span class='badge badge-inverse' data-placement='left' data-toggle='popover' data-content="These small bubbles will provide site wide updates, facts, and information about the page you're visiting." data-title="Notifications">?</span>
 			</div>
 			<h1>@yield('headerbar')</h1>
 		</div>
