@@ -23,6 +23,7 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 		'paragon'				=> null,
 		'actives'				=> null,
 		'passives'			=> null,
+		'_lastCrawl'		=> 'updated',
 		'_characterId'	=> 'bt-id',
 		'_characterBt'	=> 'bt-tag',
 		'_characterRg'	=> 'bt-srv'
