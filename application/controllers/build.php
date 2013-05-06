@@ -202,11 +202,23 @@ class Build_Controller extends Base_Controller {
 			$build->_characterId = Input::get('character-id');
 			// Sync the Data from Battle.net
 			$results = $build->sync();
-			// Return the Sync view
-			return View::make('build.sync')->with('build', $build)->with('results', $results);
+			// Return to the Success view
+			return Redirect::to_action('build@success')
+													->with('build', $build->id)
+													->with('results', $results);
+			// return View::make('build.sync')->with('build', $build)->with('results', $results);
 		}
 		// Redirect to the build
 		return Redirect::to_action('build@view', array('id' => $build->id));
+	}
+	
+	public function get_success() {
+		if(!Session::has('build') || !Session::has('results')) {
+			throw new Exception("You've reached this page in error.");
+		}
+		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) Session::get('build')));
+		$results = Session::get('results');
+		return View::make('build.sync')->with('build', $build)->with('results', $results);
 	}
 	
 	public function get_user() {
@@ -244,10 +256,21 @@ class Build_Controller extends Base_Controller {
 		if(!$build) {
 			return Response::error('404');
 		}
-		// Does this build have an owner?
-		if($build->_createdBy) {
+		// Does this build have an owner or a syncKey?
+		if($build->_createdBy || $build->_syncKey) {
+			// If we have a sync key, is it the right one?
+			if($key = Request::get('syncKey')) {
+				if($key == $build->_syncKey) {
+					// Remove the SyncKey
+					$build->_syncKey = null;
+					// Set the Stats array on the build equal to the data from the calculator
+					$build->stats = $this->makeFloats($toCache);
+					// Save it
+					$build->save();				
+				}
+			}
 			// If so, is our user logged in the owner?
-			if(Auth::user()->id === $build->_createdBy->id) {
+			if(Auth::check() && Auth::user()->id === $build->_createdBy->id) {
 				// Set the Stats array on the build equal to the data from the calculator
 				$build->stats = $this->makeFloats($toCache);
 				// Save it
