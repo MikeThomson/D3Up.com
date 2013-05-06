@@ -55,7 +55,7 @@ class User_Controller extends Base_Controller {
 		$rules = array(
 	    'email' => 'required|email',
 			'password'  => 'required|between:8,50',
-			'key' => 'match:/jestasays/',
+			'key' => 'match:/beta/',
 		);
 		$validation = Validator::make($input, $rules);
 		if ($validation->fails()) {
