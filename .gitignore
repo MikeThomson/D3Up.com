@@ -2,6 +2,7 @@ bundles/binder/
 application/config/application.php
 application/config/s3.php
 application/config/github.php
+application/config/development/*.php
 cache.properties
 
 # Numerous always-ignore extensions

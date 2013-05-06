@@ -1,0 +1,3 @@
+This folder will override settings in the configuration for your local development environment. Simply copy one of the config files from the folder above and copy it to this folder, then change the values you need to make it work in your environment. 
+
+Any files you add to this directory (PHP files) will be ignored by git, so don't try to commit them. 
