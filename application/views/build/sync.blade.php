@@ -141,6 +141,9 @@
 		url: '/b/' + {{ $build->id }} + '/cache',
 		cache: false,
 		data: {
+@if($build->_syncKey)
+			syncKey: '{{ $build->_syncKey }}',
+@endif
 			stats: d3up.builds.primary.stats
 		},
 		type: 'post',
