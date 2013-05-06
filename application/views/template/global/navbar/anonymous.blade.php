@@ -24,7 +24,7 @@
 				</div>
 				<div class="span6">
 					<p class='alert alert-warning alert-block'>{{ __('d3up.login_info') }}</p>
-					@include('user.login.form')
+					@include('user.login.login')
 				</div>
 			</div>
 		</div>
