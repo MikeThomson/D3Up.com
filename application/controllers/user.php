@@ -1,13 +1,42 @@
 <?php
 
+// Not sure where these should live yet, but not here...
+Validator::register('username', function($attribute, $value, $parameters) {	
+	return !Epic_Mongo::db('user')->findOne(array('username' => strtolower($value)));
+});
+
 class User_Controller extends Base_Controller {
 
 	public $restful = true;
 	
+	public function get_index() {
+		// Require Login
+		if(!Auth::check()) {
+			return Redirect::to('user/login');
+		}
+		return View::make('user/index');
+	}
+
+	public function get_items() {
+		// Require Login
+		if(!Auth::check()) {
+			return Redirect::to('user/login');
+		}
+		return View::make('user.items');
+	}
+
+	public function get_builds() {
+		// Require Login
+		if(!Auth::check()) {
+			return Redirect::to('user/login');
+		}
+		return View::make('user.builds');		
+	}
+	
 	public function get_login() {
 		// If we're already logged in, send em to the homepage
 		if(Auth::check()) {
-			return Redirect::to('/');
+			return Redirect::to('user/login');
 		}
 		// Render the Login View
 		return View::make('user/login');
@@ -16,7 +45,7 @@ class User_Controller extends Base_Controller {
 	public function post_login() {
 		// If we're already logged in, send em to the homepage		
 		if(Auth::check()) {
-			return Redirect::to('/');
+			return Redirect::to('user/login');
 		}
 		// Setup the Query for the Login
 		$data = array(
@@ -26,8 +55,8 @@ class User_Controller extends Base_Controller {
 		// Attempt to Authenticate
 		if(Auth::attempt($data)) {
 			Cookie::forever('d3up_user', Auth::user()->id);
-			// We logged in successfully, redirect to the homepage
-			return Redirect::to('/');
+			// We logged in successfully, redirect to user dashboard
+			return Redirect::to('user/index');
 		} else {
 			// Authentication Failure, redirect to the login form with errors and only the email address input
 			return Redirect::to('login')
@@ -53,19 +82,31 @@ class User_Controller extends Base_Controller {
 		// Get all the Inputs 
 		$input = Input::all();
 		$rules = array(
-	    'email' => 'required|email',
-			'password'  => 'required|between:8,50',
-			'key' => 'match:/beta/',
+	    'username' => 'required|alpha_dash|between:2,50|username',
+			'password'  => 'required|between:4,50',
+	    'email' => 'email',
+			'key' => 'required|match:/beta/',
 		);
 		$validation = Validator::make($input, $rules);
 		if ($validation->fails()) {
 			return Redirect::to('register')->with_errors($validation)->with_input();
 		}
 		$user = Epic_Mongo::db('doc:user');
-		$user->email = $input['email'];
+		// TODO - Fix EpicMongo to support this.
+		// $user->_id = $input['username'];
+		$user->username = strtolower($input['username']);
+		if($input['email']) {
+			$user->email = strtolower($input['email']);
+		}
 		$user->password = Hash::make($input['password']);
 		$user->save();
-		return Redirect::to('/');
+		if(Auth::attempt(array(
+			'email' => $input['username'],
+			'password' => $input['password']
+		))) {
+			return Redirect::to('user/index');
+		}
+		return Redirect::to('/login');
 	}
 	
 	public function get_logout() {
@@ -73,8 +114,12 @@ class User_Controller extends Base_Controller {
 		Auth::logout();
 		return Redirect::to('login');
 	}
-
-	public function get_items() {
-		return View::make('user.items');
+	
+	public function get_forgot() {
+		throw new Exception("Forgot Password not implemented yet");
+	}
+	
+	public function post_forgot() {
+		
 	}
 }
