@@ -1,3 +1,9 @@
-This folder will override settings in the configuration for your local development environment. Simply copy one of the config files from the folder above and copy it to this folder, then change the values you need to make it work in your environment. 
+This folder will override settings in the configuration for your local development environment as long as your ENVIRONMENT variable is equal to "development". 
 
-Any files you add to this directory (PHP files) will be ignored by git, so don't try to commit them. 
+The applications ENVIRONMENT will automatically be set to "development" as long as your local hostname is equal to:
+
+- http://local.d3up.com
+
+(These are configured in /paths.php in $environments)
+
+Simply copy one of the config files from the folder above and copy it to this folder, then change the values you need to make it work in your environment. Any files you add to this directory (PHP files) will be ignored by git, so don't try to commit them. 
