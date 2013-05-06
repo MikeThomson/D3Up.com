@@ -16,21 +16,14 @@
 				<span class='badge badge-inverse' data-toggle='popover' data-content="These small bubbles will provide site wide updates, facts, and information about the page you're visiting." data-title="Notifications">?</span>
 			</div>
 			<h1>@yield('headerbar')</h1>
-			<script type="text/javascript" charset="utf-8">
-				$("[data-toggle=popover]").popover({
-					trigger: "hover",
-					placement: "left"
-				});
-			</script>
 		</div>
 		@yield('content')
 		@include('template.global.footer')
 	</div>
 	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function () {
-			$("[data-toggle=popover]").popover({
-				// trigger: 'click',
-			});
+		$("[data-toggle=popover]").popover({
+			trigger: "hover",
+			html: true
 		});
 	</script>
 </body>

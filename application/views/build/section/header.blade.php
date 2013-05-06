@@ -1,5 +1,5 @@
 <div id="build-header" class="title-block" data-class="{{ $build->class }}">
-	<div class="title-inner">
+	<div class="title-inner clearfix">
 		<h2 class="title">
 			<a href="/b/{{ $build-> id }}">{{ $build->name }}</a> 
 			<small>
@@ -52,6 +52,10 @@
 				@endforeach
 			</ul>
 			@endif
+			<div class='dps-display'>
+				{{-- Highlight: Used to highlight DPS/EHP and other major stats at the top. --}}
+				@include('build.section.stats.highlight')
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,32 +1,18 @@
 <div id="import-find">
-	<p>If you'd like to automatically import a character, fill out the information below to find your character!</p>
-	<dt>Region</dt>
-	<dd>
-		<select name='region' id='region'>
-			<option value='1'>The Americas</option>
-			<option value='2'>Europe</option>
-			<option value='3'>Asia</option>
-		</select>
-	</dd>
-	<dt>Battle Tag</dt>
-	<dd>
-	  <input name='battletag' type='text' id="battle-tag">
-	  <br/>(example: Username#1234 - No spaces)
-	</dd>
+	{{ Form::label('region', 'Region') }}
+	{{ Form::select('class', array('1' => 'The Americas', '2' => 'Europe', '3' => 'Asia'), null, array('class' => 'input-block-level', 'id' => 'region')) }}
+
+	{{ Form::label('battletag', 'Battle Tag') }}
+	{{ Form::text('battletag', false, array('class' => 'input-block-level', 'id' => 'battle-tag'))}}
 	<div style="text-align: center; padding: 10px">
-		<button id="search-battle-tag">Find my Characters</button>
+		<a class='btn' id="search-battle-tag">Find my Characters</a>
 	</div>
 </div>
 <div id="import-character">
-	<h4>Characters</h4>
-	<p>Please select which character to import into this build.</p>
-	<div>
-		<select name='character-id-manual' id="characters-manual">
-			<option value="">Loading ...</option>
-		</select>
-	</div>
-	<p>After choosing the character, make sure to fill out the information on the left and click submit!</p>
+	<p>Characters found:</p>
+	{{ Form::select('character-id-manual', array(null => 'Loading'), null, array('class' => 'input-block-level', 'id' => 'characters-manual')) }}
+	<p>By selecting a character, it will fill out all of the information in Step #2.</p>
 	<div style="text-align: center; padding: 10px">
-		<button id="repeat-search">Back to Search</button>
+		<a class='btn' id="repeat-search">Search Again?</a>
 	</div>
 </div>

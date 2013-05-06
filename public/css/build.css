@@ -11,6 +11,10 @@
 	background: rgba(0, 0, 0, 0.6);
 	padding: 10px 0 0;
 }
+.title-inner .dps-display {
+	float: right;
+	margin-top: 5px;
+}
 .title-inner .btn-group {
 	margin: 0 5px;
 }
@@ -236,6 +240,7 @@ div.title-block .skill-row {
 .stat-table td:first-child{
 	text-align: right;
 	color: #888;
+	width: 70%;
 }
 .item.icon-link {
 	display: inline-block;

@@ -12,70 +12,129 @@
 <script src="http://d3up.com/js/unmin/itembuilder.js"></script>
 @endsection
 
+@section('headerbar')
+Create/Import your Diablo 3 Character Build
+@endsection
+
+@section('notifications')
+	<span class='badge badge-warning' data-title='Import your Character from Battle.net' data-content=''>Battle.net Import</span>
+@endsection
+
 @section('content')
+<style type="text/css" media="screen">
+	.app-pane {
+		padding: 0 15px;
+	}
+	.app-pane h2 {
+		font-size: 1.5em;
+		line-height: 1.5em;
+		margin: 0 0 10px;
+		color: #777;
+	}
+	.app-pane 
+	.nav-pills > .disabled > a,
+	.nav-pills > .disabled > a:hover,
+	.nav-pills > .disabled > a:focus {
+		background-color: #333;
+	}
+	.nav-pills-block li {
+		float: none;
+		display: block;
+	}
+</style>
 <div class="title-block">
 	<div class="title-inner">
-		<h2 class="title">
-			<a>Create/Import your Diablo 3 Character Build</a>
-		</h2>
-		<p class='meta'>
-			By creating or importing a character build into D3Up.com's Build Calculator, you'll gain access to all of our DPS, EHP and Item Comparison tools. Follow the instructions below or for more information check out the <a href="http://d3up.com/guide/12/creating-your-build-on-d3up-com">Creating your Build on D3Up.com</a> guide.
-		</p>
+		<div class='row-fluid'>
+			<div class='span4'>
+				@if(Request::get('character-id') && Request::get('character-bt'))
+					<div class='alert alert-success'>
+						<h3>Character Data Imported</h3>
+						<p>We've automatically filled out the form for you based on the character you've chosen on the search page. Feel free to modify the fields in the left column and then hit Create to import the character build!</p>
+					</div>
+					@else
+					<div class='app-pane'>
+						<h2>Step #1</h2>
+						<p>Choose a method to access your characters.</p>
+						<div id="import-tabs">
+						<ul class="nav nav-pills nav-pills-block">
+							@if(Auth::user() && Auth::user()->battletag && Auth::user()->region)
+								<li><a href="#import-others" data-toggle="tab">Import by Battle.net Battle Tag</a></li>
+								<li class='active'><a href="#import-characters" data-toggle="tab">My Characters</a></li>
+							@else
+								<li class='active'><a href="#import-others" data-toggle="tab">Import by Battle.net Battle Tag</a></li>
+								<li class='disabled'  data-toggle="popover" data-trigger="hover" data-title="Login to gain access to more features" data-content="If you register first, you'll be able to edit your items, change your skills and make changes to your character. You'll also have quick access to them from the navigation.&lt;br&gt;&lt;br&gt;Your build will still be saved even if you don't register, just bookmark the URL.">
+									<a>
+										My Characters (Login First)
+									</a>
+								</li>
+							@endif
+						</ul>
+						<div class='tab-content'>
+							@if(Auth::user())
+							<div id="import-characters" class="tab-pane active">
+								@include('build.create.user')
+							</div>
+							<div id="import-others" class="tab-pane">
+								@include('build.create.other')
+							</div>
+							@else
+							<div id="import-others" class="tab-pane active">
+								@include('build.create.other')
+							</div>
+							@endif
+					</div>
+				</div>
+				@endif				
+				</div>
+			</div>
+			<div class='span4'>
+				<div class='app-pane'>
+					<h2>Step #2</h2>
+					<p>Enter or make sure the information is correct.</p>
+					@include('build.create.form')
+				</div>
+			</div>
+			<div class='span4'>
+				<div class='app-pane'>
+					<h2>Step #3</h2>
+					<p>Create your character build!</p>
+					@if(Auth::user() && Auth::user()->battletag && Auth::user()->region)
+					<p><span class='badge badge-success'>Please note the following information...</span></p>
+					@else 
+					<p><span class='badge badge-error'>Since you're not logged in, please note...</span></p>
+					@endif					
+					<ul>
+						@if(Auth::user() && Auth::user()->battletag && Auth::user()->region)
+						<li>Your build will be accessible from the homepage and the navigation bar, as well as the "Builds" section under your account.</li>
+						<li>If you edit your build directly or any items it's wearing, it will lose it's 'Authentic' status. <a href='#'>What's an Authentic status?</a></li>
+						<li>Some skills need to be activated, you can click on the icon anywhere you see it or activate it from the skills tab.</li>
+						@else
+						<li>If you'd like to be able to edit any skills or items, please login before you create this build.</li>
+						<li>You can update your build from Battle.net by using the "Sync" tool on your build.</li>
+						<li>Even though you're not logged in, your build will be saved for future access, bookmark your build after you've created it.
+						@endif
+						<li>For more information about how to use your build, <a href="#">check out this guide</a>.</li>
+					</ul>
+					<a id='psydosubmit' class='btn btn-success input-block-level'>Create this Build</a>
+				</div>
+			</div>
 	</div>
 </div>
 <? if(!Auth::check()): ?>
-<div class='alert'>
+<!-- <div class='alert'>
 	<h4><strong style='color: #f00'>Warning! You are not logged in.</strong></h4>
 	<p>Since you are not logged in, we will import your build into what we call an <strong>anonymous build</strong>. You will not be able to edit the name, skills or gear on the build, but you will be able to use the Calculators and Item Simulators. Anonymous builds are automatically deleted after a period of ninety (90) days of no access. Please bookmark or save the link to your build for future use!</p>
 	<p>If you'd like to edit and change this your build in the future, please <a href="/login">login</a> or <a href="/register">create an account</a> before creating it.</p>
-</div>
+</div> -->
 <? endif ?>
-<div class='row'>
-	<div class='span6'>
-		<div class='content-page'>
-			@include('build.create.form')
-		</div>
-	</div>
-	<div class='span6'>
-		@if(Request::get('character-id') && Request::get('character-bt'))
-			<div class='alert alert-success'>
-				<h3>Character Data Imported</h3>
-				<p>We've automatically filled out the form for you based on the character you've chosen on the search page. Feel free to modify the fields in the left column and then hit Create to import the character build!</p>
-			</div>
-			@else
-			<div class='content-page'>
-				<h3>Import your Character!</h3>
-				<div id="import-tabs">
-				<ul class="nav nav-tabs">
-					@if(Auth::user() && Auth::user()->battletag && Auth::user()->region)
-						<li class='active'><a href="#import-characters" data-toggle="tab">My Characters</a></li>
-						<li><a href="#import-others" data-toggle="tab">By BattleTag</a></li>
-					@else
-						<li class='active'><a href="#import-others" data-toggle="tab">By BattleTag</a></li>
-					@endif
-				</ul>
-				<div class='tab-content'>
-					@if(Auth::user())
-					<div id="import-characters" class="tab-pane active">
-						@include('build.create.user')
-					</div>
-					<div id="import-others" class="tab-pane">
-						@include('build.create.other')
-					</div>
-					@else
-					<div id="import-others" class="tab-pane active">
-						@include('build.create.other')
-					</div>
-					@endif
-			</div>
-		</div>
-		@endif				
-		</div>
-	</div>
+
 </div>
 
 <script type="text/javascript">
 	$(function(){
+		$("#psydosubmit").bind('click', function() {
+			$(".form-buildcreate").trigger("submit");
+		});
 		var characterId = $("input[name=character-id]"),
 				characterRg = $("input[name=character-rg]"),
 				characterBt = $("input[name=character-bt]"),

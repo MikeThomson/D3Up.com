@@ -1,7 +1,7 @@
 <? if(Auth::user()->battletag && Auth::user()->region): ?>
-	<p>If you wish to create a build from one of your characters, please select it from the list below, ensure the information is correct and click 'Create Build' below the form on the left.</p>
+	<p>Choose one of your characters to import.</p>
 	<div>
-		<select name='character-id' id="characters" data-battletag="<?= Auth::user()->battletag ?>">
+		<select name='character-id' id="characters" data-battletag="<?= Auth::user()->battletag ?>" class="input-block-level">
 			<option value=''>Select a Character...</option>
 			<? if($characters): ?>
 				<? foreach($characters as $k => $v): ?>
@@ -10,7 +10,12 @@
 			<? endif ?>
 		</select>
 	</div>
-	<p>If the menu above does not contain your characters, please ensure <a href='/profile'>your region and battletag are correct</a> or check the <a href='/api-status'>API Status</a> page to ensure the API is responding to D3Up.</p>
+	<p>If no builds are found, please <a href='/user/edit'>Visit your Profile</a> and ensure your Battle Tag and Region are correct.</p>
+	<p>Common problems include...</p>
+	<ul>
+		<li>Ensure there are no spaces in your Battle Tag.</li>
+		<li>Your Battle Tag should be formatted as such: Username#1234</li>
+	</ul>
 <? else : ?>
 	<p>You need to specify the following information before we can import characters:</p>
 	<ul>
