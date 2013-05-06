@@ -37,8 +37,6 @@ class User_Controller extends Base_Controller {
 	}
 	
 	public function get_register() {
-		// Registration is Disabled on the V2 Staging Site (for now)
-		throw new Exception("Registration currently Disabled.");
 		// If we're already logged in, send em to the homepage				
 		if(Auth::check()) {
 			return Redirect::to('/');

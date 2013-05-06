@@ -1,0 +1,1 @@
+<p class='disclaimer'>You'll be happy to know D3Up doesn't do anything with your email or password.<br/><br/>In fact, feel free to make up an email address and username, as long as you'll remember it and won't need to use the forgot password. It's only purpose is to identify who owns a build.</p>	

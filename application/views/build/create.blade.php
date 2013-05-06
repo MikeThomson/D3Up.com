@@ -63,8 +63,8 @@ Create/Import your Diablo 3 Character Build
 							@else
 								<li class='active'><a href="#import-others" data-toggle="tab">Import by Battle.net Battle Tag</a></li>
 								<li class='disabled'  data-toggle="popover" data-trigger="hover" data-title="Login to gain access to more features" data-content="If you register first, you'll be able to edit your items, change your skills and make changes to your character. You'll also have quick access to them from the navigation.&lt;br&gt;&lt;br&gt;Your build will still be saved even if you don't register, just bookmark the URL.">
-									<a>
-										My Characters (Login First)
+									<a href='/login'>
+										My Characters (Click to Login First)
 									</a>
 								</li>
 							@endif
