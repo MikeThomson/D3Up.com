@@ -3,6 +3,7 @@ application/config/application.php
 application/config/s3.php
 application/config/github.php
 application/config/development/*.php
+application/config/testing/*.php
 cache.properties
 
 # Numerous always-ignore extensions
