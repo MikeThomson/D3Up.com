@@ -103,4 +103,6 @@ Route::get('login', 'user@login');
 Route::post('login', 'user@login');
 Route::get('register', 'user@register');
 Route::post('register', 'user@register');
+Route::get('forgot', 'user@forgot');
+Route::post('forgot', 'user@forgot');
 Route::get('logout', 'user@logout');
