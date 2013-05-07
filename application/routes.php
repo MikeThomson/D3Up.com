@@ -22,8 +22,6 @@ Route::get('/b/(:num)/(:any?)', 'build@view');
 Route::post('/b/(:num)/(:any?)', 'build@view');
 // Route to View an Item
 Route::get('/i/(:num)/(:any?)', 'item@view');
-// Route to View a build
-Route::get('/search', 'build@index');
 // Math History Routing
 Route::get('math/(:num)/history', 'math@history');
 // Math Edit Routing
