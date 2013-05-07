@@ -1,6 +1,8 @@
 (function($) {
-	// D3Up timago Template
+	// English (Template)
 	jQuery.timeago.settings.strings = {
+	  prefixAgo: "Age:",
+	  suffixAgo: "ago",
 	  seconds: "<1m",
 	  minute: "~1m",
 	  minutes: "~%dm",
