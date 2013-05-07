@@ -59,12 +59,12 @@
 			// Set the Current State with whatever the URL Parameters are set to
 			History.replaceState({
 				'page': this.getParameterByName('page', 1),
-				'class': this.getParameterByName('class', null),
-				'sort': this.getParameterByName('sort', null),
+				'class': this.getParameterByName('class'),
+				'sort': this.getParameterByName('sort'),
 				'actives': this.getParameterByName('actives'),
-				'authentic': this.getParameterByName('authentic', null),
-				'battletag': this.getParameterByName('battletag', null),
-				'battlenet': this.getParameterByName('battlenet', null),
+				'authentic': this.getParameterByName('authentic'),
+				'battletag': this.getParameterByName('battletag'),
+				'battlenet': this.getParameterByName('battlenet'),
 			});
 			// Bind the window statechange event to our update method
 			this._on(window, { statechange: "update" });
@@ -90,6 +90,8 @@
 			$(".btn.battlenet").show();
 			// Show all the D3Up Filters
 			this.options.filters.find("select").show();
+			// Except for the hidden select in the multiselect
+			this.options.filters.find("select[name=actives]").hide();
 		},
 		_showD3UpcomSearch: function() {
 			// Show D3Up's button and hide BNets
@@ -188,13 +190,16 @@
 			// Modify the Value we're changing
 			state[name] = $(event.currentTarget).val();
 			// If we didn't get a value, try to get data-value
-			if(!state['name']) {
+			if(!state[name]) {
 				state[name] = $(event.currentTarget).data('value');
 			}
+			// Ensure we have no null values to prevent URL pollution. 
+			$.each(state, function(k,v) {
+				if(state[k] == null || state[k] == "null") {
+					delete state[k];
+				}
+			});
 			// Push the Updates to History
-			if(state[name] == null || state[name] == "null") {
-				delete state[name];
-			}
 			History.pushState(state, "", "?" + $.param(state));
 		},
 		_createSkillFilter: function(name, options) {
@@ -286,7 +291,7 @@
 			if(window.d3up && window.d3up.gameData && state['class']) {
 				// Build the Active Skill filter
 				var wrapper = $('<div class="input-append btn-toolbar actives">'),
-						select = this._createSkillFilter("actives", window.d3up.gameData.actives[state['class']], 'poison-dart~b'),
+						select = this._createSkillFilter("actives", window.d3up.gameData.actives[state['class']]),
 						reset = $('<button class="btn btn-danger">Reset</button>');
 				reset.bind('click', function() {
 					select.find("option").removeAttr('selected').prop('selected', false);
@@ -305,7 +310,6 @@
 							return options.length + ' selected  <b class="caret"></b>';
 					}
 				});
-				
 			}
 		},
 		update: function () {
