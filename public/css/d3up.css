@@ -375,7 +375,7 @@ li:hover > a .icon-custom-ah-faq { background-position: -303px -42px }
 #browser .input-append .btn-danger {
 	margin-left: 0;
 }
-#browser tbody td  {
+#browser tbody td .d_* {
 	line-height: 42px;
 	font-size: 1.5em;
 	overflow: hidden;
@@ -452,7 +452,6 @@ li:hover > a .icon-custom-ah-faq { background-position: -303px -42px }
 }
 #browser .loading,
 #browser .json-response {
-	font-size: 0.8em;
 	margin: 10px 0;
 	text-align: center;
 }
