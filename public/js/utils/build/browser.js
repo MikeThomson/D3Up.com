@@ -22,7 +22,7 @@
 			],
 		},
 		options: {
-			url: 'http://phalcon.d3up.com/builds',
+			url: 'http://api.d3up.com/builds',
 			filters: false,
 			footer: false,
 			container: false,
