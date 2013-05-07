@@ -444,3 +444,24 @@ li:hover > a .icon-custom-ah-faq { background-position: -303px -42px }
 #browser .battlenet-scan .btn {
 	margin-left: 20px;
 	margin-top: 7px;
+}
+@media (max-width: 1199px) and (min-width: 979px) {
+	#browser tbody td {
+		font-size: 1em;
+	}
+	#browser .d_region_type, 
+	#browser .d_level, 
+	#browser .d_paragon {
+		width: auto;
+	}
+	#browser .d_name {
+		line-height: 1.25em;
+	}
+	#browser .d_name .updated {
+		float: none;
+		display: block;
+	}
+	#browser .d_dps, #browser .d_ehp {
+		width: auto;
+	}
+}

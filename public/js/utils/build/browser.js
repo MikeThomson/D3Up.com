@@ -2,7 +2,6 @@
 	// English (Template)
 	jQuery.timeago.settings.strings = {
 	  prefixAgo: "Age:",
-	  suffixAgo: "ago",
 	  seconds: "<1m",
 	  minute: "~1m",
 	  minutes: "~%dm",
@@ -426,17 +425,18 @@
 							break;
 						case "level":
 						case "paragon":
+							if(data[col] == null)
+								data[col] = 0;
 							row.append($this.makeColumn(col, [data[col], data.id]));
 							break;
 						default:
-							if(data[col])
-								row.append($this.makeColumn(col, [data[col], data.id, data]));
+							row.append($this.makeColumn(col, [data[col], data.id, data]));
 							break;
 					}
 				});
 				if(data['exists'] == false) {
 					var create = $("<a class='btn pull-right'>").html("Create New Build"),
-							info = "This build was found on Battle.net, you can import it here:";
+							info = "Located on Battle.net";
 					// Build one big ol' query string!
 					var qs = "character-bt=" + data['bt-tag'].replace("#", "-")
 									+"&character-rg=" + data['bt-rg']
