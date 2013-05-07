@@ -138,7 +138,7 @@ class D3Up_Sync {
 		// While we're not aborting, try to fetch specified URL
 		while($abort === false) {
 			// Do we have an application.proxy? Set it up!
-			if(Config::has('application.proxy')) {
+			if(class_exists("Config") && Config::has('application.proxy')) {
 				$context = $this->_getProxyContext(Config::get('application.proxy'));
 			}
 			// Attempt to load the JSON from the URL
@@ -585,15 +585,18 @@ class D3Up_Sync {
 	
 	// Get's characters by Region and BattleTag
 	public function getCharacters($rg, $bt) {
+		$return = array();
 		$url = $this->urlProfile[$rg] . strtolower(str_replace("#", "-", $bt)) . "/index";
 		$data = $this->_getData($url);
 		if(!isset($data['heroes'])) {
-			return null;
+			return array();
 		}
 		foreach($data['heroes'] as $k => $v) {
-			$data['heroes'][$k]['region'] = $rg;
+			$return[$v['id']] = $v;
+			$return[$v['id']]['region'] = $rg;
+			$return[$v['id']]['battletag'] = $bt;
 		}
-		return $data['heroes'];		
+		return $return;		
 	}
 
 	public function testURL($url) {
@@ -639,5 +642,38 @@ class D3Up_Sync {
 			$text, 
 			$options
 		);
+	}
+
+	public function apiGetCharacters($rg, $bt) {
+		$bnetMap = array(
+			'gender' => 'gender',
+			'name' => 'name',
+			'class' => 'heroClass',
+			'level' => 'level',
+			'paragonLevel' => 'paragon',
+			'hardcore' => 'hardcore',
+			'id' => 'bt-id',
+			'region' => 'bt-rg',
+			'battletag' => 'bt-tag',
+		);
+		$data = array();
+		$chars = $this->getCharacters($rg, $bt);
+		foreach($chars as $id => $character) {
+			foreach($bnetMap as $old => $new) {
+				if(isset($character[$old])) {
+					if($old == 'gender') {
+						if($character[$old] == 1) {
+							$data[$id][$new] = 'female';																										
+						} else {
+							$data[$id][$new] = 'male';				
+						}
+					} else {
+						$data[$id][$new] = $character[$old];						
+					}
+				}
+			}
+			$data[$id]['exists'] = false;
+		}
+		return $data;
 	}
 }
