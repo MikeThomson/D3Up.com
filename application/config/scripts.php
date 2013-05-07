@@ -11,7 +11,6 @@ return array(
 		'history.js',
 		// D3Up Scripts
 		'd3up.js',		
-		'api.js',		
 		'utils/tooltip.js',
 		'utils/skilltip.js',
 		'utils/bootstrap-multiselect.js',
