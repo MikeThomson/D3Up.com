@@ -12,6 +12,7 @@
 */
 return array('html tooltipColor' => function($color) {
 	$colors = array(
+		0 => "white",
 		1 => "white",
 		2 => "",
 		3 => "Asia",
