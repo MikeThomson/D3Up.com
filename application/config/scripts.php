@@ -13,6 +13,7 @@ return array(
 		'd3up.js',		
 		'utils/tooltip.js',
 		'utils/skilltip.js',
+		'utils/timeago.js',
 		'utils/bootstrap-multiselect.js',
 		'utils/handlebars.helpers.js',
 		'utils/diff_match_patch.js',

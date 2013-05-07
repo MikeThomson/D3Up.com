@@ -1,4 +1,18 @@
 (function($) {
+	// D3Up timago Template
+	jQuery.timeago.settings.strings = {
+	  seconds: "<1m",
+	  minute: "~1m",
+	  minutes: "~%dm",
+	  hour: "~1h",
+	  hours: "~%dhrs",
+	  day: "~1d",
+	  days: "~%dd",
+	  month: "~1m",
+	  months: "~%dm",
+	  year: "~1y",
+	  years: "~%dy",
+	};
 	$.widget( "d3up.buildBrowser", {
 		results: {},
 		d3: {
@@ -414,13 +428,14 @@
 							break;
 						default:
 							if(data[col])
-								row.append($this.makeColumn(col, [data[col], data.id]));
+								row.append($this.makeColumn(col, [data[col], data.id, data]));
 							break;
 					}
 				});
 				if(data['exists'] == false) {
 					var create = $("<a class='btn pull-right'>").html("Create New Build"),
 							info = "This build was found on Battle.net, you can import it here:";
+					// Build one big ol' query string!
 					var qs = "character-bt=" + data['bt-tag'].replace("#", "-")
 									+"&character-rg=" + data['bt-rg']
 									+"&character-id=" + data['bt-id']
@@ -430,14 +445,6 @@
 									+"&level=" + data['level']
 									+"&paragon=" + data['paragon'];
 					create.attr("href", "/build/create?" + qs); 
-					// $queryString = "character-bt=".str_replace("#", "-", Request::get('battletag'));
-					// $queryString .= "&character-rg=".$region;
-					// $queryString .= "&character-id=".$build['id'];
-					// $queryString .= "&name=".$build['name'];
-					// $queryString .= "&class=".$build['class'];
-					// $queryString .= "&hardcore=".(($build['hardcore'] == 1) ? 'true' : 'false');
-					// $queryString .= "&level=".$build['level'];
-					// $queryString .= "&paragon=".$build['paragonLevel'];
 					row.append($("<td colspan='100' class='battlenet-scan'>").append(create, info));
 				}
 				container.append(row);
@@ -492,8 +499,13 @@
 					break;
 				case "name":
 					if(data[1]) {
-						var link = $("<a href='/b/" + data[1] + "'>" + data[0] + "</a>");
-						td.html(link);						
+						var date = new Date(data[2].updated * 1000),
+								iso = date.toISOString(),
+								link = $("<a href='/b/" + data[1] + "'>" + data[0] + "</a>"),
+								updated = $("<span class='updated'>");
+						updated.attr("title", iso);
+						updated.timeago();
+						td.append(link, updated);						
 					} else {
 						td.html(data[0]);
 					}

@@ -397,6 +397,12 @@ li:hover > a .icon-custom-ah-faq { background-position: -303px -42px }
 	width: auto;
 	font-size: 1.25em;
 }
+#browser .d_name .updated {
+	float: right;
+	font-size: 0.75em;
+	line-height: 0.9em;
+	color: #666;
+}
 #browser .d_region_type,
 #browser .d_level,
 #browser .d_paragon {
