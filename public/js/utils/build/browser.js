@@ -390,9 +390,34 @@
 			if($.isEmptyObject(data)) {
 				var row = $("<tr>"),
 						cell = $("<td colspan='100'>"),
-						content = $("<div class='alert alert-danger'>");
+						content = $("<div class='json-response'>"),
+						requested = $("<div>We could not find a build on D3Up that matches:</div>"),
+						params = $("<ul>");
 				content.append($("<h3>").append("No Builds Found."));
-				content.append($("<p>").append("We couldn't find any builds for '" + state['battletag'] + "' on D3Up.com. If you'd like to search for builds based on this Battle Tag on Battle.net, click the 'Search Battle.net' button below to do a quick look at Battle.net for builds."));
+				$.each(state['data'], function(k,v) {
+					if(v != null && v != "null" && k != 'page' && k != 'battlenet') {
+						// Display it properly to avoid confusion
+						if(k == "battletag") {
+							v = v.replace("-","#");
+						}
+						var li = $("<li>"),
+								name = k.replace("_"," ").capitalize(),
+								value = v.replace("-"," ").capitalize();
+						li.append(name, ": ", value);
+						params.append(li);						
+					}
+				});
+				if(state.data['battlenet']) {
+					if(state.data['battletag']) {
+						content.append($("<p class='label label-error'>").append("No builds were found on Battle.net with this Battle Tag."));					
+					}					
+				} else {
+					requested.append(params);
+					content.append(requested);					
+					if(state.data['battletag']) {
+						content.append($("<p class='label label-info'>").append("Click 'Search Battle.net' below to search through Battle.net Characters."));					
+					}
+				}
 				row.append(cell.html(content));
 				container.append(row);
 				$(".btn.next").hide();
