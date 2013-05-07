@@ -88,17 +88,15 @@
 			// Hide D3Up's button and show BNets
 			$(".btn.d3upcom").hide();
 			$(".btn.battlenet").show();
-			// Show all the D3Up Filters
-			this.options.filters.find("select").show();
-			// Except for the hidden select in the multiselect
-			this.options.filters.find("select[name=actives]").hide();
+			// Show the D3Up Controls
+			this.options.filters.find("tr.filters").show();
 		},
 		_showD3UpcomSearch: function() {
 			// Show D3Up's button and hide BNets
 			$(".btn.d3upcom").show();
 			$(".btn.battlenet").hide();
 			// Hide all the D3Up Filters
-			this.options.filters.find("select").hide();
+			this.options.filters.find("tr.filters").hide();
 		},
 		_addSearchSource: function() {
 			var footer = this.options.footer.find("td"),
@@ -394,6 +392,7 @@
 						cell = $("<td colspan='100'>"),
 						content = $("<div class='alert alert-danger'>");
 				content.append($("<h3>").append("No Builds Found."));
+				content.append($("<p>").append("We couldn't find any builds for '" + state['battletag'] + "' on D3Up.com. If you'd like to search for builds based on this Battle Tag on Battle.net, click the 'Search Battle.net' button below to do a quick look at Battle.net for builds."));
 				row.append(cell.html(content));
 				container.append(row);
 				$(".btn.next").hide();
@@ -439,6 +438,7 @@
 					}
 				});
 				if(data['exists'] == false) {
+					$this._showD3UpcomSearch();
 					var create = $("<a class='btn pull-right'>").html("Create New Build"),
 							info = "Located on Battle.net";
 					// Build one big ol' query string!
@@ -482,7 +482,7 @@
 						container.attr({
 							'data-content': 'This is a Hardcore character being played in the ' + data[0] + ' region.',							
 						});
-						container.html(data[0] + "/HD");						
+						container.html(data[0] + "/HC");						
 					} else {						
 						container.attr({
 							'data-content': 'This is a Softcore character being played in the ' + data[0] + ' region.',							
