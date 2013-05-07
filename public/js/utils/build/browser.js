@@ -59,8 +59,11 @@
 			this._createPaginators();
 			// Add the Column Headers
 			this._buildColumnHeaders();
-			// Add the Toggle Buttons for D3Up/BNet
-			this._addSearchSource();
+			// If we're using a Battle Tag in the search..
+			if(History.getState().data['battletag']) {
+				// Add the Toggle Buttons for D3Up/BNet
+				this._addSearchSource();				
+			}
 			// Attempt to setup the Skill Filters
 			this.updateSkillFilters();
 			// Run update immediately to populate default data
