@@ -452,8 +452,14 @@ li:hover > a .icon-custom-ah-faq { background-position: -303px -42px }
 }
 #browser .loading,
 #browser .json-response {
+	font-size: 0.8em;
 	margin: 10px 0;
 	text-align: center;
+}
+#browser .json-response .label {
+	margin-top: 15px;
+	font-size: 1.25em;
+	padding: 10px;
 }
 #browser .json-response ul {
 	list-style: none;
