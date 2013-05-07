@@ -15,6 +15,9 @@ class D3Up_Mongo_Iterator_Cursor extends Epic_Mongo_Iterator_Cursor {
 	}
 	
 	public function count() {
+		if(!class_exists('Cache')) {
+			return parent::count();
+		}
 		$info = $this->_cursor->info();
 		$hash = "cursor-cache-".md5($this->queryImplode($info['query'],"|"));
 		if(Cache::has($hash)) {
