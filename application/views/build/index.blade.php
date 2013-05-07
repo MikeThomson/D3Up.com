@@ -28,7 +28,8 @@
 			filters: $("#browser").find("thead"),
 			paginators: $("#browser").find("thead, tfoot"),
 			container: $("#browser").find("tbody"),
-			columns: ['icon', 'name', 'level', 'paragon', 'actives', 'passives', 'dps', 'ehp']
+			footer: $("#browser").find("tfoot"),
+			columns: ['icon', 'name', 'region_type', 'level', 'paragon', 'actives', 'passives', 'dps', 'ehp']
 		});
 	</script>
 @endsection

@@ -1,6 +1,6 @@
 {{ Form::open('build/create', 'POST', array('class' => 'form-buildcreate')) }}	
 	{{ Form::label('name', 'Name') }}
-	{{ Form::text('name', Request::get('name') ?: '', array('class' => 'input-block-level')) }}
+	{{ Form::text('name', Request::get('name'), array('class' => 'input-block-level')) }}
   
 	{{ Form::label('class', 'Class') }}
 	{{ Form::select('class', D3Up_Classes::$classes, Request::get('class') ?: '', array('class' => 'input-block-level')) }}

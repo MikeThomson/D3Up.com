@@ -46,15 +46,23 @@ Create/Import your Diablo 3 Character Build
 	<div class="title-inner">
 		<div class='row-fluid'>
 			<div class='span4'>
-				@if(Request::get('character-id') && Request::get('character-bt'))
-					<div class='alert alert-success'>
-						<h3>Character Data Imported</h3>
-						<p>We've automatically filled out the form for you based on the character you've chosen on the search page. Feel free to modify the fields in the left column and then hit Create to import the character build!</p>
-					</div>
-					@else
-					<div class='app-pane'>
-						<h2>Step #1</h2>
-						<p>Choose a method to access your characters.</p>
+				<div class='app-pane'>
+					<h2>Step #1</h2>
+					<p>Choose a method to access your characters.</p>
+					@if(Request::get('character-id') && Request::get('character-bt'))
+						<div class='alert alert-success'>
+							<h3>Character Selected</h3>
+							<p>The character you selected from the search page has been filled into the form on the right. Check over the data and read the information in Step #3, then hit Create to get started!</p>
+							<ul>
+								<li>ID: {{ Request::get('character-id') }}</li>
+								<li>Battle Tag: {{ Request::get('character-bt') }}</li>
+								<li>Region: {{ Request::get('character-rg') }}</li>
+							</ul>
+						</div>
+						<div class='btn-group btn-group-block'>
+							<a href="/build/create" class='btn'>Search for a Different Character</a>
+						</div>
+						@else
 						<div id="import-tabs">
 						<ul class="nav nav-pills nav-pills-block">
 							@if(Auth::user())

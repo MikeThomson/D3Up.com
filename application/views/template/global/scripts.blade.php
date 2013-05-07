@@ -31,6 +31,26 @@ $(function(){
 	$('.accordion-group').on('show hide', function (n) {
     $(n.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-chevron-right icon-chevron-down');
 	});
+	/*
+		Since I couldn't get the search to jive with the # in battletags, I decided
+		to create a hidden field that's submitted instead with a "-" instead of a "#".
+		
+		It basically allows users to put a dash or hash in the battletag, but always
+		uses the dashes while submitting and in the API requests. 
+	*/
+	var form = $("#btsearch"), 
+			hidden = form.find("input[name=battletag]"),
+			input = form.find("input[name=battletag-display]");
+	// If our hidden field has a value, put it in the displayed
+	input.val(hidden.val().replace("-", "#"));
+	// While we're typing on Input, update the Hidden submitted value
+	input.on("keyup", function() {
+		hidden.val(input.val().replace("#", "-"));
+	});
+	// Hook onto the form submit
+	form.submit(function() {
+		input.removeAttr("name");
+	});
 });
 </script>
 <!-- The D3Up Tooltip Div -->

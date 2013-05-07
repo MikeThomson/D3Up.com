@@ -2,6 +2,17 @@
 	$.widget( "d3up.buildBrowser", {
 		results: {},
 		d3: {
+			regions: {
+				1: {
+					short: 'US'
+				},
+				2: {
+					short: 'EU'
+				},
+				3: {
+					short: 'AS'
+				},
+			},
 			classes: [
 				'barbarian', 
 				'demon-hunter', 
@@ -11,14 +22,16 @@
 			],
 		},
 		options: {
-			url: 'http://api.d3up.com/builds',
+			url: 'http://phalcon.d3up.com/builds',
 			filters: false,
+			footer: false,
 			container: false,
 			paginator: $("<div class='btn-group pull-right'>"),
 			paginators: false,
 			columns: [
 				'icon', 
 				'name', 
+				'region_type',
 				'level', 
 				'paragon', 
 				'actives', 
@@ -34,7 +47,9 @@
 				'class': this.getParameterByName('class', null),
 				'sort': this.getParameterByName('sort', null),
 				'actives': this.getParameterByName('actives'),
-				'authentic': this.getParameterByName('authentic', null)
+				'authentic': this.getParameterByName('authentic', null),
+				'battletag': this.getParameterByName('battletag', null),
+				'battlenet': this.getParameterByName('battlenet', null),
 			});
 			// Bind the window statechange event to our update method
 			this._on(window, { statechange: "update" });
@@ -44,10 +59,34 @@
 			this._createPaginators();
 			// Add the Column Headers
 			this._buildColumnHeaders();
+			// Add the Toggle Buttons for D3Up/BNet
+			this._addSearchSource();
 			// Attempt to setup the Skill Filters
 			this.updateSkillFilters();
 			// Run update immediately to populate default data
 			this.update();
+		},
+		_showBattlenetSearch: function() {
+			// Hide D3Up's button and show BNets
+			$(".btn.d3upcom").hide();
+			$(".btn.battlenet").show();
+			// Show all the D3Up Filters
+			this.options.filters.find("select").show();
+		},
+		_showD3UpcomSearch: function() {
+			// Show D3Up's button and hide BNets
+			$(".btn.d3upcom").show();
+			$(".btn.battlenet").hide();
+			// Hide all the D3Up Filters
+			this.options.filters.find("select").hide();
+		},
+		_addSearchSource: function() {
+			var footer = this.options.footer.find("td"),
+					bnet = $("<a type='btn' data-value='true' class='btn battlenet' name='battlenet'>").html("Search Battle.net"),
+					d3up = $("<a type='btn' data-value='null' class='btn d3upcom' name='battlenet'>").html("Search D3Up.com");
+			this._on(bnet, {click: '_updateState'});
+			this._on(d3up, {click: '_updateState'});
+			footer.append(bnet, d3up);
 		},
 		_createPaginators: function() {
 					// Get the Current State information
@@ -130,6 +169,10 @@
 					name = $(event.currentTarget).attr("name");
 			// Modify the Value we're changing
 			state[name] = $(event.currentTarget).val();
+			// If we didn't get a value, try to get data-value
+			if(!state['name']) {
+				state[name] = $(event.currentTarget).data('value');
+			}
 			// Push the Updates to History
 			if(state[name] == null || state[name] == "null") {
 				delete state[name];
@@ -255,7 +298,12 @@
 			row.append($("<td colspan='100' class='loading'>").html("Loading"));
 			container.append(row);
 			// Grab the State Information
-			var state = History.getState();			
+			var state = History.getState();		
+			if(!state.data['battlenet']) {
+				this._showBattlenetSearch();
+			}	else {
+				this._showD3UpcomSearch();
+			}
 			// Update the Filters to match the state
 			$.each(state.data, function(k,v) {
 				// Never pass a null value, this ensures it.
@@ -295,6 +343,9 @@
 			$.each(columns, function(k,v) {
 				var td = $("<td>");
 				switch(v) {
+					case "region_type":
+						v = "Region/Type";
+						break;
 					case "dps":
 					case "ehp":
 						v = v.toUpperCase();
@@ -311,14 +362,17 @@
 		process: function(data) {
 			// Grab the Container 
 			var container = this.options.container.empty(),
+					state = History.getState(),
 					$this = this;
 			// Store the Results on the browser
 			this.results = data;
 			// No results? Return the row telling the user
 			if($.isEmptyObject(data)) {
 				var row = $("<tr>"),
-						cell = $("<td colspan='100'>");
-				row.append(cell.html("No results found!"));
+						cell = $("<td colspan='100'>"),
+						content = $("<div class='alert alert-danger'>");
+				content.append($("<h3>").append("No Builds Found."));
+				row.append(cell.html(content));
 				container.append(row);
 				$(".btn.next").hide();
 				return;
@@ -339,6 +393,10 @@
 						case "icon":
 							row.append($this.makeColumn(col, [data.heroClass, data.gender]));
 							break;
+						case "region_type":
+							var region = $this.d3.regions[data['bt-rg']]['short'];
+							row.append($this.makeColumn(col, [region, data['hardcore']]));
+							break;
 						case "actives":
 							if(data.actives)
 								row.append($this.makeColumn(col, [data.heroClass, data.actives]));								
@@ -347,12 +405,43 @@
 							if(data.passives)
 								row.append($this.makeColumn(col, [data.heroClass, data.passives]));
 							break;
-						default:
+						case "level":
+						case "paragon":
 							row.append($this.makeColumn(col, [data[col], data.id]));
+							break;
+						default:
+							if(data[col])
+								row.append($this.makeColumn(col, [data[col], data.id]));
 							break;
 					}
 				});
+				if(data['exists'] == false) {
+					var create = $("<a class='btn pull-right'>").html("Create New Build"),
+							info = "This build was found on Battle.net, you can import it here:";
+					var qs = "character-bt=" + data['bt-tag'].replace("#", "-")
+									+"&character-rg=" + data['bt-rg']
+									+"&character-id=" + data['bt-id']
+									+"&name=" + data['name']
+									+"&class=" + data['heroClass']
+									+"&hardcore=" + data['hardcore']
+									+"&level=" + data['level']
+									+"&paragon=" + data['paragon'];
+					create.attr("href", "/build/create?" + qs); 
+					// $queryString = "character-bt=".str_replace("#", "-", Request::get('battletag'));
+					// $queryString .= "&character-rg=".$region;
+					// $queryString .= "&character-id=".$build['id'];
+					// $queryString .= "&name=".$build['name'];
+					// $queryString .= "&class=".$build['class'];
+					// $queryString .= "&hardcore=".(($build['hardcore'] == 1) ? 'true' : 'false');
+					// $queryString .= "&level=".$build['level'];
+					// $queryString .= "&paragon=".$build['paragonLevel'];
+					row.append($("<td colspan='100' class='battlenet-scan'>").append(create, info));
+				}
 				container.append(row);
+				row.find("[data-toggle=popover]").popover({
+					trigger: 'click',
+					placement: 'top'
+				});
 			});
 			// Show the next button incase it was hidden
 			$(".btn.next").show();
@@ -367,6 +456,25 @@
 				case "icon":
 					td.html($this.classIcon(data[0], data[1]));
 					break;
+				case "region_type":
+					var container = $("<span>")
+					container.attr({
+						'data-toggle': 'popover',
+						'data-title': 'Region & Character Type',
+					});
+					if(data[1]) {
+						container.attr({
+							'data-content': 'This is a Hardcore character being played in the ' + data[0] + ' region.',							
+						});
+						container.html(data[0] + "/HD");						
+					} else {						
+						container.attr({
+							'data-content': 'This is a Softcore character being played in the ' + data[0] + ' region.',							
+						});
+						container.html(data[0] + "/SC");
+					}
+					td.append(container);
+					break;
 				case "actives":
 					$.each(data[1], function(k,v) { 
 						var icon = $this.skillIcon(data[0], v);
@@ -380,8 +488,12 @@
 					});
 					break;
 				case "name":
-					var link = $("<a href='/b/" + data[1] + "'>" + data[0] + "</a>");
-					td.html(link);
+					if(data[1]) {
+						var link = $("<a href='/b/" + data[1] + "'>" + data[0] + "</a>");
+						td.html(link);						
+					} else {
+						td.html(data[0]);
+					}
 					break;
 				default:
 					td.html(data[0]);
