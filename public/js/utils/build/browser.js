@@ -184,12 +184,12 @@
 		_updateState: function(select) {
 			// Grab a copy of the state's data
 			var state = History.getState().data,
-					name = $(event.currentTarget).attr("name");
+					name = $(select.currentTarget).attr("name");
 			// Modify the Value we're changing
-			state[name] = $(event.currentTarget).val();
+			state[name] = $(select.currentTarget).val();
 			// If we didn't get a value, try to get data-value
 			if(!state[name]) {
-				state[name] = $(event.currentTarget).data('value');
+				state[name] = $(select.currentTarget).data('value');
 			}
 			// Ensure we have no null values to prevent URL pollution. 
 			$.each(state, function(k,v) {

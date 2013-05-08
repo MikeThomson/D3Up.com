@@ -207,9 +207,13 @@
 .navbar .nav > li > .dropdown-menu:after {
 	border: 0;
 }
-
 .nav-collapse .navbar-search {
-	margin: 10px 25px 0 0 ;
+	margin: 0;
+	padding: 0;
+	margin-top: 12px;
+	height: 35px;
+}
+.nav-collapse .navbar-search input {
 	border: 0;
   -webkit-box-shadow: none;
      -moz-box-shadow: none;

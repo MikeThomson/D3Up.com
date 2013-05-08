@@ -14,7 +14,7 @@ $(function(){
 	$.each(active.parents('.tab-pane'), function() {
 		// Activate the Parent Tab as well if it's a subtab
 		$('ul.nav a[href="#' + $(this).attr("id") + '"]').tab('show');
-		window.scrollTo(0);
+		window.scrollTo(0, 0);
 	});
 	// Bind the Click function to change the Hash
   $('.nav-tabs a, .nav-pills a').click(function (e) {
@@ -26,7 +26,7 @@ $(function(){
     $(this).tab('show');
   });
 	// Scroll to the Top
-	window.scrollTo(0);
+	window.scrollTo(0, 0);
 	// Add Toggle Icons swapping onto Accordions
 	$('.accordion-group').on('show hide', function (n) {
     $(n.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-chevron-right icon-chevron-down');
@@ -40,16 +40,16 @@ $(function(){
 	*/
 	var form = $("#btsearch"), 
 			hidden = form.find("input[name=battletag]"),
-			input = form.find("input[name=battletag-display]");
+			input = $("input[name=battletag-display]");
 	// If our hidden field has a value, put it in the displayed
 	input.val(hidden.val().replace("-", "#"));
 	// While we're typing on Input, update the Hidden submitted value
-	input.on("keyup", function() {
+	input.on("keyup", function(e) {
 		hidden.val(input.val().replace("#", "-"));
-	});
-	// Hook onto the form submit
-	form.submit(function() {
-		input.removeAttr("name");
+		// If enter's pressed, submit the real form
+		if(e.keyCode == 13) {
+			form.submit();			
+		} 
 	});
 });
 </script>
