@@ -1,5 +1,3 @@
-@layout('template.main')
-
 @section('styles')
 <link href="/css/build.css" rel="stylesheet">
 <link href="/css/compare.css" rel="stylesheet">

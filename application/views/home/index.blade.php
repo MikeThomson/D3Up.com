@@ -1,5 +1,3 @@
-@layout('template.main')
-
 @section("headerbar")
 D3Up.com - Diablo 3 Build Calculator for EHP and DPS
 @endsection

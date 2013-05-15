@@ -1,5 +1,3 @@
-@layout('template.main')
-
 @section('content')
 <a
  href="http://us.battle.net/d3/en/item/CkMIh-n87gMSBwgEFc74yBUdyOa6ah3cEpQsHaCBE64dVCDKrh0pEnPgIgsIABXBRAMAGBogCjAJOOcEQABIBlAOYOcEGJzjx9wCUAJYAA" onclick="return false">

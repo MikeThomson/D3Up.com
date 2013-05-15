@@ -1,5 +1,3 @@
-@layout('template.main')
-
 <?php
 	$lang = Config::get('application.language');
 	$langs = Config::get('application.languages');

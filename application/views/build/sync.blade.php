@@ -1,4 +1,3 @@
-@layout('template.main')
 <?
 	$totals = array();
 	foreach($results['messages'] as $res) {

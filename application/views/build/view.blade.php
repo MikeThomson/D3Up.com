@@ -1,5 +1,3 @@
-@layout('template.main')
-
 @section("headerbar")
 <a href="/build">{{ __('d3up.builds') }}</a> 
 \ <a href="/build?class={{ $build->class }}">{{ ucwords(str_replace("-", " ", $build->class)) }}</a> 

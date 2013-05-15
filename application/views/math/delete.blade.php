@@ -1,5 +1,3 @@
-@layout('template.modal')
-
 @section('styles')
 <link href="/css/math.css" rel="stylesheet">
 @endsection

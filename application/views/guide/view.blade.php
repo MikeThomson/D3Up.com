@@ -1,5 +1,3 @@
-@layout('template.main')
-
 @section('content')
 <link rel="stylesheet" href="/css/jquery.cleditor.css" type="text/css" />
 <?

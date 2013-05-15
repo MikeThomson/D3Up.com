@@ -1,5 +1,3 @@
-@layout('template.main')
-
 @section('headerbar')
 User Dashboard for {{ $user->username }}
 @endsection 
