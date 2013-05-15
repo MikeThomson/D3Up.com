@@ -2,6 +2,8 @@
 
 class Home_Controller extends Base_Controller {
 
+	public $layout = 'template.main';
+
 	public function action_index()
 	{
 		return View::make('home.index');
@@ -37,4 +39,9 @@ class Home_Controller extends Base_Controller {
 		return View::make('home.api-status')->with('status', $available);
 	}
 
+	public function action_faq($slug) {
+		$this->layout->nest('content', 'home.faq', array(
+			'faq' => $slug
+		));
+	}
 }
