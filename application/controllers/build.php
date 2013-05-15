@@ -66,31 +66,6 @@ class Build_Controller extends Base_Controller {
 	public function get_index() {
 		return View::make('build.index');
 	}
-	public function get_index2() {
-		// Fetch the Builds
-		$builds = $this->getBuilds();
-		// Fetch the Pagination
-		$pagination = $this->getPagination($builds);
-		// If we got a battletag, and no results, scan the API and present results
-		$characters = array();	// Array to return with characters
-		if($builds->count() === 0) {
-			if($battletag = Request::get('battletag')) {
-				if(Cache::has('apicache-'.$battletag)) {
-					$characters = Cache::get('apicache-'.$battletag);
-				} else {
-					$sync = new D3Up_Sync();
-					foreach(array(1 => 'US', 2 => 'EU', 3 => 'AS') as $key => $region) {
-						$characters[$key] = $sync->getCharacters($key, $battletag);
-					} 
-					// Cache::put('apicache-'.$battletag, $characters, 5);				
-				}
-			}			
-		}
-		return View::make('build.index')
-						->with('builds', $builds)
-						->with('pagination', $pagination)
-						->with('characters', $characters);
-	}
 
 	public function get_view($id, $data = false) {
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
