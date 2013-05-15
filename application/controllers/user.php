@@ -19,13 +19,16 @@ Validator::register('password_match', function($attribute, $value, $parameters) 
 class User_Controller extends Base_Controller {
 
 	public $restful = true;
+	public $layout = 'template.main';
 	
 	public function get_index() {
 		// Require Login
 		if(!Auth::check()) {
 			return Redirect::to('user/login');
 		}
-		return View::make('user/index')->with('user', Auth::user());
+		$this->layout->nest('content', 'user.index', array(
+			'user' => Auth::user()
+		));
 	}
 
 	public function get_items() {
@@ -33,7 +36,7 @@ class User_Controller extends Base_Controller {
 		if(!Auth::check()) {
 			return Redirect::to('user/login');
 		}
-		return View::make('user.items');
+		$this->layout->nest('content', 'user.items');
 	}
 
 	public function get_builds() {
@@ -41,7 +44,7 @@ class User_Controller extends Base_Controller {
 		if(!Auth::check()) {
 			return Redirect::to('user/login');
 		}
-		return View::make('user.builds');		
+		$this->layout->nest('content', 'user.builds');
 	}
 	
 	public function get_edit() {
@@ -49,7 +52,7 @@ class User_Controller extends Base_Controller {
 		if(!Auth::check()) {
 			return Redirect::to('user/login');
 		}
-		return View::make('user.edit');
+		$this->layout->nest('content', 'user.edit');
 	}
 	
 	public function post_edit() {
@@ -90,7 +93,7 @@ class User_Controller extends Base_Controller {
 		if(!Auth::check()) {
 			return Redirect::to('user/login');
 		}
-		return View::make('user.password');
+		$this->layout->nest('content', 'user.password');
 	}
 	
 	public function post_password() {
@@ -120,8 +123,10 @@ class User_Controller extends Base_Controller {
 		if(Auth::check()) {
 			return Redirect::to('user/login');
 		}
+		// Set the layout to modal for this page
+		$this->layout = View::make('template.modal');
 		// Render the Login View
-		return View::make('user/login');
+		$this->layout->nest('content', 'user.login');
 	}
 	
 	public function post_login() {
@@ -152,8 +157,10 @@ class User_Controller extends Base_Controller {
 		if(Auth::check()) {
 			return Redirect::to('/');
 		}
-		// Render the Registration view
-		return View::make('user/register');
+		// Set the layout to modal for this page
+		$this->layout = View::make('template.modal');
+		// Embed the Registration view
+		$this->layout->nest('content', 'user.register');
 	}
 	
 	public function post_register() {
@@ -202,6 +209,6 @@ class User_Controller extends Base_Controller {
 	}
 	
 	public function post_forgot() {
-		
+		throw new Exception("Forgot Password not implemented yet");		
 	}
 }

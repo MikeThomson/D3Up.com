@@ -3,6 +3,7 @@
 class Build_Controller extends Base_Controller {
 
 	public $restful = true;
+	public $layout = 'template.main';
 
 	public function getBuilds($params = array()) {
 		// Filtering on the Build List
@@ -43,28 +44,9 @@ class Build_Controller extends Base_Controller {
 		$builds = Epic_Mongo::db('build')->find($query)->sort($sort);
 		return $builds;
 	}
-	
-	public function getPagination($builds) {
-		// Build List Parameters
-		$curPage = Request::get('page') ?: 1;	// Either the currently requested page, or if null, page #1
-		$perPage = 20;
-		$skip = ($curPage - 1) * $perPage;
-		// Pagination Options
-		$paginationOptions = array(
-			'class' => Request::get('class'),
-			'sort' => Request::get('sort'),
-		);
-		// If we're being passed a BattleTag, search for it.
-		if($battletag = strtolower(Request::get('battletag'))) {
-			$paginationOptions['battletag'] = str_replace("-", "#", $battletag);
-		}
-		// Add a paginator
-		$pagination = Paginator::make($builds->limit($perPage)->skip($skip), $builds->count(), $perPage);
-		return $pagination->appends($paginationOptions);
-	}
 
 	public function get_index() {
-		return View::make('build.index');
+		$this->layout->nest('content', 'build.index');
 	}
 
 	public function get_view($id, $data = false) {
@@ -74,7 +56,9 @@ class Build_Controller extends Base_Controller {
 		}
 		// Possible Caching Mechanism, found in the Bundle D3Up-Cache
 		// return View::cached('build.view', array('build' => $build));
-		return View::make('build.view')->with('build', $build);
+		$this->layout->nest('content', 'build.view', array(
+			'build' => $build
+		));		
 	}
 	
 	public function post_view($id, $data = false) {
@@ -122,7 +106,10 @@ class Build_Controller extends Base_Controller {
 		if(!$build1 || !$build2) {
 			return Response::error('404');
 		}
-		return View::make('build.compare')->with('build1', $build1)->with('build2', $build2);
+		$this->layout->nest('content', 'build.compare', array(
+			'build1' => $build1,
+			'build2' => $build2
+		));
 	}
 	
 	public function get_sync($id, $data = false) {
@@ -133,8 +120,11 @@ class Build_Controller extends Base_Controller {
 		}
 		// Sync the Build and get the results
 		$results = $build->sync(Request::get('type'));
-		// Return the Results and Build to the View
-		return View::make('build.sync')->with('build', $build)->with('results', $results);
+		// Embed the Results and Build into the View
+		$this->layout->nest('content', 'build.sync', array(
+			'build' => $build,
+			'results' => $results
+		));
 	}
 	
 	public function get_create() {
@@ -153,9 +143,10 @@ class Build_Controller extends Base_Controller {
 				$characters = $sync->getCharacters($user->region, $user->battletag);
 			}
 		}
-		// Return the View
-		return View::make('build.create')
-							 ->with('characters', $characters);
+		// Embed the View
+		$this->layout->nest('content', 'build.create', array(
+			'characters' => $characters
+		));
 	}
 	
 	public function post_create() {
@@ -193,17 +184,10 @@ class Build_Controller extends Base_Controller {
 		}
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) Session::get('build')));
 		$results = Session::get('results');
-		return View::make('build.sync')->with('build', $build)->with('results', $results);
-	}
-	
-	public function get_user() {
-		// Fetch the Builds
-		$builds = $this->getBuilds(array('filter' => 'user'));
-		// Fetch the Pagination
-		$pagination = $this->getPagination($builds);
-		return View::make('build.index')
-						->with('builds', $builds)
-						->with('pagination', $pagination);
+		$this->layout->nest('content', 'build.sync', array(
+			'build' => $build,
+			'results' => $results
+		));
 	}
 	
 	public function makeFloats($array) {
@@ -227,8 +211,8 @@ class Build_Controller extends Base_Controller {
 		unset($toCache['skillData']);
 		// Load the build up
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
-		// 404 if no build is found
-		if(!$build) {
+		// 404 if no build is found or this isn't an ajax request
+		if(!$build || !Request::ajax()) {
 			return Response::error('404');
 		}
 		// Does this build have an owner or a syncKey?
@@ -259,8 +243,9 @@ class Build_Controller extends Base_Controller {
 		if(!$build) {
 			return Response::error('404');
 		}
-
-		return View::make('build.signature')->with('build', $build);
+		$this->layout->nest('content', 'build.signature', array(
+			'build' => $build
+		));
 	}
 	
 	public function post_signature($id) {

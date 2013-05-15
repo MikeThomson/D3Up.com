@@ -2,9 +2,14 @@
 
 class Math_Controller extends Base_Controller {
 	public $restful = true;
+	public $layout = 'template.main';
+
 	public function get_index() {
 		$math = Epic_Mongo::db('math')->find();
-		return View::make('math.index')->with('math', $math)->with('lang', Session::get('locale'));
+		$this->layout->nest('content', 'math.index', array(
+			'math' => $math,
+			'lang' => Session::get('locale')
+		));
 	}
 	
 	public function slug($text) {
@@ -26,7 +31,7 @@ class Math_Controller extends Base_Controller {
 	}
 	
 	public function get_create() {
-		return View::make('math.create');
+		$this->layout->nest('content', 'math.create');
 	}
 	
 	private function _validate() {
@@ -77,15 +82,16 @@ class Math_Controller extends Base_Controller {
 		$math = Epic_Mongo::db('math')->findOne($query);
 		// Determine which language we're trying to edit
 		$lang = Request::get('language'); 
-		// Return the View
-		return View::make('math.edit')->with('math', $math)->with('language', $lang);			
+		$this->layout->nest('content', 'math.edit', array(
+			'math' => $math,
+			'language' => $lang
+		));
 	}
 	
 	public function post_edit() {
 		$input = Input::all();
 		$validation = $this->_validate();
 		if($validation->fails()) {
-			// var_dump($input, $validation->errors); exit;
 			return Redirect::to('math/'.$input['id'].'/edit?language='.$input['locale'])->with_errors($validation);
 		}
 		$math = Epic_Mongo::db('math')->findOne(array("id" => (int) $input['id']));
@@ -111,11 +117,12 @@ class Math_Controller extends Base_Controller {
 		// Query for it
 		$query = array('id' => $id);
 		$math = Epic_Mongo::db('math')->findOne($query);
-		if($math) {
-			return View::make('math.view')->with('math', $math);			
-		} else {
-			return Redirect::to('/math');
+		if(!$math) {
+			return Response::error('404');
 		}
+		$this->layout->nest('content', 'math.view', array(
+			'math' => $math,
+		));
 	}
 	
 	public function get_delete($id) {
@@ -123,7 +130,12 @@ class Math_Controller extends Base_Controller {
 		// Query for it
 		$query = array('id' => $id);
 		$math = Epic_Mongo::db('math')->findOne($query);
-		return View::make('math.delete')->with('math', $math);
+		if(!$math) {
+			return Response::error('404');
+		}
+		$this->layout->nest('content', 'math.delete', array(
+			'math' => $math,
+		));
 	}
 	
 	public function post_delete() {
@@ -154,6 +166,9 @@ class Math_Controller extends Base_Controller {
 		$cursor->rewind();
 		$selected = $cursor->current();
 		$current = Epic_Mongo::db("math")->findOne(array("id" => (int) $id));
-		return View::make('math.history')->with('current', $current)->with('history', $history)->with('selected', $selected);
+		$this->layout->nest('content', 'math.history', array(
+			'current' => $current,
+			'history' => $history
+		));
 	}
 }

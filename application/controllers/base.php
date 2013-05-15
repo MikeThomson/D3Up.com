@@ -39,37 +39,5 @@ class Base_Controller extends Controller {
 		}
 		return Redirect::to(Request::server('http_referer'));
 	}
-
+	
 }
-// 
-// class Language_Controller extends Base_Controller {
-// 	function __construct(){
-// 		$this->action_set();
-// 		parent::__construct();
-// 	}
-// 	
-// 	private function checkLang($lang = null){
-// 		if(isset($lang)){
-// 			foreach($this->_Langs as $k => $v){
-// 				if(strcmp($lang, $k) == 0) $Check = true;
-// 			}
-// 		}
-// 		return isset($Check) ? $Check : false;
-// 	}
-// 
-// 	public function action_set($lang = null){
-// 		if(isset($lang) && $this->checkLang($lang)){
-// 			Session::put('lang', $lang);
-// 			$this->_Langs['current'] = $lang;
-// 			Config::set('application.language', $lang);
-// 		} else {
-// 			if(Session::has('lang')){
-// 				Config::set('application.language', Session::get('lang'));
-// 				$this->_Langs['current'] = Session::get('lang');
-// 			} else {
-// 				$this->_Langs['current'] = $this->_Default;
-// 			}
-// 		}
-// 		return Redirect::to('/');
-// 	}
-// }
