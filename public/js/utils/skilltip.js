@@ -39,6 +39,8 @@ $(function() {
 });
 
 Handlebars.registerHelper('skillIcon', function(heroClass, name) {
+	// Check to ensure we have the data from the gamedata.js
+	if(!d3up.gameData) return false
 	var container = $("<span class='d3-icon d3-icon-skill d3-icon-skill-42' data-type='skill'>"),
 			frame = $("<span class='frame'>"),
 			active = d3up.gameData.actives[heroClass][name];
@@ -58,6 +60,8 @@ Handlebars.registerHelper('skillIcon', function(heroClass, name) {
 });
 
 Handlebars.registerHelper('passiveIcon', function(heroClass, name) {
+	// Check to ensure we have the data from the gamedata.js
+	if(!d3up.gameData) return false
 	var container = $("<span class='passive-icon' data-type='passive'>"),
 			image = $("<img style='width:32px; height:32px'>"),
 			passive = d3up.gameData.passives[heroClass][name];
