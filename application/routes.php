@@ -34,11 +34,10 @@ Route::post('math/(:num)/delete', 'math@delete');
 Route::get('math/(:num)/(:any?)', 'math@view');
 // User Builds
 Route::get('/user/builds', 'build@user');
-
-
+// FAQ Routing
+Route::get('/faq/(:any?)', 'home@faq');
 // Guide Routing
 Route::get('guide/(:num)/(:any?)', 'guide@view');
-
 // API Status Checker
 Route::get('api-status', 'home@apistatus');
 
