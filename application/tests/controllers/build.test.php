@@ -9,7 +9,7 @@ class BuildControllerTest extends ControllerTestCase {
 		// Assert that the HTTP Status Code is 200 (OK)
 		$this->assertEquals('200', $response->foundation->getStatusCode());
 		// Assert that the View has a real build
-		$this->assertInstanceOf('D3Up_Build', $response->content->data['build']);
+		$this->assertInstanceOf('D3Up_Build', $response->content->data['content']['build']);
 	}
 
 	public function testCompare() {
@@ -18,7 +18,7 @@ class BuildControllerTest extends ControllerTestCase {
 		// Assert that the HTTP Status Code is 200 (OK)
 		$this->assertEquals('200', $response->foundation->getStatusCode());
 		// Assert that the View has a cursor
-		$this->assertInstanceOf('D3Up_Build', $response->content->data['build1']);
-		$this->assertInstanceOf('D3Up_Build', $response->content->data['build2']);
+		$this->assertInstanceOf('D3Up_Build', $response->content->data['content']['build1']);
+		$this->assertInstanceOf('D3Up_Build', $response->content->data['content']['build2']);
 	}
 }

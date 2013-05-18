@@ -107,9 +107,9 @@ class MathControllerTest extends ControllerTestCase {
 		// Assert that the HTTP Status Code is 200 (OK)
 		$this->assertEquals('200', $response->foundation->getStatusCode());
 		// Assert that the View has a cursor
-		$this->assertInstanceOf('Epic_Mongo_Iterator_Cursor', $response->content->data['math']);
+		$this->assertInstanceOf('Epic_Mongo_Iterator_Cursor', $response->content->data['content']['math']);
 		// Assert that it has data in it
-		$this->assertGreaterThan(0, $response->content->data['math']->count());
+		$this->assertGreaterThan(0, $response->content->data['content']['math']->count());
 	}
 	
 	/**
@@ -122,11 +122,11 @@ class MathControllerTest extends ControllerTestCase {
 		// Assert that the HTTP Status Code is 200 (OK)
 		$this->assertEquals('200', $response->foundation->getStatusCode());
 		// Assert that the View has a real math document
-		$this->assertInstanceOf('D3Up_Math', $response->content->data['math']);
+		$this->assertInstanceOf('D3Up_Math', $response->content->data['content']['math']);
 	}
 
 	/**
-   * @depends testView
+   * @depends testEdit
    */
 	public function testDelete() {
 		$sample = $this->getTestDocument();
@@ -138,8 +138,8 @@ class MathControllerTest extends ControllerTestCase {
 		$this->post('math@delete', array('id' => $sample->id, 'confirm' => true));
 		// Request the view page for the math, and ensure it doesn't exist
 		$response = $this->get('math@view', array('id' => $sample->id));
-		// Assert that the HTTP Status Code is 302 (Redirect)
-		$this->assertEquals('302', $response->foundation->getStatusCode());
+		// Assert that the HTTP Status Code is 404 (not found)
+		$this->assertEquals('404', $response->foundation->getStatusCode());
 	}
 	
 }
