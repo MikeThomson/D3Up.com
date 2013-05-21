@@ -5,7 +5,7 @@
 			<option value=''>Select a Character...</option>
 			<? if($characters): ?>
 				<? foreach($characters as $k => $v): ?>
-					<option data-region="<?= $v['region'] ?>" data-name="<?= $v['name'] ?>" data-hardcore="<?= $v['hardcore'] ?>" data-paragon="<?= $v['paragonLevel'] ?>" data-class="<?= $v['class'] ?>" value='<?= $v['id'] ?>'>[<?= ($v['hardcore']) ? "HC" : "SC" ?>][<?= $v['level'] ?>] <?= $v['name']?> - <?= ucwords(str_replace("-", " ", $v['class'])) ?>
+					<option data-region="<?= $v['region'] ?>" data-name="<?= $v['name'] ?>" data-hardcore="<?= $v['hardcore'] ?>" data-paragon="<?= $v['paragonLevel'] ?>" data-level="<?= $v['level'] ?>" data-class="<?= $v['class'] ?>" value='<?= $v['id'] ?>'>[<?= ($v['hardcore']) ? "HC" : "SC" ?>][<?= $v['level'] ?>] <?= $v['name']?> - <?= ucwords(str_replace("-", " ", $v['class'])) ?>
 				<? endforeach ?>
 			<? endif ?>
 		</select>

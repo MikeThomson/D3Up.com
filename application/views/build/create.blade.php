@@ -19,27 +19,6 @@ Create/Import your Diablo 3 Character Build
 @endsection
 
 @section('content')
-<style type="text/css" media="screen">
-	.app-pane {
-		padding: 0 15px;
-	}
-	.app-pane h2 {
-		font-size: 1.5em;
-		line-height: 1.5em;
-		margin: 0 0 10px;
-		color: #777;
-	}
-	.app-pane 
-	.nav-pills > .disabled > a,
-	.nav-pills > .disabled > a:hover,
-	.nav-pills > .disabled > a:focus {
-		background-color: #333;
-	}
-	.nav-pills-block li {
-		float: none;
-		display: block;
-	}
-</style>
 <div class="title-block">
 	<div class="title-inner">
 		<div class='row-fluid'>

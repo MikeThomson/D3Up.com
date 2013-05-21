@@ -290,6 +290,27 @@ a:focus {
 	margin: 0;
 	line-height: 40px;
 }
+/* Build create */
+.app-pane {
+	padding: 0 15px;
+}
+.app-pane h2 {
+	font-size: 1.5em;
+	line-height: 1.5em;
+	margin: 0 0 10px;
+	color: #777;
+}
+.app-pane 
+.nav-pills > .disabled > a,
+.nav-pills > .disabled > a:hover,
+.nav-pills > .disabled > a:focus {
+	background-color: #333;
+}
+.nav-pills-block li {
+	float: none;
+	display: block;
+}
+
 /* reusable frame */
 .icon-frame { background-color: black; padding: 1px; border-left: 1px solid #3a2912; border-right: 1px solid #59411c; border-bottom: 1px solid #463419; border-top: 1px solid #574320; border-radius: 2px; }
 .icon-frame img { display: block; vertical-align: bottom; }

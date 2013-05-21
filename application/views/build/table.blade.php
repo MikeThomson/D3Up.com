@@ -1,9 +1,3 @@
-<ul class="pager pull-left">
-{{ $pagination->previous() }}
-</ul>
-<ul class="pager pull-right">
-{{ $pagination->next() }}
-</ul>
 <table class='table build-table'>
 <tbody>
 	<tr>

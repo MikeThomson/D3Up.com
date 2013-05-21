@@ -1,4 +1,4 @@
-{{ Form::open('build/create', 'POST', array('class' => 'form-buildcreate')) }}	
+{{ Form::open() }}	
 	{{ Form::label('name', 'Name') }}
 	{{ Form::text('name', Request::get('name'), array('class' => 'input-block-level')) }}
   
