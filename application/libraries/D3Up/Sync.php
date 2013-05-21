@@ -191,6 +191,10 @@ class D3Up_Sync {
 			$this->_log("Build is missing one of: BattleTag, Region or ID. Please <a href='/b/".$build->id."/".($build->slug?:"~")."/edit'>edit the build</a> to correct this information.", "fatal");
 			return false;			
 		}
+		// Are we bypassing owner checks for automated syncing?
+		if($this->_bypass) { 
+			return true;
+		}
 		// Check to see if this build has an owner, or just skip the check if the sync is being run via the command line (testing)
 		if($build->_createdBy && !Request::cli()) {
 			if($user = Auth::user()) {
@@ -224,7 +228,9 @@ class D3Up_Sync {
 	}
 
 	// Runs the Sync against a Build
-	public function run(D3Up_Build $build, $type = null) {
+	public function run(D3Up_Build $build, $type = null, $bypass = false) {
+		// Are we bypassing checks?
+		$this->_bypass = $bypass;
 		// Is this a specific sync type?
 		$this->_syncType = $type;
 		// Store the Build on the Object
