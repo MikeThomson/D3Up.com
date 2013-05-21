@@ -120,4 +120,36 @@ class Ladder_Controller extends Base_Controller {
 												->with('added', $build->id);
 	}
 
+	public function get_syncbuilds() {
+		// Get the Ladder
+		$ladder = $this->getLadder();
+		// Get the most out of date build
+		$query = array(
+			'ladder' => $ladder->createReference(),
+			'_lastCrawl' => array(
+				'$lt' => time() - (60 * 60)	// Only builds that haven't been synced in the last hour
+			)
+		);
+		$build = Epic_Mongo::db('build')
+						->find($query)
+						->sort(array('_lastCrawl' => 1))
+						->limit(1);
+		if(!$build->count()) {
+			// If we had no builds, just exit.
+			exit;
+		}
+		$build->rewind();
+		$build = $build->current();
+		if(!$build) {
+			return Response::error('404');
+		}
+		// Sync the Build and get the results
+		$results = $build->sync('ladder', true);
+		// Embed the Results and Build into the View
+		$this->layout->nest('content', 'build.sync', array(
+			'build' => $build,
+			'results' => $results
+		));
+		
+	}
 }
