@@ -30,9 +30,9 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 		'_characterRg'	=> 'bt-rg'
 	);
 
-	public function sync($type = null) {
+	public function sync($type = null, $bypass = false) {
 		$tool = new D3Up_Sync();
-		return $tool->run($this, $type);
+		return $tool->run($this, $type, $bypass);
 	}
 	
 	public function getGear() {
