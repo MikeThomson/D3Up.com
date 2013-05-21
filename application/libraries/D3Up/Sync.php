@@ -538,6 +538,10 @@ class D3Up_Sync {
 		$build->hardcore = (bool) $json['hardcore'];
 		// Set the Hardcore Status of the Character
 		$build->paragon = (int) $json['paragonLevel'];
+		if(isset($json['kills'])) {
+			// Set the number of elite kills
+			$build->eliteKills = (int) $json['kills']['elites'];			
+		}
 		// Set the Gender of the Character
 		$build->gender = (int) $json['gender'];
 		// Set the flag stating this is an authentic character, not edited at all.
