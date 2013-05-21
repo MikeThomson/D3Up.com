@@ -26,6 +26,8 @@ return array(
 	'typemap' => array(
 		'build' => 'D3Up_Build',
 		'guide' => 'D3Up_Guide',
+		'ladder' => 'D3Up_Ladder',
+		'set:roster' => 'D3Up_Ladder_Roster',
 		'guide_section' => 'D3Up_Guide_Section',
 		'guide_sections' => 'D3Up_Guide_Sections',
 		'item' => 'D3Up_Item',
