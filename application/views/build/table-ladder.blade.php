@@ -17,7 +17,7 @@
 		<td class="stat"><?= $build->level ?></td>
 		<td class="stat"><?= $build->paragon ?></td>
 		<td class="stat"><?= HTML::prettyStat($build->stats['dps']) ?></td>
-		<td class="stat"><?= HTML::prettyStat($build->stats['health']) ?></td>
+		<td class="stat"><?= HTML::prettyStat($build->stats['life']) ?></td>
 		<td class="stat"><?= $build->eliteKills ?></td>
 	</tr>
 <? endforeach; ?>
