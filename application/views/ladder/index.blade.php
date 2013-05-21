@@ -19,5 +19,5 @@
 			</div>
 		</div>
 	</div>
-	@include('build.table', array('builds' => $ladder->builds))
+	@include('build.table-ladder', array('builds' => $ladder->builds))
 @endsection
