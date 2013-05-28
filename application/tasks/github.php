@@ -1,7 +1,7 @@
 <?php
 class Github_Task {
 	
-	protected $_rss = 'https://github.com/aaroncox/D3Up.com/commits/master.atom?login=aaroncox';
+	protected $_rss = 'https://github.com/d3up/D3Up.com/commits/master.atom?login=aaroncox';
 	protected $_limit = 100;
 	
 	public function run($args) {
