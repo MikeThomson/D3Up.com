@@ -15,6 +15,7 @@ D3Up.com - Diablo 3 Build Calculator for EHP and DPS
 			<ul>
 				<li><a href="/b/1">Viewing Builds</a> (http://v2.d3up.com/b/###### insert your ID)</li>
 				<li><a href="/c/1/2">Build Comparisons</a> (http://v2.d3up.com/c/##/## insert two IDs of builds)</li>
+				<li><a href="http://github.com/d3up/Calculator">Started construction</a> of new Calculator (pure JS implementation)</li>
 				<li><a href="http://cl.ly/image/1G2Y0W313Z2r">Preview of the new Sync Screen</a></li>
 				<li>Localization Enabled - You can change from 'English' to 'Pig Latin' using the dropdown in the upper right of the menubar on the top (thanks to allan on #diablo for the idea!)</li>
 				<li>'<a href="/math">Math</a>' section added - A community 'wiki' type engine that will allow players to learn about different game mechanics.</li>
