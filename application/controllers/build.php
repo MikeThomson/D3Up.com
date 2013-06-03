@@ -215,6 +215,10 @@ class Build_Controller extends Base_Controller {
 		if(!$build || !Request::ajax()) {
 			return Response::error('404');
 		}
+		if(!$build->stats) {
+			$build->stats = array();
+			$build->save();
+		}
 		// Does this build have an owner or a syncKey?
 		if($build->_createdBy || $build->_syncKey) {
 			// If we have a sync key, is it the right one?
