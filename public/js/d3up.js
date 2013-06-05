@@ -15,7 +15,7 @@ window.d3up = (function() {
 		},
 		addBuild: function(name, build) {
 			data = new d3up.Calc(build);
-			d3up.builds[name] = data.getStats();
+			d3up.builds[name] = data;
 		},
 		getBuild: function(name) {
 			if(d3up.builds[name]) {
