@@ -10,9 +10,17 @@
 
 window.d3up = (function() {
 	return {
-		builds: {},
+		builds: {
+			
+		},
 		addBuild: function(name, build) {
-			this.builds[name] = build;
+			data = new d3up.Calc(build);
+			d3up.builds[name] = data.getStats();
+		},
+		getBuild: function(name) {
+			if(d3up.builds[name]) {
+				return d3up.builds[name];
+			}
 		},
 		log: function() { 
 			if ( window.console ) { 

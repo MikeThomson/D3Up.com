@@ -5,12 +5,14 @@ return array(
 		// Libraries 
 		'jquery.js',
 		'jquery-ui.js',
-		'underscore.js',
+		'lodash.js',
 		'bootstrap.js',
 		'handlebars.js',
 		'history.js',
 		// D3Up Scripts
-		'd3up.js',		
+		'd3up.js',
+		'game/data.js',
+		'calc.js',
 		'utils/tooltip.js',
 		'utils/skilltip.js',
 		'utils/timeago.js',

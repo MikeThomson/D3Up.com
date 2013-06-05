@@ -17,7 +17,7 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 	protected $_jsonData = array(
 		'id'						=> null,
 		'name'					=> null,
-		'class'					=> 'heroClass',
+		'class'					=> null,
 		'gender'				=> null,
 		'level'					=> null,
 		'hardcore'			=> null,
@@ -45,13 +45,16 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 		return $this->gear;
 	}
 	
-	public function json() {
+	public function json($gear = false) {
 		$data = parent::json();
 		if(isset($this->stats['dps'])) {
 			$data['dps'] = round($this->stats['dps'], 2);
 		}
 		if(isset($this->stats['ehp'])) {
 			$data['ehp'] = round($this->stats['ehp'], 2);
+		}
+		if($gear) {
+			$data['gear'] = $this->_gear->export();
 		}
 		return $data;
 	}
