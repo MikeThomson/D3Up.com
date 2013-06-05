@@ -59,7 +59,7 @@
 					type = $("#inc-hit-type").find(":selected").val(),
 					element = $("#inc-hit-element").find(":selected").val();
 			$.each(d3up.builds, function(name, build) {
-				damage[name] = Math.round(build.calc.calcDmgTaken(build.meta.heroClass, value, type, element) * 100) / 100;
+				// damage[name] = Math.round(build.calc.calcDmgTaken(build['class'], value, type, element) * 100) / 100;
 				$("#" + name + "-inc-hit").html(damage[name]);
 			});
 			damage['diff'] = 100 - (damage['build1'] / damage['build2'] * 100);
