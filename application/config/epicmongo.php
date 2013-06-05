@@ -24,6 +24,7 @@ return array(
 	|--------------------------------------------------------------------------
 	*/
 	'typemap' => array(
+		'bug' => 'D3Up_Bug',
 		'build' => 'D3Up_Build',
 		'guide' => 'D3Up_Guide',
 		'ladder' => 'D3Up_Ladder',

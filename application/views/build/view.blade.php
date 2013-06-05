@@ -57,6 +57,9 @@
 				<li><a data-toggle="tab" href="#tab-groups">{{ __('build.groups') }}</a></a></li>
 			</ul>
 			<div class="tab-content">
+				<div class='tab-pane' id="tab-bug">
+					@include('build.section.bug')
+				</div>
 				<div class='tab-pane active' id="tab-gear">
 					@render('build.section.gear', array('gear' => $build->getGear()))
 				</div>
@@ -91,6 +94,7 @@
 		  </div>
 		</div>
 		<div class='span3'>
+			<a data-toggle="tab" href="#tab-bug" class='btn btn-warning pull-right'>REPORT BUG</a>			
 			@include('build.section.stats')
 		</div>
 	</div>
@@ -118,6 +122,9 @@
 		var data = d3up.getBuild({{ $build->id }});
 		$(v).replaceWith(template(data));		
 	});
+	
+	// Populate Bugs data
+	$("input[name=stats]").val(JSON.stringify(d3up.getBuild({{ $build->id }})));
 	
 	$(".d3-icon-skill, .passive-icon").bind('click', function() {
 		$(this).toggleClass('selected')	
