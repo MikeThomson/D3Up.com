@@ -6,8 +6,8 @@
 @section('scripts')
 <script src="/js/build.js"></script>
 <script src="/js/utils/compare.js"></script>
-<script src="http://phalcon.d3up.com/builds/{{ $build1->id }}.js"></script>
-<script src="http://phalcon.d3up.com/builds/{{ $build2->id }}.js"></script>
+<script src="http://api.d3up.com/builds/{{ $build1->id }}.js"></script>
+<script src="http://api.d3up.com/builds/{{ $build2->id }}.js"></script>
 @endsection
 
 @section('content')
