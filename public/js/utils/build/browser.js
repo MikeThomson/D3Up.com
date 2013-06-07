@@ -437,7 +437,7 @@
 				$.each($this.options.columns, function(idx, col) {
 					switch(col) {
 						case "icon":
-							row.append($this.makeColumn(col, [data.heroClass, data.gender]));
+							row.append($this.makeColumn(col, [data['class'], data.gender]));
 							break;
 						case "region_type":
 							var region = $this.d3.regions[data['bt-rg']]['short'];
@@ -445,11 +445,11 @@
 							break;
 						case "actives":
 							if(data.actives)
-								row.append($this.makeColumn(col, [data.heroClass, data.actives]));								
+								row.append($this.makeColumn(col, [data['class'], data.actives]));								
 							break;
 						case "passives":
 							if(data.passives)
-								row.append($this.makeColumn(col, [data.heroClass, data.passives]));
+								row.append($this.makeColumn(col, [data['class'], data.passives]));
 							break;
 						case "level":
 						case "paragon":
@@ -471,7 +471,7 @@
 									+"&character-rg=" + data['bt-rg']
 									+"&character-id=" + data['bt-id']
 									+"&name=" + data['name']
-									+"&class=" + data['heroClass']
+									+"&class=" + data['class']
 									+"&hardcore=" + data['hardcore']
 									+"&level=" + data['level']
 									+"&paragon=" + data['paragon'];
