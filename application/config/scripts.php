@@ -12,6 +12,7 @@ return array(
 		// D3Up Scripts
 		'd3up.js',
 		'game/data.js',
+		'utils/itembuilder.js',
 		'calc.js',
 		'utils/tooltip.js',
 		'utils/skilltip.js',
