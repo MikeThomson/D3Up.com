@@ -40,7 +40,7 @@ class D3Up_Attributes
 			'plus-damage' => '+[v]% Damage',
 			'min-damage' => '+[v] Minimum Damage',
 			'max-damage' => '+[v] Maximum Damage',
-			'minmax-damage' => '+[v] Damage (Min-Max)',
+			'minmax-damage' => '+[v]-[v] Damage',
 			'ruby-damage' => '+[v] Minimum and +[v] Maximum Damage',
 			// Elemental Damage Percents
 			'plus-arcane-damage' => '+[v]% to Arcane Damage',
@@ -56,10 +56,10 @@ class D3Up_Attributes
 			'plus-lightning-damage~2' => 'Adds [v]% to Lightning Damage',
 			'plus-poison-damage~2' => 'Adds [v]% to Poison Damage',
 			// Elemental Damage Additions
-			'arcane-damage' => '+[v] Arcane Damage',
-			'cold-damage' => '+[v] Cold Damage',
-			'fire-damage' => '+[v] Fire Damage',
-			'holy-damage' => '+[v] Holy Damage',
+			'arcane-damage' => '+[v]-[v] Arcane Damage',
+			'cold-damage' => '+[v]-[v] Cold Damage',
+			'fire-damage' => '+[v]-[v] Fire Damage',
+			'holy-damage' => '+[v]-[v] Holy Damage',
 			'lightning-damage' => '+[v] Lightning Damage',
 			'poison-damage' => '+[v] Poison Damage',
 			'elite-damage' => 'Increases Damage against Elites by [v]%',
