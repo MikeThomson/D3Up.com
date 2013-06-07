@@ -1,11 +1,10 @@
 <?
 	$stats = array(
 		'armor',
-		'resist-all',
-		'block-chance',
-		'dodge-chance',
-		'damage-reduction',
-		'total-damage-reduction',
+		'resists.all',
+		'chance.dodge',
+		'chance.block',
+		'reductions.total',
 		'thorns',
 	);
 	$tabName = 'defensive';

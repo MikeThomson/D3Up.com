@@ -10,7 +10,7 @@
 			@if($isCompare)
 				{{ (isset($name)) ? $name : "" }}
 			@else
-				{{ __('diablo.'.$tabName.'_statistics') }}
+				{{ __('calc.'.$tabName.'_statistics') }}
 				{{ (isset($name)) ? $name : "" }}
 			@endif				
     </a>
@@ -22,7 +22,7 @@
 				@foreach($stats as $stat)
 				<tr data-toggle="disabled-popover" data-placement="top" data-trigger="hover" data-content="{{ __('diablo.explained.'.$stat) }}" title="{{ __('diablo.'.$stat) }}">
 					@if($id != 'compare')
-					<td>{{ __('diablo.'.$stat) }}</td>
+					<td>{{ __('calc.'.$stat) }}</td>
 					@endif
 					<td>
 						<div class="stat-container">

@@ -1,15 +1,15 @@
 <?
 	$stats = array(
-		'resist-physical',
-		'resist-cold',
-		'resist-fire',
-		'resist-lightning',
-		'resist-poison',
-		'resist-arcane',
-		'cc-reduce',
-		'percent-range-reduce',
-		'percent-melee-reduce',
-		'percent-elite-reduce',
+		'resists.physical',
+		'resists.cold',
+		'resists.fire',
+		'resists.lightning',
+		'resists.poison',
+		'resists.arcane',
+		'reductions.reduce',
+		'reductions.range',
+		'reductions.melee',
+		'reductions.elite',
 	);
 	$tabName = 'resistance';
 ?>

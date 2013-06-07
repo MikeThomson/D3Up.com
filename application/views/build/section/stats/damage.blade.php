@@ -1,11 +1,13 @@
 <?
 	$stats = array(
-		'dps',
-		'dps-demon',
-		'dps-elite',
-		'aps-mh',
-		'aps-oh',
-		'attack-speed-incs',
+		'dps.dps',
+		'dps.vs.demon.bonus',
+		'dps.vs.demon.actual',
+		'dps.vs.elite.bonus',
+		'dps.vs.elite.actual',
+		'dps.speeds.mh.aps',
+		'dps.speeds.oh.aps',
+		'attack-speed',
 		'critical-hit',
 		'critical-hit-damage',
 	);

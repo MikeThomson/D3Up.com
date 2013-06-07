@@ -33,10 +33,10 @@
 	<tbody>
 		<tr>
 			<td>
-				<span class="dps">{{ HTML::hb('prettyStat stats.dps "dps"') }}</span>
+				<span class="dps">{{ HTML::hb('prettyStat stats.dps.dps "dps"') }}</span>
 			</td>
 			<td>
-				<span class="ehp">{{ HTML::hb('prettyStat stats.ehp "ehp"') }}</span>
+				<span class="ehp">{{ HTML::hb('prettyStat stats.ehp.ehp "ehp"') }}</span>
 			</td>
 		</tr>
 	</tbody>	
