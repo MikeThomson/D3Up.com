@@ -445,13 +445,6 @@ class D3Up_Sync {
 							'min' => (float) $matches[1],
 							'max' => (float) $matches[3],
 						);
-						// Adjust the stats that were already adjusted
-						if(isset($item->stats['damage']) && isset($item->stats['damage']['min'])) {
-							$item->stats['damage']['min'] += $matches[1];
-						}
-						if(isset($item->stats['damage']) && isset($item->stats['damage']['max'])) {
-							$item->stats['damage']['max'] += $matches[3];
-						}
 					} else {
 						// If we don't have a matches[1]
 					  if(!isset($matches[1])) {
