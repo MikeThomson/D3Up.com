@@ -23,8 +23,6 @@
 							</ul>
 						</div> -->
 					</li>
-					@else
-						@include("template.global.navbar.anonymous")
 					@endif
 	        <li class="dropdown">
 						<a href="/build" class="dropdown-toggle-clickable">{{ __('d3up.builds') }} <b class="caret"></b></a>
