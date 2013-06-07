@@ -111,7 +111,7 @@ Create/Import your Diablo 3 Character Build
 						@endif
 						<li>For more information about how to use your build, <a href="#">check out this guide</a>.</li>
 					</ul>
-					<a id='psydosubmit' class='btn btn-success input-block-level'>Create this Build</a>
+					<a id='pseudosubmit' class='btn btn-success input-block-level'>Create this Build</a>
 				</div>
 			</div>
 	</div>
@@ -128,8 +128,8 @@ Create/Import your Diablo 3 Character Build
 
 <script type="text/javascript">
 	$(function(){
-		$("#psydosubmit").bind('click', function() {
-			$(".form-buildcreate").trigger("submit");
+		$("#pseudosubmit").bind('click', function() {
+			$(".app-pane form").trigger("submit");
 		});
 		var characterId = $("input[name=character-id]"),
 				characterRg = $("input[name=character-rg]"),

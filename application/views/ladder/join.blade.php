@@ -116,7 +116,7 @@
 							@endif
 							<li>For more information about how to use your build, <a href="#">check out this guide</a>.</li>
 						</ul>
-						<a id='psydosubmit' class='disabled btn btn-success input-block-level'>Create this Build</a>
+						<a id='pseudosubmit' class='disabled btn btn-success input-block-level'>Create this Build</a>
 					</div>
 				</div>
 		</div>
@@ -133,7 +133,7 @@
 
 	<script type="text/javascript">
 		$(function(){
-			$("#psydosubmit").bind('click', function() {
+			$("#pseudosubmit").bind('click', function() {
 				if(!$(this).hasClass('disabled')) {
 					$(".app-pane form").trigger("submit");					
 				}
