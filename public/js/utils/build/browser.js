@@ -56,16 +56,12 @@
 			]
 		},
 		_create: function() {
-			// Set the Current State with whatever the URL Parameters are set to
-			History.replaceState({
-				'page': this.getParameterByName('page', 1),
-				'class': this.getParameterByName('class'),
-				'sort': this.getParameterByName('sort'),
-				'actives': this.getParameterByName('actives'),
-				'authentic': this.getParameterByName('authentic'),
-				'battletag': this.getParameterByName('battletag'),
-				'battlenet': this.getParameterByName('battlenet'),
-			});
+			// Check to see if we have a filter passed in the URL
+			var params = this.getParameterByName('filter');
+			if(params) {
+				// Set the Current State with whatever the URL Parameters are set to
+				this.replaceState($.parseJSON($.base64.decode(params)));				
+			}
 			// Bind the window statechange event to our update method
 			this._on(window, { statechange: "update" });
 			// Create the Class Filter
@@ -75,7 +71,7 @@
 			// Add the Column Headers
 			this._buildColumnHeaders();
 			// If we're using a Battle Tag in the search..
-			if(History.getState().data['battletag']) {
+			if(this.getState().data['battletag']) {
 				// Add the Toggle Buttons for D3Up/BNet
 				this._addSearchSource();				
 			}
@@ -108,7 +104,7 @@
 		},
 		_createPaginators: function() {
 					// Get the Current State information
-			var state = History.getState().data,
+			var state = this.getState().data,
 					// Grab the Paginator Template
 					paginator = this.options.paginator.clone(),
 					// Get all Elements defined as paginator containers
@@ -147,7 +143,7 @@
 		},
 		changePage: function() {
 			// Grab a copy of the state's data
-			var state = History.getState().data,
+			var state = this.getState().data,
 					inc = arguments[0];
 			// Modify the Value we're changing
 			state['page'] = parseInt(state['page']) + inc;
@@ -163,7 +159,7 @@
 			}
 			currBtn.html(state['page']);
 			// Push the Updates to History
-			History.pushState(state, "", "?" + $.param(state));
+			this.pushState(state, "", "?" + $.param(state));
 		},
 		_createFilter: function(name, options) {
 			// Create the Select Element 
@@ -183,7 +179,7 @@
 		},
 		_updateState: function(select) {
 			// Grab a copy of the state's data
-			var state = History.getState().data,
+			var state = this.getState().data,
 					name = $(select.currentTarget).attr("name");
 			// Modify the Value we're changing
 			state[name] = $(select.currentTarget).val();
@@ -198,7 +194,7 @@
 				}
 			});
 			// Push the Updates to History
-			History.pushState(state, "", "?" + $.param(state));
+			this.pushState(state, "", "?" + $.param(state));
 		},
 		_createSkillFilter: function(name, options) {
 			// Create the Select Element 
@@ -221,7 +217,7 @@
 			// Bind the Change event to push the modified state to History
 			select.on('change', function() {
 				// Grab a copy of the state's data
-				var state = History.getState().data,
+				var state = this.getState().data,
 						value = $(this).val();
 				// Modify the Value we're changing
 				if(value != null) {
@@ -232,7 +228,7 @@
 					delete state[name];
 				}
 				// Push the Updates to History
-				History.pushState(state, "", "?" + $.param(state));
+				this.pushState(state, "", "?" + $.param(state));
 			});
 			// Remove any selected values (to prevent any default selection)
 			select.find("option").removeAttr("selected");
@@ -241,7 +237,7 @@
 		_createFilters: function() {
 			var wrapper = $("<tr class='filters'>"),
 					container = $("<td colspan='100'>"),
-					state = History.getState().data;
+					state = this.getState().data;
 			// Build the Class Selector
 			var options = {
 				null: 'All Classes'
@@ -280,7 +276,7 @@
 			this.options.filters.append(wrapper);
 		},
 		updateSkillFilters: function() {
-			var state = History.getState().data;
+			var state = this.getState().data;
 			// Find the Filters
 			var filters = this.options.filters.find(".filters td");
 			// Remove the old Filter
@@ -318,7 +314,7 @@
 			row.append($("<td colspan='100' class='loading'>").html("Loading"));
 			container.append(row);
 			// Grab the State Information
-			var state = History.getState();		
+			var state = this.getState();		
 			if(!state.data['battlenet']) {
 				this._showBattlenetSearch();
 			}	else {
@@ -382,7 +378,7 @@
 		process: function(data) {
 			// Grab the Container 
 			var container = this.options.container.empty(),
-					state = History.getState(),
+					state = this.getState(),
 					$this = this;
 			// Store the Results on the browser
 			this.results = data;
@@ -584,6 +580,15 @@
 		_destroy: function() {
 			// Use the destroy method to reverse everything your plugin has applied
 			return this._super();
+		},
+		getState: function() {
+			return History.getState();
+		},
+		replaceState: function(data) {
+			return History.replaceState(data);
+		},
+		pushState: function(state, name, url) {
+			return History.pushState(state, name, "?filter=" + $.base64.encode(JSON.stringify(state)));
 		},
 		getParameterByName: function(name, defaultValue) {
 			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
