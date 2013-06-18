@@ -476,7 +476,9 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 	font-size: 10.5px;
 }
 .d3-tooltip .btn:focus {
+	background: none;
 	background-color: #70B1D5;
+	outline: none;
 }
 .d3-tooltip .dropdown-menu {
 	background-color: #222;

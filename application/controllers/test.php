@@ -5,9 +5,13 @@ class Test_Controller extends Base_Controller {
 	public $layout = 'template.main';
 	
 	public function action_itembuilder() {
-		$item = Epic_Mongo::db('item')->findOne();
+		$item1 = Epic_Mongo::db('item')->findOne();
+		$item2 = Epic_Mongo::db('item')->findOne(array('type' => 'shield'));
+		$item3 = Epic_Mongo::db('item')->findOne(array('type' => 'sword'));
 		$this->layout->nest('content', 'test.itembuilder', array(
-			'item' => $item
+			'item1' => $item1,
+			'item2' => $item2,
+			'item3' => $item3
 		));
 	}
 	
