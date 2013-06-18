@@ -442,3 +442,33 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 .d3-tooltip .skill-desc .skill-highlight {
 	color: lime;
 }
+.d3-tooltip .attrs .add-on,
+.d3-tooltip .attrs input,
+.d3-tooltip .stats input {
+	padding: 0;
+	margin: 0;
+	min-width: 0px;
+	max-width: 50px;
+	text-align: center;
+	vertical-align: baseline;
+}
+.d3-tooltip .attrs .add-on {
+	margin-right: 3px;
+	padding: 0px 3px;
+	color: #f00;
+}
+.d3-tooltip .attrs input.ignored + .addon,
+.d3-tooltip .attrs input.ignored {
+	background-color: #222;
+	color: #fff;
+	border: 1px solid #333;
+}
+.d3-tooltip .btn {
+	background-color: #f5f5f5;
+	color: #333;
+	padding: 1px 3px;
+	font-size: 10.5px;
+}
+.d3-tooltip .btn:focus {
+	background-color: #70B1D5;
+}

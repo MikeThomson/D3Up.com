@@ -48,6 +48,16 @@ class Build_Controller extends Base_Controller {
 	public function get_index() {
 		$this->layout->nest('content', 'build.index');
 	}
+	
+	public function get_loader($id) {
+		$this->layout = null;
+		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
+		if(!$build) {
+			return Response::error('404');
+		}
+		// Possible Caching Mechanism, found in the Bundle D3Up-Cache
+		return View::make('build.loader');
+	}
 
 	public function get_view($id, $data = false) {
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
@@ -56,9 +66,14 @@ class Build_Controller extends Base_Controller {
 		}
 		// Possible Caching Mechanism, found in the Bundle D3Up-Cache
 		// return View::cached('build.view', array('build' => $build));
-		$this->layout->nest('content', 'build.view', array(
+		$this->layout->nest('content', 'build.view2', array(
 			'build' => $build
 		));		
+	}
+	
+	public function get_ajax($id, $data = false) {
+		$this->layout = null;
+		return View::make('build.ajax', array('id' => (int) $id));
 	}
 	
 	public function post_view($id, $data = false) {

@@ -41,16 +41,18 @@ $(function(){
 	var form = $("#btsearch"), 
 			hidden = form.find("input[name=battletag]"),
 			input = $("input[name=battletag-display]");
-	// If our hidden field has a value, put it in the displayed
-	input.val(hidden.val().replace("-", "#"));
-	// While we're typing on Input, update the Hidden submitted value
-	input.on("keyup", function(e) {
-		hidden.val(input.val().replace("#", "-"));
-		// If enter's pressed, submit the real form
-		if(e.keyCode == 13) {
-			form.submit();			
-		} 
-	});
+	if(hidden.length && input.length) {
+		// If our hidden field has a value, put it in the displayed
+		input.val(hidden.val().replace("-", "#"));
+		// While we're typing on Input, update the Hidden submitted value
+		input.on("keyup", function(e) {
+			hidden.val(input.val().replace("#", "-"));
+			// If enter's pressed, submit the real form
+			if(e.keyCode == 13) {
+				form.submit();			
+			} 
+		});		
+	}
 });
 </script>
 <!-- The D3Up Tooltip Div -->

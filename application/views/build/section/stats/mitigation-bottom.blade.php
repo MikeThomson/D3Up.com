@@ -5,7 +5,7 @@
 		'percent-resist-all',
 		'damage-reduction',
 		'life',
-		'ehp',
+		'ehp.ehp',
 	);
 	// Only show the HP/EHP Ratio if we aren't comparing
 	if(!$isCompare) {

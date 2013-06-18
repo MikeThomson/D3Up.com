@@ -18,12 +18,14 @@
 .compare-container .tab-pane .gear-table td:first-child {
 	width: 38px;
 }
+.build-container .nav.nav-pills,
 .compare-container .nav.nav-pills {
 	text-align: center;
 	border: 1px solid #333;
 	padding: 5px;
 	margin-bottom: 10px;
 }
+.build-container .nav-pills > li,
 .compare-container .nav-pills > li {
 	display: inline-block;
 	float: none;

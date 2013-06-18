@@ -13,14 +13,20 @@ window.d3up = (function() {
 		builds: {
 			
 		},
-		addBuild: function(name, build) {
+		addBuild: function(build, name) {
+			if(!name) {
+				name = build.id;
+			}
 			data = new d3up.Calc(build);
 			d3up.builds[name] = data;
 		},
-		getBuild: function(name) {
-			if(d3up.builds[name]) {
-				return d3up.builds[name];
-			}
+		getBuild: function(id) { 
+			return d3up.builds[id] || (d3up.builds[id] = $.ajax({ 
+				url: 'http://phalcon.d3up.com/builds/' + id + '.json', 
+				dataType: 'jsonp' 
+			}).done(function(buildData) { 
+				d3up.builds[id] = new d3up.Calc(buildData); 
+			}));
 		},
 		log: function() { 
 			if ( window.console ) { 

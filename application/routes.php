@@ -6,6 +6,8 @@
 |--------------------------------------------------------------------------
 */
 
+// Route to Edit an Item
+Route::get('/i/(:num)/edit', 'item@edit');
 // Route to Sync a Build
 Route::get('/b/(:num)/sync', 'build@sync');
 // Route to Cache a Build's Stats
@@ -16,12 +18,14 @@ Route::get('/b/(:num)/signature', 'build@signature');
 Route::post('/b/(:num)/signature', 'build@signature');
 // Route to Compare two builds
 Route::get('/c/(:num)/(:num)', 'build@compare');
+// Route to View an Item
+Route::get('/i/(:num)/(:any?)', 'item@view');
+// Route to Post to an Item
+Route::post('/i/(:num)/(:any?)', 'item@edit');
 // Route to View a build
 Route::get('/b/(:num)/(:any?)', 'build@view');
 // Route to Post an Edit to a build
 Route::post('/b/(:num)/(:any?)', 'build@view');
-// Route to View an Item
-Route::get('/i/(:num)/(:any?)', 'item@view');
 // Math History Routing
 Route::get('math/(:num)/history', 'math@history');
 // Math Edit Routing
@@ -40,6 +44,12 @@ Route::get('/faq/(:any?)', 'home@faq');
 Route::get('guide/(:num)/(:any?)', 'guide@view');
 // API Status Checker
 Route::get('api-status', 'home@apistatus');
+// AJAX Build Modifier
+Route::get('/a/(:num)/(:any?)', 'build@ajax');
+
+
+// Test Build Loader
+Route::get('/l/(:num)/(:any?)', 'build@loader');
 
 // Detect Controllers and Build Routes for them
 Route::controller(Controller::detect());

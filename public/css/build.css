@@ -139,13 +139,17 @@ div.title-block .skill-row {
 	font-size: 18px;
 	line-height: 18px;
 }
-.build-container {
-	margin-top: 3px;
-	padding: 1px;
-	border: 1px solid #333;
-	-webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.build-container .nav-pills a {
+	padding: 10px 20px;
+	border: 1px solid #222;
+}
+.build-container .nav-pills a:hover {
+	background-color: #000;
+	border: 1px solid #0088cc;
+}
+.build-container .nav-pills .active a:hover {
+	background-color: #0088cc;
+	border: 1px solid #000;
 }
 .build-container .build-content {
 }
@@ -157,13 +161,6 @@ div.title-block .skill-row {
 	border-right: 1px solid #333;
 	background-color: #222;
 	border-bottom: 1px solid #333;
-}
-.build-container .build-content {
-}
-.build-container .build-content > .tab-content {
-}
-.build-container .build-content .gear-table {
-	padding: 10px;
 }
 .nav-tabs > li > a {
 	border: none;
@@ -191,24 +188,6 @@ div.title-block .skill-row {
 .build-container .build-content .nav-pills li a {
 	 margin: 5px 2px 0;
 }
-.build-container .build-content .nav-tabs a:hover,
-.build-container .build-content .nav-tabs > .active > a,
-.build-container .build-content .nav-tabs > .active > a:hover,
-.build-container .build-content .nav-tabs > .active > a:focus,
-.build-container .build-content .nav-pills a:hover,
-.build-container .build-content .nav-pills > .active > a,
-.build-container .build-content .nav-pills > .active > a:hover,
-.build-container .build-content .nav-pills > .active > a:focus {
-	color: #ececec;
-  background-color: #70b1d5;
-  background-image: -moz-linear-gradient(top, #4F86A9, #4F86A9);
-  background-image: -ms-linear-gradient(top, #4F86A9, #4F86A9);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4F86A9), to(#4F86A9));
-  background-image: -webkit-linear-gradient(top, #4F86A9, #4F86A9);
-  background-image: -o-linear-gradient(top, #4F86A9, #4F86A9);
-  background-image: linear-gradient(top, #4F86A9, #4F86A9);
-  background-repeat: repeat-x;
-}
 .build-container .build-content .tab-pane {
 	padding: 5px;
 }
@@ -223,6 +202,7 @@ div.title-block .skill-row {
 .build-stats table {
 	margin: 0;
 }
+.build-gear-modify .accordion-group,
 .build-stats .accordion-group {
 	border: 1px solid #333;
 	-webkit-box-sizing: border-box;
@@ -232,22 +212,28 @@ div.title-block .skill-row {
      -moz-border-radius: 0px;
           border-radius: 0px;
 }
+.build-gear-modify .accordion-group .accordion-inner,
 .build-stats .accordion-group .accordion-inner {
 	padding: 0;
 }
+.build-gear-modify .accordion-inner,
 .build-stats .accordion-inner {
 	border-top: 1px solid #333;
 }
+.build-gear-modify .accordion-inner:first-child,
 .build-stats .accordion-inner:first-child {
 	border-top: 0;
 }
+.build-gear-modify .accordion-heading,
 .build-stats .accordion-heading {
 	background-color: #2b2b2b;
 	border-bottom: 1px solid #333;	
 }
+.build-gear-modify .accordion-heading a,
 .build-stats .accordion-heading a {
 	padding: 0 15px 0 5px;
 }
+.build-gear-modify .accordion-heading a:hover,
 .build-stats .accordion-heading a:hover {
 	background-color: #333;
 	text-decoration: none;

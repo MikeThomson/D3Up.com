@@ -323,3 +323,12 @@ ul.nav li.dropdown:hover > .dropdown-menu{
 .table-builds {
 	border: 1px solid #333;
 }
+.modal {
+	color: #111;
+}
+.modal-body {
+	overflow-y: visible;
+}
+.typeahead.dropdown-menu {
+	z-index: 1051;
+}
