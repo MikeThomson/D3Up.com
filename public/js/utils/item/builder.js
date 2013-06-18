@@ -40,7 +40,7 @@
 					attrs = this.elements.attrs,
 					li = $("<li>"),
 					search = $("<input type='text' class='input-block-level'>");
-			search.attr("placeholder", "Start typing the name of the attribute");
+			search.attr("placeholder", "Start typing the name and press enter");
 			search.typeahead({
 				source: _.values(d3up.gameData.attributes),
 				updater: function(item) {
@@ -147,97 +147,6 @@
 			this.elements.item.show();
 			this.elements.modify.show();
 		},
-		// init: function() {
-		// 	// Do we have an edit button on this page?
-		// 	if(this.options.editButton) {
-		// 		// Hide it on init
-		// 		$(this.options.editButton).hide();
-		// 	}
-		// 	this._createControls();
-		// 	this._createFields();
-		// 	
-		// },
-		// _destroy: function() {
-		// 	console.log("_destroy");
-		// 	var $this = this;
-		// 	// Do we have an edit button on this page?
-		// 	if(this.options.editButton) {
-		// 		// Show it on destroy
-		// 		$(this.options.editButton).show();
-		// 	}
-		// 	// Remove the Controls
-		// 	this.controls.remove();
-		// 	// Remove all the Inputs
-		// 	$.each(this.element.find("[data-modify]"), function() {
-		// 		var wrapper = $("<span>");
-		// 		if($(this).data("range")) { 
-		// 			wrapper.html($this.originals[$(this).data('modify') + "~min"] + " - " + $this.originals[$(this).data('modify') + "~max"]);
-		// 		} else {
-		// 			wrapper.html($this.originals[$(this).data('modify')]);					
-		// 		}
-		// 		wrapper.attr("data-modify", $(this).data("modify"));
-		// 		if($(this).data("range")) {
-		// 			wrapper.attr("data-range", true)
-		// 		}
-		// 		$(this).replaceWith(wrapper);
-		// 	});
-		// 	// Reset the Modified attributes
-		// 	this.options.modified = {};
-		// 	// Call _super
-		// 	return this._super();
-		// },
-		// _createControls: function() {
-		// 	var group = $("<span class='btn-group'>"),
-		// 			save = $("<a class='btn btn-danger'>Save</a>"),
-		// 			cancel = $("<a class='btn'>Cancel</a>"),
-		// 			revert = $("<a class='btn'>Revert</a>"),
-		// 			stat = $("<a class='btn btn-success'>Add Stat</a>");
-		// 	// Add the controls on this for easy removal
-		// 	this.controls = group;
-		// 	// Bind all these inputs
-		// 	save.on('click', $.proxy(this, '_save'));
-		// 	cancel.on('click', $.proxy(this, '_destroy'));
-		// 	revert.on('click', $.proxy(this, '_revert'));
-		// 	stat.on('click', $.proxy(this, '_appendAttrMenu'));
-		// 	// Add the Controls after the item
-		// 	this.element.after(group.append(stat, cancel, revert, save));
-		// },
-		// _appendAttr: function(attr) {
-		// 	console.log("Adding attr: " + attr);
-		// 	var item = $("<li>"),
-		// 			span = "<span data-modify='" + attr + "'>" + 0 + "</span>",
-		// 			text = d3up.gameData.attributes[attr],
-		// 			selector = "[data-modify=" + attr + "]";
-		// 	item.html(text.replace('[X]', span));
-		// 	this.element.find(".attrs").append(item);
-		// 	this._createFields(selector);
-		// 	this.element.find(selector).focus();
-		// },
-		// _appendAttrMenu: function() {
-		// 	var $this = this,
-		// 			container = $("<div class='modal hide fast'>"),
-		// 			header = $("<div class='modal-header'>");
-		// 			body = $("<div class='modal-body'>"),
-		// 			footer = $("<div class='modal-footer'>"), 
-		// 			stats = $("<input type='text' class='input-block-level'>");
-		// 	header.html("<h3>Select an Attribute to Add</h3>");
-		// 	body.html("<p>Start typing the name of an attribute to search through the available choices. Then either click the attribute you want or hit enter to continue.</p>");
-		// 	body.append(stats);
-		// 	body.append("<p><strong>Note</strong>: Your cursor will automatically focus to the new stat for easy data entry.</p>");
-		// 	container.append(header, body, footer);
-		// 	container.modal({
-		// 		height: 500
-		// 	});
-		// 	stats.typeahead({
-		// 		source: _.values(d3up.gameData.attributes),
-		// 		updater: function(item) {
-		// 			var inverse = _.invert(d3up.gameData.attributes);
-		// 			$this._appendAttr(inverse[item]);
-		// 			container.modal("hide");
-		// 		}
-		// 	});
-		// 	stats.focus();
-		// },
 		_revert: function() {
 			console.log("_revert");
 			var $this = this;
