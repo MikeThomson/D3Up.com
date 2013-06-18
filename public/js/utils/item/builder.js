@@ -39,7 +39,8 @@
 			var $this = this,
 					attrs = this.elements.attrs,
 					li = $("<li>"),
-					search = $("<input type='text'>");
+					search = $("<input type='text' class='input-block-level'>");
+			search.attr("placeholder", "Start typing the name of the attribute");
 			search.typeahead({
 				source: _.values(d3up.gameData.attributes),
 				updater: function(item) {
@@ -121,8 +122,7 @@
 		},
 		_createPaneAttr: function(attr, value) {
 			console.log("_createPaneAttr", attr, value);
-			var attrs = this.elements.attrs,
-					li = $("<li>"),
+			var li = $("<li>"),
 					text = d3up.gameData.attributes[attr],
 					input = "<input type='text' value='" + value + "'>";
 			text = text.replace(/\[X\]/g, input);

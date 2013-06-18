@@ -1,8 +1,7 @@
 function buildTooltip(elem) {
 	// Parse the Items JSON
 	var item = $.parseJSON(elem.attr('data-json')),
-			builder = new d3up.ItemBuilder,
-			gems = d3up.gameData.gemEffects;
+			builder = new d3up.ItemBuilder;
 	// Build all the HTML parts
 	var container = $("<div class='d3-tooltip'/>"),
 			header = $("<div class='top'/>"),

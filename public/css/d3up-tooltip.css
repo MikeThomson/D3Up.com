@@ -452,6 +452,12 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 	text-align: center;
 	vertical-align: baseline;
 }
+.d3-tooltip .attrs input.input-block-level {
+	max-width: 290px;
+	margin: 0;
+	font-size: 1em;
+	line-height: 1em;
+}
 .d3-tooltip .attrs .add-on {
 	margin-right: 3px;
 	padding: 0px 3px;
@@ -471,4 +477,15 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 }
 .d3-tooltip .btn:focus {
 	background-color: #70B1D5;
+}
+.d3-tooltip .dropdown-menu {
+	background-color: #222;
+}
+.d3-tooltip .item ul.attrs li .dropdown-menu li {
+	width: 283px;
+	max-width: 283px;
+	overflow-x: hidden;
+	background-image: none;
+	margin: 0;
+	padding: 0;
 }

@@ -13,19 +13,19 @@ return array(
 		'd3up.js',
 		'game/data.js',
 		'utils/item/builder.js',
-		'sandbox.js',
-		'calc.js',
 		'utils/base64.js',
 		'utils/tooltip.js',
 		'utils/skilltip.js',
 		'utils/timeago.js',
 		'utils/bootstrap-multiselect.js',
 		'utils/handlebars.helpers.js',
-		'utils/diff_match_patch.js',
+		// 'utils/diff_match_patch.js',
 		'utils/pretty-diff.js',
 		'utils/jquery.cookie.js',
 		'utils/build/browser.js',
 		// Polyfills
 		'polyfill/bind.js',
+		'sandbox.js',
+		'calc.js',		
 	)
 );

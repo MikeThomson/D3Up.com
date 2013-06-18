@@ -458,7 +458,7 @@
 							break;
 					}
 				});
-				if(data['exists'] == false) {
+				if(data['exists'] === false) {
 					$this._showD3UpcomSearch();
 					var create = $("<a class='btn pull-right'>").html("Create New Build"),
 							info = "Located on Battle.net";
