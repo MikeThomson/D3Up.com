@@ -1,18 +1,6 @@
 (function($) {
 	$.widget( "d3up.itemBuilder", {
 		ignored: ['min-damage', 'max-damage', 'plus-damage', 'plus-aps'],
-		controls: false,
-		elements: {
-			modify: $("<a class='btn' data-for='modify'>Modify</a>"),
-			body: false,
-			bottom: false,
-			top: false,
-			editor: false
-		},
-		options: {
-			item: false,
-			modified: {},
-		},
 		_create: function() {
 			console.log("_create");
 		},
@@ -174,9 +162,12 @@
 		_init: function() {
 			console.log("_init");
 			// Assign some initial elements
-			this.elements.item = this.element.find(".item");
-			this.elements.top = this.element.find(".top");
-			this.elements.bottom = this.element.find(".bottom");
+			this.elements = {
+				item: this.element.find(".item"),
+				top: this.element.find(".top"),
+				bottom: this.element.find(".bottom"),
+				modify: $("<a class='btn' data-for='modify'>Modify</a>")
+			};
 			// Create our Toggle
 			this._addToggle();
 			// Create our Edit Pane
