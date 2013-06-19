@@ -1,6 +1,7 @@
 (function($) {
 	$.widget( "d3up.itemBuilder", {
 		ignored: ['min-damage', 'max-damage', 'plus-damage', 'plus-aps'],
+		ranges: ['damage', 'block-amount'],
 		_create: function() {
 			console.log("_create");
 		},
@@ -13,6 +14,7 @@
 			var editor = this.elements.editor,
 					bottom = this.elements.bottom;
 			// Item Editor Bindings
+			editor.on('change', '[data-type]', $.proxy(this, '_modifyType'));
 			editor.on('keyup', '[data-attr]', $.proxy(this, '_modifyAttr'));
 			editor.on('keyup', '[data-stat]', $.proxy(this, '_modifyStat'));
 			editor.on('click keypress', '[data-for=attr-add]', $.proxy(this, '_addAttrFinder'));
@@ -40,8 +42,22 @@
 			attrs.find('li:last').prev().after(li.append(search));
 			li.find("input").focus().select();
 		},
+		_modifyType: function(event) {
+			console.log("_modifyType");
+			var modified = this.options.modified,
+					target = $(event.currentTarget),
+					key = target.data("type"),
+					value = target.val();
+			if(key === 'quality') {
+				modified[key] = Number(value);
+			} else if(key === 'type') {
+				modified[key] = value;				
+			}
+			this._update();
+			console.log(JSON.stringify(modified));			
+		},
 		_modifyStat: function(event) {
-			console.log("_modifyAttr");
+			console.log("_modifyStat");
 			var modified = this.options.modified,
 					target = $(event.currentTarget),
 					stat = target.data("stat"),
@@ -50,6 +66,7 @@
 				modified.stats = {};
 			}
 			modified.stats[stat] = Number(value);
+			this._update();
 			console.log(JSON.stringify(modified));
 		},
 		_modifyAttr: function(event) {
@@ -63,6 +80,7 @@
 				modified.attrs = {};
 			}
 			modified.attrs[attr] = Number(value);
+			this._update();
 			console.log(JSON.stringify(modified));
 		},
 		_togglePane: function() {
@@ -91,10 +109,41 @@
 			this.elements.item.after(editor);
 			// Append the new Controls
 			this.elements.bottom.append(controls);
+			// Add the Item Types
+			this._createPaneTypes();
 			// Add the Stats Options
 			this._createPaneStats();
 			// Add the Attribute Options
 			this._createPaneAttrs();
+		},
+		_createPaneTypes: function() {
+			console.log("_createPaneTypes");
+			var item = this.options.item,
+					editor = this.elements.editor,
+					types = d3up.gameData.types,
+					qualities = d3up.gameData.qualities,
+					type = $("<select data-type='type'>"),
+					quality = $("<select data-type='quality'>");
+			_.each(types, function(display, key) {
+				var li = $("<option>");
+				li.attr("value", key);
+				li.html(display);
+				if(item.type === key) {
+					li.attr("selected", "selected");
+				}
+				type.append(li);
+			}, this);
+			_.each(qualities, function(display, key) {
+				var li = $("<option>");
+				li.attr("value", key);
+				li.html(display);
+				console.log(item.quality);
+				if(String(item.quality) === key) {
+					li.attr("selected", "selected");
+				}
+				quality.append(li);
+			}, this);
+			editor.append($("<div>").append(quality, type));
 		},
 		_createPaneStats: function() {
 			console.log("_createPaneStats");
@@ -102,10 +151,26 @@
 					editor = this.elements.editor;
 			_.each(item.stats, function(value, stat) {
 				var input = $("<input type='text'>"),
-						label = $("<label>");
-				input.attr("name", stat).attr("data-stat", stat).val(value);
-				label.attr("for", stat).html(stat);
-				editor.append(label, input);
+						container = $("<div>"),
+						text = d3up.gameData.stats[stat];
+				if(_.indexOf(this.ranges, stat) >= 0) {
+					var input1 = input.clone(),
+							input2 = input.clone(),
+							container1 = container.clone().html("Min " + text),
+							container2 = container.clone().html("Max " + text);
+					console.log("this is a range: ", stat);
+					input1.val(value['min'])
+						.addClass("range")
+						.attr('data-stat', stat + '~min');
+					input2.val(value['max'])
+						.addClass("range")
+						.attr('data-stat', stat + '~max');
+					editor.append(container1.prepend(input1), container2.prepend(input2));
+				} else {
+					input.val(value)
+						.attr("data-stat", stat);
+					editor.append(container.html(text).prepend(input));
+				}
 			}, this);
 		},
 		_createPaneAttr: function(attr, value) {
@@ -159,6 +224,13 @@
 			}
 			console.log(this.options.modified);
 		},
+		_update: function() {
+			console.log("_update");
+			var callback = this.options.callback;
+			if(callback) {
+				callback(this.options.modified);
+			}
+		},
 		_init: function() {
 			console.log("_init");
 			// Assign some initial elements
@@ -168,6 +240,10 @@
 				bottom: this.element.find(".bottom"),
 				modify: $("<a class='btn' data-for='modify'>Modify</a>")
 			};
+			// Make sure our modified object exists
+			if(!this.options.modified) {
+				this.options.modified = {};
+			}
 			// Create our Toggle
 			this._addToggle();
 			// Create our Edit Pane
