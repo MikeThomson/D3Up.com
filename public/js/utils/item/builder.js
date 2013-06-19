@@ -216,10 +216,11 @@
 			if($.isEmptyObject(this.options.modified)) {
 				console.log("not saving, no changes");
 			} else {
-				// $.ajax({
-				// 	type: 'POST',
-				// 	data: this.options.modified
-				// });
+				$.ajax({
+					url: '/i/' + this.options.item.id + '/edit',
+					type: 'POST',
+					data: this.options.modified
+				});
 				console.log("saving");				
 			}
 			console.log(this.options.modified);
