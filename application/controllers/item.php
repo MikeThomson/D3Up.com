@@ -16,29 +16,43 @@ class Item_Controller extends Base_Controller {
 	}
 	
 	public function post_edit($id) {
-		$item = Epic_Mongo::db('item')->findOne(array('id' => (int) $id));
-		if(!$item) {
-			return Response::error('404');
-		}
+		$query = array(
+			'id' => (int) $id
+		);
+		$update = array(
+			'$set' => array(),
+			'$unset' => array(),
+		);
+		$data = Input::all();
 		$valid_attrs = array_keys(D3Up_Attributes::$attributes['en']);
-		foreach(Input::only($valid_attrs) as $key => $value) {
-			if($value === "null") {
-				unset($item->attrs[$key]);
-			} else {
-				$item->attrs[$key] = $value;				
-			}
-		}
 		$valid_stats = array('block-chance', 'block-amount', 'damage', 'speed', 'armor');
-		foreach(Input::only($valid_stats) as $key => $value) {
-			if(is_array($value)) {
-				foreach($value as $skey => $svalue) {
-					$item->stats[$key][$skey] = $svalue;
-				}
-			} else {
-				$item->stats[$key] = $value;									
-			}
+		if($attrs = Input::get('attrs')) {
+			foreach($attrs as $k => $v) {
+				if($v === "null" || $v === "0") {
+					$update['$unset']['attrs.' . $k] = 1;
+				} else {
+					$update['$set']['attrs.' . $k] = (float) $v;				
+				}				
+			}			
 		}
-		$item->save();
+		if($stats = Input::get('stats')) {
+			foreach($stats as $k => $v) {
+				if($v === "null" || $v === "0") {
+					$update['$unset']['stats.' . $k] = 1;
+				} else {
+					$update['$set']['stats.' . $k] = (float) $v;				
+				}				
+			}			
+		}
+		if(empty($update['$unset'])) {
+			unset($update['$unset']);
+		}
+		if(empty($update['$set'])) {
+			unset($update['$set']);
+		}
+		$collection = Epic_Mongo::db('item')->update($query, $update);
+		var_dump($collection); 
+		exit;
 	}
 	
 	public function get_edit($id) {
