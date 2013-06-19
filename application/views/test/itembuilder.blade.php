@@ -38,7 +38,9 @@
 				console.log(JSON.stringify(modified));
 				$(".modified-item-1").html(JSON.stringify(modified));
 				console.log($("#iframe-1"));
-				$("#iframe-1").attr( 'src', function ( i, val ) { return val; });
+			},
+			onSave: function() {
+				$("#iframe-1").attr( 'src', function ( i, val ) { return val; });				
 			}
 		});
 		$(".view-item-2 .d3-tooltip").itemBuilder({
@@ -46,7 +48,9 @@
 			callback: function(modified) {
 				console.log(JSON.stringify(modified));
 				$(".modified-item-2").html(JSON.stringify(modified));
-				$("#iframe-2").attr( 'src', function ( i, val ) { return val; });
+			},
+			onSave: function() {
+				$("#iframe-2").attr( 'src', function ( i, val ) { return val; });				
 			}
 		});
 		$(".view-item-3 .d3-tooltip").itemBuilder({
@@ -54,7 +58,9 @@
 			callback: function(modified) {
 				console.log(JSON.stringify(modified));
 				$(".modified-item-3").html(JSON.stringify(modified));
-				$("#iframe-3").attr( 'src', function ( i, val ) { return val; });
+			},
+			onSave: function() {
+				$("#iframe-3").attr( 'src', function ( i, val ) { return val; });				
 			}
 		});
 	});

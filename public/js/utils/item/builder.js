@@ -220,7 +220,7 @@
 					url: '/i/' + this.options.item.id + '/edit',
 					type: 'POST',
 					data: this.options.modified
-				});
+				}).done(this.options.onSave);
 				console.log("saving");				
 			}
 			console.log(this.options.modified);
