@@ -6,20 +6,21 @@
 			console.log("_create");
 		},
 		_addToggle: function() {
-			var bottom = this.elements.bottom,
+			var item = this.elements.item,
 					modify = this.elements.modify;
-			bottom.append(modify);
+			item.prepend(modify);
 		},
 		_addBindings: function() {
-			var editor = this.elements.editor,
+			var item = this.elements.item,
+					editor = this.elements.editor,
 					bottom = this.elements.bottom;
 			// Item Editor Bindings
+			item.on('click keypress', '[data-for=modify]', $.proxy(this, '_togglePane'));
 			editor.on('change', '[data-type]', $.proxy(this, '_modifyType'));
 			editor.on('keyup', '[data-attr]', $.proxy(this, '_modifyAttr'));
 			editor.on('keyup', '[data-stat]', $.proxy(this, '_modifyStat'));
 			editor.on('click keypress', '[data-for=attr-add]', $.proxy(this, '_addAttrFinder'));
 			// Bottom Control Bindings
-			bottom.on('click keypress', '[data-for=modify]', $.proxy(this, '_togglePane'));
 			bottom.on('click keypress', '[data-for=save]', $.proxy(this, '_save'));
 			bottom.on('click keypress', '[data-for=revert]', $.proxy(this, '_revert'));
 			bottom.on('click keypress', '[data-for=cancel]', $.proxy(this, '_togglePane'));
@@ -86,8 +87,6 @@
 		_togglePane: function() {
 			// Hide the actual Item display
 			this.elements.item.toggle();
-			// Hide the Toggle 
-			this.elements.modify.toggle();
 			// Hide the actual Item display
 			this.elements.editor.toggle();
 			// Hide the Toggle 
@@ -239,7 +238,7 @@
 				item: this.element.find(".item"),
 				top: this.element.find(".top"),
 				bottom: this.element.find(".bottom"),
-				modify: $("<a class='btn' data-for='modify'>Modify</a>")
+				modify: $("<a class='btn pull-right' data-for='modify'>Modify</a>")
 			};
 			// Make sure our modified object exists
 			if(!this.options.modified) {
