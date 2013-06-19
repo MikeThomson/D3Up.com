@@ -455,6 +455,8 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 }
 .d3-tooltip select[data-type],
 .d3-tooltip input[data-stat] {
+	background-color: #fff;
+	color: #000;
 	width: 100px;
 	max-width: 100px;
 	margin-right: 5px;
