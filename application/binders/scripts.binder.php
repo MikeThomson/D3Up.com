@@ -5,7 +5,7 @@
 |--------------------------------------------------------------------------
 */
 return array('html scripts' => function() {
-	if(Request::env() == 'development') {
+	if(Input::get('debug') || Request::env() == 'development') {
 		// If we are in development mode
 		$scripts = "";
 		// Loop through the files that are minified
