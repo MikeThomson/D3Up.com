@@ -44,13 +44,6 @@
 				$(".modified-item-2").html(JSON.stringify(modified));
 			}
 		});
-		$(".view-item-3 .d3-tooltip").itemBuilder({
-			item: $.parseJSON('{{ addslashes(json_encode($item3->json())) }}'),
-			onUpdate: function(modified) {
-				console.log(JSON.stringify(modified));
-				$(".modified-item-3").html(JSON.stringify(modified));
-			}
-		});
 	});
 </script>
 @endsection
