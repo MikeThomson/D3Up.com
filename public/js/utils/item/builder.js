@@ -14,6 +14,7 @@
 			var el = this.element;
 			// Top Control Bindings
 			el.on('keyup', '[data-for=name]', $.proxy(this, '_modifyName'));
+			el.on('click', '[data-for=collapse]', $.proxy(this, '_toggleCollapse'));
 			// Item Editor Bindings
 			el.on('click keypress', '[data-for=modify]', $.proxy(this, '_createPane'));
 			el.on('change', '[data-type]', $.proxy(this, '_modifyType'));
@@ -42,7 +43,7 @@
 					attrs.find("[data-attr='" + inverse[item] + "'] input").focus();
 				}
 			});
-			attrs.find('li:last').prev().after(li.append(search));
+			attrs.append(li.append(search));
 			li.find("input").focus().select();
 		},
 		_modifySocket: function(event) {
@@ -63,7 +64,7 @@
 					target = $(event.currentTarget),
 					socket = target.data("socket"),
 					value = target.val();
-			$("[data-socket=" + socket + "]").remove();
+			target.closest("li").remove();
 			if(!modified.sockets) {
 				modified.sockets = {};
 			}
@@ -81,17 +82,24 @@
 					value = target.val(),
 					li = $("<li>");
 			var nextIdx = 0;
-			if(item.sockets.length) {
+			if(!$.isEmptyObject(item.sockets)) {
 				nextIdx = Math.max.apply(Math, _.keys(item.sockets)) + 1;				
 			}
+			// Ensure our modified properties has sockets
 			if(!modified.sockets) {
 				modified.sockets = {};
 			}
+			// Append our new empty socket
 			modified.sockets[nextIdx] = "empty";
+			// Ensure our item has sockets
+			if(!item.sockets) {
+				item.sockets = {};
+			}
+			// Append our new empty socket
 			item.sockets[nextIdx] = "empty";
 			var newSocket = this._createSocketSelect(nextIdx);
 			if(nextIdx > 0) {
-				sockets.find('li:last').prev().after(li.append(newSocket));				
+				sockets.append(li.append(newSocket));				
 			} else {
 				sockets.prepend(li.append(newSocket));
 			}
@@ -192,18 +200,27 @@
 		},
 		_createPane: function() {
 			console.log("_createPane");
-			var editor = this.elements.editor = $("<div class='item item-editor well-small'>"),
-					controls = this.elements.controls = $("<div class='bottom btn-group'>");
-			// Quickly add some buttons
-			controls.append($("<a class='btn' href='#' data-for='save'>Save</a>"));
-			controls.append($("<a class='btn' href='#' data-for='revert'>Revert</a>"));
-			controls.append($("<a class='btn' href='#' data-for='cancel'>Cancel</a>"));
+			var titlebar = this.elements.titlebar = this.element.find(".top").clone().empty(),
+					editor = this.elements.editor = $("<div class='item item-editor well-small'>"),
+					controls = this.elements.controls = $("<div class='bottom btn-toolbar'>"),
+					group = $("<div class='btn-group'>");
+			// Quickly add some buttons to the group
+			group.append($("<a class='btn' href='#' data-for='save'>Save</a>"));
+			group.append($("<a class='btn' href='#' data-for='revert'>Revert</a>"));
+			group.append($("<a class='btn' href='#' data-for='cancel'>Cancel</a>"));
+			// Append the Button Group
+			controls.append(group);
+			// Clone the Icon in-place
 			editor.append(this.elements.item.find(".item-icon").clone());
-			// Append the Editor after the actual Item
+			// Append the titlebar after the actual .top
+			this.elements.top.after(titlebar);
+			// Append the Editor after the actual .item
 			this.elements.item.after(editor);
 			// Append the new Controls
 			this.elements.bottom.append(controls);
-			// Hide the item itself
+			// Hide the top 
+			this.elements.top.hide();
+			// Hide the item
 			this.elements.item.hide();
 			// Add the Item's Name input
 			this._createPaneName();
@@ -219,9 +236,10 @@
 		_createPaneSockets: function() {
 			console.log("_createPaneSockets"	);
 			var editor = this.elements.editor,
+					controls = this.elements.controls,
 					list = $("<ul class='sockets'>");
 					item = this.options.item,
-					newSocket = $("<a class='btn' data-for='socket-add'>");
+					newSocket = $("<a class='btn pull-left' data-for='socket-add'>");
 			newSocket.html("Add Socket");
 			_.each(item.sockets, function(gem, socket) {
 				var li = $("<li>");
@@ -230,7 +248,7 @@
 				li.html(this._createSocketSelect(socket));
 				list.append(li);
 			}, this);
-			list.append($("<li>").append(newSocket));
+			controls.prepend(newSocket);
 			editor.append(list);
 		},
 		_createSocketSelect: function(socket) {
@@ -284,11 +302,12 @@
 		_createPaneName: function() {
 			console.log("_createPaneName");
 			var item = this.options.item, 
-					top = this.elements.top,
-					wrapper = this.elements.nameChange = $("<p>"),
+					titlebar = this.elements.titlebar,
+					wrapper = $("<p>"),
+					collapse = $("<i data-for='collapse' class='icon-collapse pull-left'></i>"),
 					input = $("<input type='text' data-for='name'>");
 			input.val(item.name);
-			top.find("p").hide().after(wrapper.append(input));
+			titlebar.append(wrapper.append(collapse, input));
 		},
 		_createPaneTypes: function() {
 			console.log("_createPaneTypes");
@@ -318,6 +337,14 @@
 				quality.append(li);
 			}, this);
 			editor.append($("<div>").append(quality, type));
+		},
+		_toggleCollapse: function(event) {
+			var target = $(event.currentTarget),
+					editor = this.elements.editor,
+					controls = this.elements.controls;
+			target.toggleClass("icon-rotate-270");
+			editor.toggle();
+			controls.toggle();
 		},
 		_createPaneStats: function() {
 			console.log("_createPaneStats");
@@ -360,36 +387,50 @@
 		_createPaneAttrs: function() {
 			console.log("_createPaneAttrs");
 			var item = this.options.item,
+					controls = this.elements.controls,
 					editor = this.elements.editor,
 					attrs = this.elements.attrs = $("<ul class='attrs'>");
 			_.each(item.attrs, function(value, attr) {
 				attrs.append(this._createPaneAttr(attr, value));
 			}, this);
-			attrs.append($("<li><a class='btn btn-mini' href='#' data-for='attr-add'>Add Attribute</a></li>"));
+			controls.prepend($("<a class='btn btn-mini pull-left' href='#' data-for='attr-add'>Add Attribute</a>"));
 			editor.append(attrs);
 		},
 		_removePane: function() {
-			// Remove the namechange input and show the name
-			this.elements.nameChange.remove();
-			this.elements.top.find("p").show();
 			// Destroy the elements created in _createPane
+			this.elements.titlebar.remove();
 			this.elements.editor.remove();
 			this.elements.controls.remove();
+			// Show the old fields from the tooltip
+			this.elements.top.show();
 			this.elements.item.show();
+			// Unhide elements we need
+			this.elements.top.find("p").show();
 		},
 		_cancel: function() {
 			this._revert();
-			this._removePane();
+			if(this.options.onCancel) {
+				this.options.onCancel();
+			}
+			this.destroy();
 		},
-		_revert: function() {
-			// Reset our item to a clone of the original
-			this.options.item = _.cloneDeep(this.original);
-			// Set our modified object to be empty
-			this.options.modified = {};
+		_revertPane: function() {
 			// Remove the old pane
 			this._removePane();
 			// Create a new pane (Was an easy way to reset)
 			this._createPane();
+		},
+		_revertItem: function() {
+			// Reset our item to a clone of the original
+			this.options.item = _.cloneDeep(this.original);
+			// Set our modified object to be empty
+			this.options.modified = {};			
+		},
+		_revert: function() {
+			// Revert the Item
+			this._revertItem();
+			// Revert the Pane
+			this._revertPane();
 			// Run an update
 			this._update();
 		},
@@ -464,6 +505,14 @@
 			this._addToggle();
 			// Add Bindings to all controls
 			this._addBindings();
+			// If 'modding' was passed, we're starting off modifying
+			if(this.options.modding) {
+				this._createPane();
+			}
+		},
+		_destroy: function() {
+			this._revert();
+			this._removePane();
 		}
 	});
 })( jQuery );

@@ -3,7 +3,7 @@ class Scripts_Task {
 	
 	protected $_node = '/usr/local/bin/node';
 	protected $_uglify = '/usr/local/bin/uglifyjs';
-	protected $_options = '-c -m';
+	protected $_options = '-m';
 	
 	public $scriptPath = 'js/';
 	

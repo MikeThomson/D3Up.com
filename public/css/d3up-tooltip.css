@@ -102,7 +102,7 @@
 .d3-tooltip .item ul.attrs{
 	list-style: none;
 	color: #7979D4;
-	margin: 10px 5px 5px 10px;
+	margin: 10px 0 5px 0;
 	padding: 0;
 	clear: both;
 }
@@ -498,6 +498,15 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 	background: none;
 	background-color: #70B1D5;
 	outline: none;
+}
+.d3-tooltip .top i.icon-collapse {
+	color: #ececec;
+	margin-left: 15px;
+	line-height: 41px;
+	vertical-align: middle;
+}
+.d3-tooltip .top i.icon-collapse:hover {
+
 }
 .d3-tooltip .dropdown-menu {
 	background-color: #222;

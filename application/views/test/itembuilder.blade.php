@@ -39,6 +39,7 @@
 		});
 		$(".view-item-2 .d3-tooltip").itemBuilder({
 			item: $.parseJSON('{{ addslashes(json_encode($item2->json())) }}'),
+			modding: true,
 			onUpdate: function(modified) {
 				console.log(JSON.stringify(modified));
 				$(".modified-item-2").html(JSON.stringify(modified));

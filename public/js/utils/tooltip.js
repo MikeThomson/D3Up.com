@@ -1,7 +1,7 @@
 function buildTooltip(elem) {
 	// Parse the Items JSON
 	var item = $.parseJSON(elem.attr('data-json')),
-			builder = new d3up.ItemBuilder;
+			gameData = d3up.gameData;
 	// Build all the HTML parts
 	var container = $("<div class='d3-tooltip'/>"),
 			header = $("<div class='top'/>"),
@@ -25,7 +25,7 @@ function buildTooltip(elem) {
 	// Set the Quality of the Item
 	itemType.html(item.type.charAt(0).toUpperCase() + item.type.slice(1));
 	// Fix up the Tooltip Icon
-	itemQuality.html(builder.qualityMap[item.quality])
+	itemQuality.html(gameData.qualities[item.quality])
 	if(item && item.icon && item.quality) {
 		itemIcon.addClass("item-quality-" + item.quality);
 		itemIcon.html("<img src='http://media.blizzard.com/d3/icons/items/large/" + item.icon + ".png'>");
@@ -70,8 +70,8 @@ function buildTooltip(elem) {
 	if(item.attrs) {
 		// Loop through attrs and add
 		$.each(item.attrs, function(k, v) {
-			if(text = builder.getSkillText(k, v)) {
-				itemAttrs.append("<li>" + text + "</li>");
+			if(text = gameData.attributes[k]) {
+				itemAttrs.append("<li>" + text.replace("[X]", v) + "</li>");
 			}
 		});
 		// Append Attrs to content
@@ -80,22 +80,18 @@ function buildTooltip(elem) {
 	// Do we have sockets?
 	if(item.sockets) {
 		$.each(item.sockets, function(k,v) {
-			var itemClass = builder.getItemClass(item.type), 
+			var itemClass = d3up.Calc.prototype.itemClass(item.type), 
 					text = null;
 			if(itemClass == 'weapon') {
 				// Weapon Effects
-				var effect = builder.gemEffect[v][2][0],
-						value = builder.gemEffect[v][2][1];
+				text = gameData.gems[v][2];
 			} else if(_.indexOf(["spirit-stone","voodoo-mask","wizard-hat","helm"], item.type) >= 0) {
 				// Helm Effects
-				var effect = builder.gemEffect[v][1][0],
-						value = builder.gemEffect[v][1][1];
+				text = gameData.gems[v][1];
 			} else {
-				// Other Effects
-				var effect = builder.gemEffect[v][3][0],
-						value = builder.gemEffect[v][3][1];
+				// All other Effects
+				text = gameData.gems[v][3];
 			}
-			text = builder.getSkillText(effect, value);
 			itemSockets.append("<li class='gem_" + item.sockets[k] + "'>" + text + "</li>");
 		});
 		content.append(itemSockets);
@@ -158,44 +154,37 @@ $.fn.tooltipCompare = function() {
 }
 
 $.fn.tooltip = function() {
-	// Define the Tooltip Div
-	var tooltip = $("#d3up-tooltip");
-	// If we have no JSON, return false immediately
-	if(!$(this).attr('data-json')) {
-		return false;
-	}
-	
-	var tip = buildTooltip($(this));
-
-	// Bind the mouse
-	$(this).mouseover(function() {
-		var $this = $(this);
-		tooltip.css({
-				position: 'absolute'
-		});
-		tooltip.empty().append(tip);
-		var position = {
-			of: $this,
-			at: "right middle",
-			my: "left middle",
-			offset: "20 10",
-			collision: "flip"
-		};
-		tooltip.appendTo("body").position(position);
-	}).mouseout(function() {
+	var tooltip = $("#d3up-tooltip"),
+			tip = buildTooltip($(this));
+	tooltip.css({
+			position: 'absolute'
+	});
+	tooltip.empty().append(tip);
+	var position = {
+		of: $(this),
+		at: "right middle",
+		my: "left middle",
+		offset: "20 10",
+		collision: "flip"
+	};
+	tooltip.appendTo("body").position(position);
+}
+// function checkTooltip() {
+// 	if($(this).attr('data-json')) {
+// 		console.log("Rawr");
+// 		if($(this).attr('data-compare')) {
+// 			$(this).tooltipCompare();			
+// 		} else {
+// 			$(this).tooltip();			
+// 		}
+// 	}
+// }
+$(function() {
+	$("body").on('hover', '[data-json]', function(event) {
+		var target = $(event.currentTarget);
+		target.tooltip();
+	}).on('mouseout', '[data-json]', function(event) {
+		var tooltip = $("#d3up-tooltip");
 		tooltip.empty();
 	});
-	
-}
-function checkTooltip() {
-	if($(this).attr('data-json')) {
-		if($(this).attr('data-compare')) {
-			$(this).tooltipCompare();			
-		} else {
-			$(this).tooltip();			
-		}
-	}
-}
-$(function() {
-	$("a").each(checkTooltip);	
 });

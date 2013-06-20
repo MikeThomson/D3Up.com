@@ -46,7 +46,7 @@ return array('html itemLink' => function($item, $params = array()) {
 		// Replacement text for the Link
 		if(isset($params['text'])) {
 			$text = $params['text'];
-		}		
+		}
 	}
 	// Return the Link
 	return HTML::link(

@@ -21,7 +21,7 @@ class Item_Controller extends Base_Controller {
 		// Start building the Query
 		$query = array(
 			'id' => (int) $id, 
-			'break' => true
+			// 'break' => true
 		);
 		// Start building the Update
 		$update = array(

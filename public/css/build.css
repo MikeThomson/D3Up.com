@@ -18,22 +18,27 @@
 .title-inner .btn-group {
 	margin: 0 5px;
 }
+.background-barbarian,
 .title-block[data-class=barbarian],
 .title-block[data-class=barbarian-0] {
 	background-image: url('/img/bgs/barbarian.jpeg');
 }
+.background-demon-hunter,
 .title-block[data-class=demon-hunter],
 .title-block[data-class=demon-hunter-0] {
 	background-image: url('/img/bgs/demon-hunter.jpeg');
 }
+.background-witch-doctor,
 .title-block[data-class=witch-doctor],
 .title-block[data-class=witch-doctor-0] {
 	background-image: url('/img/bgs/witch-doctor.jpeg');
 }
+.background-monk,
 .title-block[data-class=monk],
 .title-block[data-class=monk-0] {
 	background-image: url('/img/bgs/monk.jpeg');
 }
+.background-wizard,
 .title-block[data-class=wizard],
 .title-block[data-class=wizard-0] {
 	background-image: url('/img/bgs/wizard.jpeg');
@@ -279,4 +284,7 @@ div.title-block .skill-row {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+#display-items {
+	display: none;
 }

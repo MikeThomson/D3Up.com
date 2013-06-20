@@ -13,7 +13,6 @@
 <link href="/css/compare.css" rel="stylesheet">
 <link href="/css/paperdoll.css" rel="stylesheet">
 <link href="/css/utils/chosen.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css" rel="stylesheet">
 @endsection
 
 @section('scripts')
@@ -62,5 +61,12 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div id='display-items'> 
+	@foreach($build->gear as $slot => $item) 
+		<div data-slot="{{ $slot }}">
+			@include('item.display')->with('item', $item)
+		</div>
+	@endforeach
 </div>
 @endsection

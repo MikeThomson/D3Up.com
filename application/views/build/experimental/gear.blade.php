@@ -11,11 +11,11 @@
 		user-select: none;
 		background-color: #111;
 	}
-	.build-gear .active-modify{
+	.build-gear .active-modify {
 		background-color: #000;
 	}	
 	.build-gear-modify {
-		padding: 15px;
+		padding: 5px;
 		display: none;
 		background-color: #000;
 		border-left: 1px solid #333;
@@ -48,14 +48,20 @@
 	.build-gear .table-gear tbody td:first-child {
 		text-align: left;
 	}
-	.build-gear .table-gear .icon-signout {
+	.build-gear .icon-signout {
 		color: #333; 
+		background-color: #111;
 		border-color: #333;
 		line-height: 28px;
 	}
-	.build-gear .table-gear .icon-signout:hover {
+	.build-gear tr.item:hover .icon-signout {
 		color: #ececec; 
 		border-color: #ececec;
+	}
+	.build-gear tr.item.active-modify:hover .icon-signout,
+	.build-gear .active-modify .icon-signout {
+		color: #70B1D5; 
+		border-color: #70B1D5;		
 	}
 </style>
 
@@ -63,7 +69,6 @@
 	<div class="span9">
 		<div class="build-gear">
 			<div class='build-gear-modify'>
-				@include('build.experimental.gear.modify')
 			</div>
 			<script id="build-gear{{ ((isset($id)) ? ('-'.$id) : "") }}" type="text/x-handlebars-template">
 				<table class='table table-gear'>
@@ -79,8 +84,8 @@
 						<tr class='item'>
 							<td>
 								{{ HTML::itemIcon($item) }}
-								{{ HTML::itemLink($item, array('slot' => $slot)) }}
-								<i class="btn-modify icon-signout pull-right icon-border" data-modify-toggle="{{ $slot }}"></i>
+								{{ HTML::itemLink($item, array('slot' => $slot, 'icon' => true)) }}
+								<i class="btn-modify icon-signout pull-left icon-border" data-modify-toggle="{{ $slot }}"></i>
 							</td>
 							<td>{{ HTML::hb('prettyStat stats.gear.'.$slot.'.contributions.dps') }}</td>
 							<td>{{ HTML::hb('prettyStat stats.gear.'.$slot.'.contributions.ehp') }}</td>
@@ -101,10 +106,10 @@
 	d3up.getBuild({{ $build->id }}).done(function(data) {
 		$('.build-gear').buildGear({
 			container: $('#build-gear'),
-			gearList: '.table-gear',
 			modify: $('.build-gear-modify'),
 			modifyPane: $('#build-gear-modify-pane'),
 			modifyToggle: '.icon-signout',
+			displayItems: $("#display-items"),
 			calc: new d3up.Calc(data)
 		});
 	});

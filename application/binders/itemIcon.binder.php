@@ -34,6 +34,7 @@ return array('html itemIcon' => function($item, $params = array()) {
 			$options['class'] = $params['class'];
 		}
 	}
+	$options['data-json'] = json_encode($item->json());
 	// Generate the Image
 	$image = HTML::image('http://media.blizzard.com/d3/icons/items/'.$size.'/'.$item->icon.'.png', $item->name, $options);
 	// Wrap it in a span and return
