@@ -9,6 +9,7 @@
 class D3Up_Gems
 {
 	public static $gems = array(
+		'empty' => array('Empty Socket', array('empty-socket', 1), array('empty-socket', 1), array('empty-socket', 1)),
 		'chipped_amethyst' => array('Chipped Amethyst' , array('plus-life', 5) , array('life-hit', 2), array('vitality', 6)),
 		'chipped_emerald' => array('Chipped Emerald' , array('plus-gold-find', 5), array('critical-hit-damage', 10), array('dexterity', 6)),
 		'chipped_ruby' => array('Chipped Ruby' , array('plus-experience-percent', 5), array('ruby-damage', 3) ,array('strength',6)),
@@ -133,4 +134,17 @@ class D3Up_Gems
 		'marquise_ruby' => 15,
 		'marquise_topaz' => 15,
 	);
+	
+	public static function effect($item, $gem) {
+		$idx = 0;
+		if(in_array($item->type, ["2h-mace","2h-axe","bow","daibo","crossbow","2h-mighty","polearm","staff","2h-sword","axe","ceremonial-knife","hand-crossbow","dagger","fist-weapon","mace","mighty-weapon","spear","sword","wand"])) {
+			$idx = 2;
+		} elseif(in_array($item->type, ["spirit-stone","voodoo-mask","wizard-hat","helm"])) {
+			$idx = 1;
+		} else {
+			$idx = 3;
+		}
+		list($attr, $value) = static::$gems[$gem][$idx];
+		return D3Up_Attributes::attr($attr, $value);
+	}
 } // END class D3Up_Tool_Gems

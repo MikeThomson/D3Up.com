@@ -7,8 +7,61 @@
  **/
 class D3Up_Attributes 
 {
+	public static $quality = array(
+		0 => 'Junk',
+		1 => 'Junk',
+		2 => 'Common',
+		3 => 'Uncommon',
+		4 => 'Magic',
+		5 => 'Rare',
+		6 => 'Legendary',
+		7 => 'Set',
+	);
+	
+	public static $itemTypes = array(
+		"2h-axe" => "Two-Handed Axe",
+		"2h-mace" => "Two-Handed Mace",
+		"2h-mighty" => "Two-Handed Mighty Weapon",
+		"2h-sword" => "Two-Handed Sword",
+		"amulet" => "Amulet",
+		"axe" => "Axe",
+		"belt" => "Belt",
+		"boots" => "Boots",
+		"bow" => "Bow",
+		"bracers" => "Bracers",
+		"ceremonial-knife" => "Ceremonial Knife",
+		"chest" => "Chest Armor",
+		"cloak" => "Cloak",
+		"crossbow" => "Crossbow",
+		"dagger" => "Dagger",
+		"daibo" => "Daibo",
+		"fist-weapon" => "Fist Weapon",
+		"gloves" => "Gloves",
+		"hand-crossbow" => "Hand Crossbow",
+		"helm" => "Helm",
+		"mace" => "Mace",
+		"mighty-belt" => "Mighty Belt",
+		"mighty-weapon" => "Mighty Weapon",
+		"mojo" => "Mojo",
+		"pants" => "Pants",
+		"polearm" => "Polearm",
+		"quiver" => "Quiver",
+		"ring" => "Ring",
+		"shield" => "Shield",
+		"shoulders" => "Shoulders",
+		"source" => "Source",
+		"spear" => "Spear",
+		"spirit-stone" => "Spirit Stone",
+		"staff" => "Staff",
+		"sword" => "Sword",
+		"voodoo-mask" => "Voodoo Mask",
+		"wand" => "Wand",
+		"wizard-hat" => "Wizard Hat"
+	);
+	
 	public static $attributes = array(
 		'en' => array(
+			'empty-socket' => 'Empty Socket',
 			// Base Stats
 			'strength' => '+[v] Strength',
 			'intelligence' => '+[v] Intelligence',
@@ -1184,9 +1237,8 @@ class D3Up_Attributes
 		return $ratings;
 	}
 	
-	public static function attr($attr, $value, $wrapper = "<span data-modify='[a]'>[v]</span>") {
+	public static function attr($attr, $value) {
 		$text = static::$attributes['en'][$attr];
-		$value = str_replace(array('[a]','[v]'), array($attr, $value), $wrapper);
 		return $return = str_replace('[v]', $value, $text);
 	}
 } // END class D3Up_Tool_Attributes

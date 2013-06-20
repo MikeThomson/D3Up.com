@@ -8,8 +8,8 @@
 				<img src='http://media.blizzard.com/d3/icons/items/large/{{ $item->icon }}.png'>
 			</div>
 			<p class='item-type'>
-				<span class='quality'>{{ $item->quality }}</span>
-				<span class='type'>{{ $item->type }}</span>
+				<span class='quality'>{{ D3Up_Attributes::$quality[$item->quality] }}</span>
+				<span class='type'>{{ D3Up_Attributes::$itemTypes[$item->type] }}</span>
 			</p>
 			<p class='stats stats-primary'>
 			@if($item->stats['armor'])
@@ -51,7 +51,7 @@
 			</ul>
 			<ul class='sockets'>
 			@foreach($item->sockets as $socket => $gem)
-				<li>{{ $socket }} {{ $gem }}</li>
+				<li class='gem_{{ $gem }}'>{{ D3Up_Gems::effect($item, $gem) }}</li>
 			@endforeach
 			</ul>
 			<div class='setBonus quality-7'>

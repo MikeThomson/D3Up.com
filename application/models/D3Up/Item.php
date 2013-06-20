@@ -6,14 +6,15 @@ class D3Up_Item extends D3Up_Mongo_Document_Sequenced {
   );
 	protected $_sequenceKey = 'item';
 	protected $_jsonData = array(
-		'id'						=> null,
-		'name'					=> null,
-		'attrs'					=> null,
-		'stats'					=> null,
-		'icon'					=> null,
-		'type'					=> null,
-		'quality'				=> null,
-		'_created'			=> 'created',
+		'id' => null,
+		'name' => null,
+		'attrs' => null,
+		'stats' => null,
+		'icon' => null,
+		'type' => null,
+		'quality' => null,
+		'sockets' => null,
+		'_created' => 'created',
 	);
 	
 	public function cleanedFor($type) {

@@ -11,20 +11,22 @@
 			item.prepend(modify);
 		},
 		_addBindings: function() {
-			var item = this.elements.item,
-					editor = this.elements.editor,
-					bottom = this.elements.bottom;
+			var el = this.element;
+			// Top Control Bindings
+			el.on('keyup', '[data-for=name]', $.proxy(this, '_modifyName'));
 			// Item Editor Bindings
-			item.on('click keypress', '[data-for=modify]', $.proxy(this, '_togglePane'));
-			editor.on('change', '[data-type]', $.proxy(this, '_modifyType'));
-			editor.on('keyup', '[data-attr]', $.proxy(this, '_modifyAttr'));
-			editor.on('keyup', '[data-stat]', $.proxy(this, '_modifyStat'));
-			editor.on('click keypress', '[data-for=attr-add]', $.proxy(this, '_addAttrFinder'));
+			el.on('click keypress', '[data-for=modify]', $.proxy(this, '_createPane'));
+			el.on('change', '[data-type]', $.proxy(this, '_modifyType'));
+			el.on('keyup', '[data-attr]', $.proxy(this, '_modifyAttr'));
+			el.on('keyup', '[data-stat]', $.proxy(this, '_modifyStat'));
+			el.on('click keypress', '[data-for=attr-add]', $.proxy(this, '_addAttrFinder'));
+			el.on('change', '[data-for=socket]', $.proxy(this, '_modifySocket'));
+			el.on('click keypress', '[data-for=socket-remove]', $.proxy(this, '_modifySocketRemove'));
+			el.on('click keypress', '[data-for=socket-add]', $.proxy(this, '_modifySocketAdd'));
 			// Bottom Control Bindings
-			bottom.on('click keypress', '[data-for=save]', $.proxy(this, '_save'));
-			bottom.on('click keypress', '[data-for=revert]', $.proxy(this, '_revert'));
-			bottom.on('click keypress', '[data-for=cancel]', $.proxy(this, '_togglePane'));
-			
+			el.on('click keypress', '[data-for=save]', $.proxy(this, '_save'));
+			el.on('click keypress', '[data-for=revert]', $.proxy(this, '_revert'));
+			el.on('click keypress', '[data-for=cancel]', $.proxy(this, '_cancel'));
 		},
 		_addAttrFinder: function() {
 			var $this = this,
@@ -43,6 +45,58 @@
 			attrs.find('li:last').prev().after(li.append(search));
 			li.find("input").focus().select();
 		},
+		_modifySocket: function(event) {
+			console.log("_modifySocket");
+			var modified = this.options.modified,
+					target = $(event.currentTarget),
+					socket = target.data("socket"),
+					value = target.val();
+			if(!modified.sockets) {
+				modified.sockets = {};
+			}
+			modified.sockets[socket] = value;
+			this._update();
+		},
+		_modifySocketRemove: function(event) {
+			console.log("_modifySocketRemove");
+			var modified = this.options.modified,
+					target = $(event.currentTarget),
+					socket = target.data("socket"),
+					value = target.val();
+			$("[data-socket=" + socket + "]").remove();
+			if(!modified.sockets) {
+				modified.sockets = {};
+			}
+			modified.sockets[socket] = null;
+			this._update();			
+		},
+		_modifySocketAdd: function(event) {
+			console.log("_modifySocketRemove");
+			var modified = this.options.modified,
+					item = this.options.item,
+					editor = this.elements.editor,
+					sockets = editor.find(".sockets"),
+					target = $(event.currentTarget),
+					socket = target.data("socket"),
+					value = target.val(),
+					li = $("<li>");
+			var nextIdx = 0;
+			if(item.sockets.length) {
+				nextIdx = Math.max.apply(Math, _.keys(item.sockets)) + 1;				
+			}
+			if(!modified.sockets) {
+				modified.sockets = {};
+			}
+			modified.sockets[nextIdx] = "empty";
+			item.sockets[nextIdx] = "empty";
+			var newSocket = this._createSocketSelect(nextIdx);
+			if(nextIdx > 0) {
+				sockets.find('li:last').prev().after(li.append(newSocket));				
+			} else {
+				sockets.prepend(li.append(newSocket));
+			}
+			this._update();						
+		},
 		_modifyType: function(event) {
 			console.log("_modifyType");
 			var modified = this.options.modified,
@@ -51,11 +105,55 @@
 					value = target.val();
 			if(key === 'quality') {
 				modified[key] = Number(value);
+				this._modifyItemQuality();
 			} else if(key === 'type') {
 				modified[key] = value;				
+				this._modifyItemType();
 			}
 			this._update();
 			console.log(JSON.stringify(modified));			
+		},
+		_modifyItemQuality: function() {
+			// The Element
+			var el = this.element,
+					// Our "Old" Quality
+					old = this.options.item.quality,
+					// Our "Possible" Quality
+					pos = this.options.modified.quality;
+			console.log(old, pos);
+			// Swap out all old classes on the tooltip
+			el.find(".quality-" + old)
+				.removeClass("quality-" + old)
+				.addClass("quality-" + pos);
+			el.find(".item-quality-" + old)
+				.removeClass("item-quality-" + old)
+				.addClass("item-quality-" + pos);
+			// Set the new quality as current
+			this.options.item.quality = pos;
+		},
+		_modifyItemType: function() {
+			console.log("_modifyItemType");
+			// Remove the item's stats
+			this.options.modified.stats = {};
+			_.each(this.options.item.stats, function(v,k) {
+				console.log("nulling", k);
+				this.options.modified.stats[k] = null;
+			}, this);
+			this.options.item.stats = {};
+			this.options.item.type = this.options.modified.type;
+			// What item class is this?
+			var itemClass = d3up.Calc.prototype.itemClass(this.options.modified.type);
+			_.each(d3up.gameData.itemStats[itemClass], function(stat) {
+				var parts = stat.split("~");
+				if(parts.length > 1) {
+					this.options.item.stats[parts[0] + "~" + parts[1]] = 1;
+				} else {
+					this.options.item.stats[stat] = 1;					
+				}
+			}, this);
+			_.extend(this.options.modified.stats, this.options.item.stats);
+			this._removePane();
+			this._createPane();
 		},
 		_modifyStat: function(event) {
 			console.log("_modifyStat");
@@ -69,6 +167,14 @@
 			modified.stats[stat] = Number(value);
 			this._update();
 			console.log(JSON.stringify(modified));
+		},
+		_modifyName: function(event) {
+			console.log("_modifyName");
+			var modified = this.options.modified,
+					target = $(event.currentTarget),
+					value = target.val();
+			modified['name'] = value;
+			this._update();
 		},
 		_modifyAttr: function(event) {
 			console.log("_modifyAttr");
@@ -84,14 +190,6 @@
 			this._update();
 			console.log(JSON.stringify(modified));
 		},
-		_togglePane: function() {
-			// Hide the actual Item display
-			this.elements.item.toggle();
-			// Hide the actual Item display
-			this.elements.editor.toggle();
-			// Hide the Toggle 
-			this.elements.controls.toggle();
-		},
 		_createPane: function() {
 			console.log("_createPane");
 			var editor = this.elements.editor = $("<div class='item item-editor well-small'>"),
@@ -101,19 +199,96 @@
 			controls.append($("<a class='btn' href='#' data-for='revert'>Revert</a>"));
 			controls.append($("<a class='btn' href='#' data-for='cancel'>Cancel</a>"));
 			editor.append(this.elements.item.find(".item-icon").clone());
-			// Hide the Editor & Controls
-			editor.hide();
-			controls.hide();
 			// Append the Editor after the actual Item
 			this.elements.item.after(editor);
 			// Append the new Controls
 			this.elements.bottom.append(controls);
+			// Hide the item itself
+			this.elements.item.hide();
+			// Add the Item's Name input
+			this._createPaneName();
 			// Add the Item Types
 			this._createPaneTypes();
 			// Add the Stats Options
 			this._createPaneStats();
 			// Add the Attribute Options
 			this._createPaneAttrs();
+			// Add the Socket Options
+			this._createPaneSockets();
+		},
+		_createPaneSockets: function() {
+			console.log("_createPaneSockets"	);
+			var editor = this.elements.editor,
+					list = $("<ul class='sockets'>");
+					item = this.options.item,
+					newSocket = $("<a class='btn' data-for='socket-add'>");
+			newSocket.html("Add Socket");
+			_.each(item.sockets, function(gem, socket) {
+				var li = $("<li>");
+				li.attr("data-socket", socket);
+				li.addClass("gem_" + gem);
+				li.html(this._createSocketSelect(socket));
+				list.append(li);
+			}, this);
+			list.append($("<li>").append(newSocket));
+			editor.append(list);
+		},
+		_createSocketSelect: function(socket) {
+			console.log("_createSocketSelect" + socket);
+			var itemType = this.options.item.type,
+					itemClass = d3up.Calc.prototype.itemClass(itemType),
+					current = this.options.item.sockets[socket],
+					gems = d3up.gameData.gems,
+					wrapper = $("<div class='input-append'>"),
+					remove = $("<button class='btn'>Remove</button>"),
+					select = $("<select>"),
+					types = d3up.gameData.types;
+			// Set the data-type to socket-remove for binding
+			remove.attr("data-for", 'socket-remove');
+			// Set the Socket Identifier
+			remove.attr("data-socket", socket);
+			// Set the data-type to socket for binding
+			select.attr("data-for", 'socket');
+			// Set the Socket Identifier
+			select.attr("data-socket", socket);
+			_.each(_.keys(gems).reverse(), function(gem) {
+				var idx, option = $("<option>");
+				// Set the value equal to the name of the gem
+				option.val(gem);
+				// This ugly if statement will determine the gem effect
+				if(itemClass === 'weapon') {
+					idx = 2;
+				} else if(_.indexOf(["spirit-stone","voodoo-mask","wizard-hat","helm"], itemType) >= 0) {
+					idx = 1;
+				} else {
+					idx = 3;
+				}
+				// If this is the gem we have, select it
+				if(current === gem) {
+					option.attr("selected", "selected");
+				}
+				// Set the HTML to the name and effect
+				option.html(gems[gem][0] + " (" + gems[gem][idx] + ")");
+				// Append the option to the select
+				select.append(option);
+			});
+			// Add the "Empty" option
+			var empty = $("<option value='empty'>Empty Socket</option>");
+			console.log(current);
+			if(current === 'empty' || typeof current === 'undefined') {
+				empty.attr("selected", "selected");
+			}
+			select.append(empty);
+			return wrapper.append(select, remove);
+		},
+		_createPaneName: function() {
+			console.log("_createPaneName");
+			var item = this.options.item, 
+					top = this.elements.top,
+					wrapper = this.elements.nameChange = $("<p>"),
+					input = $("<input type='text' data-for='name'>");
+			input.val(item.name);
+			top.find("p").hide().after(wrapper.append(input));
 		},
 		_createPaneTypes: function() {
 			console.log("_createPaneTypes");
@@ -152,6 +327,7 @@
 				var input = $("<input type='text'>"),
 						container = $("<div>"),
 						text = d3up.gameData.stats[stat];
+				console.log(stat, text);
 				if(_.indexOf(this.ranges, stat) >= 0) {
 					var input1 = input.clone(),
 							input2 = input.clone(),
@@ -193,62 +369,100 @@
 			editor.append(attrs);
 		},
 		_removePane: function() {
-			console.log("_removePane");
+			// Remove the namechange input and show the name
+			this.elements.nameChange.remove();
+			this.elements.top.find("p").show();
+			// Destroy the elements created in _createPane
 			this.elements.editor.remove();
 			this.elements.controls.remove();
 			this.elements.item.show();
-			this.elements.modify.show();
+		},
+		_cancel: function() {
+			this._revert();
+			this._removePane();
 		},
 		_revert: function() {
-			console.log("_revert");
-			var $this = this;
-			$.each(this.element.find("[data-modify]"), function() {
-				console.log("reverting " + $(this).data("modify"));
-				var attr = $(this).data("modify");
-				$(this).val($this.originals[attr]);				
-			});
-			// Reset the Modified attributes
+			// Reset our item to a clone of the original
+			this.options.item = _.cloneDeep(this.original);
+			// Set our modified object to be empty
 			this.options.modified = {};
+			// Remove the old pane
+			this._removePane();
+			// Create a new pane (Was an easy way to reset)
+			this._createPane();
+			// Run an update
+			this._update();
 		},
 		_save: function() {
-			console.log("_save");
+			var $this = this;
+			// If we have no modifications, don't bother AJAXing
 			if($.isEmptyObject(this.options.modified)) {
-				console.log("not saving, no changes");
+				// Swap back to the item view unaltered
+				this._removePane();
 			} else {
+				// Issue the AJAX post to perform the updates
 				$.ajax({
 					url: '/i/' + this.options.item.id + '/edit',
 					type: 'POST',
-					data: this.options.modified
-				}).done(this.options.onSave);
-				console.log("saving");				
+					data: this.options.modified, 
+				}).done(function(data) {
+					// Once the AJAX is complete...
+					var json = $.parseJSON(data),	// JSON Response
+							html = json.html,	// HTML Render of the new Item
+							item = json.item;	// JSON Data of the new Item
+					// Remove the old Form
+					$this._removePane();
+					if($this.options.onSave) {
+						// Call our onSave callback
+						$this.options.onSave();						
+					}
+					// Replace the item's HTML with the new HTML
+					$this.element.html($(html));
+					// Assign our new item
+					$this.options.item = item;
+					// Remove all old modifications
+					$this.options.modified = {};
+					// Reinit our values with the new item
+					$this._reinit();
+					// Readd our toggle
+					$this._addToggle();
+					// Perform an update
+					$this._update();
+				});
 			}
-			console.log(this.options.modified);
 		},
 		_update: function() {
-			console.log("_update");
-			var callback = this.options.callback;
-			if(callback) {
-				callback(this.options.modified);
+			// Do we have a callback on our updates?
+			if(this.options.onUpdate) {
+				// Execute it and pass what's been modified
+				this.options.onUpdate(this.options.modified);
 			}
 		},
-		_init: function() {
-			console.log("_init");
-			// Assign some initial elements
+		_assignElements: function() {
 			this.elements = {
 				item: this.element.find(".item"),
 				top: this.element.find(".top"),
 				bottom: this.element.find(".bottom"),
 				modify: $("<a class='btn pull-right' data-for='modify'>Modify</a>")
 			};
+		},
+		_reinit: function() {
+			// Assign some initial elements
+			this._assignElements();
 			// Make sure our modified object exists
 			if(!this.options.modified) {
 				this.options.modified = {};
 			}
+			// Create a copy of the original for reverting
+			this.original = _.cloneDeep(this.options.item);			
+		},
+		_init: function() {
+			console.log("_init");
+			// Initialize some options
+			this._reinit();
 			// Create our Toggle
 			this._addToggle();
-			// Create our Edit Pane
-			this._createPane();
-			// Add Bindings to all buttons
+			// Add Bindings to all controls
 			this._addBindings();
 		}
 	});

@@ -9762,8 +9762,8 @@
 		"itemStats": {
 			"none": [],
 			"armor": ["armor"],
-			"weapon": ["dps", "damage", "speed"],
-			"shield": ["block-chance", "block-value", "armor"]
+			"weapon": ["dps", "speed", "damage~min", "damage~max"],
+			"shield": ["armor", "block-chance", "block-amount~min", "block-amount~max"]
 		},
 		"qualities": {
 			"0": "Unspecified", 
@@ -9817,10 +9817,14 @@
 		},
 		"stats": {
 			"damage": "Damage",
+			"damage~min": "Min Damage",
+			"damage~max": "Max Damage",
 			"speed": "Attacks per Second",
 			"dps": "Damage per Second",
 			"armor": "Armor",
 			"block-amount": "Block Amount",
+			"block-amount~min": "Min Block Amount",
+			"block-amount~max": "Max Block Amount",
 			"block-chance": "% Block Chance"
 		},
 		"attributes": {
