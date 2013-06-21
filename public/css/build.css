@@ -288,3 +288,13 @@ div.title-block .skill-row {
 #display-items {
 	display: none;
 }
+#pill-gear .span3 {
+	margin-left: 10px;
+	width: 230px;
+}
+@media (min-width: 1200px) {
+	#pill-gear .span3 {
+		margin-left: 10px;
+		width: 290px;
+	}
+}
