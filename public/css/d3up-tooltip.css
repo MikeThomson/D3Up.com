@@ -40,6 +40,9 @@
 	padding: 0 15px; 
 	background: url("http://us.battle.net/d3/static/images/ui/tooltip-title.jpg") no-repeat;
 }
+.d3-tooltip .top .item-icon {
+	margin: 3px 0;
+}
 .d3-tooltip .top.quality-1,
 .d3-tooltip .top.quality-2 { background-position: 0 -40px; }
 .d3-tooltip .top.quality-4 { background-position: 0 -80px; }
@@ -62,59 +65,59 @@
 .d3-tooltip .top.skill p {
 	font-size: 16px;
 }
-.d3-tooltip .item {
+.d3-tooltip > .item {
   padding: 10px;
 	color: #ececec;
 }
-.d3-tooltip .item p {
+.d3-tooltip > .item p {
 	margin: 0;
 }
-.d3-tooltip .item .item-type {
+.d3-tooltip > .item .item-type {
 	margin-bottom: 8px;
 }
-.d3-tooltip .item .big-stat {
+.d3-tooltip > .item .big-stat {
 	font-size: 42px;
 	line-height: 42px;
 	display: block;
 }
-.d3-tooltip .item .stat-helper {
+.d3-tooltip > .item .stat-helper {
 	color: #777;
 	font-size: 12px;
 	line-height: 12px;
 }
-.d3-tooltip .item .stats-damage {
+.d3-tooltip > .item .stats-damage {
 	margin-top: 10px;
 }
-.d3-tooltip .item p.item-type,
-.d3-tooltip .item p.stats {
+.d3-tooltip > .item p.item-type,
+.d3-tooltip > .item p.stats {
 	margin-bottom: 5px;
 	line-height: 1em;
 	font-size: 1em;
 	width: auto;
 	text-align: left;
 }
-.d3-tooltip .item p.stats {
+.d3-tooltip > .item p.stats {
 	display: block;	
 }
-.d3-tooltip .item .stats-primary {
+.d3-tooltip > .item .stats-primary {
 	margin-bottom: 10px;
 }
-.d3-tooltip .item ul.attrs{
+.d3-tooltip > .item ul.attrs{
 	list-style: none;
 	color: #7979D4;
 	margin: 10px 0 5px 0;
 	padding: 0;
 	clear: both;
 }
-.d3-tooltip .item ul.sockets .value,
-.d3-tooltip .item ul.attrs .value {
+.d3-tooltip > .item ul.sockets .value,
+.d3-tooltip > .item ul.attrs .value {
 	color: #A4A4C0;
 }
-.d3-tooltip .item ul {
+.d3-tooltip > .item ul {
 	font-size: 14px;
 	margin: 0;
 }
-.d3-tooltip .item ul.attrs li {
+.d3-tooltip > .item ul.attrs li {
 	padding: 1px 15px;
 	background-image: url("/img/bullet.gif");
 	background-repeat: no-repeat;
@@ -127,7 +130,7 @@
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
-.d3-tooltip .item .item-icon {
+.d3-tooltip > .item .item-icon {
 	float: left;
 	margin: 0 20px 11px 10px;
 	border: 1px solid #000;
@@ -135,7 +138,7 @@
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
-.d3-tooltip .item .item-icon img {
+.d3-tooltip > .item .item-icon img {
 	max-height: 100px;	
 }
 .item .item-icon-box.item-icon img,
@@ -173,7 +176,7 @@
 	border-color: #87a73d;
 	background: url(http://us.battle.net/d3/static/images/item/icon-bgs/green.png);
 }
-.d3-tooltip .item ul.sockets {
+.d3-tooltip > .item ul.sockets {
 	margin: 0;
 }
 .sockets > li {
@@ -186,7 +189,7 @@
 	padding: 1px 37px;
 	line-height: 25px;
 }
-.d3-tooltip .item ul.sockets > li select {
+.d3-tooltip > .item ul.sockets > li select {
 	color: #000;
 }
 .d3-tooltip .bottom {
@@ -511,7 +514,7 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 .d3-tooltip .dropdown-menu {
 	background-color: #222;
 }
-.d3-tooltip .item ul.attrs li .dropdown-menu li {
+.d3-tooltip > .item ul.attrs li .dropdown-menu li {
 	width: 283px;
 	max-width: 283px;
 	overflow-x: hidden;

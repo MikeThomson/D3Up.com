@@ -137,9 +137,9 @@ class D3Up_Gems
 	
 	public static function effect($item, $gem) {
 		$idx = 0;
-		if(in_array($item->type, ["2h-mace","2h-axe","bow","daibo","crossbow","2h-mighty","polearm","staff","2h-sword","axe","ceremonial-knife","hand-crossbow","dagger","fist-weapon","mace","mighty-weapon","spear","sword","wand"])) {
+		if(in_array($item->type, array("2h-mace","2h-axe","bow","daibo","crossbow","2h-mighty","polearm","staff","2h-sword","axe","ceremonial-knife","hand-crossbow","dagger","fist-weapon","mace","mighty-weapon","spear","sword","wand"))) {
 			$idx = 2;
-		} elseif(in_array($item->type, ["spirit-stone","voodoo-mask","wizard-hat","helm"])) {
+		} elseif(in_array($item->type, array("spirit-stone","voodoo-mask","wizard-hat","helm"))) {
 			$idx = 1;
 		} else {
 			$idx = 3;

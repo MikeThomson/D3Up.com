@@ -1,4 +1,12 @@
+/*jslint devel: true*/
+/*global _: true*/
+/*global jQuery: true*/
+/*global Handlebars: true*/
+/*global History: true*/
+/*global window: true*/
+/*global checkSkillTip: true*/
 (function($) {
+	'use strict';
 	// English (Template)
 	jQuery.timeago.settings.strings = {
 	  prefixAgo: "Age:",
@@ -12,7 +20,7 @@
 	  month: "~1m",
 	  months: "~%dm",
 	  year: "~1y",
-	  years: "~%dy",
+	  years: "~%dy"
 	};
 	$.widget( "d3up.buildBrowser", {
 		results: {},
@@ -26,7 +34,7 @@
 				},
 				3: {
 					short: 'AS'
-				},
+				}
 			},
 			classes: [
 				'barbarian', 
@@ -34,7 +42,7 @@
 				'monk', 
 				'witch-doctor', 
 				'wizard'
-			],
+			]
 		},
 		options: {
 			url: 'http://api.d3up.com/builds',
@@ -71,7 +79,7 @@
 			// Add the Column Headers
 			this._buildColumnHeaders();
 			// If we're using a Battle Tag in the search..
-			if(this.getState().data['battletag']) {
+			if(this.getState().data.battletag) {
 				// Add the Toggle Buttons for D3Up/BNet
 				this._addSearchSource();				
 			}
@@ -112,11 +120,11 @@
 					// Build our Controls
 					nextBtn = $("<a class='btn next'>").html("Next"),
 					currBtn = $("<a class='btn curr'>"),
-					prevBtn = $("<a class='btn prev'>").html("Previous")
+					prevBtn = $("<a class='btn prev'>").html("Previous"),
 					frstBtn = $("<a class='btn first'>").html("<<");
-			if(state['page'] > 1) {
+			if(state.page > 1) {
 				// If the page is set, put it in the current button
-				currBtn.html(state['page']);
+				currBtn.html(state.page);
 			} else {
 				// Otherwise set page to 1 and hide the 1st/prev buttons
 				currBtn.html(1);
@@ -141,23 +149,23 @@
 				$(this).find("td").append(paginator.clone(true));				
 			});
 		},
-		changePage: function() {
+		changePage: function(page) {
 			// Grab a copy of the state's data
 			var state = this.getState().data,
-					inc = arguments[0];
+				currBtn = $(".btn.curr"),
+				inc = arguments[page];
 			// Modify the Value we're changing
-			state['page'] = parseInt(state['page']) + inc;
-			var currBtn = $(".btn.curr");
+			state.page = parseInt(state.page, 10) + inc;
 			// Don't store null states
-			if(state['page'] <= 1) {
+			if(state.page <= 1) {
 				$(".btn.prev").hide();				
 				$(".btn.first").hide();
-				state['page'] = 1;
+				state.page = 1;
 			} else {
 				$(".btn.prev").show();				
 				$(".btn.first").show();
 			}
-			currBtn.html(state['page']);
+			currBtn.html(state.page);
 			// Push the Updates to History
 			this.pushState(state, "", "?" + $.param(state));
 		},
@@ -167,7 +175,7 @@
 			// Each option we're passed, make into a HTML element
 			$.each(options, function(k,v) {
 				// Is this an object? If so, lets use it's name
-				if(typeof(v) == "object") {
+				if(typeof v === "object") {
 					v = v.name;
 				}
 				// Define the HTML Element and append
@@ -188,8 +196,8 @@
 				state[name] = $(select.currentTarget).data('value');
 			}
 			// Ensure we have no null values to prevent URL pollution. 
-			$.each(state, function(k,v) {
-				if(state[k] == null || state[k] == "null") {
+			$.each(state, function(k) {
+				if(state[k] === null || state[k] === "null") {
 					delete state[k];
 				}
 			});
@@ -198,16 +206,17 @@
 		},
 		_createSkillFilter: function(name, options) {
 			// Create the Select Element 
-			var select = $("<select multiple='multiple' name='" + name + "' id='d3up_buildBrowser_" + name + "'>");
-			// Each option we're passed, make into a HTML element
-			var optGroup = "";
+			var $this = this,
+				select = $("<select multiple='multiple' name='" + name + "' id='d3up_buildBrowser_" + name + "'>"),
+				// Each option we're passed, make into a HTML element
+				optGroup;
 			$.each(options, function(k,v) {
-				if(!k.match("\~")) {
+				if(!k.match(/~/)) {
 					optGroup = $("<optgroup label='" + v.name + "'>");
 					select.append(optGroup);
 				} else {
 					// Is this an object? If so, lets use it's name
-					if(typeof(v) == "object") {
+					if(typeof v === "object") {
 						v = v.name;
 					}
 					// Define the HTML Element and append
@@ -217,18 +226,18 @@
 			// Bind the Change event to push the modified state to History
 			select.on('change', function() {
 				// Grab a copy of the state's data
-				var state = this.getState().data,
-						value = $(this).val();
+				var state = $this.getState().data,
+					value = $(this).val();
 				// Modify the Value we're changing
-				if(value != null) {
+				if(value !== null) {
 					state[name] = value.join("|");					
 				} 
 				// Don't store null states
-				if(value == null || state[name] == null || state[name] == "null") {
+				if(value === null || state[name] === null || state[name] === "null") {
 					delete state[name];
 				}
 				// Push the Updates to History
-				this.pushState(state, "", "?" + $.param(state));
+				$this.pushState(state, "", "?" + $.param(state));
 			});
 			// Remove any selected values (to prevent any default selection)
 			select.find("option").removeAttr("selected");
@@ -236,58 +245,59 @@
 		},
 		_createFilters: function() {
 			var wrapper = $("<tr class='filters'>"),
-					container = $("<td colspan='100'>"),
-					state = this.getState().data;
-			// Build the Class Selector
-			var options = {
-				null: 'All Classes'
-			};
+				container = $("<td colspan='100'>"),
+				state = this.getState().data,
+				// Build the Sort Filter
+				optionsSort = {
+					'null': 'Recently Updated',
+					dps: 'Highest DPS',
+					ehp: 'Highest EHP'
+				},
+				// Build the Authentic Search Filter
+				optionsAuthentic = {
+					'null': 'Show All Builds',
+					'true': 'Authentic Only'
+				},
+				// Build the Class Selector
+				optionsClass = {
+					'null': 'All Classes'
+				}, classFilter;
 			// Iterate over classes and build the params for _createSelect
-			$.each(this.d3.classes, function(k,v) {
-				var name = v.split("-").join(" ");
-				options[v] = name;
+			_.each(this.d3.classes, function(v) {
+				optionsClass[v] = v.split("-").join(" ");
 			});
 			// Build the class filter select
-			var classFilter = this._createFilter("class", options, state['class']);
+			classFilter = this._createFilter("class", optionsClass, state['class']);
 			// Append it to the container
 			container.append(classFilter);
 			// Bind the updateSkillFilters function to the class changer
 			this._on(classFilter, {
 				change: $.proxy(this, 'updateSkillFilters')
 			});
-			// Build the Sort Filter
-			var options = {
-				null: 'Recently Updated',
-				dps: 'Highest DPS',
-				ehp: 'Highest EHP',
-			}
+			
 			// Build the Select and append it to the container
-			container.append(this._createFilter("sort", options, state['sort']));
-			// Build the Authentic Search Filter
-			var options = {
-				null: 'Show All Builds',
-				true: 'Authentic Only',
-			}
+			container.append(this._createFilter("sort", optionsSort, state.sort));
 			// Build the Select and append it to the container
-			container.append(this._createFilter("authentic", options, state['authentic']));
+			container.append(this._createFilter("authentic", optionsAuthentic, state.authentic));
 			// Append the Container to the Wrapper
 			wrapper.html(container);
 			// Then finally add it into the filters
 			this.options.filters.append(wrapper);
 		},
 		updateSkillFilters: function() {
-			var state = this.getState().data;
-			// Find the Filters
-			var filters = this.options.filters.find(".filters td");
+			var $this = this, state = this.getState().data,
+				// Find the Filters
+				filters = this.options.filters.find(".filters td"),
+				wrapper = $('<div class="input-append btn-toolbar actives">'),
+				reset = $('<button class="btn btn-danger">Reset</button>'),
+				select;
 			// Remove the old Filter
 			filters.find("select[name=actives], .actives").remove();
 			// Do we have the skill data loaded and a class selected?
 			if(window.d3up && window.d3up.gameData && state['class']) {
-				// Build the Active Skill filter
-				var wrapper = $('<div class="input-append btn-toolbar actives">'),
-						select = this._createSkillFilter("actives", window.d3up.gameData.actives[state['class']]),
-						reset = $('<button class="btn btn-danger">Reset</button>');
+				select = this._createSkillFilter("actives", window.d3up.gameData.actives[state['class']]);
 				reset.bind('click', function() {
+					var select = $this._createSkillFilter("actives", window.d3up.gameData.actives[state['class']]);
 					select.find("option").removeAttr('selected').prop('selected', false);
 					select.multiselect('refresh');
 					select.trigger('change');
@@ -298,41 +308,43 @@
 					enableFiltering: true,
 					filterPlaceholder: 'Search Skills',
 					buttonText: function(options) {
-						if (options.length == 0)
-							return 'No Skills Selected<b class="caret"></b>';
-						else
-							return options.length + ' selected  <b class="caret"></b>';
+						var text;
+						if (options.length === 0) {
+							text = 'No Skills Selected<b class="caret"></b>';
+						} else {
+							text = options.length + ' selected  <b class="caret"></b>';
+						}	
+						return text;
 					}
 				});
 			}
 		},
 		update: function () {
-			var container = this.options.container;
+			var container = this.options.container,
+				row = $("<tr>"),
+				state = this.getState();
 			// Remove the Previous Results
 			container.empty();
-			var row = $("<tr>");
 			row.append($("<td colspan='100' class='loading'>").html("Loading"));
 			container.append(row);
-			// Grab the State Information
-			var state = this.getState();		
-			if(!state.data['battlenet']) {
+			if(!state.data.battlenet) {
 				this._showBattlenetSearch();
 			}	else {
 				this._showD3UpcomSearch();
 			}
 			// Update the Filters to match the state
 			$.each(state.data, function(k,v) {
+				// Update any filters to match what's in the state data
+				var el = $("#d3up_buildBrowser_" + k);
 				// Never pass a null value, this ensures it.
-				if(v == null || v == 'null') {
+				if(v === null || v === 'null') {
 					delete state.data[k];
 					return;
 				}
-				// Update any filters to match what's in the state data
-				var el = $("#d3up_buildBrowser_" + k);
 				if(el) {
 					// Need special actions on actives
-					if(k == 'actives') {
-						if(v != null) {
+					if(k === 'actives') {
+						if(v !== null) {
 							el.val(v.split("|"));
 							el.multiselect('refresh');						
 						}
@@ -347,7 +359,7 @@
 				url: this.options.url,
 				data: state.data,
 				dataType: 'jsonp',
-				jsonpCallback: 'd3up_bb_process',
+				jsonpCallback: 'd3up_bb_process'
 			})
 			// When the request completes, process the data
 			.done($.proxy(this, 'process'));
@@ -356,7 +368,7 @@
 			var filters = this.options.filters,
 					columns = this.options.columns,
 					tr = $("<tr>");
-			$.each(columns, function(k,v) {
+			_.each(columns, function(v) {
 				var td = $("<td>");
 				switch(v) {
 					case "region_type":
@@ -379,38 +391,38 @@
 			// Grab the Container 
 			var container = this.options.container.empty(),
 					state = this.getState(),
-					$this = this;
+					$this = this,
+					row = $("<tr>"),
+					cell = $("<td colspan='100'>"),
+					content = $("<div class='json-response'>"),
+					requested = $("<div>We could not find a build on D3Up that matches:</div>"),
+					params = $("<ul>");
 			// Store the Results on the browser
 			this.results = data;
 			// No results? Return the row telling the user
 			if($.isEmptyObject(data)) {
-				var row = $("<tr>"),
-						cell = $("<td colspan='100'>"),
-						content = $("<div class='json-response'>"),
-						requested = $("<div>We could not find a build on D3Up that matches:</div>"),
-						params = $("<ul>");
 				content.append($("<h3>").append("No Builds Found."));
-				$.each(state['data'], function(k,v) {
-					if(v != null && v != "null" && k != 'page' && k != 'battlenet') {
+				$.each(state.data, function(k,v) {
+					if(v !== null && v !== "null" && k !== 'page' && k !== 'battlenet') {
 						// Display it properly to avoid confusion
-						if(k == "battletag") {
+						if(k === "battletag") {
 							v = v.replace("-","#");
 						}
 						var li = $("<li>"),
-								name = k.replace("_"," ").capitalize(),
-								value = v.replace("-"," ").capitalize();
+							name = k.replace("_"," ").capitalize(),
+							value = v.replace("-"," ").capitalize();
 						li.append(name, ": ", value);
 						params.append(li);						
 					}
 				});
-				if(state.data['battlenet']) {
-					if(state.data['battletag']) {
+				if(state.data.battlenet) {
+					if(state.data.battletag) {
 						content.append($("<p class='label label-error'>").append("No builds were found on Battle.net with this Battle Tag."));					
 					}					
 				} else {
 					requested.append(params);
 					content.append(requested);					
-					if(state.data['battletag']) {
+					if(state.data.battletag) {
 						content.append($("<p class='label label-info'>").append("Click 'Search Battle.net' below to search through Battle.net Characters."));					
 					}
 				}
@@ -420,37 +432,48 @@
 				return;
 			}
 			// Did we get an error back?
-			if(data['error']) {
-				var row = $("<tr>"),
-						cell = $("<td colspan='100'>");
-				row.append(cell.html(data['error']));
+			if(data.error) {
+				row.append(cell.html(data.error));
 				container.append(row);
 				return;				
 			}
 			// Iterate through our results and add new rows
-			$.each(data, function(id, data) {
-				var row = $("<tr>");
-				$.each($this.options.columns, function(idx, col) {
+			_.each(data, function(data) {
+				var row = $("<tr>"),
+					create = $("<a class='btn pull-right'>").html("Create New Build"),
+					info = "Located on Battle.net",
+					qs = "character-bt=" + data['bt-tag'].replace("#", "-")
+						+"&character-rg=" + data['bt-rg']
+						+"&character-id=" + data['bt-id']
+						+"&name=" + data.name
+						+"&class=" + data['class']
+						+"&hardcore=" + data.hardcore
+						+"&level=" + data.level
+						+"&paragon=" + data.paragon;
+				_.each($this.options.columns, function(col) {
 					switch(col) {
 						case "icon":
 							row.append($this.makeColumn(col, [data['class'], data.gender]));
 							break;
 						case "region_type":
-							var region = $this.d3.regions[data['bt-rg']]['short'];
-							row.append($this.makeColumn(col, [region, data['hardcore']]));
+							var region = $this.d3.regions[data['bt-rg']].short;
+							row.append($this.makeColumn(col, [region, data.hardcore]));
 							break;
 						case "actives":
-							if(data.actives)
-								row.append($this.makeColumn(col, [data['class'], data.actives]));								
+							if(data.actives) {
+								row.append($this.makeColumn(col, [data['class'], data.actives]));																
+							}
 							break;
 						case "passives":
-							if(data.passives)
-								row.append($this.makeColumn(col, [data['class'], data.passives]));
+							if(data.passives) {
+								row.append($this.makeColumn(col, [data['class'], data.passives]));								
+							}
 							break;
 						case "level":
 						case "paragon":
-							if(data[col] == null)
-								data[col] = 0;
+							if(data[col] === null) {
+								data[col] = 0;								
+							}
 							row.append($this.makeColumn(col, [data[col], data.id]));
 							break;
 						default:
@@ -458,19 +481,9 @@
 							break;
 					}
 				});
-				if(data['exists'] === false) {
+				if(data.exists === false) {
 					$this._showD3UpcomSearch();
-					var create = $("<a class='btn pull-right'>").html("Create New Build"),
-							info = "Located on Battle.net";
 					// Build one big ol' query string!
-					var qs = "character-bt=" + data['bt-tag'].replace("#", "-")
-									+"&character-rg=" + data['bt-rg']
-									+"&character-id=" + data['bt-id']
-									+"&name=" + data['name']
-									+"&class=" + data['class']
-									+"&hardcore=" + data['hardcore']
-									+"&level=" + data['level']
-									+"&paragon=" + data['paragon'];
 					create.attr("href", "/build/create?" + qs); 
 					row.append($("<td colspan='100' class='battlenet-scan'>").append(create, info));
 				}
@@ -487,50 +500,50 @@
 		},
 		makeColumn: function(name, data) {
 			var $this = this,
-					td = $("<td>");
+				td = $("<td>"),
+				container = $("<span>"),
+				date,
+				link = $("<a href='/b/" + data[1] + "'>" + data[0] + "</a>"),
+				updated = $("<span class='updated'>");
 			td.addClass("d_" + name);
 			switch(name) {
 				case "icon":
 					td.html($this.classIcon(data[0], data[1]));
 					break;
 				case "region_type":
-					var container = $("<span>")
 					container.attr({
 						'data-toggle': 'popover',
-						'data-title': 'Region & Character Type',
+						'data-title': 'Region & Character Type'
 					});
 					if(data[1]) {
 						container.attr({
-							'data-content': 'This is a Hardcore character being played in the ' + data[0] + ' region.',							
+							'data-content': 'This is a Hardcore character being played in the ' + data[0] + ' region.'
 						});
 						container.html(data[0] + "/HC");						
 					} else {						
 						container.attr({
-							'data-content': 'This is a Softcore character being played in the ' + data[0] + ' region.',							
+							'data-content': 'This is a Softcore character being played in the ' + data[0] + ' region.'
 						});
 						container.html(data[0] + "/SC");
 					}
 					td.append(container);
 					break;
 				case "actives":
-					$.each(data[1], function(k,v) { 
+					_.each(data[1], function(v) { 
 						var icon = $this.skillIcon(data[0], v);
 						td.append(Handlebars.helpers.skillIcon.apply(icon, [data[0], v]).string);
 					});
 					break;
 				case "passives":
-					$.each(data[1], function(k,v) { 
+					_.each(data[1], function(v) { 
 						var icon = $this.passiveIcon(data[0], v);
 						td.append(Handlebars.helpers.passiveIcon.apply(icon, [data[0], v]).string);
 					});
 					break;
 				case "name":
 					if(data[1]) {
-						var date = new Date(data[2].updated * 1000),
-								iso = date.toISOString(),
-								link = $("<a href='/b/" + data[1] + "'>" + data[0] + "</a>"),
-								updated = $("<span class='updated'>");
-						updated.attr("title", iso);
+						date = new Date(data[2].updated * 1000);
+						updated.attr("title", date.toISOString());
 						updated.timeago();
 						td.append(link, updated);						
 					} else {
@@ -560,23 +573,14 @@
 			return $("<img src='" + url + "'>");			
 		},
 		classIcon: function(heroClass, gender) {
-			var heroClass = heroClass.replace("-", ""),
-					urlTemplate = 'http://media.blizzard.com/d3/icons/portraits/42/|heroClass|_|gender|.png',
-					url = urlTemplate.replace("|gender|", gender).replace("|heroClass|", heroClass);					
+			heroClass = heroClass.replace("-", "");
+			var urlTemplate = 'http://media.blizzard.com/d3/icons/portraits/42/|heroClass|_|gender|.png',
+				url = urlTemplate.replace("|gender|", gender).replace("|heroClass|", heroClass);					
 			return $("<img src='" + url + "'>");
 		},
-		_hover: function() {
+		// _hover: function() {
 			// Methods with an underscore are "private"
-		},
-		_setOption: function( key, value ) {
-			// Use the _setOption method to respond to changes to options
-			switch( key ) {
-				case "length":
-				break;
-			}
-			// and call the parent function too!
-			return this._superApply( arguments );
-		},
+		// },
 		_destroy: function() {
 			// Use the destroy method to reverse everything your plugin has applied
 			return this._super();
@@ -587,24 +591,27 @@
 		replaceState: function(data) {
 			return History.replaceState(data);
 		},
-		pushState: function(state, name, url) {
+		pushState: function(state, name) {
 			return History.pushState(state, name, "?filter=" + $.base64.encode(JSON.stringify(state)));
 		},
 		getParameterByName: function(name, defaultValue) {
-			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-			var regexS = "[\\?&]" + name + "=([^&#]*)";
-			var regex = new RegExp(regexS);
-			var results = regex.exec(window.location.search);
-			if(results == null && defaultValue)
-				return defaultValue;
-			else if(results == null)
-				return null;
-			else if(results[1].replace(/\+/g, " ") == "null")
-				return null;
-			else if(results[1].replace(/\+/g, " ") == "NaN")
-				return null;
-			else
-				return decodeURIComponent(results[1].replace(/\+/g, " "));
+			name = name.replace(/[\[]/, /\\\[/).replace(/[\]]/, /\\\]/);
+			var regexS = "[\\?&]" + name + "=([^&#]*)",
+				regex = new RegExp(regexS),
+				results = regex.exec(window.location.search),
+				value;
+			if(results === null && defaultValue) {
+				value = defaultValue;
+			} else if(results === null) {
+				value = null;				
+			} else if(results[1].replace(/\+/g, " ") === "null") {
+				value = null;
+			} else if (results[1].replace(/\+/g, " ") === "NaN") {
+				value = null;				
+			} else {
+				value = decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+			return value;
 		}
 	});
-})( jQuery );
+}( jQuery ));

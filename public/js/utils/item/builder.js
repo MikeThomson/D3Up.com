@@ -1,4 +1,11 @@
+/*jslint devel: true*/
+/*global _: true*/
+/*global jQuery: true*/
+/*global Handlebars: true*/
+/*global window: true*/
+/*global d3up: true*/
 (function($) {
+	'use strict';
 	$.widget( "d3up.itemBuilder", {
 		ignored: ['min-damage', 'max-damage', 'plus-damage', 'plus-aps'],
 		ranges: ['damage', 'block-amount'],
@@ -62,8 +69,7 @@
 			console.log("_modifySocketRemove");
 			var modified = this.options.modified,
 					target = $(event.currentTarget),
-					socket = target.data("socket"),
-					value = target.val();
+					socket = target.data("socket");
 			target.closest("li").remove();
 			if(!modified.sockets) {
 				modified.sockets = {};
@@ -71,17 +77,15 @@
 			modified.sockets[socket] = null;
 			this._update();			
 		},
-		_modifySocketAdd: function(event) {
+		_modifySocketAdd: function() {
 			console.log("_modifySocketRemove");
 			var modified = this.options.modified,
 					item = this.options.item,
 					editor = this.elements.editor,
 					sockets = editor.find(".sockets"),
-					target = $(event.currentTarget),
-					socket = target.data("socket"),
-					value = target.val(),
-					li = $("<li>");
-			var nextIdx = 0;
+					li = $("<li>"),
+					nextIdx = 0,
+					newSocket;
 			if(!$.isEmptyObject(item.sockets)) {
 				nextIdx = Math.max.apply(Math, _.keys(item.sockets)) + 1;				
 			}
@@ -97,11 +101,10 @@
 			}
 			// Append our new empty socket
 			item.sockets[nextIdx] = "empty";
-			var newSocket = this._createSocketSelect(nextIdx);
 			if(nextIdx > 0) {
-				sockets.append(li.append(newSocket));				
+				sockets.append(li.append(this._createSocketSelect(nextIdx)));				
 			} else {
-				sockets.prepend(li.append(newSocket));
+				sockets.prepend(li.append(this._createSocketSelect(nextIdx)));
 			}
 			this._update();						
 		},
@@ -143,7 +146,7 @@
 			console.log("_modifyItemType");
 			// Remove the item's stats
 			this.options.modified.stats = {};
-			_.each(this.options.item.stats, function(v,k) {
+			_.each(_.keys(this.options.item.stats), function(k) {
 				console.log("nulling", k);
 				this.options.modified.stats[k] = null;
 			}, this);
@@ -181,7 +184,7 @@
 			var modified = this.options.modified,
 					target = $(event.currentTarget),
 					value = target.val();
-			modified['name'] = value;
+			modified.name = value;
 			this._update();
 		},
 		_modifyAttr: function(event) {
@@ -200,18 +203,21 @@
 		},
 		_createPane: function() {
 			console.log("_createPane");
-			var titlebar = this.elements.titlebar = this.element.find(".top").clone().empty(),
-					editor = this.elements.editor = $("<div class='item item-editor well-small'>"),
-					controls = this.elements.controls = $("<div class='bottom btn-toolbar'>"),
-					group = $("<div class='btn-group'>");
+			var group = $("<div class='btn-group'>"),
+				titlebar, icon, editor, controls;
+			titlebar = this.elements.titlebar = this.element.find(".top").clone().empty();
+			icon = this.elements.item.find(".item-icon").clone();
+			editor = this.elements.editor = $("<div class='item item-editor well-small'>");
+			controls = this.elements.controls = $("<div class='bottom btn-toolbar'>");
+				
 			// Quickly add some buttons to the group
-			group.append($("<a class='btn' href='#' data-for='save'>Save</a>"));
+			group.append($("<a class='btn' href='#' dAta-for='save'>Save</a>"));
 			group.append($("<a class='btn' href='#' data-for='revert'>Revert</a>"));
 			group.append($("<a class='btn' href='#' data-for='cancel'>Cancel</a>"));
 			// Append the Button Group
 			controls.append(group);
 			// Clone the Icon in-place
-			editor.append(this.elements.item.find(".item-icon").clone());
+			titlebar.append($("<div class='item'>").append(icon.addClass("item-icon-box pull-left")));
 			// Append the titlebar after the actual .top
 			this.elements.top.after(titlebar);
 			// Append the Editor after the actual .item
@@ -236,10 +242,10 @@
 		_createPaneSockets: function() {
 			console.log("_createPaneSockets"	);
 			var editor = this.elements.editor,
-					controls = this.elements.controls,
-					list = $("<ul class='sockets'>");
-					item = this.options.item,
-					newSocket = $("<a class='btn pull-left' data-for='socket-add'>");
+				controls = this.elements.controls,
+				list = $("<ul class='sockets'>"),
+				item = this.options.item,
+				newSocket = $("<a class='btn pull-left' data-for='socket-add'>");
 			newSocket.html("Add Socket");
 			_.each(item.sockets, function(gem, socket) {
 				var li = $("<li>");
@@ -254,16 +260,17 @@
 		_createSocketSelect: function(socket) {
 			console.log("_createSocketSelect" + socket);
 			var itemType = this.options.item.type,
-					itemClass = d3up.Calc.prototype.itemClass(itemType),
-					current = this.options.item.sockets[socket],
-					gems = d3up.gameData.gems,
-					wrapper = $("<div class='input-append'>"),
-					remove = $("<button class='btn'>Remove</button>"),
-					select = $("<select>"),
-					types = d3up.gameData.types;
+				itemClass = d3up.Calc.prototype.itemClass(itemType),
+				current = this.options.item.sockets[socket],
+				gems = d3up.gameData.gems,
+				wrapper = $("<div class='input-append'>"),
+				remove = $("<button class='btn'>Remove</button>"),
+				select = $("<select>"),
+				empty = $("<option value='empty'>Empty Socket</option>");
 			// Set the data-type to socket-remove for binding
 			remove.attr("data-for", 'socket-remove');
 			// Set the Socket Identifier
+			console.log(socket);
 			remove.attr("data-socket", socket);
 			// Set the data-type to socket for binding
 			select.attr("data-for", 'socket');
@@ -282,7 +289,8 @@
 					idx = 3;
 				}
 				// If this is the gem we have, select it
-				if(current === gem) {
+				if(gem === current) {
+					console.log("current: ", current);
 					option.attr("selected", "selected");
 				}
 				// Set the HTML to the name and effect
@@ -291,9 +299,8 @@
 				select.append(option);
 			});
 			// Add the "Empty" option
-			var empty = $("<option value='empty'>Empty Socket</option>");
 			console.log(current);
-			if(current === 'empty' || typeof current === 'undefined') {
+			if(current === 'empty' || current === undefined) {
 				empty.attr("selected", "selected");
 			}
 			select.append(empty);
@@ -352,22 +359,22 @@
 					editor = this.elements.editor;
 			_.each(item.stats, function(value, stat) {
 				var input = $("<input type='text'>"),
-						container = $("<div>"),
-						text = d3up.gameData.stats[stat];
+					input2 = input.clone(),
+					container = $("<div>"),
+					container2 = container.clone(),
+					text = d3up.gameData.stats[stat];
 				console.log(stat, text);
 				if(_.indexOf(this.ranges, stat) >= 0) {
-					var input1 = input.clone(),
-							input2 = input.clone(),
-							container1 = container.clone().html("Min " + text),
-							container2 = container.clone().html("Max " + text);
+					container.html("Min " + text);
+					container2.html("Max " + text);
 					console.log("this is a range: ", stat);
-					input1.val(value['min'])
+					input.val(value.min)
 						.addClass("range")
 						.attr('data-stat', stat + '~min');
-					input2.val(value['max'])
+					input2.val(value.max)
 						.addClass("range")
 						.attr('data-stat', stat + '~max');
-					editor.append(container1.prepend(input1), container2.prepend(input2));
+					editor.append(container.prepend(input), container2.prepend(input2));
 				} else {
 					input.val(value)
 						.attr("data-stat", stat);
@@ -387,9 +394,10 @@
 		_createPaneAttrs: function() {
 			console.log("_createPaneAttrs");
 			var item = this.options.item,
-					controls = this.elements.controls,
-					editor = this.elements.editor,
-					attrs = this.elements.attrs = $("<ul class='attrs'>");
+				controls = this.elements.controls,
+				editor = this.elements.editor,
+				attrs = $("<ul class='attrs'>");
+			this.elements.attrs = attrs;
 			_.each(item.attrs, function(value, attr) {
 				attrs.append(this._createPaneAttr(attr, value));
 			}, this);
@@ -445,7 +453,7 @@
 				$.ajax({
 					url: '/i/' + this.options.item.id + '/edit',
 					type: 'POST',
-					data: this.options.modified, 
+					data: this.options.modified 
 				}).done(function(data) {
 					// Once the AJAX is complete...
 					var json = $.parseJSON(data),	// JSON Response
@@ -515,4 +523,4 @@
 			this._removePane();
 		}
 	});
-})( jQuery );
+}( jQuery ));

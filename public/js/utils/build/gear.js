@@ -1,4 +1,10 @@
+/*jslint devel: true*/
+/*global _: true*/
+/*global jQuery: true*/
+/*global Handlebars: true*/
+/*global History: true*/
 (function($) {
+	'use strict';
 	$.widget( "d3up.buildGear", {
 		options: {
 			calc: false,
@@ -10,7 +16,7 @@
 		},
 		_create: function() {
 			// Load up our Calc
-			var calc = this.calc = this.options.calc;
+			this.calc = this.options.calc;
 			// Create an empty elements object
 			this.elements = {};
 			// Create an empty modifying ojbect
@@ -21,13 +27,13 @@
 		},
 		_init: function() {
 			this._log("_init");
-
 			var container = this.options.container,
-					template = Handlebars.compile(container.html()),
-					content = template(this.calc),
-					$content = this.elements.content = $(content);
+				template = Handlebars.compile(container.html()),
+				content = template(this.calc);
+			// Set our content element equal to this new template
+			this.elements.content = $(content);
 			// Replace the container with our handlebars content
-			container.replaceWith($content);
+			container.replaceWith(this.elements.content);
 			// Create all of our bindings on controls
 			this._addBindings();
 		},
@@ -105,7 +111,7 @@
 						// 	$this._modifyEnd(slot)
 						// }
 						onCancel: function() {
-							$this._modifyEnd(slot)
+							$this._modifyEnd(slot);
 						}
 					});
 					// Append the Item Builder
@@ -117,36 +123,36 @@
 			
 		},
 		update: function () {
-
+			console.log("update");
 		},
-		getState: function() {
-			return History.getState();
-		},
-		replaceState: function(data) {
-			return History.replaceState(data);
-		},
-		pushState: function(state, name, url) {
-			return History.pushState(state, name, "?filter=" + $.base64.encode(JSON.stringify(state)));
-		},
+		// getState: function() {
+		// 	return History.getState();
+		// },
+		// replaceState: function(data) {
+		// 	return History.replaceState(data);
+		// },
+		// pushState: function(state, name) {
+		// 	return History.pushState(state, name, "?filter=" + $.base64.encode(JSON.stringify(state)));
+		// },
 		_destroy: function() {
 			// Use the destroy method to reverse everything your plugin has applied
 			return this._super();
-		},
-		getParameterByName: function(name, defaultValue) {
-			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-			var regexS = "[\\?&]" + name + "=([^&#]*)";
-			var regex = new RegExp(regexS);
-			var results = regex.exec(window.location.search);
-			if(results == null && defaultValue)
-				return defaultValue;
-			else if(results == null)
-				return null;
-			else if(results[1].replace(/\+/g, " ") == "null")
-				return null;
-			else if(results[1].replace(/\+/g, " ") == "NaN")
-				return null;
-			else
-				return decodeURIComponent(results[1].replace(/\+/g, " "));
 		}
+		// getParameterByName: function(name, defaultValue) {
+		// 	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		// 	var regexS = "[\\?&]" + name + "=([^&#]*)";
+		// 	var regex = new RegExp(regexS);
+		// 	var results = regex.exec(window.location.search);
+		// 	if(results == null && defaultValue)
+		// 		return defaultValue;
+		// 	else if(results == null)
+		// 		return null;
+		// 	else if(results[1].replace(/\+/g, " ") == "null")
+		// 		return null;
+		// 	else if(results[1].replace(/\+/g, " ") == "NaN")
+		// 		return null;
+		// 	else
+		// 		return decodeURIComponent(results[1].replace(/\+/g, " "));
+		// }
 	});
-})( jQuery );
+}( jQuery ));
