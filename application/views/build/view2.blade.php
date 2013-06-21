@@ -19,7 +19,7 @@
 <script src="/js/build.js"></script>
 <script src="/js/utils/build/gear.js"></script>
 <script src="/js/utils/chosen.min.js"></script>
-<script src="http://phalcon.d3up.com/builds/{{ $build->id }}.js"></script>
+<script src="http://api.d3up.com/builds/{{ $build->id }}.js"></script>
 @endsection	
 
 

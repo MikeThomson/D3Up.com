@@ -22,7 +22,7 @@ window.d3up = (function() {
 		},
 		getBuild: function(id) { 
 			return d3up.builds[id] || (d3up.builds[id] = $.ajax({ 
-				url: 'http://phalcon.d3up.com/builds/' + id + '.json', 
+				url: 'http://api.d3up.com/builds/' + id + '.json', 
 				dataType: 'jsonp' 
 			}).done(function(buildData) { 
 				d3up.builds[id] = new d3up.Calc(buildData); 
