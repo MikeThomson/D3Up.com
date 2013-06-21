@@ -63,6 +63,22 @@
 		},
 		_modifyStart: function(slot) {
 			this._log("_modifyStart @ " + slot);
+			var modify = this.options.modify,
+					content = this.elements.content;
+			if($.isEmptyObject(this.modifying)) {	
+				console.log("was empty");		
+				// Show the mod window
+				modify.show();
+				// Set the remaining columns to the proper width
+				content.css({width: $(content).width() - $(modify).width()});
+				// Set it's height equal to that of the content
+				modify.css({height: $(content).height() + 10});
+				// Hide the excess rows
+				$.each(content.find("tr"), function() {
+					$(this).find("td").not(":first").hide();
+					$(this).find("th").not(":first").hide();					
+				});
+			}
 			// Add the item into our modifying object, false for uninitialized builder
 			this.modifying[slot] = false;
 			// Update our modification panel
@@ -85,7 +101,12 @@
 			// If we don't have modifications occuring, hide and return
 			if($.isEmptyObject(this.modifying)) {
 				this._log("_modifyUpdate @ hiding, no modifications");
-				this.options.modify.hide();
+				this.elements.content.css({width: '100%'});
+				$(this.options.modify).hide();
+				$.each(this.elements.content.find("tr"), function() {
+					$(this).find("td").show();
+					$(this).find("th").show();					
+				});
 				return;
 			}
 			this._log("_modifyUpdate @ displaying");
@@ -94,10 +115,6 @@
 					modify = this.options.modify,
 					content = this.elements.content,
 					displays = this.options.displayItems;
-			// Show the mod window
-			modify.show();
-			// Set it's height equal to that of the content
-			modify.css({height: $(content).height() + 10});
 			_.each(this.modifying, function(data, slot) {
 				var search = "[data-slot=" + slot + "]",
 						display = displays.find(search).clone();

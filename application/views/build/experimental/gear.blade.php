@@ -55,6 +55,7 @@
 		line-height: 28px;
 	}
 	.build-gear tr.item:hover .icon-signout {
+		cursor: pointer;
 		color: #ececec; 
 		border-color: #ececec;
 	}
@@ -85,7 +86,7 @@
 							<td>
 								{{ HTML::itemIcon($item) }}
 								{{ HTML::itemLink($item, array('slot' => $slot, 'icon' => true)) }}
-								<i class="btn-modify icon-signout pull-left icon-border" data-modify-toggle="{{ $slot }}"></i>
+								<i class="btn-modify icon-signout pull-right icon-border" data-modify-toggle="{{ $slot }}"></i>
 							</td>
 							<td>{{ HTML::hb('prettyStat stats.gear.'.$slot.'.contributions.dps') }}</td>
 							<td>{{ HTML::hb('prettyStat stats.gear.'.$slot.'.contributions.ehp') }}</td>
