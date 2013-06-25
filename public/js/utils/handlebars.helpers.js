@@ -48,6 +48,14 @@ Handlebars.registerHelper('prettyStat', function(value, stat) {
 		value = 0;
 	}
 	if(value) {
+		// Reduce to 'k' and 'm'
+		if(value > 1500000) {
+			value = value / 1000000;
+			append = "m " + append;
+		} else if(value >= 10000) {
+			value = value / 1000;
+			append = "k " + append;
+		}
 		value = Handlebars.helpers.round.call(this, value, decimals);		
 		var parts = value.toString().split(".");
 	  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -107,6 +115,16 @@ Handlebars.registerHelper('if_gt', function(context, options) {
 	if (context > options.hash.compare)
 		return options.fn(this);
 	return options.inverse(this);
+});
+
+/**
+ * Unless Equals
+ * unless_eq this compare=that
+ */
+Handlebars.registerHelper('unless_eq', function(context, options) {
+    if (context == options.hash.compare)
+        return options.inverse(this);
+    return options.fn(this);
 });
 
 Handlebars.registerHelper('skillName', function(name) {
