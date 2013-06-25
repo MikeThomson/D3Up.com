@@ -12,6 +12,8 @@ return array(
 		// D3Up Scripts
 		'd3up.js',
 		'game/data.js',
+		'sandbox.js',
+		'calc.js',
 		'utils/item/builder.js',
 		'utils/base64.js',
 		'utils/tooltip.js',
@@ -24,8 +26,6 @@ return array(
 		'utils/jquery.cookie.js',
 		'utils/build/browser.js',
 		// Polyfills
-		'polyfill/bind.js',
-		'sandbox.js',
-		'calc.js',		
+		'polyfill/bind.js',	
 	)
 );
