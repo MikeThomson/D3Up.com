@@ -17,15 +17,14 @@ window.d3up = (function() {
 			if(!name) {
 				name = build.id;
 			}
-			data = new d3up.Calc(build);
-			d3up.builds[name] = data;
+			d3up.builds[name] = build;
 		},
 		getBuild: function(id) { 
 			return d3up.builds[id] || (d3up.builds[id] = $.ajax({ 
 				url: 'http://api.d3up.com/builds/' + id + '.json', 
 				dataType: 'jsonp' 
 			}).done(function(buildData) { 
-				d3up.builds[id] = new d3up.Calc(buildData); 
+				d3up.builds[id] = buildData; 
 			}));
 		},
 		log: function() { 
