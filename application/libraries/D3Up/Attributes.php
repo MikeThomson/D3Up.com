@@ -62,40 +62,11 @@ class D3Up_Attributes
 	public static $attributes = array(
 		'en' => array(
 			'empty-socket' => 'Empty Socket',
-			// Base Stats
-			'strength' => '+[v] Strength',
-			'intelligence' => '+[v] Intelligence',
-			'vitality' => '+[v] Vitality',
-			'dexterity' => '+[v] Dexterity',
-			// Defensive Stats
-			'resist-all' => '+[v] Resistance to All Elements',
-			'armor' => '+[v] Armor',
-			'plus-life' => '+[v]% Life',
-			'life-regen' => 'Regenerates [v] Life per Second',
-			'plus-block' => '+[v]% Chance to Block',
-			'cc-reduce' => 'Reduces the duration of control impairing effects by [v]%',
-			'elite-reduce' => 'Reduces damage from elites by [v]%',
-			'melee-reduce' => 'Reduces damage from melee attacks by [v]%',
-			'range-reduce' => 'Reduces damage from ranged attacks by [v]%',
-			'cold-reduce' => 'Reduces damage from Cold attacks by [v]%.',
-			'arcane-resist' => '+[v] Arcane Resistance',
-			'cold-resist' => '+[v] Cold Resistance',
-			'fire-resist' => '+[v] Fire Resistance',
-			'lightning-resist' => '+[v] Lightning Resistance',
-			'physical-resist' => '+[v] Physical Resistance',
-			'poison-resist' => '+[v] Poison Resistance',
-			'thorns' => 'Melee attackers take [v] damage per hit',
-			// Offensive Stats
-			'attack-speed' => 'Attack speed increased by [v]%',
-			'plus-aps' => '+[v] Attacks per Second',
-			'critical-hit' => 'Critical Hit Chance increased by [v]%',
-			'critical-hit-damage' => 'Critical Hit Damage increased by [v]%',
-			'plus-damage' => '+[v]% Damage',
+			// Damages
 			'min-damage' => '+[v] Minimum Damage',
 			'max-damage' => '+[v] Maximum Damage',
 			'minmax-damage' => '+[v]-[v] Damage',
-			'ruby-damage' => '+[v] Minimum and +[v] Maximum Damage',
-			// Elemental Damage Percents
+			// % Elemental Damage
 			'plus-arcane-damage' => '+[v]% to Arcane Damage',
 			'plus-cold-damage' => '+[v]% to Cold Damage',
 			'plus-fire-damage' => '+[v]% to Fire Damage',
@@ -108,23 +79,94 @@ class D3Up_Attributes
 			'plus-holy-damage~2' => 'Adds [v]% to Holy Damage',
 			'plus-lightning-damage~2' => 'Adds [v]% to Lightning Damage',
 			'plus-poison-damage~2' => 'Adds [v]% to Poison Damage',
-			// Elemental Damage Additions
+			// Elemental Damage
 			'arcane-damage' => '+[v]-[v] Arcane Damage',
 			'cold-damage' => '+[v]-[v] Cold Damage',
 			'fire-damage' => '+[v]-[v] Fire Damage',
 			'holy-damage' => '+[v]-[v] Holy Damage',
-			'lightning-damage' => '+[v] Lightning Damage',
-			'poison-damage' => '+[v] Poison Damage',
-			'elite-damage' => 'Increases Damage against Elites by [v]%',
-			'demon-damage' => '+[v]% Damage to Demons',
-			// Elemental Skill Bonuses
+			'lightning-damage' => '+[v]-[v] Lightning Damage',
+			'poison-damage' => '+[v]-[v] Poison Damage',
+			// Elemental Damage Skills
 			'plus-arcane-damage-skills' => 'Arcane skills deal [v]% more damage',
 			'plus-cold-damage-skills' => 'Cold skills deal [v]% more damage',
 			'plus-fire-damage-skills' => 'Fire skills deal [v]% more damage',
 			'plus-holy-damage-skills' => 'Holy skills deal [v]% more damage',
 			'plus-lightning-damage-skills' => 'Lightning skills deal [v]% more damage',
 			'plus-poison-damage-skills' => 'Poison skills deal [v]% more damage',
-			// Procs
+			// Percent Damage
+			'plus-damage' => '+[v]% Damage',
+			// Strength
+			'strength' => '+[v] Strength',
+			// Dexterity
+			'dexterity' => '+[v] Dexterity',
+			// Intelligence
+			'intelligence' => '+[v] Intelligence',
+			// Vitality
+			'vitality' => '+[v] Vitality',
+			// Attack Speed
+			'plus-aps' => '+[v] Attacks per Second',
+			'attack-speed' => 'Attack speed increased by [v]%',
+			// Resistances
+			'arcane-resist' => '+[v] Arcane Resistance',
+			'cold-resist' => '+[v] Cold Resistance',
+			'fire-resist' => '+[v] Fire Resistance',
+			'lightning-resist' => '+[v] Lightning Resistance',
+			'physical-resist' => '+[v] Physical Resistance',
+			'poison-resist' => '+[v] Poison Resistance',
+			'resist-all' => '+[v] Resistance to All Elements',
+			// stun Chance
+			// Life On Hit
+			'life-hit' => 'Each hit adds +[v] Life',
+			// Life on Kill
+			'life-kill' => '+[v] Life after each Kill',
+			// Damage vs. Monster Types
+			'demon-damage' => '+[v]% Damage to Demons',
+			// % Life
+			'plus-life' => '+[v]% Life',
+			// Armor
+			'armor' => '+[v] Armor',
+			// Crit Damage
+			'critical-hit-damage' => 'Critical Hit Damage increased by [v]%',
+			// Misc
+			'indestructible' => 'Ignores durability loss',
+			'plus-gold-find' => '+[v]% Extra Gold from Monsters',
+			// Life Max
+			'life-regen' => 'Regenerates [v] Life per Second',
+			'plus-magic-find' => '[v]% Better Chance of finding Magic Items',
+			// Class Resource Affixes
+			'fury-max' => '+[v] Maximum Fury',
+			'hatred-regen' => 'Increases Hatred Regeneration by [v] per Second',
+			'max-discipline' => '+[v] Maximum Discipline',
+			'spirit-regen' => 'Increases Spirit Regeneration by [v] per Second',
+			'mana-regen' => 'Increases Mana Regeneration by [v] per Second',
+			'mana-max' => '+[v] Maximum Mana',
+			'ap-max' => '+[v] Maximum Arcane Power',
+			'ap-regen' => 'Increases Arcane Power regeneration by [v] per second.',
+			// Movement_Speed
+			'plus-movement' => '+[v]% Movement Speed',
+			// Life Steal
+			'life-steal' => '[v]% of Damage Dealt is Converted to Life',
+			// Thorns
+			'thorns' => 'Melee attackers take [v] damage per hit',
+			// Block Chance
+			'plus-block' => '+[v]% Chance to Block',
+			// Crit %
+			'critical-hit' => 'Critical Hit Chance increased by [v]%',
+			// Spending Resource Heals
+			'spirit-spent-life' => 'Gain [v] Life per Spirit Spent',
+			// Critical hits grant resource
+			'ap-on-crit' => 'Critical Hits grant [v] Arcane Power',
+			// XP Bonus
+			'plus-experience' => 'Monster kills grant +[v] experience',
+			'plus-experience-percent' => 'Increased Experience Rewarded per Kill by [v]%',
+			'plus-experience-bonus' => 'Increases Bonus Experience by [v]%',
+			// Health Globe Bonus
+			'health-globes' => 'Health Globes and Potions Grant +[v] Life',
+			// Gold_PickUp_Radius
+			'plus-pickup-radius' => 'Increases Gold and Health pickup by [v] yards',
+			// CrowdControl_Reduction
+			'cc-reduce' => 'Reduces the duration of control impairing effects by [v]%',
+			// On Hit procs like fear, stun, blind, chill
 			'chance-bleed' => '[v]% chance to inflict Bleed for [v] damage over 5 seconds',
 			'chance-blind' => '[v]% chance to Blind on Hit',
 			'chance-chill' => '[v]% chance to Chill on Hit',
@@ -139,21 +181,14 @@ class D3Up_Attributes
 			'chance-skeleton' => 'Summons a skeleton when attacked.',
 			'chance-reflect-projectiles' => 'Chance to reflect projectiles when hit.',
 			'effect-poison-cloud' => 'You are sourrounded by a deadly Posion Cloud.',
-			// Etc
-			'plus-movement' => '+[v]% Movement Speed',
-			'plus-pickup-radius' => 'Increases Gold and Health pickup by [v] yards',
-			'plus-experience' => 'Monster kills grant +[v] experience',
-			'plus-experience-percent' => 'Increased Experience Rewarded per Kill by [v]%',
-			'plus-experience-bonus' => 'Increases Bonus Experience by [v]%',
-			'plus-gold-find' => '+[v]% Extra Gold from Monsters',
-			'plus-magic-find' => '[v]% Better Chance of finding Magic Items',
-			'health-globes' => 'Health Globes and Potions Grant +[v] Life',
-			'life-steal' => '[v]% of Damage Dealt is Converted to Life',
-			'life-kill' => '+[v] Life after each Kill',
-			'life-hit' => 'Each hit adds +[v] Life',
-			'level-reduce' => 'Level Requirement reduced by [v]',
-			'indestructible' => 'Ignores durability loss',
-			// Barbarian
+			// Reduced damage from ranged/melee/elites
+			'elite-reduce' => 'Reduces damage from elites by [v]%',
+			'melee-reduce' => 'Reduces damage from melee attacks by [v]%',
+			'range-reduce' => 'Reduces damage from ranged attacks by [v]%',
+			'cold-reduce' => 'Reduces damage from Cold attacks by [v]%.',
+			// Damage to Elites
+			'elite-damage' => 'Increases Damage against Elites by [v]%',
+			// Reduced damage/increased damage from elemental types
 			'bb-bash' => 'Increases bash damage by [v]%',
 			'bb-cleave' => 'Increases cleave damage by [v]%',
 			'bb-frenzy' => 'Increases frenzy damage by [v]%',
@@ -166,10 +201,7 @@ class D3Up_Attributes
 			'bb-seismic-slam' => 'Increases Critical Hit Chance of Seismic Slam by [v]%',
 			'bb-weapon-throw-dmg' => 'Increases Weapon Throw damage by [v]%',
 			'bb-ancient-spear-dmg' => 'Increases Ancient Spear damage by [v]%',
-			'fury-max' => '+[v] Maximum Fury',
 			// Demon Hunter
-			'hatred-regen' => 'Increases Hatred Regeneration by [v] per Second',
-			'max-discipline' => '+[v] Maximum Discipline',
 			'dh-chakram' => 'Reduces resource cost of Chakram by [v] Hatred',
 			'dh-evasive-fire' => 'Increases Evasive Fire damage by [v]%',
 			'dh-grenades' => 'Increases Grenades Damage by [v]%',
@@ -184,8 +216,6 @@ class D3Up_Attributes
 			'dh-cluster-arrow' => 'Reduces resource cost of Cluster Arrow by [v] Hatred',
 			'dh-strafe' => 'Increases Critical Hit Chance of Strafe by [v]%',
 			// Monk
-			'spirit-spent-life' => 'Gain [v] Life per Spirit Spent',
-			'spirit-regen' => 'Increases Spirit Regeneration by [v] per Second',
 			'mk-crippling-wave' => 'Increases Crippling Wave damage by [v]%',
 			'mk-cyclone-strike' => 'Reduces resource cost of Cyclone Strike by [v] Spirit',
 			'mk-deadly-reach' => 'Increases Deadly Reach damage by [v]%',
@@ -198,8 +228,6 @@ class D3Up_Attributes
 			'mk-tempest-rush' => 'Increases Critical Hit Chance of Tempest Rush by [v]%',
 			'mk-wave-of-light' => 'Increases Critical Hit Chance of Wave of Light by [v]%',
 			// Witch Doctor
-			'mana-regen' => 'Increases Mana Regeneration by [v] per Second',
-			'mana-max' => '+[v] Maximum Mana',
 			'wd-firebomb' => 'Reduces resource cost of Firebomb by [v] Mana',
 			'wd-haunt' => 'Increases Haunt Damage by [v]%',
 			'wd-acid-cloud' => 'Increases Critical Hit Chance of Acid Clouds by [v]%',
@@ -212,9 +240,6 @@ class D3Up_Attributes
 			'wd-zombie-charger' => 'Reduces resource cost of Zombie Charger by [v] Mana',
 			'wd-gargantuan' => 'Reduces cooldown of Gargantuan by [v] seconds',
 			// Wizard
-			'ap-on-crit' => 'Critical Hits grant [v] Arcane Power',
-			'ap-max' => '+[v] Maximum Arcane Power',
-			'ap-regen' => 'Increases Arcane Power regeneration by [v] per second.',
 			'wz-arcane-torrent' => 'Reduces resource cost of Arcane Torrent by [v] Arcane Power',
 			'wz-disintegrate' => 'Reduces resource cost of Disintegrate by [v] Arcane Power',
 			'wz-electrocute' => 'Increases Electrocute damage by [v]%',
@@ -284,6 +309,10 @@ class D3Up_Attributes
 			'leg-litany-of-the-undaunted' => 'This ring sometimes summons a Skeleton when you attack.',
 			'leg-demons-flight' => 'Chance to reflect projectiles when you are hit by enemies.',
 			'leg-the-murlocket' => 'Call forth a creature from the depths.',
+			// Reduced level requirement
+			'level-reduce' => 'Level Requirement reduced by [v]',
+			// D3Up Specific
+			'ruby-damage' => '+[v] Minimum and +[v] Maximum Damage',
 		),
 		// More languages!
 		'es' => array(),
@@ -1144,6 +1173,10 @@ class D3Up_Attributes
 		)
 	);
 	
+	static protected $_order = array(
+		
+	);
+	
 	static protected $_typeMap = array();
 	
 	static protected $_instance = NULL;
@@ -1240,5 +1273,15 @@ class D3Up_Attributes
 	public static function attr($attr, $value) {
 		$text = static::$attributes['en'][$attr];
 		return $return = str_replace('[v]', $value, $text);
+	}
+	
+	public static function order($attrs) {
+		$return = array();
+		foreach(static::$attributes['en'] as $attr => $string) {
+			if(isset($attrs[$attr])) {
+				$return[$attr] = $attrs[$attr];
+			}			
+		}
+		return $return;
 	}
 } // END class D3Up_Tool_Attributes

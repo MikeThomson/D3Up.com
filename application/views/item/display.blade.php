@@ -43,7 +43,7 @@
 			@endif			
 			</p>
 			<ul class='attrs'>
-			@foreach($item->attrs as $attr => $value)
+			@foreach(D3Up_Attributes::order($item->attrs) as $attr => $value)
 				<li>
 					{{ D3Up_Attributes::attr($attr, $value) }}
 				</li>
