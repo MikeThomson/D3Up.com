@@ -99,7 +99,7 @@ class User_Controller extends Base_Controller {
 	public function post_password() {
 		// Require Login
 		if(!Auth::check()) {
-			return Redirect::to('user/login');
+			return Redirect::to('/user');
 		}
 		// Get all the Inputs 
 		$input = Input::all();
@@ -121,7 +121,7 @@ class User_Controller extends Base_Controller {
 	public function get_login() {
 		// If we're already logged in, send em to the homepage
 		if(Auth::check()) {
-			return Redirect::to('user/login');
+			return Redirect::to('/user');
 		}
 		// Set the layout to modal for this page
 		$this->layout = View::make('template.modal');
@@ -132,7 +132,7 @@ class User_Controller extends Base_Controller {
 	public function post_login() {
 		// If we're already logged in, send em to the homepage		
 		if(Auth::check()) {
-			return Redirect::to('user/login');
+			return Redirect::to('/user');
 		}
 		// Setup the Query for the Login
 		$data = array(
@@ -143,7 +143,7 @@ class User_Controller extends Base_Controller {
 		if(Auth::attempt($data)) {
 			Cookie::forever('d3up_user', Auth::user()->id);
 			// We logged in successfully, redirect to user dashboard
-			return Redirect::to('user/index');
+			return Redirect::to('/user');
 		} else {
 			// Authentication Failure, redirect to the login form with errors and only the email address input
 			return Redirect::to('login')
@@ -193,7 +193,7 @@ class User_Controller extends Base_Controller {
 			'email' => $input['username'],
 			'password' => $input['password']
 		))) {
-			return Redirect::to('user/index');
+			return Redirect::to('/user');
 		}
 		return Redirect::to('/login');
 	}
