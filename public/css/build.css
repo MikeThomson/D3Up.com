@@ -208,6 +208,7 @@ div.title-block .skill-row {
 	margin: 0;
 }
 .build-gear-modify .accordion-group,
+#build-gear-results .stat-table,
 .build-stats .accordion-group {
 	border: 1px solid #333;
 	-webkit-box-sizing: border-box;

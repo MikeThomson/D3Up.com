@@ -508,6 +508,17 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 	line-height: 41px;
 	vertical-align: middle;
 }
+.d3-tooltip .icon-ban-circle {
+	margin-left: 10px;
+	color: #333;
+	cursor: pointer;
+}
+.d3-tooltip .attrs li:hover .icon-ban-circle{
+	color: #999;
+}
+.d3-tooltip .attrs li .icon-ban-circle:hover {
+	color: #fff;
+}
 .d3-tooltip .top i.icon-collapse:hover {
 
 }
