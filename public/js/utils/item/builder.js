@@ -19,6 +19,8 @@
 		},
 		_addBindings: function() {
 			var el = this.element;
+			// Modal/Save Bindings
+			el.on('click', '#modal-save [data-save]', $.proxy(this, '_saveAction'));
 			// Top Control Bindings
 			el.on('keyup', '[data-for=name]', $.proxy(this, '_modifyName'));
 			el.on('click', '[data-for=collapse]', $.proxy(this, '_toggleCollapse'));
@@ -27,6 +29,7 @@
 			el.on('change', '[data-type]', $.proxy(this, '_modifyType'));
 			el.on('keyup', '[data-attr]', $.proxy(this, '_modifyAttr'));
 			el.on('keyup', '[data-stat]', $.proxy(this, '_modifyStat'));
+			el.on('click', '[data-for=attr-remove]', $.proxy(this, '_modifyAttrRemove'));
 			el.on('click keypress', '[data-for=attr-add]', $.proxy(this, '_addAttrFinder'));
 			el.on('change', '[data-for=socket]', $.proxy(this, '_modifySocket'));
 			el.on('click keypress', '[data-for=socket-remove]', $.proxy(this, '_modifySocketRemove'));
@@ -43,7 +46,24 @@
 					search = $("<input type='text' class='input-block-level'>");
 			search.attr("placeholder", "Start typing the name and press enter");
 			search.typeahead({
-				source: _.values(d3up.gameData.attributes),
+				source: function() {
+					// Get the attrs that exist on the item
+					var existing = _.keys($this.options.item.attrs),
+							// All attributes in the game
+							all = _.keys(d3up.gameData.attributes),
+							// The keys that don't exist on the item, to avoid adding dupe attrs
+							searchable = _.difference(all, existing), 
+							results = [];
+					// Add all of our non-existant stats
+					_.each(searchable, function(attr) {
+						results.push(d3up.gameData.attributes[attr]);
+					});
+					// Add back the ones we've removed this session to the searchable list
+					_.each(_.keys($this.options.modified.attrs), function(attr) {
+						results.push(d3up.gameData.attributes[attr]);
+					}); 
+					return results;
+				},
 				updater: function(item) {
 					var inverse = _.invert(d3up.gameData.attributes);
 					li.replaceWith($this._createPaneAttr(inverse[item], 1));
@@ -60,7 +80,7 @@
 					socket = target.data("socket"),
 					value = target.val();
 			if(!modified.sockets) {
-				modified.sockets = {};
+				modified.sockets = [];
 			}
 			modified.sockets[socket] = value;
 			this._update();
@@ -72,7 +92,12 @@
 					socket = target.data("socket");
 			target.closest("li").remove();
 			if(!modified.sockets) {
-				modified.sockets = {};
+				if(this.options.item.sockets) {
+					modified.sockets = this.options.item.sockets;
+				} else {
+					modified.sockets = [];
+				}
+				
 			}
 			modified.sockets[socket] = null;
 			this._update();			
@@ -199,7 +224,20 @@
 			}
 			modified.attrs[attr] = Number(value);
 			this._update();
-			console.log(JSON.stringify(modified));
+		},
+		_modifyAttrRemove: function(event) {
+			console.log("_modifyAttrRemove");
+			var target = $(event.currentTarget),
+					remove = target.closest("li"),
+					attr = remove.data("attr"),
+					modified = this.options.modified;
+			if(!modified.attrs) {
+				modified.attrs = {};
+			}
+			modified.attrs[attr] = 0;
+			// Remove the actual row
+			remove.remove();
+			this._update();			
 		},
 		_createPane: function() {
 			console.log("_createPane");
@@ -270,7 +308,6 @@
 			// Set the data-type to socket-remove for binding
 			remove.attr("data-for", 'socket-remove');
 			// Set the Socket Identifier
-			console.log(socket);
 			remove.attr("data-socket", socket);
 			// Set the data-type to socket for binding
 			select.attr("data-for", 'socket');
@@ -290,7 +327,6 @@
 				}
 				// If this is the gem we have, select it
 				if(gem === current) {
-					console.log("current: ", current);
 					option.attr("selected", "selected");
 				}
 				// Set the HTML to the name and effect
@@ -299,7 +335,6 @@
 				select.append(option);
 			});
 			// Add the "Empty" option
-			console.log(current);
 			if(current === 'empty' || current === undefined) {
 				empty.attr("selected", "selected");
 			}
@@ -337,7 +372,6 @@
 				var li = $("<option>");
 				li.attr("value", key);
 				li.html(display);
-				console.log(item.quality);
 				if(String(item.quality) === key) {
 					li.attr("selected", "selected");
 				}
@@ -363,11 +397,9 @@
 					container = $("<div>"),
 					container2 = container.clone(),
 					text = d3up.gameData.stats[stat];
-				console.log(stat, text);
 				if(_.indexOf(this.ranges, stat) >= 0) {
 					container.html("Min " + text);
 					container2.html("Max " + text);
-					console.log("this is a range: ", stat);
 					input.val(value.min)
 						.addClass("range")
 						.attr('data-stat', stat + '~min');
@@ -386,9 +418,17 @@
 			console.log("_createPaneAttr", attr, value);
 			var li = $("<li>"),
 					text = d3up.gameData.attributes[attr],
-					input = "<input type='text' value='" + value + "'>";
+					remove = $("<i data-for='attr-remove' class='icon-ban-circle'>"),
+					input = "<input type='text' value='" + value + "'>",
+					modified = this.options.modified;
+			if(!text.match(/\[X\]/g)) {
+				if(!modified.attrs) {
+					modified.attrs = {};
+				}
+				modified.attrs[attr] = 1;				
+			}
 			text = text.replace(/\[X\]/g, input);
-			li.attr('data-attr', attr).html(text);
+			li.attr('data-attr', attr).html(text).append(remove);
 			return li;
 		},
 		_createPaneAttrs: function() {
@@ -443,42 +483,63 @@
 			this._update();
 		},
 		_save: function() {
-			var $this = this;
+			console.log("_save");
 			// If we have no modifications, don't bother AJAXing
 			if($.isEmptyObject(this.options.modified)) {
 				// Swap back to the item view unaltered
 				this._removePane();
 			} else {
-				// Issue the AJAX post to perform the updates
-				$.ajax({
-					url: '/i/' + this.options.item.id + '/edit',
-					type: 'POST',
-					data: this.options.modified 
-				}).done(function(data) {
-					// Once the AJAX is complete...
-					var json = $.parseJSON(data),	// JSON Response
-							html = json.html,	// HTML Render of the new Item
-							item = json.item;	// JSON Data of the new Item
-					// Remove the old Form
-					$this._removePane();
-					if($this.options.onSave) {
-						// Call our onSave callback
-						$this.options.onSave();						
-					}
-					// Replace the item's HTML with the new HTML
-					$this.element.html($(html));
-					// Assign our new item
-					$this.options.item = item;
-					// Remove all old modifications
-					$this.options.modified = {};
-					// Reinit our values with the new item
-					$this._reinit();
-					// Readd our toggle
-					$this._addToggle();
-					// Perform an update
-					$this._update();
-				});
+				if(this.options.authentic) {
+					this.elements.saveModal.modal();					
+				} else {
+					this._saveAction();
+				}
 			}
+		},
+		_saveAction: function() {
+			console.log("_saveAction");
+			var $this = this;			
+			// Issue the AJAX post to perform the updates
+			$.ajax({
+				url: '/i/' + this.options.item.id + '/edit',
+				type: 'POST',
+				data: this.options.modified 
+			}).done(function(data) {
+				// Once the AJAX is complete...
+				var json = $.parseJSON(data),	// JSON Response
+						html = json.html,	// HTML Render of the new Item
+						item = json.item;	// JSON Data of the new Item
+				// Remove the old Form
+				$this._removePane();
+				if($this.options.onSave) {
+					// Call our onSave callback
+					$this.options.onSave();						
+				}
+				// Replace the item's HTML with the new HTML
+				$this.element.html($(html));
+				// Assign our new item
+				$this.options.item = item;
+				// Remove all old modifications
+				$this.options.modified = {};
+				// Reinit our values with the new item
+				$this._reinit();
+				// Readd our toggle
+				$this._addToggle();
+				// Perform an update
+				$this._update();
+				// Hide the Modal
+				$("#modal-save").modal("hide");
+			});
+		},
+		_createSaveModal: function() {
+			console.log("_createSaveModal");
+			var container = $("<div id='modal-save' class='modal hide fade' tabindex='-1' role='dialog' aria-hidden='true'>"),
+					header = $("<div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button><h3>Are you sure?</h3></div>"),
+					body = $("<div class='modal-body'></div>"),
+					footer = $("<div class='modal-footer'><button class='btn' data-dismiss='modal' aria-hidden='true'>Cancel</button><button class='btn btn-primary' data-save='true'>Save</button></div>");
+			this.elements.saveModal = container;
+			body.append("Saving this item will cause your build to no longer be 'Authentic', indicating that you have changed the build somehow.");
+			this.element.append(container.append(header, body, footer));
 		},
 		_update: function() {
 			// Do we have a callback on our updates?
@@ -506,11 +567,13 @@
 			this.original = _.cloneDeep(this.options.item);			
 		},
 		_init: function() {
-			console.log("_init");
+			console.log("_init", this.options);
 			// Initialize some options
 			this._reinit();
 			// Create our Toggle
 			this._addToggle();
+			// Add our 'Save' Modal
+			this._createSaveModal();
 			// Add Bindings to all controls
 			this._addBindings();
 			// If 'modding' was passed, we're starting off modifying
