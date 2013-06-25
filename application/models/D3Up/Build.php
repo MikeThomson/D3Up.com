@@ -27,7 +27,8 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 		'_lastCrawl'		=> 'updated',
 		'_characterId'	=> 'bt-id',
 		'_characterBt'	=> 'bt-tag',
-		'_characterRg'	=> 'bt-rg'
+		'_characterRg'	=> 'bt-rg',
+		'_authentic' 		=> 'authentic'
 	);
 
 	public function sync($type = null, $bypass = false) {
