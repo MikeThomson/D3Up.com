@@ -1,4 +1,4 @@
-<div class='d3-tooltip'/>
+<div class='d3-tooltip'>
 	<div class='top quality-{{ $item->quality }}'>
 		<p class='quality-{{ $item->quality }}'>{{ $item->name }}</p>
 	</div>

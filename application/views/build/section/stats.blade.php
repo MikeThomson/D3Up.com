@@ -18,6 +18,23 @@
 		$name = __('build.compare');
 	}
 ?>
+<div id="build-gear-results">
+	<div class="results build-stats"></div>
+	<script id="build-gear-results-template" type="text/x-handlebars-template">
+		<table class='table stat-table'>
+			{{ HTML::hb('#each this.diff') }}
+				{{ HTML::hb('#unless_eq diff compare=0') }}
+				<tr>
+					<td>{{ HTML::hb("@key") }}</td>
+					<td>{{ HTML::hb("prettyStat diff @key") }}</td>
+					<td>{{ HTML::hb("prettyStat value2 @key") }}</td>
+					<td>{{ HTML::hb("prettyStat value1 @key") }}</td>
+				</tr>
+				{{ HTML::hb('/unless_eq') }}
+			{{ HTML::hb('/each')}}
+		</table>
+	</script>
+</div>
 <div class="build-stats" data-id="stats-sidebar{{ (($id) ? ('-'.$id) : "") }}">
 	<script id="stats-sidebar{{ (($id) ? ('-'.$id) : "") }}" type="text/x-handlebars-template">
 

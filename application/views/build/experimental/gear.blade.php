@@ -110,6 +110,8 @@
 			modify: $('.build-gear-modify'),
 			modifyPane: $('#build-gear-modify-pane'),
 			modifyToggle: '.icon-signout',
+			resultsPane: $("#build-gear-results"),
+			resultsTemplate: $("#build-gear-results-template"),
 			displayItems: $("#display-items"),
 			calc: new d3up.Calc(data)
 		});
