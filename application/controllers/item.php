@@ -110,8 +110,8 @@ class Item_Controller extends Base_Controller {
 				}				
 			}			
 		}
-		// Save the Item (whole/deep save)
-		$item->save(true);
+		// Save the Item (whole/deep save & modifiedBuilds)
+		$item->save(true, true);
 		// Return the item and HTML as JSON
 		return json_encode(array(
 			'html' => View::make('item.display', array('item' => $item)) . "",

@@ -13,13 +13,6 @@
 <link href="/css/compare.css" rel="stylesheet">
 @endsection
 
-@section('scripts')
-<script src="http://d3up.com/js/gamedata.js"></script>
-<script src="/js/build.js"></script>
-<script src="http://d3up.com/js/unmin/calcv2.js"></script>
-<script src="http://d3up.com/js/unmin/itembuilder.js"></script>
-@endsection
-
 @section("notifications")
 	@include("build.notifications")
 @endsection
@@ -63,13 +56,13 @@
 	<div class="content-page sync-results">
 		<h4>Testing Calculated Values</h4>
 		<div id="sync-stats">
-			<span class="label label-important">Absolute Unbuffed DPS: {{ HTML::hb('prettyStat stats.dps') }}</span>
-			<span class="label label-success">Absolute Unbuffed EHP: {{ HTML::hb('prettyStat stats.ehp') }}</span>
+			<span class="label label-important">Absolute Unbuffed DPS: {{ HTML::hb('prettyStat stats.dps.dps') }}</span>
+			<span class="label label-success">Absolute Unbuffed EHP: {{ HTML::hb('prettyStat stats.ehp.ehp') }}</span>
 		</div>
 		<h4>Items Detected and Equipped</h4>
 		<div class='items-horizontal'>
 		@foreach($build->getGear() as $slot => $item)
-			<span class='item icon-link'>
+			<span class='item'>
 				<a href="/i/{{ $item->id }}" data-json="{{ e(json_encode($item->json())) }}" data-slot="{{ $slot }}">
 					{{ HTML::itemIcon($item) }}
 				</a>
@@ -105,59 +98,32 @@
 
 <div id='character' data-json='{{ json_encode($build->json()) }}'></div>
 <script>
-	jQuery(document).ready(function ($) {
-		$('#build-tabs').tab();
-  });
-	// Setup the Build and Calculators
-  var build = $("#character").data("json"),
-			// Set the Skills Used
-			skills = {
-        actives: build.actives,
-        passives: build.passives
-      },
-			// Grab all the gear
-      gear = $(".items-horizontal a[data-json]"),
-			// Set Meta information about the character
-      meta = {
-        level: build.level,
-        paragon: build.paragon,
-        heroClass: build.heroClass,
-      },
-			// Set the Gear, Skills and Meta on the Primary Build
-      buildPrimary = new d3up.Build({
-        gear: gear, 
-        skills: skills,
-        meta: meta
-      });
-	// Store the Primary and Compare builds
-  d3up.builds = {
-    primary: buildPrimary
-  };
-	// Run stats against the primary build
-	d3up.builds.primary.run();
-	// Now lets update the "Saved" stats in the Database for Sorting on the Build Screen (Only works for Registered Users)
-	$.ajax({
-		url: '/b/' + {{ $build->id }} + '/cache',
-		cache: false,
-		data: {
-@if($build->_syncKey)
-			syncKey: '{{ $build->_syncKey }}',
-@endif
-			stats: d3up.builds.primary.stats
-		},
-		type: 'post',
-		dataType: 'json'
-	});
-	// Now show a few stats on the Sync screen
+	
 	var sources = [
-		'#sync-stats',
+		'#sync-stats'
 	];
-	$.each(sources, function(k,v) {
-		var source   = $(v).html();
-		var template = Handlebars.compile(source);
-		var data = d3up.builds.primary;
-		$(v).replaceWith(template(data));		
+	
+	$.each(sources, function(idx, element) {
+		var template = Handlebars.compile($(element).html());
+		d3up.getBuild({{ $build->id }}).done(function(data) {
+			var calc = new d3up.Calc(data);
+			$(element).replaceWith(template(calc));					
+			$.ajax({
+				url: '/b/' + {{ $build->id }} + '/cache',
+				cache: false,
+				data: {
+@if($build->_syncKey)
+					syncKey: '{{ $build->_syncKey }}',
+@endif
+					stats: calc.stats
+				},
+				type: 'post',
+				dataType: 'json'
+			});
+			
+		});
 	});
+	
 </script>
 @endsection
 

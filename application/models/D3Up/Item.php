@@ -26,5 +26,25 @@ class D3Up_Item extends D3Up_Mongo_Document_Sequenced {
 		}
 		return $this;
 	}
+	
+	public function save($whole = false, $modified = false) {
+		// var_dump($this->export(), $modified); exit;
+		// Did the user modify this item and wasn't modified before?
+		if($modified && $this->_d3id) {
+			// Remove the D3Id, It's invalid now
+			$this->_d3id = null;
+			// Store that the item was modified
+			$this->_modified = true;
+			// Save the Item
+			$save = parent::save(true);
+			// Now let's find the build(s) using this item to update caches
+			Epic_Mongo::db('build')->modifiedItem((string) $this->_id);
+			// Return the Save
+			return $save;
+		}
+		// echo "done";
+		// exit;
+		return parent::save($whole);
+	}
 
 }

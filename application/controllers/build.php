@@ -223,7 +223,7 @@ class Build_Controller extends Base_Controller {
 		// Get the Stats from the AJAX Request (Generated via the Calculator)
 		$toCache = Request::get('stats');
 		// Unset the Skill Data, we don't need this
-		unset($toCache['skillData']);
+		// unset($toCache['skillData']);
 		// Load the build up
 		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) $id));
 		// 404 if no build is found or this isn't an ajax request

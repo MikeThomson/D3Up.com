@@ -36,8 +36,6 @@ Route::get('math/(:num)/delete', 'math@delete');
 Route::post('math/(:num)/delete', 'math@delete');
 // Math Routing
 Route::get('math/(:num)/(:any?)', 'math@view');
-// User Builds
-Route::get('/user/builds', 'build@user');
 // FAQ Routing
 Route::get('/faq/(:any?)', 'home@faq');
 // Guide Routing

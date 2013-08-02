@@ -267,12 +267,11 @@ class D3Up_Sync {
 				$build->gear = $this->_getGear($json);			
 				// Set _gear as a GearSet (References to Actual Items)
 				$this->_logEnabled = false;	// Disable Logging for this action
-				$build->_gear = $this->_getGear($json, 'gearsetcache');
 				$this->_logEnabled = true;	// Re-enable Logging for from here on out				
 			}
 		}	
 		// Finally save the build
-		$build->save(true);
+		$build->save(true, true);
 	}
 	
 	protected function _getGear(array $json, $docType = 'gearset') {

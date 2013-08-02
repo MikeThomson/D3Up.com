@@ -48,16 +48,42 @@ class D3Up_Build extends D3Up_Mongo_Document_Sequenced {
 	
 	public function json($gear = false) {
 		$data = parent::json();
-		if(isset($this->stats['dps'])) {
-			$data['dps'] = round($this->stats['dps'], 2);
+		if(isset($this->stats['dps']) && isset($this->stats['dps']['dps'])) {
+			$data['dps'] = round($this->stats['dps']['dps'], 2);
 		}
-		if(isset($this->stats['ehp'])) {
-			$data['ehp'] = round($this->stats['ehp'], 2);
+		if(isset($this->stats['ehp']) && isset($this->stats['ehp']['ehp'])) {
+			$data['ehp'] = round($this->stats['ehp']['ehp'], 2);
 		}
 		if($gear) {
 			$data['gear'] = $this->_gear->export();
 		}
 		return $data;
+	}
+	
+	public function modifiedItem($id) {
+		$query = array(
+			'_createdBy' => Auth::user()->createReference(),
+			'_gearIds' => $id,
+		);
+		$builds = Epic_Mongo::db('build')->find($query);
+		foreach($builds as $build) {
+			$build->_authentic = false;
+			$build->save(true, true);
+		}
+	}
+	
+	public function save($whole = false, $recache = false) {
+		if($recache === true) {
+			$this->_gear = Epic_Mongo::db('doc:gearsetcache');
+			$gearIds = array();
+			foreach($this->gear as $slot => $item) {
+				$item = $this->gear[$slot]->export();
+				$this->_gear[$slot] = $item;
+				$gearIds[] = (string) $item['_id'];				
+			}
+			$this->_gearIds = $gearIds;			
+		} 
+		return parent::save($whole); 
 	}
 
 }

@@ -86,6 +86,9 @@
 							<td>
 								{{ HTML::itemIcon($item) }}
 								{{ HTML::itemLink($item, array('slot' => $slot, 'icon' => true)) }}
+								@if($item->_modified)
+									<i class="item-modified icon-certificate" title="Modified Item"></i>
+								@endif
 								<i class="btn-modify icon-signout pull-right icon-border" data-modify-toggle="{{ $slot }}"></i>
 							</td>
 							<td>{{ HTML::hb('prettyStat stats.gear.'.$slot.'.contributions.dps') }}</td>

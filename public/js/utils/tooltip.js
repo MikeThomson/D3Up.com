@@ -163,9 +163,8 @@ $.fn.tooltip = function() {
 	var position = {
 		of: $(this),
 		at: "right middle",
-		my: "left middle",
-		offset: "20 10",
-		collision: "flip"
+		my: "left+10 middle",
+		collision: "flipfit"
 	};
 	tooltip.appendTo("body").position(position);
 }
@@ -180,10 +179,10 @@ $.fn.tooltip = function() {
 // 	}
 // }
 $(function() {
-	$("body").on('hover', '[data-json]', function(event) {
+	$("body").on('mouseenter', '[data-json]', function(event) {
 		var target = $(event.currentTarget);
 		target.tooltip();
-	}).on('mouseout', '[data-json]', function(event) {
+	}).on('mouseleave', '[data-json]', function(event) {
 		var tooltip = $("#d3up-tooltip");
 		tooltip.empty();
 	});

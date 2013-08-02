@@ -45,7 +45,8 @@
 			]
 		},
 		options: {
-			url: 'http://api.d3up.com/builds',
+			url: 'http://phalcon.d3up.com/builds',
+			user_id: false,
 			filters: false,
 			footer: false,
 			container: false,
@@ -353,6 +354,10 @@
 					}
 				}
 			});
+			// Do we only want "MY" builds?
+			if(this.options.user_id) {
+				state.data.user = this.options.user_id;
+			}
 			// Perform the API call with the state data
 			$.ajax({
 				type: 'GET',

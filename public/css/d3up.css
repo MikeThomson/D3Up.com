@@ -204,6 +204,8 @@ a:focus {
 .navbar .nav > li > a.iconmenu-dropdown .icon-frame {
 	width: 36px;
 	height: 36px;	
+	display: block;
+	margin-top: 7px;
 }
 
 .navbar .nav > li > a.iconmenu-dropdown .build-select .icon-custom-followers {

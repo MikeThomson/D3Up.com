@@ -19,7 +19,7 @@
 <script src="/js/build.js"></script>
 <script src="/js/utils/build/gear.js"></script>
 <script src="/js/utils/chosen.min.js"></script>
-<script src="http://api.d3up.com/builds/{{ $build->id }}.js"></script>
+<script src="http://phalcon.d3up.com/builds/{{ $build->id }}.js"></script>
 @endsection	
 
 
@@ -45,7 +45,7 @@
 	  </ul>
 		<div class='pill-content'>
 			<div class='pill-pane active' id="pill-overview">
-				overview
+				@include('build.experimental.overview')
 			</div>
 			<div class='pill-pane' id="pill-stats">
 				stats

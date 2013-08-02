@@ -9,7 +9,7 @@
 <script src="http://api.d3up.com/builds/{{ $build1->id }}.js"></script>
 <script src="http://api.d3up.com/builds/{{ $build2->id }}.js"></script>
 @endsection
-
+<div></div>
 @section('content')
 <div class='row compare-container tab-content'>
 	<div class='span6' id="build-header-1">

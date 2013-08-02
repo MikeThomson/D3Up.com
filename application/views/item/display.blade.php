@@ -50,9 +50,11 @@
 			@endforeach
 			</ul>
 			<ul class='sockets'>
+			@if($item->sockets)
 			@foreach($item->sockets as $socket => $gem)
 				<li class='gem_{{ $gem }}'>{{ D3Up_Gems::effect($item, $gem) }}</li>
 			@endforeach
+			@endif
 			</ul>
 			<div class='setBonus quality-7'>
 			</div>

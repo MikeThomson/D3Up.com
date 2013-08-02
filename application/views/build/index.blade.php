@@ -1,9 +1,3 @@
-@layout('template.main')
-
-@section('scripts')
-<script src="http://d3up.com/js/gamedata.js"></script>
-@endsection
-
 @section('styles')
 <link href="/css/utils/chosen.css" rel="stylesheet">
 @endsection

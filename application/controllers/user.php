@@ -93,6 +93,9 @@ class User_Controller extends Base_Controller {
 		if(!Auth::check()) {
 			return Redirect::to('user/login');
 		}
+		// Set the layout to modal for this page
+		$this->layout = View::make('template.modal');
+		
 		$this->layout->nest('content', 'user.password');
 	}
 	
