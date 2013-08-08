@@ -3,7 +3,7 @@
 class Build_Controller extends Base_Controller {
 
 	public $restful = true;
-	public $layout = 'template.main';
+	public $layout = 'template.tuktuk';
 
 	public function getBuilds($params = array()) {
 		// Filtering on the Build List
@@ -194,11 +194,16 @@ class Build_Controller extends Base_Controller {
 	}
 	
 	public function get_success() {
-		if(!Session::has('build') || !Session::has('results')) {
-			throw new Exception("You've reached this page in error.");
+		// if(!Session::has('build') || !Session::has('results')) {
+		// 	throw new Exception("You've reached this page in error.");
+		// }
+		if(Input::get('id')) {
+			$build = Epic_Mongo::db('build')->findOne(array('id' => (int) Input::get('id')));						
+			$results = $build->sync();
+		} else {
+			$build = Epic_Mongo::db('build')->findOne(array('id' => (int) Session::get('build')));			
+			$results = Session::get('results');
 		}
-		$build = Epic_Mongo::db('build')->findOne(array('id' => (int) Session::get('build')));
-		$results = Session::get('results');
 		$this->layout->nest('content', 'build.sync', array(
 			'build' => $build,
 			'results' => $results

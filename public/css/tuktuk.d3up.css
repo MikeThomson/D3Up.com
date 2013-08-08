@@ -1,0 +1,195 @@
+.skill-icons {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+.skill-icons li {
+	display: inline-block;
+	padding: 0;
+}
+.skill-icons li img {
+/*	width: 48px;*/
+}
+.skill-icons .skill-type {
+	color: #888;
+	line-height: 48px;
+}
+/* reusable frame */
+.icon-frame { background-color: black; padding: 1px; border-left: 1px solid #3a2912; border-right: 1px solid #59411c; border-bottom: 1px solid #463419; border-top: 1px solid #574320; border-radius: 2px; }
+.icon-frame img { display: block; vertical-align: bottom; }
+.icon-frame.hardcore-frame,
+a:hover .icon-frame.hardcore-frame { border-color:#a20101 } /* hardcore frame */
+.icon-frame-text { vertical-align: middle; margin-top: -2px; margin-left: 2px; margin-right: 2px; } /* correctly aligns the frame within a line of text */
+
+/* custom */
+.icon-custom { background: url("/img/icons/tools.png") no-repeat; width: 36px; height: 36px; }
+.icon-custom-calculator { background-position: 1px 1px; }
+.icon-custom-gear { background-position: -36px 1px; }
+.icon-custom-tooltip { background-position: -73px 1px; }
+.icon-custom-followers { background-position: -109px 1px; }
+.icon-custom-anniversary { background-position: -171px 1px; }
+.icon-custom-ce { background-position: -215px 1px; }
+.icon-custom-status { background-position: -258px 1px }
+.icon-custom-ah-faq { background-position: -303px 1px }
+li:hover > a .icon-custom-calculator { background-position: 1px -36px; }
+li:hover > a .icon-custom-gear { background-position: -36px -36px; }
+li:hover > a .icon-custom-tooltip,
+.icon-custom-tooltip:hover { background-position: -73px -36px; }
+li:hover > a .icon-custom-anniversary { background-position: -171px -42px; }
+li:hover > a .icon-custom-ce { background-position: -215px -42px; }
+li:hover > a .icon-custom-status { background-position: -258px -42px }
+li:hover > a .icon-custom-ah-faq { background-position: -303px -42px }
+
+.dropdown-menu.dropdown-classes {
+/*	display: block;*/
+}
+.dropdown-classes > h3 {
+	margin: 0;
+	padding: 0 0 0 5px;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	background-color: #111;
+	font-size: 1em;
+}
+.icon-blank {
+	margin: 0;
+	background-image: none;
+	background-color: #111;
+}
+
+/*
+ 
+	Build Browser CSS
+
+*/
+#browser .btn-toolbar {
+	margin: 0;
+	text-align: left;
+}
+#browser .filters .multiselect-container > ul > li > label {
+	background-color: #333;
+	font-weight: bold;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+#browser .filters select {
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 0;
+	margin-right: 10px;
+}
+#browser .multiselect-container.dropdown-menu .input-prepend {
+	width: auto;
+	display: block;
+}
+#browser .multiselect-search {
+	height: auto;
+	width: 90%;
+}
+#browser .input-append .active, 
+#browser .input-prepend .active {
+	background-color: #70B1D5;
+}
+#browser .input-append .active a:hover, 
+#browser .input-prepend .active a:hover {
+	color: #000;
+}
+#browser .input-append .btn-danger {
+	margin-left: 0;
+}
+#browser tbody td[class*='d_'] {
+	overflow: hidden;
+}
+#browser tbody td .popover-content {
+	line-height: 1.1em;
+}
+#browser tfoot,
+#browser thead {
+	border-color: #2b2b2b;
+	background-color: #2b2b2b;
+}
+#browser thead td {
+	text-align: center;
+}
+#browser .filters td {
+	text-align: left;
+}
+#browser .filters select {
+	width: 150px;
+}
+#browser .d_name {
+	width: auto;
+}
+#browser .d_name .updated {
+	float: right;
+	font-size: 0.75em;
+	color: #666;
+}
+#browser .d_region_type,
+#browser .d_level,
+#browser .d_paragon {
+	text-align: center;
+	width: 50px;
+	max-width: 30px;
+}
+#browser .d_actives,
+#browser .d_passives {
+	text-align: center;
+}
+#browser .d_actives span,
+#browser .d_passives span {
+	margin-right: 2px;
+}
+#browser .d_actives .d3-icon-skill,
+#browser .d_passives .d3-icon-skill {
+	box-shadow: 0 0 1px #000;
+}
+#browser .d_passives img {
+	display: block;
+}
+#browser .d_dps,
+#browser .d_ehp {
+	text-align: center;
+	width: 90px;
+	max-width: 90px;
+}
+#browser .d_dps {
+	color: #F50;
+}
+#browser .d_ehp {
+	color: #2A8903;
+}
+#browser .d_icon {
+	text-align: center;
+	width: 21px;
+}
+#browser .battlenet-scan {
+	color: #f50;
+	text-align: right;
+}
+#browser .battlenet-scan .btn {
+	margin-left: 20px;
+	margin-top: 7px;
+}
+#browser .loading,
+#browser .json-response {
+	margin: 10px 0;
+	text-align: center;
+}
+#browser .json-response .label {
+	margin-top: 15px;
+	padding: 10px;
+}
+#browser .json-response ul {
+	list-style: none;
+	margin: 0;
+}
+#browser .pagination a {
+	cursor: pointer;
+	margin-right: 5px;
+}
+.table-builds td {
+	padding: 5px;
+	vertical-align: middle;
+}

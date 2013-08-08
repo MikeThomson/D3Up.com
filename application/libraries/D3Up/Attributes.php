@@ -1272,6 +1272,12 @@ class D3Up_Attributes
 	
 	public static function attr($attr, $value) {
 		$text = static::$attributes['en'][$attr];
+		if(!is_scalar($value)) {
+			foreach($value->export() as $v) {
+				$text = preg_replace('/\[v\]/', $v, $text, 1);
+			}
+			return $text;
+		}
 		return $return = str_replace('[v]', $value, $text);
 	}
 	

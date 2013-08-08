@@ -39,14 +39,15 @@ $(function(){
 		uses the dashes while submitting and in the API requests. 
 	*/
 	var form = $("#btsearch"), 
-			hidden = form.find("input[name=battletag]"),
-			input = $("input[name=battletag-display]");
+			hidden = form.find("input#battletag"),
+			input = $("input#battletag-display");
 	if(hidden.length && input.length) {
 		// If our hidden field has a value, put it in the displayed
 		input.val(hidden.val().replace("-", "#"));
 		// While we're typing on Input, update the Hidden submitted value
 		input.on("keyup", function(e) {
-			hidden.val(input.val().replace("#", "-"));
+			var base64 = $.base64.encode(JSON.stringify({battletag: input.val().replace("#", "-")}));
+			hidden.val(base64);
 			// If enter's pressed, submit the real form
 			if(e.keyCode == 13) {
 				form.submit();			
@@ -58,4 +59,4 @@ $(function(){
 <!-- The D3Up Tooltip Div -->
 <div id="d3up-tooltip"></div>
 <div id="d3up-tooltip-compare"></div>
-@yield('scripts')
+@yield_content('scripts')

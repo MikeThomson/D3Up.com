@@ -21,6 +21,13 @@ class Base_Controller extends Controller {
 		} else {
 			Config::set('application.language', Cookie::get('d3up_lang'));
 		}
+		if(!Cache::has('d3up-counts')) {
+			Cache::put('d3up-counts', array(
+				'guides' => HTML::prettyStat(Epic_Mongo::db('guide')->find()->count(), 0),
+				'builds' => HTML::prettyStat(Epic_Mongo::db('build')->find()->count(), 0),
+				'math' => HTML::prettyStat( Epic_Mongo::db('math')->find()->count(), 0),
+			), 15);
+		}
 		parent::__construct();
 	}
 

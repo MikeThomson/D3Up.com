@@ -1,26 +1,22 @@
 {{ Form::open('register', null, array('class' => 'form-signin')) }}
-<div class='pull-left' style="width: 165px">
-	<img src="/img/logo.png">
-	@include('user.login.disclaimer')
-</div>	
-<div class='signin'>
-	<h2>{{__('login.register_account')}}</h2>
+	<h2 class='margin-top margin-bottom'>{{__('login.register_account')}}</h2>
 	<!-- username field -->
-	<p>{{ Form::label('username', __('login.username')) }}</p>
-	<p>{{ Form::text('username', Input::old('username',''), array('class'=>'input-block-level')) }}</p>
-	{{ $errors->has('username') ? '<div class="alert alert-error">'.__('login.invalid_username').'</div>' : '' }}
+	{{ Form::label('username', __('login.username')) }}
+	{{ Form::text('username', Input::old('username',''), array('class'=>'input-block-level')) }}
+	{{ $errors->has('username') ? '<div class="bck alert padding-5">'.__('login.invalid_username').'</div>' : '' }}
 	<!-- email field -->
-	<p>{{ Form::label('email', __('login.email')) }}</p>
-	<p>{{ Form::text('email', Input::old('email',''), array('class'=>'input-block-level')) }}</p>
-	{{ $errors->has('email') ? '<div class="alert alert-error">'.__('login.invalid_email').'</div>' : '' }}
+	{{ Form::label('email', __('login.email')) }}
+	{{ Form::text('email', Input::old('email',''), array('class'=>'input-block-level')) }}
+	{{ $errors->has('email') ? '<div class="bck alert padding-5">'.__('login.invalid_email').'</div>' : '' }}
 	<!-- password field -->
-	<p>{{ Form::label('password', __('login.password')) }}</p>
-	<p>{{ Form::password('password', array('class'=>'input-block-level')) }}</p>
-	{{ $errors->has('password') ? '<div class="alert alert-error">'.__('login.invalid_password').'</div>' : '' }}
-	<p>{{ Form::label('key', 'Access Key') }}</p>
-	<p>{{ Form::text('key', '', array('class'=>'input-block-level')) }}</p>
-	{{ $errors->has('key') ? '<div class="alert alert-error">Invalid Access Key.</div>' : '' }}
-	<!-- submit button -->
-	<p>{{ Form::submit(__('login.register'), array('class' => 'btn')) }}</p>
-</div>
+	{{ Form::label('password', __('login.password')) }}
+	{{ Form::password('password', array('class'=>'input-block-level')) }}
+	{{ $errors->has('password') ? '<div class="bck alert padding-5">'.__('login.invalid_password').'</div>' : '' }}
+	{{ Form::label('key', 'Access Key') }}
+	{{ Form::text('key', '', array('class'=>'input-block-level')) }}
+	{{ $errors->has('key') ? '<div class="bck alert padding-5">Invalid Access Key.</div>' : '' }}
+	<div class='text center margin-top margin-bottom'>
+		<!-- submit button -->
+		{{ Form::submit(__('login.register'), array('class' => 'button')) }}
+	</div>
 {{ Form::close() }}

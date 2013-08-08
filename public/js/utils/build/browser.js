@@ -50,7 +50,8 @@
 			filters: false,
 			footer: false,
 			container: false,
-			paginator: $("<div class='btn-group pull-right'>"),
+			search: false,
+			paginator: $("<div class='pagination text tiny bck color padding-5 on-right'>"),
 			paginators: false,
 			columns: [
 				'icon', 
@@ -68,8 +69,13 @@
 			// Check to see if we have a filter passed in the URL
 			var params = this.getParameterByName('filter');
 			if(params) {
+				var state = $.parseJSON($.base64.decode(params));
+				console.log(state);
+				if(this.options.search && state.battletag) {
+					this.options.search.val(state.battletag);
+				}
 				// Set the Current State with whatever the URL Parameters are set to
-				this.replaceState($.parseJSON($.base64.decode(params)));				
+				this.replaceState(state);								
 			}
 			// Bind the window statechange event to our update method
 			this._on(window, { statechange: "update" });
@@ -91,22 +97,22 @@
 		},
 		_showBattlenetSearch: function() {
 			// Hide D3Up's button and show BNets
-			$(".btn.d3upcom").hide();
-			$(".btn.battlenet").show();
+			$(".button.d3upcom").hide();
+			$(".button.battlenet").show();
 			// Show the D3Up Controls
 			this.options.filters.find("tr.filters").show();
 		},
 		_showD3UpcomSearch: function() {
 			// Show D3Up's button and hide BNets
-			$(".btn.d3upcom").show();
-			$(".btn.battlenet").hide();
+			$(".button.d3upcom").show();
+			$(".button.battlenet").hide();
 			// Hide all the D3Up Filters
 			this.options.filters.find("tr.filters").hide();
 		},
 		_addSearchSource: function() {
 			var footer = this.options.footer.find("td"),
-					bnet = $("<a type='btn' data-value='true' class='btn battlenet' name='battlenet'>").html("Search Battle.net"),
-					d3up = $("<a type='btn' data-value='null' class='btn d3upcom' name='battlenet'>").html("Search D3Up.com");
+					bnet = $("<a data-value='true' class='button tiny margin-right battlenet' name='battlenet'>").html("Search Battle.net"),
+					d3up = $("<a data-value='null' class='button tiny margin-right d3upcom' name='battlenet'>").html("Search D3Up.com");
 			this._on(bnet, {click: '_updateState'});
 			this._on(d3up, {click: '_updateState'});
 			footer.append(bnet, d3up);
@@ -119,10 +125,10 @@
 					// Get all Elements defined as paginator containers
 					paginators = this.options.paginators,
 					// Build our Controls
-					nextBtn = $("<a class='btn next'>").html("Next"),
-					currBtn = $("<a class='btn curr'>"),
-					prevBtn = $("<a class='btn prev'>").html("Previous"),
-					frstBtn = $("<a class='btn first'>").html("<<");
+					nextBtn = $("<a class='next'>").html("Next"),
+					currBtn = $("<a class='curr'>"),
+					prevBtn = $("<a class='prev'>").html("Previous"),
+					frstBtn = $("<a class='first'>").html("<<");
 			if(state.page > 1) {
 				// If the page is set, put it in the current button
 				currBtn.html(state.page);
@@ -153,18 +159,18 @@
 		changePage: function(page) {
 			// Grab a copy of the state's data
 			var state = this.getState().data,
-				currBtn = $(".btn.curr"),
+				currBtn = $(".curr"),
 				inc = arguments[page];
 			// Modify the Value we're changing
 			state.page = parseInt(state.page, 10) + inc;
 			// Don't store null states
 			if(state.page <= 1) {
-				$(".btn.prev").hide();				
-				$(".btn.first").hide();
+				$(".prev").hide();				
+				$(".first").hide();
 				state.page = 1;
 			} else {
-				$(".btn.prev").show();				
-				$(".btn.first").show();
+				$(".prev").show();				
+				$(".first").show();
 			}
 			currBtn.html(state.page);
 			// Push the Updates to History
@@ -289,8 +295,8 @@
 			var $this = this, state = this.getState().data,
 				// Find the Filters
 				filters = this.options.filters.find(".filters td"),
-				wrapper = $('<div class="input-append btn-toolbar actives">'),
-				reset = $('<button class="btn btn-danger">Reset</button>'),
+				wrapper = $('<div class="actives">'),
+				reset = $('<button class="alert tiny">Reset</button>'),
 				select;
 			// Remove the old Filter
 			filters.find("select[name=actives], .actives").remove();
@@ -303,7 +309,7 @@
 					select.multiselect('refresh');
 					select.trigger('change');
 				});
-				filters.append(wrapper.append(select, reset));
+				// filters.append(wrapper.append(select, reset));
 				select.multiselect({
 					maxHeight: 250,
 					enableFiltering: true,
@@ -326,7 +332,7 @@
 				state = this.getState();
 			// Remove the Previous Results
 			container.empty();
-			row.append($("<td colspan='100' class='loading'>").html("Loading"));
+			row.append($("<td colspan='100' class='padding loading'>").html("<h2 class='padding'>Loading</h2>"));
 			container.append(row);
 			if(!state.data.battlenet) {
 				this._showBattlenetSearch();
@@ -359,6 +365,7 @@
 				state.data.user = this.options.user_id;
 			}
 			// Perform the API call with the state data
+			console.log(this.options.url, state.data);
 			$.ajax({
 				type: 'GET',
 				url: this.options.url,
@@ -383,6 +390,10 @@
 					case "ehp":
 						v = v.toUpperCase();
 						break;
+					case "actives":
+					case "passives":
+					case "icon":
+						td.addClass("hide-phone");
 					default:
 						v = v.charAt(0).toUpperCase() + v.slice(1);
 						break;
@@ -392,7 +403,7 @@
 			});
 			filters.append(tr);
 		},
-		process: function(data) {
+		process: function(response) {
 			// Grab the Container 
 			var container = this.options.container.empty(),
 					state = this.getState(),
@@ -403,10 +414,10 @@
 					requested = $("<div>We could not find a build on D3Up that matches:</div>"),
 					params = $("<ul>");
 			// Store the Results on the browser
-			this.results = data;
+			this.results = response;
 			// No results? Return the row telling the user
-			if($.isEmptyObject(data)) {
-				content.append($("<h3>").append("No Builds Found."));
+			if($.isEmptyObject(response)) {
+				content.append($("<h3 class='margin'>").append("No Builds Found."));
 				$.each(state.data, function(k,v) {
 					if(v !== null && v !== "null" && k !== 'page' && k !== 'battlenet') {
 						// Display it properly to avoid confusion
@@ -433,20 +444,23 @@
 				}
 				row.append(cell.html(content));
 				container.append(row);
-				$(".btn.next").hide();
+				$(".next").hide();
 				return;
 			}
 			// Did we get an error back?
-			if(data.error) {
-				row.append(cell.html(data.error));
+			if(response.error) {
+				row.append(cell.html(response.error));
 				container.append(row);
 				return;				
 			}
 			// Iterate through our results and add new rows
-			_.each(data, function(data) {
+			_.each(response, function(data) {
+				if(!data['bt-tag']) {
+					return;
+				}
 				var row = $("<tr>"),
-					create = $("<a class='btn pull-right'>").html("Create New Build"),
-					info = "Located on Battle.net",
+					create = $("<a class='button tiny on-right'>").html("Create New Build"),
+					info = "<span class='bck dark tag on-left margin-top'>Located on Battle.net</span>",
 					qs = "character-bt=" + data['bt-tag'].replace("#", "-")
 						+"&character-rg=" + data['bt-rg']
 						+"&character-id=" + data['bt-id']
@@ -493,15 +507,11 @@
 					row.append($("<td colspan='100' class='battlenet-scan'>").append(create, info));
 				}
 				container.append(row);
-				row.find("[data-toggle=popover]").popover({
-					trigger: 'click',
-					placement: 'top'
-				});
 			});
 			// Show the next button incase it was hidden
-			$(".btn.next").show();
+			$(".next").show();
 			// Hook all Tooltips
-			$(".d3-icon-skill, .passive-icon").each(checkSkillTip);	
+			$(".d3-d	ill, .passive-icon").each(checkSkillTip);	
 		},
 		makeColumn: function(name, data) {
 			var $this = this,
@@ -513,6 +523,7 @@
 			td.addClass("d_" + name);
 			switch(name) {
 				case "icon":
+					td.addClass("hide-phone");				
 					td.html($this.classIcon(data[0], data[1]));
 					break;
 				case "region_type":
@@ -534,12 +545,14 @@
 					td.append(container);
 					break;
 				case "actives":
+					td.addClass("hide-phone");
 					_.each(data[1], function(v) { 
 						var icon = $this.skillIcon(data[0], v);
 						td.append(Handlebars.helpers.skillIcon.apply(icon, [data[0], v]).string);
 					});
 					break;
 				case "passives":
+					td.addClass("hide-phone");
 					_.each(data[1], function(v) { 
 						var icon = $this.passiveIcon(data[0], v);
 						td.append(Handlebars.helpers.passiveIcon.apply(icon, [data[0], v]).string);
@@ -566,7 +579,7 @@
 			heroClass = heroClass.replace(/-/g, "");
 			skill = skill.replace(/-/g, "");	
 			// Generate the Icon URL 
-			var url = "http://media.blizzard.com/d3/icons/skills/42/" + heroClass + "_passive_" + skill + ".png";
+			var url = "http://media.blizzard.com/d3/icons/skills/21/" + heroClass + "_passive_" + skill + ".png";
 			return $("<img src='" + url + "'>");			
 		},
 		skillIcon: function(heroClass, skill) {
@@ -574,14 +587,15 @@
 			heroClass = heroClass.replace(/-/g, "");
 			skill = skill.replace(/-/g, "").split("~")[0];	
 			// Generate the Icon URL 
-			var url = "http://media.blizzard.com/d3/icons/skills/42/" + heroClass + "_" + skill + ".png";
+			var url = "http://media.blizzard.com/d3/icons/skills/21/" + heroClass + "_" + skill + ".png";
 			return $("<img src='" + url + "'>");			
 		},
 		classIcon: function(heroClass, gender) {
+			if(!heroClass) return;
 			heroClass = heroClass.replace("-", "");
-			var urlTemplate = 'http://media.blizzard.com/d3/icons/portraits/42/|heroClass|_|gender|.png',
+			var urlTemplate = 'http://media.blizzard.com/d3/icons/portraits/21/|heroClass|_|gender|.png',
 				url = urlTemplate.replace("|gender|", gender).replace("|heroClass|", heroClass);					
-			return $("<img src='" + url + "'>");
+			return $("<img class='icon-frame' src='" + url + "'>");
 		},
 		// _hover: function() {
 			// Methods with an underscore are "private"

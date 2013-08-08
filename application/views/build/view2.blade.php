@@ -24,49 +24,31 @@
 
 
 @section('content')
-<div class='row build-container tab-content'>
-	<div class='span12'>
-		<ul class="nav nav-pills">
-	    <li class="active">
-				<a href="#pill-overview" data-toggle="pill">{{ __('build.overview') }}</a>
-			</li>
-	    <li>
-				<a href="#pill-stats" data-toggle="pill">{{ __('build.stats') }}</a>
-			</li>
-	    <li>
-				<a href="#pill-gear" data-toggle="pill">{{ __('build.gear') }}</a>
-			</li>
-	    <li>
-				<a href="#pill-skills" data-toggle="pill">{{ __('build.skills') }}</a>
-			</li>
-	    <li>
-				<a href="#pill-mitigation" data-toggle="pill">{{ __('build.mitigation') }}</a>
-			</li>
-	  </ul>
-		<div class='pill-content'>
-			<div class='pill-pane active' id="pill-overview">
-				@include('build.experimental.overview')
-			</div>
-			<div class='pill-pane' id="pill-stats">
-				stats
-			</div>
-			<div class='pill-pane' id="pill-gear">
-				@include('build.experimental.gear')
-			</div>
-			<div class='pill-pane' id="pill-mitigation">
-				mit
-			</div>
-			<div class='pill-pane' id="pill-skills">
-				skills
-			</div>
-		</div>
+<div class='row'>
+	<div class='column_12'>
+		<nav data-tuktuk="menu" data-role="tabs" class="margin-top margin-bottom center text small bold clearfix">
+			<a href data-tab="#tab-overview" data-toggle="tab">{{ __('build.overview') }}</a>
+			<a href data-tab="#tab-stats" data-toggle="tab">{{ __('build.stats') }}</a>
+			<a href data-tab="#tab-gear" data-toggle="tab">{{ __('build.gear') }}</a>
+			<a href data-tab="#tab-skills" data-toggle="tab">{{ __('build.skills') }}</a>
+			<a href data-tab="#tab-mitigation" data-toggle="tab">{{ __('build.mitigation') }}</a>
+		</nav>
 	</div>
 </div>
-<div id='display-items'> 
-	@foreach($build->gear as $slot => $item) 
-		<div data-slot="{{ $slot }}">
-			@include('item.display')->with('item', $item)
-		</div>
-	@endforeach
+<div id="tab-overview" data-role="tab">
+	@include('build.experimental.overview')
 </div>
+<div id="tab-stats" data-role="tab">
+	stats
+</div>
+<div id="tab-gear" data-role="tab">
+	@include('build.experimental.gear')
+</div>
+<div id="tab-mitigation" data-role="tab">
+	mit
+</div>
+<div id="tab-skills" data-role="tab">
+	skills
+</div>
+@include("template.global.scripts.tabs")
 @endsection

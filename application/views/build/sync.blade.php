@@ -8,11 +8,6 @@
 	}
 ?>
 
-@section('styles')
-<link href="/css/build.css" rel="stylesheet">
-<link href="/css/compare.css" rel="stylesheet">
-@endsection
-
 @section("notifications")
 	@include("build.notifications")
 @endsection
@@ -26,7 +21,7 @@
 
 @section('content')
 @if((isset($totals['error']) && $totals['error'] > 0) || $results['fatal']) 
-<div class='alert alert-error'>
+<div class='bck alert'>
 	@if($results['fatal'])
 		<h4><strong class='badge badge-error'>Fatal Error during Battle.net Sync</strong></h4>
 		<h4>{{ $results['fatal'] }}</h4>
@@ -43,24 +38,21 @@
 	@endif
 </div>
 @else
-<div class='alert alert-success'>
-	<h2>Successfully Imported from Battle.net</h2>
-	<p>No errors were generated during the import of your character. Feel free to review the information below to see exactly what occurred, or use one of the buttons below to continue on.</p>
-	<div class='btn-group'>
-		<a href='/b/{{ $build->id }}' class='btn btn-primary'>View Build</a>
-		<a href='/api-status' class='btn'>Check Battle.net API Status</a>
+<div class='row'>
+	<div class='bck white padding rounded column_10 offset_1 margin-top'>
+		<h2>Successfully Imported from Battle.net</h2>
+		<p class='margin'>No errors were generated during the import of your character. Feel free to review the information below to see exactly what occurred, or use one of the buttons below to continue on.</p>
+		<a href='/api-status' class='button on-right'>Check Battle.net API Status</a>
+		<a href='/b/{{ $build->id }}' class='button success'>View Build</a>
+		</div>
 	</div>
 </div>
 @endif
 @if(!empty($results['messages']))
-	<div class="content-page sync-results">
-		<h4>Testing Calculated Values</h4>
-		<div id="sync-stats">
-			<span class="label label-important">Absolute Unbuffed DPS: {{ HTML::hb('prettyStat stats.dps.dps') }}</span>
-			<span class="label label-success">Absolute Unbuffed EHP: {{ HTML::hb('prettyStat stats.ehp.ehp') }}</span>
-		</div>
-		<h4>Items Detected and Equipped</h4>
-		<div class='items-horizontal'>
+<div class='row margin-top'>
+	<div class='column_9 padding bck white rounded'>
+		<h4 class='text large margin-bottom'>Items Detected and Equipped</h4>
+		<div class='items-horizontal padding-5 bck dark clearfix rounded'>
 		@foreach($build->getGear() as $slot => $item)
 			<span class='item'>
 				<a href="/i/{{ $item->id }}" data-json="{{ e(json_encode($item->json())) }}" data-slot="{{ $slot }}">
@@ -69,30 +61,48 @@
 			</span>
 		@endforeach
 		</div>
-		<h4>Skills and Passives Detected</h4>
-		<ul class='skills skills-horizontal'>
-			@foreach($build->actives as $skill)
-			<li class='skill-icon icon-frame'>
-				<img src='/img/icons/{{ $build->class }}-{{ explode("~", $skill)[0] }}.png'>
-			</li>
-			@endforeach
-			@foreach($build->passives as $skill)
-			<li class='skill-icon icon-frame'>
-				<img src='/img/icons/{{ $build->class }}-{{ explode("~", $skill)[0] }}.png'>
-			</li>		
-			@endforeach
-		</ul>
-		<h4>Battle.net Sync/API Results</h4>
-		<p>
-		@foreach($totals as $type => $total)
-			<span class='badge badge-{{ $type }}'>{{ $total }} {{ $type }} messages</span>
-		@endforeach
-		</p>
-		<ul class="sync">
+		<h4 class='text large margin-bottom margin-top'>Skills and Passives Detected</h4>
+		<div class="padding-5 bck dark clearfix rounded">
+			<ul class='skills skill-icons skills-horizontal'>
+				@foreach($build->actives as $skill)
+				<li class='skill-icon icon-frame'>
+					<img src='/img/icons/{{ $build->class }}-{{ explode("~", $skill)[0] }}.png'>
+				</li>
+				@endforeach
+				@foreach($build->passives as $skill)
+				<li class='skill-icon icon-frame'>
+					<img src='/img/icons/{{ $build->class }}-{{ explode("~", $skill)[0] }}.png'>
+				</li>		
+				@endforeach
+			</ul>
+		</div>
+	</div>
+	<div class='column_3 padding bck white rounded'>
+		<h4 class='text large margin-bottom'>Testing Calculator</h4>
+		<p>Unbuffed DPS: {{ HTML::hb('prettyStat stats.dps.dps') }}</p>
+		<p>Unbuffed EHP: {{ HTML::hb('prettyStat stats.ehp.ehp') }}</p>
+	</div>
+</div>
+<div class='row'>
+	<div class='column_12'>
+		<h4 class='text small margin-top'>Battle.net Sync/API Results</h4>
+		<table>
+			<tr>
+				<td class='text center' colspan="2">
+					@foreach($totals as $type => $total)
+						<span class='tag bck dark'>{{ $total }} {{ $type }} messages</span>
+					@endforeach
+				</td>
+			</tr>
 		@foreach($results['messages'] as $res) 
-			<li class='alert-{{ $res->type }}'>{{ $res->message }}</li>
+			<tr>
+				<td class='text right'>
+					<span class='tag bck theme'>{{ $res->type }}</span>
+				</td>
+				<td>{{ $res->message }}</td>
+			</tr>
 		@endforeach
-		</ul>
+		</table>
 	</div>
 @endif
 

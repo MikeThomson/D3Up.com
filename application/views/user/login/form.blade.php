@@ -1,6 +1,5 @@
-{{ Form::open('/login', 'post', array('class' => 'form-signin')) }}
-	<a href="/"><img src="/img/logo.png" class='pull-left'></a>
-	<div class='signin'>
+<div class='bck rounded padding margin'>
+	{{ Form::open('/login', 'post') }}
 		@include('user.login.login')
-	</div>
-{{ Form::close() }}
+	{{ Form::close() }}
+</div>

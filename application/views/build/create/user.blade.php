@@ -1,6 +1,6 @@
 <? if(Auth::user()->battletag && Auth::user()->region): ?>
 	<p>Choose one of your characters to import.</p>
-	<div>
+	<div class='padding'>
 		<select name='character-id' id="characters" data-battletag="<?= Auth::user()->battletag ?>" class="input-block-level">
 			<option value=''>Select a Character...</option>
 			<? if($characters): ?>
@@ -10,9 +10,9 @@
 			<? endif ?>
 		</select>
 	</div>
-	<p>If no builds are found, please <a href='/user/edit'>Visit your Profile</a> and ensure your Battle Tag and Region are correct.</p>
-	<p>Common problems include...</p>
-	<ul>
+	<p class='margin'>If no builds are found, please <a href='/user/edit'>Visit your Profile</a> and ensure your Battle Tag and Region are correct.</p>
+	<p class='margin'>Common problems include...</p>
+	<ul class='margin padding'>
 		<li>Ensure there are no spaces in your Battle Tag.</li>
 		<li>Your Battle Tag should be formatted as such: Username#1234</li>
 	</ul>

@@ -419,7 +419,7 @@ background-image: url('http://media.blizzard.com/d3/icons/items/small/topaz_15_d
 .d3-icon-skill.selected .frame { background-position: top right; }
 .d3-icon-skill .frame:hover { background-position: bottom left; }
 /* passive */
-.passive-icon { background:url(/img/passive-skills.png) -41px -41px no-repeat; display:inline-block; width:31px; height:31px; padding:5px; vertical-align:middle }
+.passive-icon { background:url(/img/passive-skills.png) -41px -41px no-repeat; display:inline-block; width:42px; height:42px; padding:5px; vertical-align:middle }
 .passive-icon:hover { background-position: -82px -41px }
 .passive-icon.selected { display:block; background-position: 0 -41px }
 .d3-tooltip .d3-icon-skill,

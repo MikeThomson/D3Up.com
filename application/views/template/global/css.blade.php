@@ -7,4 +7,4 @@
 <link href="/css/d3up.css" rel="stylesheet">
 <link href="/css/d3up-tooltip.css" rel="stylesheet">
 <link href="/css/responsive.css" rel="stylesheet">
-@yield('styles')
+@yield_content('styles')

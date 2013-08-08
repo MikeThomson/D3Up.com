@@ -2,7 +2,7 @@
 
 class Home_Controller extends Base_Controller {
 
-	public $layout = 'template.main';
+	public $layout = 'template.tuktuk';
 
 	public function action_index()
 	{

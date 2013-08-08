@@ -19,7 +19,7 @@ Validator::register('password_match', function($attribute, $value, $parameters) 
 class User_Controller extends Base_Controller {
 
 	public $restful = true;
-	public $layout = 'template.main';
+	public $layout = 'template.tuktuk';
 	
 	public function get_index() {
 		// Require Login
@@ -94,7 +94,7 @@ class User_Controller extends Base_Controller {
 			return Redirect::to('user/login');
 		}
 		// Set the layout to modal for this page
-		$this->layout = View::make('template.modal');
+		// $this->layout = View::make('template.global.tuktuk.modal');
 		
 		$this->layout->nest('content', 'user.password');
 	}
@@ -127,7 +127,7 @@ class User_Controller extends Base_Controller {
 			return Redirect::to('/user');
 		}
 		// Set the layout to modal for this page
-		$this->layout = View::make('template.modal');
+		// $this->layout = View::make('template.global.tuktuk.modal');
 		// Render the Login View
 		$this->layout->nest('content', 'user.login');
 	}
@@ -161,7 +161,7 @@ class User_Controller extends Base_Controller {
 			return Redirect::to('/');
 		}
 		// Set the layout to modal for this page
-		$this->layout = View::make('template.modal');
+		// $this->layout = View::make('template.global.tuktuk.modal');
 		// Embed the Registration view
 		$this->layout->nest('content', 'user.register');
 	}

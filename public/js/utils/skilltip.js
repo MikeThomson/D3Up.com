@@ -41,7 +41,7 @@ $(function() {
 Handlebars.registerHelper('skillIcon', function(heroClass, name) {
 	// Check to ensure we have the data from the gamedata.js
 	if(!d3up.gameData) return false
-	var container = $("<span class='d3-icon d3-icon-skill d3-icon-skill-42' data-type='skill'>"),
+	var container = $("<span class='d3-icon d3-icon-skill d3-icon-skill-21' data-type='skill'>"),
 			frame = $("<span class='frame'>"),
 			active = d3up.gameData.actives[heroClass][name];
 	container.attr("data-tooltip", "<p>" + active.desc + "</p>");
@@ -52,7 +52,7 @@ Handlebars.registerHelper('skillIcon', function(heroClass, name) {
 	// Fix up the Class and Skill Name for Blizzard's URLs
 	heroClass = heroClass.replace(/-/g, "");
 	name = name.replace(/-/g, "").split("~")[0];	
-	var icon = "http://media.blizzard.com/d3/icons/skills/42/" + heroClass + "_" + name + ".png";
+	var icon = "http://media.blizzard.com/d3/icons/skills/21/" + heroClass + "_" + name + ".png";
 	container.css({backgroundImage: 'url("' + icon + '")'});
 	container.attr("data-icon", icon);
 	// Find the Passive in D3Up's game data
@@ -62,15 +62,15 @@ Handlebars.registerHelper('skillIcon', function(heroClass, name) {
 Handlebars.registerHelper('passiveIcon', function(heroClass, name) {
 	// Check to ensure we have the data from the gamedata.js
 	if(!d3up.gameData) return false
-	var container = $("<span class='passive-icon' data-type='passive'>"),
-			image = $("<img style='width:32px; height:32px'>"),
+	var container = $("<span class='inline d3-icon-skill-21' data-type='passive'>"),
+			image = $("<img>"),
 			passive = d3up.gameData.passives[heroClass][name];
 	container.attr("data-tooltip", passive.desc);
 	container.attr("data-name", name.replace(/-/g, " ").capitalize());
 	// Fix up the Class and Skill Name for Blizzard's URLs
 	heroClass = heroClass.replace(/-/g, "");
 	name = name.replace(/-/g, "");	
-	var icon = "http://media.blizzard.com/d3/icons/skills/42/" + heroClass + "_passive_" + name + ".png";
+	var icon = "http://media.blizzard.com/d3/icons/skills/21/" + heroClass + "_passive_" + name + ".png";
 	image.attr("src", icon);
 	container.attr("data-icon", icon);
 	// Find the Passive in D3Up's game data
